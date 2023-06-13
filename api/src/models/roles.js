@@ -5,9 +5,9 @@ module.exports = (sequelize) => {
         'roles',
         {
             id_roles: {
-                type: DataTypes.UUID,
-                defaultValue: DataTypes.UUIDV4,
+                type: DataTypes.INTEGER,                
                 primaryKey: true,
+                autoIncrement: true,
             },
             rol_type: {
                 type: DataTypes.STRING,

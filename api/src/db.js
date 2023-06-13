@@ -45,10 +45,10 @@ const { Comments, Posts, Roles, User_data, Users  } = sequelize.models;
 
 // Aca vendrian las relaciones y la creacion de la tabla intermedia
 
-Users.hasOne(User_data, { foreignKey: 'id_user_data' });
+Users.hasOne(User_data, { foreignKey: 'id_users' });
 
 //?Verificar relacion id_roles
-User_data.hasOne(Roles, {foreignKey:'id_roles' }); 
+Roles.hasOne(User_data, {foreignKey: 'id_roles' }); 
 User_data.hasMany(Posts,{foreignKey: 'id_user_data' })
 Posts.hasMany(Comments, {foreignKey: 'id_post'})
 
