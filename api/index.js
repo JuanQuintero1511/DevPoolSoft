@@ -1,4 +1,4 @@
-const server = require('../api/src/routes/app.js');
+const server = require('../api/src/app.js');
 // const { database } = require ('./src/db.js');
 
 

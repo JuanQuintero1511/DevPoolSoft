@@ -1,4 +1,4 @@
-const {datos} = require('../../routes/db')
+// const {datos} = require('../../routes/db')
 
 
 const postUsers = (req, res) => {

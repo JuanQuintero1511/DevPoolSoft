@@ -1,4 +1,4 @@
-const { Activity, Country } = require("../db");
+// const { Activity, Country } = require("../db");
 const { Op } = require("sequelize");
 
 const postActivity = async ({ name, difficulty, duration, season, country, }) => {
