@@ -47,7 +47,7 @@ const { Comments, Posts, Roles, User_data, Users  } = sequelize.models;
 
 Users.hasOne(User_data, { foreignKey: 'id_user_data' });
 
-// User_data.hasOne(Roles); 
+//?Verificar relacion id_roles
 User_data.hasOne(Roles, {foreignKey:'id_roles' }); 
 User_data.hasMany(Posts,{foreignKey: 'id_user_data' })
 Posts.hasMany(Comments, {foreignKey: 'id_post'})
