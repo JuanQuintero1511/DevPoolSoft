@@ -9,11 +9,11 @@ const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env;
 
 
 const sequelize = new Sequelize(
-   `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
-   {
-      logging: false, 
-      native: false, 
-   }
+  `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
+  {
+    logging: false,
+    native: false,
+  }
 );
 
 const basename = path.basename(__filename);
@@ -36,7 +36,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Comments, Posts, Roles, User_data, Users  } = sequelize.models;
+const { Comments, Posts, Roles, User_data, Users } = sequelize.models;
 
 // Aca vendrian las relaciones y la creacion de la tabla intermedia a traves de country_activity
 // Country.belongsToMany(Activity, { through: "country_activity" });
@@ -46,13 +46,11 @@ const { Comments, Posts, Roles, User_data, Users  } = sequelize.models;
 // Aca vendrian las relaciones y la creacion de la tabla intermedia
 
 Users.hasOne(User_data, { foreignKey: 'id_users' });
-
-//?Verificar relacion id_roles
-Roles.hasOne(User_data, {foreignKey: 'id_roles' }); 
-User_data.hasMany(Posts,{foreignKey: 'id_user_data' })
-Posts.hasMany(Comments, {foreignKey: 'id_post'})
+Roles.hasOne(User_data, { foreignKey: 'id_roles' });
+User_data.hasMany(Posts, { foreignKey: 'id_user_data' })
+Posts.hasMany(Comments, { foreignKey: 'id_post' })
 
 module.exports = {
-   ...sequelize.models, // para poder importar los modelos así
-   conn: sequelize,     // para importar la conexión { conn } = require('./db.js');
- };
+  ...sequelize.models, // para poder importar los modelos así
+  conn: sequelize,     // para importar la conexión { conn } = require('./db.js');
+};
