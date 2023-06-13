@@ -14,9 +14,12 @@ const database = new Sequelize(
    }
 );
 
-// admin(database);
-// bussi(database);
-// persol(database);
+const users = require("./models/users");
+const comment = require("./models/comments");
+const users = require("./models/users");
+const users = require("./models/users");
+const bussi = require(".");
+const persol = require(".");
 
 
 // Post.hasMany(Comment, { foreignKey: 'post_id' }); 
