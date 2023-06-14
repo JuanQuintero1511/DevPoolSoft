@@ -1,59 +1,84 @@
-const { post } = require('../../models/post.js');
+const { Posts } = require("../../db");
 
-const createPost = async (req) => {
+const createPost = async (req, res) => {
     try {
-      const postData = req.body;
-      const newPost = await post.create(postData);
-      return newPost;
+
+      const {description} = req.body;
+
+      
+      if (!description) throw new Error("Missing required data");
+      
+      const newPost = {description}
+
+      const createNewPost = await  Posts.create(newPost);
+      
+      return res.status(201).json(createNewPost)
+
     } catch (error) {
-      throw new Error('Error al crear el post');
+      return res.status(400).json({ error: error.message });
+      
     }
   };
   
-  const getAllPosts = async () => {
+  const getAllPosts = async (req, res) => {
     try {
-      const allPosts = await post.findAll();
-      return allPosts;
+      
+      const allPosts = await Posts.findAll();
+      
+      return res.status(201).json(allPosts)
+      
     } catch (error) {
-      throw new Error('Error al obtener los posts');
+      return res.status(400).json({ error: error.message });
     }
   };
   
   const getPostById = async (id_post) => {
     try {
-      const post = await post.findByPk(id_post);
+      
+      const post = await Posts.findByPk(id_post);
+      
       if (!post) {
         throw new Error('El post no existe');
       }
       return post;
+
     } catch (error) {
-      throw new Error('Error al obtener el post');
+      return res.status(400).json({ error: error.message });
     }
   };
   
   const updatePost = async (id_post, newData) => {
     try {
-      const post = await post.findByPk(id_post);
+      
+      const post = await Posts.findByPk(id_post);
       if (!post) {
         throw new Error('El post no existe');
       }
+
+      
       await post.update(newData);
+
       return post;
+
     } catch (error) {
-      throw new Error('Error al actualizar el post');
+      return res.status(400).json({ error: error.message });
     }
   };
   
   const deletePost = async (id_post) => {
     try {
-      const post = await post.findByPk(id_post);
+     
+      const post = await Posts.findByPk(id_post);
+      
       if (!post) {
         throw new Error('El post no existe');
       }
+
       await post.destroy();
+      
       return 'Post eliminado exitosamente';
-    } catch (error) {
-      throw new Error('Error al eliminar el post');
+     } catch (error) {
+      return res.status(400).json({ error: error.message });
     }
   };
 
