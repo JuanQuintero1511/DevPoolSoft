@@ -1,4 +1,4 @@
-const {datos} = require('../../routes/db')
+// const {datos} = require('../../routes/db')
 
 
 const postUsers = (req, res) => {
@@ -21,4 +21,4 @@ const deleteUsers = (req, res) => {
     res.send('deleteUsers Funciona')
   };
 
-module.exports = {postUsers, getUsers, getUsersById, updateUsers, deleteUsers}
+// module.exports = {postUsers, getUsers, getUsersById, updateUsers, deleteUsers}

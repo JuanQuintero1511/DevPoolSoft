@@ -63,9 +63,9 @@ export const Login = () => {
               <p className="text-sm text-gray-500 mt-12">&copy; 2021 Talwind - All Rights Reserved.</p>
           </div>
 
-        </div>
+  //       </div>
 
-      </section>
-    </div>
-  )
-}
+  //     </section>
+  //   </div>
+  // )
+)}
