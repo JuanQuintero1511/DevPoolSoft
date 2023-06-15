@@ -6,7 +6,7 @@ export const Landing = () => {
   <div className="bg-blue-600 hidden lg:block w-full md:w-1/2 xl:w-2/3 h-screen">
     <img src="src/image/fondo.jpg" alt="fondo" className="w-full h-full object-cover"/>
   </div>
-  <div className="bg-white w-full md:max-w-md lg:max-w-full md:mx-auto md:mx-0 md:w-1/2 xl:w-1/3 h-screen px-6 lg:px-16 xl:px-12 flex items-center justify-center">
+  <div className="bg-white w-full md:max-w-md lg:max-w-full md:mx-auto md:w-1/2 xl:w-1/3 h-screen px-6 lg:px-16 xl:px-12 flex items-center justify-center">
     <div className="w-full h-100">
       <h1 className="text-xl font-bold">The tranquility tohave everything yourworld developer inthe only place.</h1>
       <div className="mt-6 flex justify-center space-x-4">
@@ -23,7 +23,7 @@ export const Landing = () => {
       </div>
       <p className="mt-8">
         Need an account?
-        <a href="#" className="text-blue-500 hover:text-blue-700 font-semibold">
+        <a href="/register" className="text-blue-500 hover:text-blue-700 font-semibold">
           Create an account
         </a>
       </p>
