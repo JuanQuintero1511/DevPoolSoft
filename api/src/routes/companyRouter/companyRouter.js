@@ -6,7 +6,7 @@ const {
     createCompanyHandler,
     updateCompanyHandler,
     deleteCompanyHandler
- } = require("../handlers/companyHandlers")
+ } = require("../../handlers/companyHandlers/companyHandlers")
 
 
 const CompanyRouter = Router();

@@ -1,4 +1,4 @@
-const { User_data } = require("../db")
+const { User_data } = require("../../db")
 
 // const { Op } = require("sequelize");
 

@@ -1,4 +1,4 @@
-const { createCompany, setPremium } = require('../controllers/companyControllers')
+const { createCompany, setPremium } = require('../../controllers/companyControllers/companyControllers')
 
 const createCompanyHandler = async (req, res) => {
     try {

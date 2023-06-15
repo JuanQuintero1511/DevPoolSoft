@@ -1,6 +1,6 @@
-const { Posts } = require("../db");
+const { Posts } = require("../../db");
 
-const createPost = async (req, res) => {
+const createPostHandler = async (req, res) => {
     try {
 
       const {description} = req.body;
@@ -20,7 +20,7 @@ const createPost = async (req, res) => {
     }
   };
   
-  const getAllPosts = async (req, res) => {
+  const getAllPostsHandler = async (req, res) => {
     try {
       
       const allPosts = await Posts.findAll();
@@ -32,7 +32,7 @@ const createPost = async (req, res) => {
     }
   };
   
-  const getPostById = async (req, res) => {
+  const getPostByIdHandler = async (req, res) => {
     const {id_post} = req.params;
     
     try {      
@@ -48,7 +48,7 @@ const createPost = async (req, res) => {
     }
   };
   
-  const updatePost = async (id_post, newData) => {
+  const updatePostHandler = async (id_post, newData) => {
     try {
       
       const post = await Posts.findByPk(id_post);
@@ -66,7 +66,7 @@ const createPost = async (req, res) => {
     }
   };
   
-  const deletePost = async (id_post) => {
+  const deletePostHandler = async (id_post) => {
     try {
      
       const post = await Posts.findByPk(id_post);
@@ -84,11 +84,11 @@ const createPost = async (req, res) => {
   };
 
 module.exports = {
-    createPost,
-    getAllPosts,
-    getPostById,
-    updatePost,
-    deletePost
+    createPostHandler,
+    getAllPostsHandler,
+    getPostByIdHandler,
+    updatePostHandler,
+    deletePostHandler
 };
 
 
