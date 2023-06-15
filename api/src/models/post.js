@@ -20,7 +20,16 @@ module.exports = (sequelize) => {
         likes: {
           type: DataTypes.INTEGER,
           defaultValue: 0
-        }
+        },
+        // date_register: {
+        //   type: DataTypes.DATE,
+        //   defaultValue: DataTypes.NOW,
+        //   allowNull: false,
+        // },
+        // state: {
+        //   type: DataTypes.ENUM (["In Progress", "Finished"]),
+        //   allowNull: true,
+        // }
       },
       {
         paranoid: true, // Habilita soft deletes
