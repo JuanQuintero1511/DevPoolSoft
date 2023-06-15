@@ -97,7 +97,7 @@ export const Register = () => {
 
     return (
         <div className="container mx-auto">
-      <h1 className="text-center font-bold text-3xl mb-4">
+      <h1 className="text-center font-bold text-3xl mb-4 mt-5 ml-2" >
        USER REGISTER:
       </h1>
       <div className="flex justify-center gap-4 mb-4">
