@@ -32,9 +32,10 @@ const createPost = async (req, res) => {
     }
   };
   
-  const getPostById = async (id_post) => {
-    try {
-      
+  const getPostById = async (req, res) => {
+    const {id_post} = req.params;
+    
+    try {      
       const post = await Posts.findByPk(id_post);
       
       if (!post) {
