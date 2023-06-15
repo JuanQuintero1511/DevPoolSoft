@@ -1,47 +1,35 @@
-const { Posts } = require("../../db");
+const {createNewPost, getAllPosts, getPostById} = require("../../controllers/postsControllers/postsControllers")
 
 const createPostHandler = async (req, res) => {
     try {
-
-      const {description} = req.body;
-
-      
-      if (!description) throw new Error("Missing required data");
-      
-      const newPost = {description}
-
-      const createNewPost = await  Posts.create(newPost);
-      
-      return res.status(201).json(createNewPost)
+      const {description} = req.body;      
+      if (!description ) throw new Error("Missing required data");
+      const newPost = await createNewPost (description);           
+      return res.status(201).json(newPost);
 
     } catch (error) {
-      return res.status(400).json({ error: error.message });
-      
+      return res.status(400).json({ error: error.message });      
     }
   };
   
   const getAllPostsHandler = async (req, res) => {
-    try {
-      
-      const allPosts = await Posts.findAll();
-      
-      return res.status(201).json(allPosts)
+    try {      
+      const allPosts = await getAllPosts();      
+      return res.status(201).json(allPosts);
       
     } catch (error) {
       return res.status(400).json({ error: error.message });
     }
   };
   
+
   const getPostByIdHandler = async (req, res) => {
-    const {id_post} = req.params;
+    const { id_post } = req.params;
     
     try {      
-      const post = await Posts.findByPk(id_post);
-      
-      if (!post) {
-        throw new Error('El post no existe');
-      }
-      return post;
+      const PostById = await getPostById(id_post);      
+      if (!PostById) throw new Error('El post no existe');   
+      return PostById;
 
     } catch (error) {
       return res.status(400).json({ error: error.message });
