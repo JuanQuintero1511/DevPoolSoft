@@ -1,13 +1,13 @@
 const { Router } = require('express');
-const router = Router();
 
 // Importa los routers individuales
-const UsersRouter = require('./users/userroutes');
-const PostsRouter = require('./posts/postsRoutes');
+const CompanyRouter = require('./companyRouter');
+const PostsRouter = require('./postsRoutes');
 
+const router = Router();
 
 // Agrega los routers al enrutador principal
-router.use('/users', UsersRouter);
+router.use('/company', CompanyRouter);
 router.use('/posts', PostsRouter);
 // Agrega más routers si es necesario
 
