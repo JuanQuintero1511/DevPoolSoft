@@ -9,13 +9,13 @@ const {
  } = require("../handlers/companyHandlers")
 
 
-const CompanyRouter = Router();
+const companyRouter = Router();
 
-CompanyRouter.get("/", getCompanyHandler);
-CompanyRouter.get("/:id", getCompanyHandlerId)
-CompanyRouter.post("/", createCompanyHandler);
-CompanyRouter.put("/:id", updateCompanyHandler);
-CompanyRouter.delete("/:id", deleteCompanyHandler);
+companyRouter.get("/", getCompanyHandler);
+companyRouter.get("/:id", getCompanyHandlerId)
+companyRouter.post("/", createCompanyHandler);
+companyRouter.put("/:id", updateCompanyHandler);
+companyRouter.delete("/:id", deleteCompanyHandler);
 
 
-module.exports = CompanyRouter;
+module.exports = companyRouter;

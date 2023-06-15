@@ -1,12 +1,25 @@
-const { User_data } = require("../db")
+const { User_data } = require("../db");
+const { Op } = require("sequelize");
 
-// const { Op } = require("sequelize");
-
-const createCompany = async (full_name, backup_email, description, date_birthday, address, phone_number, profile_image, authentication) => {
-    return (
-        await User_data.create({ full_name, backup_email, description, date_birthday, address, phone_number, profile_image, authentication })
-    )    
-}
+//Fn para crear la empresa
+const createCompany = async (
+    full_name,
+    backup_email,
+    description,
+    date_birthday,
+    address,
+    phone_number,
+    profile_image,
+    authentication) => { 
+            return (await User_data.create({ 
+            full_name,
+            backup_email,
+            description,
+            date_birthday,
+            address,
+            phone_number,
+            profile_image,
+            authentication }))}
 
 const setPremium = async (isPremium, full_name) => {
     if (isPremium === true) {
@@ -16,26 +29,24 @@ const setPremium = async (isPremium, full_name) => {
 } 
 
 
-
-
-
-
 // //?Trae las empresas de la DB
 const getAllCompanies = async () => {
-    // return await User_data.findAll({
-    //     include: [
-    //         {
-    //             model: Activity,
-    //             attributes: ["name", "difficulty", "duration", "season"],
-    //             through: { attributes: [] },
-    //         },
-    //     ],
-    // });
+    return await User_data.findAll(
+        // {
+        // include: [
+        //     {
+        //         model: Activity,
+        //         attributes: ["name", "difficulty", "duration", "season"],
+        //         through: { attributes: [] },
+        //     },
+        // ],
+    // }
+    );
 };
 
 
-//? Obtiene el pais por ID especifico mas las actividades
-const getCountriesById = async (id) => {
+//? Obtiene la empresa por ID especifico mas los posteos
+const getCompanyById = async (id) => {
     // return await Country.findOne({
     //     where: { id },
     //     include: [
@@ -49,20 +60,19 @@ const getCountriesById = async (id) => {
 };
 
 
-//?Obtiene el pais por nombre
-const getCountriesByName = async (name) => {
-    // return await Country.findAll({
-    //     //? ILIKE '%hat' (case insensitive)
-    //     where: { name: { [Op.iLike]: `%${name}%` } },
-    // });
+//* Obtiene la empresa por nombre
+const searchCompanyByName = async (full_name) => {
+    return await user_data.findAll({
+        where: { full_name: { [Op.iLike]: `%${full_name}%` } },
+    });
 };
 
 module.exports = {
     createCompany,
     setPremium,
     getAllCompanies,
-    getCountriesById,
-    getCountriesByName,
+    getCompanyById,
+    searchCompanyByName,
 }
 
 
