@@ -54,13 +54,15 @@ export const Register = () => {
 
     const handleSubmit = event => {
         event.preventDefault();
-        let error;
+        let errors= {};
         if (!rolSelected.company) {
-            error = onValidate(userForm)
+            errors = onValidate(userForm)
         } else {
-            error = onValidate(companyForm)
+            errors = onValidate(companyForm)
         }
-
+        if(errors.length > 0) {
+          setError(errors)
+        }
         
             console.log(companyForm)
         
@@ -68,8 +70,26 @@ export const Register = () => {
     }
 
     const onValidate = (values) => {
-        const errors = {hola: "hola"};
-       console.log("se esta validando" + errors)
+        const errors = {};
+        const noSymbols = /[ `!@#$%^&*()+\-=\[\]{};':"\\|,.<>\/?~]/;
+        const bestPassword = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+
+        if(!values.username_company && !values.username_user) {
+          errors.username = "User name is required"
+        }
+        if(values.fullName_owner && noSymbols.test(values.fullName_owner)) {
+          errors.fullName = "Name can't contain symbols"
+        }
+        if(values.fullName_user && noSymbols.test(values.fullName_user)) {
+          errors.fullName = "Name can't contain symbols"
+        }
+        if (values.password_company && !bestPassword.test(values.password_company)) {
+          errors.password = "Password must be at least 8 characters and contain at least one uppercase letter, one lowercase letter, and one number"
+        }
+        if (values.password_user && !bestPassword.test(values.password_user)) {
+          errors.password = "Password must be at least 8 characters and contain at least one uppercase letter, one lowercase letter, and one number"
+        }
+        
     };
 
     console.log(companyForm.username_company)
@@ -102,6 +122,7 @@ export const Register = () => {
           COMPANY
         </button>
       </div>
+      {rolSelected.company || rolSelected.user ? 
       <form className="bg-gray-100 p-8 rounded shadow-md">
         <div className="mb-4">
           <label className="block text-gray-700 font-bold mb-2">
@@ -111,7 +132,7 @@ export const Register = () => {
               name={rolSelected.company ? "username_company" : "username_user"}
               onChange={handleInputChange}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              placeholder="Escriba su user name aquí"
+              placeholder="User name here..."
             />
           </label>
         </div>
@@ -226,6 +247,7 @@ export const Register = () => {
           </button>
         </div>
       </form>
+      :null/* image soon*/}
     </div>
   );
 
