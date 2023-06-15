@@ -25,7 +25,7 @@ const createPostHandler = async (req, res) => {
 
   const getPostByIdHandler = async (req, res) => {
     const { id_post } = req.params;
-    
+  
     try {      
       const PostById = await getPostById(id_post);      
       if (!PostById) throw new Error('El post no existe');   

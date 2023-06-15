@@ -11,10 +11,11 @@ const getAllPosts = async () => {
 };
 
 const getPostById = async (id_post) => {
-    const PostById= await Posts.findByPk(id_post);
+    const PostById = await Posts.findByPk(id_post);
     return PostById;
 };
 
 
 
 module.exports = {createNewPost, getAllPosts, getPostById}
+
