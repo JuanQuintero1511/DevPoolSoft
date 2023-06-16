@@ -77,10 +77,10 @@ export const Register = () => {
 
     return (
         <div className="container mx-auto">
-      <h1 className="text-center font-bold text-3xl mb-4" style={{marginTop:'50px'}}>
+      <h1 className="text-center font-bold text-3xl mb-4 mt-[50px]" >
        USER REGISTER:
       </h1>
-      <div className="flex justify-center gap-4 mb-4" style={{marginLeft: '300px'}}>
+      <div className="flex justify-center gap-4 mb-4 ml-[200px]" >
         <button
           className={`${
             rolSelected.user ? "bg-blue-500 text-white" : "bg-gray-200"
