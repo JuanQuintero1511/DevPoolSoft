@@ -1,6 +1,5 @@
 const { Posts } = require ("../../db");
 
-
 const createNewPost = async (description) => {
     const newPost = await Posts.create({ description});
     return newPost;

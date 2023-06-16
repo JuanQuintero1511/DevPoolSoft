@@ -1,5 +1,3 @@
-const {createNewPost, getAllPosts, getPostById, updatePost, deletePost} = require("../../controllers/postsControllers/postsControllers")
-const  {Posts} = require('../../db');
 
 
 const createPostHandler = async (req, res) => {
@@ -27,19 +25,8 @@ const createPostHandler = async (req, res) => {
   };
   
 
- const getPostByIdHandler = async (req, res) => {
-      const {id} = req.params;
-      try{
-        if(isNaN(id)) {
-          let postById = await getPostById(id)
 
-          if (!postById) throw Error('No se encontro el Post del usuario');
-          return res.status(200).json(postById);
-        }
-      } catch(error) {
-        return res.status(400).json(error.message);
-      }
-  };
+
   
   const updatePostHandler = async (req, res) => {
     const { id, description } = req.body;
@@ -87,53 +74,3 @@ module.exports = {
 
 
 
-// // const { Activity, Country } = require("../db");
-// const { Op } = require("sequelize");
-
-// const postActivity = async ({ name, difficulty, duration, season, country, }) => {
-//   const newActivity = await Activity.create({
-//     name,
-//     difficulty,
-//     duration,
-//     season,
-//     country,
-//   });
-//   for (const countryId of country) {
-//     let countryObj = await Country.findByPk(countryId);
-//     if (countryObj) {
-//       newActivity.addCountry(countryObj);
-//     }
-//   }
-//   return newActivity;
-// };
-
-// const getActivities = async () => {
-//   const activity = await Activity.findAll({
-//     include: [{ model: Country, attributes: ["name"] }],
-//   });
-//   return activity;
-// };
-
-// const getActivityByName = async (name) => {
-//   return await Activity.findOne({
-//     where: { name: { [Op.iLike]: `%${name}%` } },
-//   });
-// };
-
-
-// //?Controller para borrar actividades
-// const activityDeleteAll = () => {
-//   Activity.destroy({ where: {} });
-// };
-
-// const activityDeleteById = (id) => {
-//   Activity.destroy({ where: { id } });
-// };
-
-// module.exports = {
-//   getActivities,
-//   postActivity,
-//   getActivityByName,
-//   activityDeleteAll,
-//   activityDeleteById,
-// };

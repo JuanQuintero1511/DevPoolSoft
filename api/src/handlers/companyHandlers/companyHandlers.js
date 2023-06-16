@@ -1,6 +1,6 @@
 const {
     createCompany,
-    setPremium,
+    setCompanyPremium,
     getAllCompanies,
     searchCompanyByName,
     getCompanyById} = require('../../controllers/companyControllers/companyControllers')
@@ -14,8 +14,7 @@ const createCompanyHandler = async (req, res) => {
             date_birthday,
             address,
             phone_number,
-            profile_image,
-            isPremium,
+            profile_image,            
             authentication } = req.body;
 
         const newCompany = await createCompany(
@@ -26,8 +25,7 @@ const createCompanyHandler = async (req, res) => {
             address,
             phone_number,
             profile_image,
-            authentication);
-        // await setPremium(isPremium, full_name)
+            authentication);        
         res.status(201).json(newCompany);
 
     } catch (error) {
@@ -61,8 +59,15 @@ const getCompanyHandlerId = async (req, res) => {
 }
 
 
-const updateCompanyHandler = async (req, res) => {
-
+const updateCompanyPremiumHandler = async (req, res) => {
+    const { full_name } = req.params    
+    console.log(req.params.full_name)
+    try {
+        await setCompanyPremium(full_name)
+        res.status(200).json({ message: "Actualizado a premium"})        
+    } catch (error) {
+        res.status(404).json({ error: error.message })
+    }
 }
 
 const deleteCompanyHandler = async (req, res) => {
@@ -74,6 +79,6 @@ module.exports = {
     getCompanyHandler,
     getCompanyHandlerId,
     createCompanyHandler,
-    updateCompanyHandler,
+    updateCompanyPremiumHandler,
     deleteCompanyHandler,
 }
