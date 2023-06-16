@@ -21,11 +21,12 @@ const createCompany = async (
             profile_image,
             authentication }))}
 
-const setPremium = async (isPremium, full_name) => {
-    if (isPremium === true) {
-        const query = `UPDATE user_data SET isPremium = true WHERE full_name = ${full_name};`;
-        await User_data.query(query);
-    }    
+const setCompanyPremium = async (full_name) => {
+    await User_data.update({isPremium: true},{
+        where: {
+            full_name: { [Op.iLike]: `%${full_name}%` }
+        }
+    })
 } 
 
 
@@ -62,14 +63,14 @@ const getCompanyById = async (id) => {
 
 //* Obtiene la empresa por nombre
 const searchCompanyByName = async (full_name) => {
-    return await user_data.findAll({
+    return await User_data.findAll({
         where: { full_name: { [Op.iLike]: `%${full_name}%` } },
     });
 };
 
 module.exports = {
     createCompany,
-    setPremium,
+    setCompanyPremium,
     getAllCompanies,
     getCompanyById,
     searchCompanyByName,
