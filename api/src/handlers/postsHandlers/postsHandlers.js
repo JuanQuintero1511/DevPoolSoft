@@ -66,11 +66,10 @@ const createPostHandler = async (req, res) => {
       const post = await getPostById(id);
       if (!post) {
         return res.status(404).json({ error: 'El post no existe' });
-      }
+      }  
+      const postdelete = await deletePost(post);
   
-      await post.destroy(id);
-  
-      return res.status(200).json({ message: 'Post eliminado correctamente' });
+      return res.status(200).json({ message: 'Post eliminado correctamente', postdelete });
   
     } catch (error) {
       return res.status(500).json({ error: error.message });

@@ -28,8 +28,8 @@ const updatePost = async ( id, description) => {
     }
   };
 
-const deletePost = async (id) => {
-    const postDelete = await Posts.destroy(id);
+const deletePost = async (post) => {
+    const postDelete = await post.destroy();
     return postDelete;
 };
 
