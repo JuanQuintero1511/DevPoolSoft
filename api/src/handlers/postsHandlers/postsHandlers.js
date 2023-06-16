@@ -1,5 +1,5 @@
-const { INTEGER } = require("sequelize");
-const {createNewPost, getAllPosts, getPostById} = require("../../controllers/postsControllers/postsControllers")
+
+const {createNewPost, getAllPosts, getPostById, updatePost} = require("../../controllers/postsControllers/postsControllers")
 
 const createPostHandler = async (req, res) => {
     try {
@@ -24,40 +24,41 @@ const createPostHandler = async (req, res) => {
   };
   
 
-  const getPostByIdHandler = async (req, res) => {
+ const getPostByIdHandler = async (req, res) => {
     
-    const {id} = req.body;
-    
-   
-    console.log((id) + "-" + "hola");
-
+    const { id } = req.params;
+        
     try {      
-      const PostById = await getPostById (id);      
-       
-      return PostById;
+      const PostById = await getPostById (id); 
+      if (!PostById) return res.status(404).json({ error: 'El post no existe' });            
+      return res.status(200).json(PostById);
 
     } catch (error) {
-      return res.status(400).json({ error: error.message });
+      return res.status(400).json({ error: error});
     }
   };
   
-  const updatePostHandler = async (id_post, newData) => {
+  const updatePostHandler = async (req, res) => {
+    const { id, description} = req.body;
+    
     try {
-      
-      const post = await Posts.findByPk(id_post);
-      if (!post) {
-        throw new Error('El post no existe');
+      const postChanges = await getPostById (id);          
+      if (!postChanges) {
+        return res.status(404).json({ error: error });
       }
+      console.log(postChanges + "tututu");
 
-      
-      await post.update(newData);
+      postChanges = await updatePost(description);
 
-      return post;
-
+      console.log(postChanges + "ttataata");
+  
+      return res.status(200).json({ message: 'Post actualizado correctamente', postChanges });
+  
     } catch (error) {
-      return res.status(400).json({ error: error.message });
+      return res.status(500).json({ error: 'Ocurrió un error al actualizar el post' });
     }
   };
+  
   
   const deletePostHandler = async (id_post) => {
     try {

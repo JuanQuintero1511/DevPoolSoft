@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const {getAllPostsHandler, createPostHandler, getPostByIdHandler, }  = require("../../handlers/postsHandlers/postsHandlers");
+const {getAllPostsHandler, createPostHandler, getPostByIdHandler, updatePostHandler}  = require("../../handlers/postsHandlers/postsHandlers");
 
 const PostsRouter = Router();
 
@@ -7,7 +7,7 @@ const PostsRouter = Router();
 PostsRouter.get("/", getAllPostsHandler);
 PostsRouter.post("/", createPostHandler);
 PostsRouter.get("/:id", getPostByIdHandler);
-// PostsRouter.put("/:id", updatePostsHandler);
+PostsRouter.put("/:id", updatePostHandler);
 // PostsRouter.delete("/:id", deletePostHandler);
 
 
