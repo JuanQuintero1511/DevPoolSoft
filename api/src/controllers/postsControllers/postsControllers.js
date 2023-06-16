@@ -1,4 +1,4 @@
-const { Posts,} = require ("../../db");
+const { Posts } = require ("../../db");
 
 const createNewPost = async (description) => {
     const newPost = await Posts.create({ description});
@@ -11,7 +11,7 @@ const getAllPosts = async () => {
 };
 
 const getPostById = async (id) => {
-    const PostById = await Posts.findOne(id);
+    const PostById = await Posts.findByPk(id);
     return PostById;
 };
 
