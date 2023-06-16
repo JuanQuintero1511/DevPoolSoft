@@ -1,3 +1,4 @@
+const { INTEGER } = require("sequelize");
 const {createNewPost, getAllPosts, getPostById} = require("../../controllers/postsControllers/postsControllers")
 
 const createPostHandler = async (req, res) => {
@@ -24,11 +25,15 @@ const createPostHandler = async (req, res) => {
   
 
   const getPostByIdHandler = async (req, res) => {
-    const { id_post } = req.params;
-  
+    
+    const {id} = req.body;
+    
+   
+    console.log((id) + "-" + "hola");
+
     try {      
-      const PostById = await getPostById(id_post);      
-      if (!PostById) throw new Error('El post no existe');   
+      const PostById = await getPostById (id);      
+       
       return PostById;
 
     } catch (error) {
