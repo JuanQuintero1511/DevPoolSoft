@@ -1,6 +1,8 @@
 import { useState, useRef } from "react";
 import leftside from "../image/leftside.jpg"
+import {useDispatch} from "react-redux"
 import devpoolicon from "../image/devpoolicon.png"
+import { createCompany } from "../redux/actions";
 
 let docTitle = document.title;
 window.addEventListener("blur", () => {
@@ -12,6 +14,7 @@ window.addEventListener("focus", () => {
 
 export const Register = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const dispatch = useDispatch();
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode)
@@ -31,18 +34,30 @@ export const Register = () => {
     password: "",
   })
 
+  {
+    // "full_name": "John Doe",
+    // "backup_email": "john.doe@example.com",
+    // "description": "Company description",
+    // "date_birthday": "1990-01-01",
+    // "address": "123 Main St, City",
+    // "phone_number": "1234567890",
+    // "profile_image": "https://example.com/profile.jpg",
+    // "authentication": "https://example.com/authentication.pdf"
+  }
+
   const [companyForm, setCompanyForm] = useState({
 
     rol_type: "",
     userName: "",
     password_company: "",
     full_name: "",
+    adress: "",
     backup_email: users.email,
     date_birthday: "",
     phone_number: "",
     isActive: true,
     isPremium: false,
-    authentication_pdf: "",
+    authentication: "",
 
 
   })
@@ -69,37 +84,26 @@ export const Register = () => {
       setCompanyForm(prevCompany => ({
         ...prevCompany,
         [name]: value
-      }))
+      }));
+      setUsers(prevUser => ({
+        ...prevUser,
+        [name]: value
+      }));
     } else {
       setUserForm(prevUser => ({
         ...prevUser,
         [name]: value
       }))
+      setUsers(prevUser => ({
+        ...prevUser,
+        [name]: value
+      }));
     }
 
   };
 
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    let errors = {};
-    if (!rolSelected.company) {
-      errors = onValidate(userForm);
-    } else {
-      errors = onValidate(companyForm);
-    }
-    if (errors && Object.keys(errors).length > 0) {
-      setError(errors)
-    } else {
-
-      console.log(companyForm)
-      console.log(userForm)
-    }
-
-
-
-
-  }
+  
 
   const onValidate = (values) => {
     const errors = {};
@@ -126,8 +130,38 @@ export const Register = () => {
 
   };
 
-  console.log(companyForm.userName)
+  const test1 = {
+    full_name: "Juan Meyer",
+    backup_email: "try@example.com",
+    description: "test1",
+    date_birthday: "1990-02-03",
+    address: "test1 agregar",
+    phone_number: "12345129",
+    profile_image: "https://example.com/profile.jpg",
+    authentication: "CUIL"
+  }
+  console.log(test1)
 
+  function handleSubmit(event) {
+    event.preventDefault();
+    let errors = {};
+    if (!rolSelected.company) {
+     
+    } else {
+      
+    }
+    if (errors && Object.keys(errors).length > 0) {
+      setError(errors)
+    } else {
+      dispatch(createCompany(test1));
+      alert("se ha creado con éxito")
+      console.log(test1)
+    }
+
+
+
+
+  }
 
 
 
@@ -238,7 +272,7 @@ export const Register = () => {
                   Authentication archive:
                   <input
                     type="text"
-                    name="authentication_pdf"
+                    name="authentication"
                     placeholder="Load authentication..."
                     onChange={handleInputChange}
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"

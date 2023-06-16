@@ -1,4 +1,4 @@
-const { Posts } = require("../db");
+const { Posts } = require("../../db");
 
 const createPost = async (req, res) => {
     try {
