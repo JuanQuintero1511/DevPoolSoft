@@ -1,5 +1,5 @@
 
-const {createNewPost, getAllPosts, getPostById, updatePost} = require("../../controllers/postsControllers/postsControllers")
+const {createNewPost, getAllPosts, getPostById, updatePost, deletePost} = require("../../controllers/postsControllers/postsControllers")
 
 const createPostHandler = async (req, res) => {
     try {
@@ -38,42 +38,42 @@ const createPostHandler = async (req, res) => {
     }
   };
   
-  const updatePostHandler = async (req, res) => {
-    const { id, description} = req.body;
+  // const updatePostHandler = async (req, res) => {
+  //   const { id, description} = req.body;
     
-    try {
-      const postChanges = await getPostById (id);          
-      if (!postChanges) {
-        return res.status(404).json({ error: error });
-      }
-      console.log(postChanges + "tututu");
+  //   try {
+  //     const postChanges = await getPostById (id);          
+  //     if (!postChanges) {
+  //       return res.status(404).json({ error: error });
+  //     }
+  //     console.log(postChanges + "tututu");
 
-      postChanges = await updatePost(description);
+  //     postChanges = await updatePost(description);
 
-      console.log(postChanges + "ttataata");
+  //     console.log(postChanges + "ttataata");
   
-      return res.status(200).json({ message: 'Post actualizado correctamente', postChanges });
+  //     return res.status(200).json({ message: 'Post actualizado correctamente', postChanges });
+  
+  //   } catch (error) {
+  //     return res.status(500).json({ error: 'Ocurrió un error al actualizar el post' });
+  //   }
+  // };
+  
+  const deletePostHandler = async (req, res) => {
+    const { id} = req.params;
+  
+    try {
+      const post = await Posts.findByPk(id_post);
+      if (!post) {
+        return res.status(404).json({ error: 'El post no existe' });
+      }
+  
+      await post.destroy(id);
+  
+      return res.status(200).json({ message: 'Post eliminado correctamente' });
   
     } catch (error) {
-      return res.status(500).json({ error: 'Ocurrió un error al actualizar el post' });
-    }
-  };
-  
-  
-  const deletePostHandler = async (id_post) => {
-    try {
-     
-      const post = await Posts.findByPk(id_post);
-      
-      if (!post) {
-        throw new Error('El post no existe');
-      }
-
-      await post.destroy();
-      
-      return 'Post eliminado exitosamente';
-     } catch (error) {
-      return res.status(400).json({ error: error.message });
+      return res.status(500).json({ error: 'Ocurrió un error al eliminar el post' });
     }
   };
 
@@ -81,7 +81,7 @@ module.exports = {
     createPostHandler,
     getAllPostsHandler,
     getPostByIdHandler,
-    updatePostHandler,
+    // updatePostHandler,
     deletePostHandler
 };
 

@@ -14,6 +14,10 @@ const getPostById = async (id) => {
     const PostById = await Posts.findByPk(id);
     return PostById;
 };
+const deletePost = async (id) => {
+    const postDelete = await Posts.destroy(id);
+    return postDelete;
+};
 const updatePost = async (description) => {
    const postChanges = await Posts.update(description);
    return postChanges;
@@ -22,5 +26,6 @@ const updatePost = async (description) => {
 
 
 
-module.exports = {createNewPost, getAllPosts, getPostById, updatePost}
+
+module.exports = {createNewPost, getAllPosts, getPostById, updatePost, deletePost}
 
