@@ -39,26 +39,23 @@ const createPostHandler = async (req, res) => {
       }
   };
   
-  // const updatePostHandler = async (req, res) => {
-  //   const { id, description} = req.body;
-    
-  //   try {
-  //     const postChanges = await getPostById (id);          
-  //     if (!postChanges) {
-  //       return res.status(404).json({ error: error });
-  //     }
-  //     console.log(postChanges + "tututu");
-
-  //     postChanges = await updatePost(description);
-
-  //     console.log(postChanges + "ttataata");
+  const updatePostHandler = async (req, res) => {
+    const { id, description } = req.body;
   
-  //     return res.status(200).json({ message: 'Post actualizado correctamente', postChanges });
+    try {
+      const postById = await getPostById( id);
+      if (!postById) {
+        return res.status(404).json({ error: 'El post no fue encontrado' });
+      }
   
-  //   } catch (error) {
-  //     return res.status(500).json({ error: 'Ocurrió un error al actualizar el post' });
-  //   }
-  // };
+      const postChanges = await updatePost(id, description);
+  
+      return res.status(200).json({ message: 'Post actualizado correctamente', postChanges });
+  
+    } catch (error) {
+      return res.status(500).json({ error: 'Ocurrió un error al actualizar el post', details: error.message });
+    }
+  };
   
   const deletePostHandler = async (req, res) => {
     const { id} = req.params;
@@ -83,7 +80,7 @@ module.exports = {
     createPostHandler,
     getAllPostsHandler,
     getPostByIdHandler,
-    // updatePostHandler,
+    updatePostHandler,
     deletePostHandler
 };
 
