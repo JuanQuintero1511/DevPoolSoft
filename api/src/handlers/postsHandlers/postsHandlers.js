@@ -16,7 +16,9 @@ const createPostHandler = async (req, res) => {
   
   const getAllPostsHandler = async (req, res) => {
     try {      
-      const allPosts = await getAllPosts();      
+      const allPosts = await getAllPosts();
+      if (allPosts === "[]")throw new Error("Post dont exist")      
+      
       return res.status(201).json(allPosts);
       
     } catch (error) {
@@ -35,7 +37,7 @@ const createPostHandler = async (req, res) => {
           return res.status(200).json(postById);
         }
       } catch(error) {
-        return res.status(400).json(error);
+        return res.status(400).json(error.message);
       }
   };
   
@@ -58,10 +60,10 @@ const createPostHandler = async (req, res) => {
   };
   
   const deletePostHandler = async (req, res) => {
-    const { id} = req.params;
+    const { id } = req.params;
   
     try {
-      const post = await Posts.findByPk(id_post);
+      const post = await getPostById(id);
       if (!post) {
         return res.status(404).json({ error: 'El post no existe' });
       }
@@ -71,7 +73,7 @@ const createPostHandler = async (req, res) => {
       return res.status(200).json({ message: 'Post eliminado correctamente' });
   
     } catch (error) {
-      return res.status(500).json({ error: 'Ocurrió un error al eliminar el post' });
+      return res.status(500).json({ error: error.message });
     }
   };
 
