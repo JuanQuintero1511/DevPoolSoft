@@ -29,7 +29,7 @@ const createPostHandler = async (req, res) => {
       const {id} = req.params;
       try{
         if(isNaN(id)) {
-          let postById = await Posts.findByPk(id)
+          let postById = await getPostById(id)
 
           if (!postById) throw Error('No se encontro el Post del usuario');
           return res.status(200).json(postById);
