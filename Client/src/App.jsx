@@ -15,8 +15,8 @@ const location = useLocation();
   return (
     <>
     <div>
-     {location.pathname !== "/" && location.pathname !=="/login" && <Nav/>}
-     {location.pathname !== "/" && location.pathname !=="/login" && <SideBar/>}
+     {location.pathname !== "/" && location.pathname !=="/login" && location.pathname !== "/register"  && <Nav/> }
+     {location.pathname !== "/" && location.pathname !=="/login" && location.pathname !== "/register" && <SideBar/>}
       </div>
 
       <Routes>

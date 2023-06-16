@@ -606,3 +606,8 @@ const companies = [
       ]
     }
   ];
+
+export {
+    users,
+    companies,
+}
