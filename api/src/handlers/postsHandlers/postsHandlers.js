@@ -1,4 +1,4 @@
-const {createNewPost, getAllPosts, getPostById} = require("../../controllers/postsControllers/postsControllers")
+
 
 const createPostHandler = async (req, res) => {
     try {
@@ -14,7 +14,9 @@ const createPostHandler = async (req, res) => {
   
   const getAllPostsHandler = async (req, res) => {
     try {      
-      const allPosts = await getAllPosts();      
+      const allPosts = await getAllPosts();
+      if (allPosts === "[]")throw new Error("Post dont exist")      
+      
       return res.status(201).json(allPosts);
       
     } catch (error) {
@@ -23,57 +25,44 @@ const createPostHandler = async (req, res) => {
   };
   
 
-  const getPostByIdHandler = async (req, res) => {
-    
+
+
+  
+  const updatePostHandler = async (req, res) => {
+    const { id, description } = req.body;
+  
+    try {
+      const postById = await getPostById( id);
+      if (!postById) {
+        return res.status(404).json({ error: 'El post no fue encontrado' });
+      }
+  
+      const postChanges = await updatePost(id, description);
+  
+      return res.status(200).json({ message: 'Post actualizado correctamente', postChanges });
+  
+    } catch (error) {
+      return res.status(500).json({ error: 'Ocurrió un error al actualizar el post', details: error.message });
+    }
+  };
+  
+  const deletePostHandler = async (req, res) => {
     const { id } = req.params;
-        
-    try {      
-      const PostById = await getPostById (id); 
-      if (! PostById) {
-        throw new Error('El post no existe');
+  
+    try {
+      const post = await getPostById(id);
+      if (!post) {
+        return res.status(404).json({ error: 'El post no existe' });
       }  
-       
-      return res.status(200).json(PostById);
-
-    } catch (error) {
-      return res.status(400).json({ error:"El post no existe" });
-    }
-  };
+      const postdelete = await deletePost(post);
   
-  const updatePostHandler = async (id_post, newData) => {
-    try {
-      
-      const post = await Posts.findByPk(id_post);
-      if (!post) {
-        throw new Error('El post no existe');
-      }
-
-      
-      await post.update(newData);
-
-      return post;
-
-    } catch (error) {
-      return res.status(400).json({ error: error.message });
-    }
-  };
+      return res.status(200).json({ message: 'Post eliminado correctamente', postdelete });
   
-  const deletePostHandler = async (id_post) => {
-    try {
-     
-      const post = await Posts.findByPk(id_post);
-      
-      if (!post) {
-        throw new Error('El post no existe');
-      }
-
-      await post.destroy();
-      
-      return 'Post eliminado exitosamente';
-     } catch (error) {
-      return res.status(400).json({ error: error.message });
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
     }
   };
+
 
 module.exports = {
     createPostHandler,
@@ -85,53 +74,3 @@ module.exports = {
 
 
 
-// // const { Activity, Country } = require("../db");
-// const { Op } = require("sequelize");
-
-// const postActivity = async ({ name, difficulty, duration, season, country, }) => {
-//   const newActivity = await Activity.create({
-//     name,
-//     difficulty,
-//     duration,
-//     season,
-//     country,
-//   });
-//   for (const countryId of country) {
-//     let countryObj = await Country.findByPk(countryId);
-//     if (countryObj) {
-//       newActivity.addCountry(countryObj);
-//     }
-//   }
-//   return newActivity;
-// };
-
-// const getActivities = async () => {
-//   const activity = await Activity.findAll({
-//     include: [{ model: Country, attributes: ["name"] }],
-//   });
-//   return activity;
-// };
-
-// const getActivityByName = async (name) => {
-//   return await Activity.findOne({
-//     where: { name: { [Op.iLike]: `%${name}%` } },
-//   });
-// };
-
-
-// //?Controller para borrar actividades
-// const activityDeleteAll = () => {
-//   Activity.destroy({ where: {} });
-// };
-
-// const activityDeleteById = (id) => {
-//   Activity.destroy({ where: { id } });
-// };
-
-// module.exports = {
-//   getActivities,
-//   postActivity,
-//   getActivityByName,
-//   activityDeleteAll,
-//   activityDeleteById,
-// };

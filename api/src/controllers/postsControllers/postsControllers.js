@@ -15,7 +15,26 @@ const getPostById = async (id) => {
     return PostById;
 };
 
+const updatePost = async ( id, description) => {
+    try {
+      const postUpdateResult = await Posts.update(
+        { description: description },
+        { where: { id_post:  id } }
+      );
+      return postUpdateResult;
+    } catch (error) {
+      throw new Error('Error al actualizar los posts: ' + error.message);
+    }
+  };
+
+const deletePost = async (post) => {
+    const postDelete = await post.destroy();
+    return postDelete;
+};
 
 
-module.exports = {createNewPost, getAllPosts, getPostById}
+
+
+
+module.exports = {createNewPost, getAllPosts, getPostById, updatePost, deletePost}
 
