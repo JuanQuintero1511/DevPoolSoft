@@ -1,53 +1,46 @@
-const { Posts } = require("../db");
+const {createNewPost, getAllPosts, getPostById} = require("../../controllers/postsControllers/postsControllers")
 
-const createPost = async (req, res) => {
+const createPostHandler = async (req, res) => {
     try {
-
-      const {description} = req.body;
-
-      
-      if (!description) throw new Error("Missing required data");
-      
-      const newPost = {description}
-
-      const createNewPost = await  Posts.create(newPost);
-      
-      return res.status(201).json(createNewPost)
+      const {description} = req.body;      
+      if (!description ) throw new Error("Missing required data");
+      const newPost = await createNewPost (description);           
+      return res.status(201).json(newPost);
 
     } catch (error) {
-      return res.status(400).json({ error: error.message });
-      
+      return res.status(400).json({ error: error.message });      
     }
   };
   
-  const getAllPosts = async (req, res) => {
-    try {
-      
-      const allPosts = await Posts.findAll();
-      
-      return res.status(201).json(allPosts)
+  const getAllPostsHandler = async (req, res) => {
+    try {      
+      const allPosts = await getAllPosts();      
+      return res.status(201).json(allPosts);
       
     } catch (error) {
       return res.status(400).json({ error: error.message });
     }
   };
   
-  const getPostById = async (id_post) => {
-    try {
-      
-      const post = await Posts.findByPk(id_post);
-      
-      if (!post) {
+
+  const getPostByIdHandler = async (req, res) => {
+    
+    const { id } = req.params;
+        
+    try {      
+      const PostById = await getPostById (id); 
+      if (! PostById) {
         throw new Error('El post no existe');
-      }
-      return post;
+      }  
+       
+      return res.status(200).json(PostById);
 
     } catch (error) {
-      return res.status(400).json({ error: error.message });
+      return res.status(400).json({ error:"El post no existe" });
     }
   };
   
-  const updatePost = async (id_post, newData) => {
+  const updatePostHandler = async (id_post, newData) => {
     try {
       
       const post = await Posts.findByPk(id_post);
@@ -65,7 +58,7 @@ const createPost = async (req, res) => {
     }
   };
   
-  const deletePost = async (id_post) => {
+  const deletePostHandler = async (id_post) => {
     try {
      
       const post = await Posts.findByPk(id_post);
@@ -83,11 +76,11 @@ const createPost = async (req, res) => {
   };
 
 module.exports = {
-    createPost,
-    getAllPosts,
-    getPostById,
-    updatePost,
-    deletePost
+    createPostHandler,
+    getAllPostsHandler,
+    getPostByIdHandler,
+    updatePostHandler,
+    deletePostHandler
 };
 
 
