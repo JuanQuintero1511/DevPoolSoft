@@ -1,5 +1,6 @@
-
 const {createNewPost, getAllPosts, getPostById, updatePost, deletePost} = require("../../controllers/postsControllers/postsControllers")
+const  {Posts} = require('../../db');
+
 
 const createPostHandler = async (req, res) => {
     try {
@@ -25,17 +26,17 @@ const createPostHandler = async (req, res) => {
   
 
  const getPostByIdHandler = async (req, res) => {
-    
-    const { id } = req.params;
-        
-    try {      
-      const PostById = await getPostById (id); 
-      if (!PostById) return res.status(404).json({ error: 'El post no existe' });            
-      return res.status(200).json(PostById);
+      const {id} = req.params;
+      try{
+        if(isNaN(id)) {
+          let postById = await Posts.findByPk(id)
 
-    } catch (error) {
-      return res.status(400).json({ error: error});
-    }
+          if (!postById) throw Error('No se encontro el Post del usuario');
+          return res.status(200).json(postById);
+        }
+      } catch(error) {
+        return res.status(400).json(error);
+      }
   };
   
   // const updatePostHandler = async (req, res) => {
@@ -76,6 +77,7 @@ const createPostHandler = async (req, res) => {
       return res.status(500).json({ error: 'Ocurrió un error al eliminar el post' });
     }
   };
+
 
 module.exports = {
     createPostHandler,
