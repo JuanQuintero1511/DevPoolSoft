@@ -24,9 +24,19 @@ const createPostHandler = async (req, res) => {
     }
   };
   
+  const getPostByIdHandler = async (req, res) => {
+    const {id} = req.params;
+    try{
+      if(isNaN(id)) {
+        let postById = await getPostById(id)
 
-
-
+        if (!postById) throw Error('No se encontro el Post del usuario');
+        return res.status(200).json(postById);
+      }
+    } catch(error) {
+      return res.status(400).json(error.message);
+    }
+};
   
   const updatePostHandler = async (req, res) => {
     const { id, description } = req.body;
