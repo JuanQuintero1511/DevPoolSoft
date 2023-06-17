@@ -10,7 +10,14 @@ module.exports = (sequelize) => {
           primaryKey: true,
           allowNull: false
         },
-        description: {
+        title: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+              len: [0, 50] // Establece que la longitud máxima es de 255 caracteres
+            }
+          },
+        body: {
           type: DataTypes.STRING,
           allowNull: false,
           validate: {

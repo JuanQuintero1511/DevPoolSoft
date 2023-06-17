@@ -2,9 +2,9 @@ const {createNewPost, getAllPosts, getPostById, updatePost, deletePost} = requir
 
 const createPostHandler = async (req, res) => {
     try {
-      const {description} = req.body;      
-      if (!description ) throw new Error("Missing required data");
-      const newPost = await createNewPost (description);           
+      const {title, body, state} = req.body;      
+      if (!title && !body && !state ) throw new Error("Missing required data");
+      const newPost = await createNewPost (title, body, state);           
       return res.status(201).json(newPost);
 
     } catch (error) {
@@ -39,15 +39,16 @@ const createPostHandler = async (req, res) => {
 };
   
   const updatePostHandler = async (req, res) => {
-    const { id, description } = req.body;
+    const { id, title, body, state } = req.body;
   
     try {
-      const postById = await getPostById( id);
-      if (!postById) {
-        return res.status(404).json({ error: 'El post no fue encontrado' });
+      if(isNaN(id)) {
+        let postById = await getPostById(id)
+
+        if (!postById) throw Error('No se encontro el Post del usuario');
+      
       }
-  
-      const postChanges = await updatePost(id, description);
+      const postChanges = await updatePost(id, title, body, state);
   
       return res.status(200).json({ message: 'Post actualizado correctamente', postChanges });
   

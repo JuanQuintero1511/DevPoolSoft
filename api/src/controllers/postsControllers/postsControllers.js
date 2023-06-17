@@ -1,7 +1,7 @@
 const { Posts } = require ("../../db");
 
-const createNewPost = async (description) => {
-    const newPost = await Posts.create({ description});
+const createNewPost = async (title, body, state) => {
+    const newPost = await Posts.create({ title, body, state});
     return newPost;
 };
 
@@ -15,10 +15,10 @@ const getPostById = async (id) => {
     return PostById;
 };
 
-const updatePost = async ( id, description) => {
+const updatePost = async ( id, title, body, state) => {
     try {
       const postUpdateResult = await Posts.update(
-        { description: description },
+        { title: title, body: body, state: state },
         { where: { id_post:  id } }
       );
       return postUpdateResult;
