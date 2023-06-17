@@ -20,7 +20,7 @@ const Detail = () => {
   
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-4">
+    <div className="bg-white rounded-lg shadow-md p-4 ml-[250px]">
       <div className="mb-2">
         <span className="text-gray-600">User: </span>
         <span className="font-bold">{post.user}</span>
