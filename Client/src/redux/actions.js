@@ -1,7 +1,21 @@
-import { users, companies } from "../bdd/baseDeDatos";
-import axios from "axios"
+import { GET_ALL_POSTS, GET_ID_POST, CREATE_COMPANY } from "./action-types";
+import axios from "axios";
 
-export const CREATE_COMPANY = "CREATE_COMPANY"
+export const getAllPosts = () => {
+    return async function (dispatch){
+        const {data} = await axios.get(`http://localhost:3001/posts`);
+        const posts = data;
+        dispatch({ type: GET_ALL_POSTS, payload: posts });
+    }
+}
+export const getPostById = (id) => {
+    return async function (dispatch) {
+        const {data} = await axios.get(`http://localhost:3001/posts/${id}`);
+        const post = data;
+        dispatch({ type: GET_ID_POST, payload: post });
+    }
+}
+
 
 
 export const getUsers = () => {

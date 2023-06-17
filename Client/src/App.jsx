@@ -6,6 +6,8 @@ import { Login } from './components/Login';
 import { useLocation } from 'react-router-dom';
 import Nav from "./components/Nav";
 import SideBar from "./components/sidebar";
+import Community from "./components/Community";
+import Detail from "./components/DetailCommunity";
 
 
 function App() {
@@ -24,6 +26,9 @@ const location = useLocation();
         <Route path='/' element={ <Landing />}/>
         <Route path='/login' element={ <Login /> }/>
         <Route path='/home' element={ <Home />}/>
+        <Route path='/community' element={ <Community />}/>
+        <Route path="/community/:id" element={ <Detail />} />
+
       </Routes>
     </>
   )
