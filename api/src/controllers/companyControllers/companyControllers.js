@@ -1,4 +1,4 @@
-const { User_data, Roles } = require("../../db");
+const { User_data, Roles, Posts } = require("../../db");
 const { Op } = require("sequelize");
 
 //Fn para crear la empresa
@@ -61,17 +61,24 @@ const getAllCompanies = async () => {
 
 //? Obtiene la empresa por ID especifico mas los posteos
 const getCompanyById = async (id) => {
-    // return await Country.findOne({
-    //     where: { id },
-    //     include: [
-    //         {
-    //             model: Activity,
-    //             attributes: ["name", "difficulty", "duration", "season"],
-    //             through: { attributes: [] },
-    //         },
-    //     ],
-    // });
-};
+    try {
+      const companyById = await User_data.findByPk(id, {
+        include: {
+          model: Posts,
+          // include: Comment // Incluye los comentarios relacionados con cada post
+        }
+      });
+  
+      if (!companyById) {
+        throw new Error(`Company with ID ${id} not found`);
+      }
+  
+      return companyById;
+    } catch (error) {
+      console.error(`Error occurred while fetching company with ID ${id}:`, error);
+      throw error;
+    }
+  };
 
 
 //* Obtiene la empresa por nombre
@@ -79,6 +86,7 @@ const searchCompanyByName = async (full_name) => {
     return await User_data.findAll({
         where: { full_name: { [Op.iLike]: `%${full_name}%` } },
     });
+    
 };
 
 module.exports = {
@@ -89,3 +97,5 @@ module.exports = {
     getCompanyById,
     searchCompanyByName,
 }
+
+

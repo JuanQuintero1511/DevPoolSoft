@@ -51,12 +51,15 @@ const getCompanyHandler = async (req, res) => {
     }
 }
 
+
+//? Obtiene la empresa por ID especifico mas los posteos
+
 const getCompanyHandlerId = async (req, res) => {
     const { id } = req.params;
     const source = isNaN(id) ? "bdd" : "api";
     try {
-        const companyByID = await getCompanyById(id, source)
-        res.status(200).json(companyByID)
+        const companyById = await getCompanyById(id, source)
+        res.status(200).json(companyById)
     } catch (error) {
         res.status(400).json({ error: error.message })
     }

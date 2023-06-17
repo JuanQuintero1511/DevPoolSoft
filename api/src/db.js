@@ -39,6 +39,7 @@ const { Comments, Posts, Roles, User_data, Users } = sequelize.models;
 Users.hasOne(User_data, { foreignKey: 'id_users' });
 Roles.hasOne(User_data, { foreignKey: 'id_roles' });
 User_data.hasMany(Posts, { foreignKey: 'id_user_data' })
+Posts.belongsTo(User_data,{ foreignKey: 'id_user_data' })
 Posts.hasMany(Comments, { foreignKey: 'id_post' })
 
 module.exports = {

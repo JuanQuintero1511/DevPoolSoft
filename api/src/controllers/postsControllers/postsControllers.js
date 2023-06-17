@@ -1,4 +1,4 @@
-const { Posts } = require ("../../db");
+const { Posts, User_data } = require ("../../db");
 
 const createNewPost = async (title, body, state) => {
     const newPost = await Posts.create({ title, body, state});
@@ -11,7 +11,13 @@ const getAllPosts = async () => {
 };
 
 const getPostById = async (id) => {
-    const PostById = await Posts.findByPk(id);
+  const PostById = await Posts.findByPk(id, 
+    // {
+    // include: {
+    //   model: User_data,
+    //   // include: Comment // Incluye los comentarios relacionados con cada post
+    // }}
+    )
     return PostById;
 };
 

@@ -16,18 +16,22 @@ const createPostHandler = async (req, res) => {
         state, 
         id_user_data);
               
-      return res.status(400).json({ error: error.message });      
+      return res.status(400).json({ newPost });      
+    } catch (error) {
+      return res.status(400).json({ error: error.message });
     }
   };
   
   const getAllPostsHandler = async (req, res) => {
-    try {      
+    try {
       const allPosts = await getAllPosts();
-      if (allPosts === "[]")throw new Error("Post dont exist")      
-      
-      return res.status(201).json(allPosts);
-      
+      if (allPosts.length === 0) {
+        throw new Error("Posts don't exist");
+      }
+  
+      return res.status(200).json(allPosts);
     } catch (error) {
+      console.error("Error occurred while fetching all posts:", error);
       return res.status(400).json({ error: error.message });
     }
   };
