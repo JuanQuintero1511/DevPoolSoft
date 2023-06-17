@@ -8,6 +8,7 @@ import Nav from "./components/Nav";
 import SideBar from "./components/sidebar";
 import Community from "./components/Community";
 import Detail from "./components/DetailCommunity";
+import JobsOffers from "./components/JobsOffers";
 
 
 function App() {
@@ -22,6 +23,8 @@ const location = useLocation();
       </div>
 
       <Routes>
+        
+        <Route path='/JobsOffers' element={<JobsOffers />}/>
         <Route path='/register' element={<Register />} />
         <Route path='/' element={ <Landing />}/>
         <Route path='/login' element={ <Login /> }/>
