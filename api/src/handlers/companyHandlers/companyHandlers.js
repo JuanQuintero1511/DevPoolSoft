@@ -44,10 +44,7 @@ const getCompanyHandler = async (req, res) => {
         const results = name ? await searchCompanyByName(name) : await getAllCompanies()
         res.status(200).json(results);
     } catch (error) {
-        console.error("Error occurred while found company:", error);
-        res
-            .status(400)
-            .json({ error: "Failed to found company. Please try again later." });
+        res.status(400).json({ error:"Error occurred while found company:", detail: error.message })
     }
 }
 
@@ -59,10 +56,14 @@ const getCompanyHandlerId = async (req, res) => {
     const source = isNaN(id) ? "bdd" : "api";
     try {
         const companyById = await getCompanyById(id, source)
+        if (!companyById) {
+            throw new Error(`Company with ID ${id} not found`);
+          }
         res.status(200).json(companyById)
     } catch (error) {
-        res.status(400).json({ error: error.message })
+        res.status(400).json({ error: `Error occurred while fetching company with ID ${id}:` , detail: error.message })
     }
+
 }
 
 
