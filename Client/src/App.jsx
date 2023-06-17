@@ -5,7 +5,8 @@ import {Register} from './components/Register'
 import { Login } from './components/Login';
 import { useLocation } from 'react-router-dom';
 import Nav from "./components/Nav";
-import SideBar from "./components/sidebar";
+import SideBar from "./components/SideBar";
+import { Profile } from "./components/Profile";
 
 
 function App() {
@@ -24,6 +25,7 @@ const location = useLocation();
         <Route path='/' element={ <Landing />}/>
         <Route path='/login' element={ <Login /> }/>
         <Route path='/home' element={ <Home />}/>
+        <Route path='/profile/:id' element={ <Profile />}/>
       </Routes>
     </>
   )
