@@ -31,7 +31,7 @@ const location = useLocation();
         <Route path='/' element={ <Landing />}/>
         <Route path='/login' element={ <Login /> }/>
         <Route path='/home' element={ <Home />}/>
-        <Route path='/profile/:id' element={ <Profile />}/>
+        <Route path='/profile' element={ <Profile />}/>
         <Route path='/community' element={ <Community />}/>
         <Route path="/community/:id" element={ <Detail />} />
 
