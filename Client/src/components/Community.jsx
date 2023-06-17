@@ -23,6 +23,7 @@ const Community = ({ posts, getAllPosts }) => {
   );
 };
 
+
 const mapStateToProps = (state) => {
   return {
     posts: state.allPosts,
