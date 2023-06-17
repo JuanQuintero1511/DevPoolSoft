@@ -1,6 +1,24 @@
-import React from "react";
+import { useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getPostById } from "../redux/actions";
 
-const Detail = ({ post }) => {
+
+const Detail = () => {
+    const { id } = useParams();
+    const dispatch = useDispatch();
+    // const [isLoading, setIsLoading] = useState(true);
+  
+    useEffect(() => {
+      dispatch(getPostById(id))
+        // .then(() => {
+        //   setIsLoading(false)
+        // })
+    }, [dispatch, id]);
+  
+    const post = useSelector((state) => state.idPost);
+  
+
   return (
     <div className="bg-white rounded-lg shadow-md p-4">
       <div className="mb-2">
