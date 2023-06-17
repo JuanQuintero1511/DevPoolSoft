@@ -1,4 +1,4 @@
-
+const {createNewPost, getAllPosts, getPostById, updatePost, deletePost} = require('../../controllers/postsControllers/postsControllers')
 
 const createPostHandler = async (req, res) => {
     try {
