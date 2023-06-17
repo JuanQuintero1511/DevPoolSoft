@@ -8,7 +8,7 @@ export const getAllPosts = () => {
         dispatch({ type: GET_ALL_POSTS, payload: posts });
     }
 }
-export const getPostById = () => {
+export const getPostById = (id) => {
     return async function (dispatch) {
         const {data} = await axios.get(`http://localhost:3001/posts/${id}`);
         const post = data;
