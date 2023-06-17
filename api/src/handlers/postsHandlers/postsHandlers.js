@@ -2,12 +2,20 @@ const {createNewPost, getAllPosts, getPostById, updatePost, deletePost} = requir
 
 const createPostHandler = async (req, res) => {
     try {
-      const {title, body, state} = req.body;      
-      if (!title && !body && !state ) throw new Error("Missing required data");
-      const newPost = await createNewPost (title, body, state);           
-      return res.status(201).json(newPost);
+      const {
+        title, 
+        body,
+        state} = req.body;    
+      const id_user_data = req.body.id_user_data  
 
-    } catch (error) {
+      if (!title && !body && !state ) throw new Error("Missing required data");
+
+      const newPost = await createNewPost(
+        title, 
+        body, 
+        state, 
+        id_user_data);
+              
       return res.status(400).json({ error: error.message });      
     }
   };
