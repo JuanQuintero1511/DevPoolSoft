@@ -16,10 +16,8 @@ const reducer = (state = initialState, action) => {
 
         case GET_ID_POST:
             return { ...state, idPost: action.payload};
-            case SET_USERS:
-            return {...state, users:action.payload}
-        case SET_COMPANIES:
-            return {...state, companies: action.payload}
+            
+        
         case CREATE_COMPANY:
             return {
                 ...state,
