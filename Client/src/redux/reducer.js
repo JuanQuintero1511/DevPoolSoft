@@ -2,7 +2,7 @@ import { GET_ALL_POSTS, GET_ID_POST, CREATE_COMPANY } from "./action-types";
 
 const initialState = {
     allPosts:[],
-    idPost: [],
+    idPost: {},
     users: [],
     users_date: [],
     companyies: [],

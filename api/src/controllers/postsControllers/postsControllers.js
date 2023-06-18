@@ -21,9 +21,15 @@ const getAllPosts = async () => {
 };
 
 const getPostById = async (id) => {
-  const PostById = await Posts.findByPk(id)
+    const PostById = await Posts.findOne({ 
+      where: { id_post: id },
+      include: { 
+        model: User_data,
+        attributes: ['full_name']
+      }});  
     return PostById;
-};
+  };
+  
 
 const updatePost = async ( id, title, body, state, id_user_data) => {
   const postUpdate = await Posts.update(

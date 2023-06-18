@@ -10,6 +10,7 @@ import { Profile } from "./components/Profile";
 import Community from "./components/Community";
 import Detail from "./components/DetailCommunity";
 import JobsOffers from "./components/JobsOffers";
+import InProgress from "./components/InProgress";
 
 
 
@@ -34,6 +35,7 @@ const location = useLocation();
         <Route path='/profile/:id' element={ <Profile />}/>
         <Route path='/community' element={ <Community />}/>
         <Route path="/community/:id" element={ <Detail />} />
+        <Route path="/inprogress" element={ <InProgress /> }/>
 
       </Routes>
     </>
