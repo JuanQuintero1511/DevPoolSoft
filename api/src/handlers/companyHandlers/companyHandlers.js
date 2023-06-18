@@ -1,26 +1,23 @@
 const {
     createCompany,
-    setCompanyRol,
     setCompanyPremium,
     getAllCompanies,
     searchCompanyByName,
-    getCompanyById } = require('../../controllers/companyControllers/companyControllers')
+    getCompanyById  } = require('../../controllers/companyControllers/companyControllers')
 
 const createCompanyHandler = async (req, res) => {
     try {
-        const {
+        const { 
             full_name,
             backup_email,
             description,
             date_birthday,
             address,
             phone_number,
-            profile_image,
-            authentication} = req.body;
-        const rol_type = req.body.rol_type
-        const full_nameAux = req.body.full_name
+            profile_image,            
+            authentication } = req.body;
 
-        await createCompany(
+        const newCompany = await createCompany(
             full_name,
             backup_email,
             description,
@@ -29,8 +26,6 @@ const createCompanyHandler = async (req, res) => {
             phone_number,
             profile_image,
             authentication);        
-        await setCompanyRol(rol_type, full_nameAux)
-        const newCompany = await searchCompanyByName(full_nameAux)    
         res.status(201).json(newCompany);
     } catch (error) {
         res.status(400).json({ error: error.message })
@@ -48,27 +43,34 @@ const getCompanyHandler = async (req, res) => {
         res
             .status(400)
             .json({ error: "Failed to found company. Please try again later." });
-    }
+    }    
 }
+
+
+//? Obtiene la empresa por ID especifico mas los posteos
 
 const getCompanyHandlerId = async (req, res) => {
     const { id } = req.params;
     const source = isNaN(id) ? "bdd" : "api";
     try {
-        const companyByID = await getCompanyById(id, source)
-        res.status(200).json(companyByID)
+        const companyById = await getCompanyById(id, source)
+        if (!companyById) {
+            throw new Error(`Company with ID ${id} not found`);
+          }
+        res.status(200).json(companyById)
     } catch (error) {
-        res.status(400).json({ error: error.message })
+        res.status(400).json({ error: `Error occurred while fetching company with ID ${id}:` , detail: error.message })
     }
+
 }
 
 
 const updateCompanyPremiumHandler = async (req, res) => {
-    const { full_name } = req.params
+    const { full_name } = req.params    
     console.log(req.params.full_name)
     try {
         await setCompanyPremium(full_name)
-        res.status(200).json({ message: "Actualizado a premium" })
+        res.status(200).json({ message: "Actualizado a premium"})        
     } catch (error) {
         res.status(404).json({ error: error.message })
     }
