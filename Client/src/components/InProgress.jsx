@@ -7,7 +7,7 @@ const InProgress = () => {
       <div className="flex justify-center">
         <img src="src/image/dev.jpg" alt="Development Image" className="w-1/2 mb-4 ml-[20vw]" />
       </div>
-      <p className="text-2xl text-teal-700 text-center ml-[20vw]">Coming soon!</p>
+      <p className="text-2xl font-bold text-teal-700 text-center ml-[20vw]">Coming soon!</p>
     </div>
   );
 };

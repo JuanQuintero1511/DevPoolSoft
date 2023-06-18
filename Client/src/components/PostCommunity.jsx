@@ -32,7 +32,7 @@ const PostCommunity = ({ post }) => {
                     <span className="font-bold"> {post.likes}</span>
                 </div>
                 <div>
-                    <span className="text-gray-600"> 📨 </span>
+                    <span className="text-gray-600"> ✉️ </span>
                     <span className="font-bold"> 0</span>
                 </div>
             </div>
