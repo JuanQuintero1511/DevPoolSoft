@@ -1,4 +1,5 @@
-const { Posts } = require ("../../db");
+const { Posts, User_data } = require ("../../db");
+
 
 const createNewPost = async (title, body, state, id_user_data) => {
   const newPost = await Posts.create({ 
@@ -11,7 +12,11 @@ const createNewPost = async (title, body, state, id_user_data) => {
 };
 
 const getAllPosts = async () => {
-    const AllPosts = await Posts.findAll();
+    const AllPosts = await Posts.findAll({ 
+        include: { 
+          model: User_data, 
+          attributes: ['full_name'] 
+        }});
     return AllPosts;
 };
 
