@@ -1,8 +1,33 @@
 const { User_data, Roles, Posts } = require("../../db");
 const { Op } = require("sequelize");
+const cloudinary = require("../../utils/cloudinary");
 
-//Fn para crear la empresa
 const createCompany = async (
+  full_name,
+  backup_email,
+  description,
+  date_birthday,
+  address,
+  phone_number,
+  profile_image,
+  authentication,
+  image
+) => {
+  let imageUploadResult;
+
+  if (typeof image === 'string') {
+    // `image` es una ruta de archivo, usar cloudinary.uploader.upload
+    imageUploadResult = await cloudinary.uploader.upload(image, {
+      folder: 'posts',
+    });
+  } else if (typeof image === 'object' && image.public_id && image.url) {
+    // `image` es un objeto de imagen con public_id y url, usar directamente
+    imageUploadResult = image;
+  } else {
+    throw new Error('Invalid image data');
+  }
+
+  return await User_data.create({
     full_name,
     backup_email,
     description,
@@ -10,16 +35,14 @@ const createCompany = async (
     address,
     phone_number,
     profile_image,
-    authentication) => { 
-            return (await User_data.create({ 
-            full_name,
-            backup_email,
-            description,
-            date_birthday,
-            address,
-            phone_number,
-            profile_image,
-            authentication }))}
+    authentication,
+    image: {
+      public_id: imageUploadResult.public_id,
+      url: imageUploadResult.url,
+    },
+  });
+};
+
 
 const setCompanyRol = async (rol_type, full_name) => {
     const [companyRol, created] = await Roles.findOrCreate({

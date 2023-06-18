@@ -16,7 +16,8 @@ const createCompanyHandler = async (req, res) => {
             address,
             phone_number,
             profile_image,
-            authentication} = req.body;
+            authentication,
+            image} = req.body;
         const rol_type = req.body.rol_type
         const full_nameAux = req.body.full_name
 
@@ -28,7 +29,8 @@ const createCompanyHandler = async (req, res) => {
             address,
             phone_number,
             profile_image,
-            authentication);        
+            authentication,
+            image);        
         await setCompanyRol(rol_type, full_nameAux)
         const newCompany = await searchCompanyByName(full_nameAux)    
         res.status(201).json(newCompany);
