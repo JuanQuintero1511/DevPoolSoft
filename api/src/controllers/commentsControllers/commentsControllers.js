@@ -5,10 +5,10 @@ const createNewComment = async (description) => {
         return newComment;
 }
 
-const getCommentById = async (id) => {
-        const commentsById = await Comments.findByPk({id})
+const getCommentById = async (id_coments) => {
+        const commentsById = await Comments.findByPk(id_coments)
         return commentsById;
-}
+} 
 
 const updateComents = async (id, description) => {
         const commentsUpdateResult = await Comments.update(
@@ -20,7 +20,7 @@ const updateComents = async (id, description) => {
 
 
 const deleteComment = async (comment) => {
-        const comentDelete = await Comments.destroy({comment});
+        const comentDelete = await Comments.destroy(comment);
         return comentDelete;
 } 
 

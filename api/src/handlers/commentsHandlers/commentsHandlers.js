@@ -15,7 +15,7 @@ const commentByIdHandler = async (req, res) => {
         const {id} = req.params;
     try{
         if(isNaN(id)){
-            let commentById = await getCommentById (id)
+            let commentById = await getCommentById(id)
             
             if (!commentById) throw Error ('No se encontro el comentario del usuario');
             return res.status(200).json(commentById);
