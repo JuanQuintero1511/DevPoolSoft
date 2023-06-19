@@ -1,30 +1,42 @@
-const { Posts } = require ("../../db");
+const { Posts, User_data } = require ("../../db");
 
-const createNewPost = async (description) => {
-    const newPost = await Posts.create({ description});
-    return newPost;
+
+const createNewPost = async (title, body, state, id_user_data) => {
+  const newPost = await Posts.create({ 
+    title, 
+    body, 
+    state, 
+    id_user_data
+  });
+  return newPost;
 };
 
 const getAllPosts = async () => {
-    const AllPosts = await Posts.findAll();
+    const AllPosts = await Posts.findAll({ 
+        include: { 
+          model: User_data, 
+          attributes: ['full_name'] 
+        }});
     return AllPosts;
 };
 
 const getPostById = async (id) => {
-    const PostById = await Posts.findByPk(id);
+    const PostById = await Posts.findOne({ 
+      where: { id_post: id },
+      include: { 
+        model: User_data,
+        attributes: ['full_name']
+      }});  
     return PostById;
-};
+  };
+  
 
-const updatePost = async ( id, description) => {
-    try {
-      const postUpdateResult = await Posts.update(
-        { description: description },
-        { where: { id_post:  id } }
+const updatePost = async ( id, title, body, state, id_user_data) => {
+  const postUpdate = await Posts.update(
+        { title: title, body: body, state: state },
+        { where: { id_post:  id, id_user_data:id_user_data  } }
       );
-      return postUpdateResult;
-    } catch (error) {
-      throw new Error('Error al actualizar los posts: ' + error.message);
-    }
+    return postUpdate;
   };
 
 const deletePost = async (post) => {

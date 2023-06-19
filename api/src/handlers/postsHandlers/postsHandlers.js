@@ -2,25 +2,38 @@ const {createNewPost, getAllPosts, getPostById, updatePost, deletePost} = requir
 
 const createPostHandler = async (req, res) => {
     try {
-      const {description} = req.body;      
-      if (!description ) throw new Error("Missing required data");
-      const newPost = await createNewPost (description);           
-      return res.status(201).json(newPost);
+      const {
+        title, 
+        body,
+        state,
+        id_user_data} = req.body;    
+       
 
+      if (!title && !body && !state && !id_user_data) throw new Error("Missing required data");
+
+      const newPost = await createNewPost(
+        title, 
+        body, 
+        state, 
+        id_user_data);
+              
+      return res.status(200).json({ newPost });      
     } catch (error) {
-      return res.status(400).json({ error: error.message });      
+      return res.status(400).json({ details: error.message });
     }
   };
   
   const getAllPostsHandler = async (req, res) => {
-    try {      
+    try {
       const allPosts = await getAllPosts();
-      if (allPosts === "[]")throw new Error("Post dont exist")      
-      
-      return res.status(201).json(allPosts);
-      
+      if (allPosts.length === 0) {
+        throw new Error("The posts do not exist.");
+      }
+  
+      return res.status(200).json(allPosts);
     } catch (error) {
-      return res.status(400).json({ error: error.message });
+      console.error("Error occurred while fetching all posts:", error);
+      return res.status(400).json({ details: error.message });
     }
   };
   
@@ -30,29 +43,37 @@ const createPostHandler = async (req, res) => {
       if(isNaN(id)) {
         let postById = await getPostById(id)
 
-        if (!postById) throw Error('No se encontro el Post del usuario');
+        if (!postById) throw Error("The user's post was not found.");
         return res.status(200).json(postById);
       }
     } catch(error) {
-      return res.status(400).json(error.message);
+      return res.status(400).json({ details: error.message });
     }
 };
   
   const updatePostHandler = async (req, res) => {
-    const { id, description } = req.body;
+    const {
+      id, 
+      title, 
+      body, 
+      state, 
+      id_user_data } = req.body;
+
+      if (!id && !title && !body && !state && !id_user_data) throw new Error("Missing required data");
   
     try {
-      const postById = await getPostById( id);
-      if (!postById) {
-        return res.status(404).json({ error: 'El post no fue encontrado' });
+      if(isNaN(id)) {
+        let postById = await getPostById(id)
+
+        if (!postById) throw Error("The user's post was not found.");
+      
       }
+      const postChanges = await updatePost(id, title, body, state, id_user_data);
   
-      const postChanges = await updatePost(id, description);
-  
-      return res.status(200).json({ message: 'Post actualizado correctamente', postChanges });
+      return res.status(200).json({ message: "The post was updated successfully.", postChanges });
   
     } catch (error) {
-      return res.status(500).json({ error: 'Ocurrió un error al actualizar el post', details: error.message });
+      return res.status(500).json({ error: "An error occurred while updating the post.", details: error.message });
     }
   };
   
@@ -62,11 +83,11 @@ const createPostHandler = async (req, res) => {
     try {
       const post = await getPostById(id);
       if (!post) {
-        return res.status(404).json({ error: 'El post no existe' });
+        return res.status(404).json({ error: "The post does not exist." });
       }  
       const postdelete = await deletePost(post);
   
-      return res.status(200).json({ message: 'Post eliminado correctamente', postdelete });
+      return res.status(200).json({ message: "The post was deleted successfully.", postdelete });
   
     } catch (error) {
       return res.status(500).json({ error: error.message });
