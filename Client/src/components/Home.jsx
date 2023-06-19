@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import SideBar from './SideBar';
+
 import CardsContainer from './CardsContainer';
 
 const Home = () => {
