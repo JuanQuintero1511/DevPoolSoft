@@ -121,7 +121,7 @@ const Detail = () => {
     const post= posts.find(post => post.id_post === id);
 
     return (
-        <div className="bg-white rounded-lg shadow-md p-4 ml-[250px] mt-10 mr-4">
+        <div className="bg-white rounded-lg shadow-md p-4 ml-[350px] mt-16 mr-4">
   <div className="mb-4">
     <h2 className="text-2xl font-bold underline text-blue-500">{post.title}</h2>
   </div>
