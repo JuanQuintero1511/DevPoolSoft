@@ -1,10 +1,10 @@
 const { createNewComment, getCommentById, updateComents, deleteComment } = require('../../controllers/commentsControllers/commentsControllers'); 
 
 const createCommentHandler = async (req, res) => {
-        const { description } = req.body;
+        const { description, id_post} = req.body;
     try{
-        if (!description) throw new Error ('Falta description')
-        const newCommet = await createNewComment ( description )
+        if (!description, !id_post) throw new Error ('Falta description y id')
+        const newCommet = await createNewComment ( description, id_post )
         return res.status(201).json({ message: 'Comentario Creado', newCommet});
     } catch (error){
         return res.status(404).json({ error: error.message })
