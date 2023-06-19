@@ -5,7 +5,12 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage:{
+        "bgjobsoffer": "url('./src/image/jobsearch.jpg')",
+        'registerbg': "url('./src/image/leftside.jpg')"
+      }
+    },
   },
   plugins: [],
 }

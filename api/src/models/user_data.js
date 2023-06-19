@@ -13,6 +13,7 @@ module.exports = (sequelize) => {
     full_name: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
     },    
     backup_email: {
       type: DataTypes.STRING,
@@ -51,7 +52,7 @@ module.exports = (sequelize) => {
     },
     isActive: {
       type: DataTypes.BOOLEAN,
-      defaultValue: false,      
+      defaultValue: true,      
     },
     isPremium: {
       type: DataTypes.BOOLEAN,      
@@ -60,6 +61,10 @@ module.exports = (sequelize) => {
     authentication: {
       type: DataTypes.ENUM (["CUIT", "CUIL", "PASSPORT"]),
       allowNull: false,
+    },
+    image: {
+      type: DataTypes.JSONB,
+      allowNull: false
     }
   },
   {

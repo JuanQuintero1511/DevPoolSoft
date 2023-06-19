@@ -43,10 +43,11 @@ const Card = () => {
       <hr />
       <p className="card-text text-gray-600">Descripción de la publicación</p>
       {!showDetail && (
-        <button className="btn btn-primary btn-sm mt-4" onClick={handleToggleDetail} disabled={buttonClicked}>
-          Ver más
+        <button className="select-none rounded-lg bg-teal-700 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" onClick={handleToggleDetail} disabled={buttonClicked}>
+          Ver Detalles
         </button>
       )}
+
       {showDetail && (
         <div className="card-detail" style={{ width: '20rem', position: 'absolute', top: '0', left: '100%', marginLeft: '50px' }}>
           <div className="card">
@@ -54,8 +55,14 @@ const Card = () => {
             <div className="card-body">
               <h5 className="card-title">Special title treatment</h5>
               <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
-              <a href="#" className="btn btn-primary">Go somewhere</a>
-              <button className="btn btn-secondary" onClick={handleCloseDetail}>Close</button>
+
+              <button className="select-none rounded-lg bg-teal-700 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" onClick={handleCloseDetail}>
+                Cerrar
+              </button>
+              <button className="select-none rounded-lg bg-teal-700 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"  style={{marginLeft:'5px'}}>
+                APLICA
+              </button>
+              
             </div>
           </div>
         </div>
