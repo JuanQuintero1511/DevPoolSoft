@@ -34,9 +34,28 @@ export const Profile = () => {
     },
   ];
 
+  const handleClick = () => {
+    console.log("Haz hecho clic en la flecha");
+  };
+
   return (
-    <div className="max-w-4xl mx-auto py-10 px-4">
-      <div className="bg-white shadow-md rounded-md p-6 mb-4">
+    <div className="max-w-4xl mx-auto py-10 px-4 mt-8">
+      <div className="bg-white shadow-md rounded-md p-6 mb-4 relative">
+      <div className="absolute top-0 right-0 transform -translate-x-2 translate-y-2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="w-6 h-6 text-gray-400 cursor-pointer"
+            onClick={handleClick}
+          >
+            <path d="M15 18l-6-6 6-6" />
+          </svg>
+        </div>
         <div className="text-center mb-6">
           <div className="border-4 border-gray-200 rounded-full overflow-hidden w-40 h-40 mx-auto mb-4">
             <img
