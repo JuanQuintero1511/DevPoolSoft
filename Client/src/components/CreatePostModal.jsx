@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const CreatePostModal = ({ addPost, closeModal}) => {
+const CreatePostModal = ({ addPost, closeModal }) => {
   const [title, setTitle] = useState("");
   const [resume, setResume] = useState("");
   const [description, setDescription] = useState("");
@@ -9,7 +9,7 @@ const CreatePostModal = ({ addPost, closeModal}) => {
     event.preventDefault();
     let counter = 9
     // Generar un nuevo ID para el post
-    const id = counter +1
+    const id = counter + 1
 
     // Crear el nuevo post
     const newPost = {
@@ -80,7 +80,15 @@ const CreatePostModal = ({ addPost, closeModal}) => {
           >
             Create Post
           </button>
-         
+          <button
+            type="submit"
+            className="fixed ml-[140px] bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600"
+            onClick={closeModal}
+          >
+            X
+          </button>
+
+
         </form>
       </div>
     </div>
