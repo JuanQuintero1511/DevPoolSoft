@@ -28,16 +28,16 @@ const PostCommunity = ({ post }) => {
 
             <div className="flex justify-end">
                 <div className="mr-4">
-                    <span className="text-gray-600">❤ </span>
+                    <span className="text-gray-600">❤️ </span>
                     <span className="font-bold"> {post.likes}</span>
                 </div>
                 <div>
-                    <span className="text-gray-600"> ✉ </span>
-                    <span className="font-bold"> 0</span>
+                    <span className="text-gray-600"> ✉️ </span>
+                    <span className="font-bold"> {post.comments} </span>
                 </div>
             </div>
         </div>
     );
 };
 
-export default PostCommunity;
+export default PostCommunity;
