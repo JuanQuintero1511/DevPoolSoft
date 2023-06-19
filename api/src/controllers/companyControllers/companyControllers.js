@@ -1,8 +1,33 @@
-const { User_data } = require("../../db");
+const { User_data, Roles, Posts } = require("../../db");
 const { Op } = require("sequelize");
+const cloudinary = require("../../utils/cloudinary");
 
-//Fn para crear la empresa
 const createCompany = async (
+  full_name,
+  backup_email,
+  description,
+  date_birthday,
+  address,
+  phone_number,
+  profile_image,
+  authentication,
+  image
+) => {
+  let imageUploadResult;
+
+  if (typeof image === 'string') {
+    // `image` es una ruta de archivo, usar cloudinary.uploader.upload
+    imageUploadResult = await cloudinary.uploader.upload(image, {
+      folder: 'posts',
+    });
+  } else if (typeof image === 'object' && image.public_id && image.url) {
+    // `image` es un objeto de imagen con public_id y url, usar directamente
+    imageUploadResult = image;
+  } else {
+    throw new Error('Invalid image data');
+  }
+
+  return await User_data.create({
     full_name,
     backup_email,
     description,
@@ -10,16 +35,27 @@ const createCompany = async (
     address,
     phone_number,
     profile_image,
-    authentication) => { 
-            return (await User_data.create({ 
-            full_name,
-            backup_email,
-            description,
-            date_birthday,
-            address,
-            phone_number,
-            profile_image,
-            authentication }))}
+    authentication,
+    image: {
+      public_id: imageUploadResult.public_id,
+      url: imageUploadResult.url,
+    },
+  });
+};
+
+
+const setCompanyRol = async (rol_type, full_name) => {
+    const [companyRol, created] = await Roles.findOrCreate({
+        where: { 
+            rol_type: `${rol_type}`}
+    })
+    const atributoToSet = companyRol.dataValues.id_roles
+    await User_data.update({id_roles: `${atributoToSet}`},{
+        where: {
+            full_name: { [Op.iLike]: `%${full_name}%` }
+        }
+    })
+} 
 
 const setCompanyPremium = async (full_name) => {
     await User_data.update({isPremium: true},{
@@ -33,43 +69,40 @@ const setCompanyPremium = async (full_name) => {
 // //?Trae las empresas de la DB
 const getAllCompanies = async () => {
     return await User_data.findAll(
-        // {
-        // include: [
-        //     {
-        //         model: Activity,
-        //         attributes: ["name", "difficulty", "duration", "season"],
-        //         through: { attributes: [] },
-        //     },
-        // ],
-    // }
+
     );
 };
 
 
 //? Obtiene la empresa por ID especifico mas los posteos
 const getCompanyById = async (id) => {
-    // return await Country.findOne({
-    //     where: { id },
-    //     include: [
-    //         {
-    //             model: Activity,
-    //             attributes: ["name", "difficulty", "duration", "season"],
-    //             through: { attributes: [] },
-    //         },
-    //     ],
-    // });
-};
-
+      const companyById = await User_data.findByPk(id, {
+        include: {
+          model: Posts,
+          // include: Comment // Incluye los comentarios relacionados con cada post
+        }
+      });     
+      return companyById;
+    }
+  
 
 //* Obtiene la empresa por nombre
 const searchCompanyByName = async (full_name) => {
-    return await User_data.findAll({
-        where: { full_name: { [Op.iLike]: `%${full_name}%` } },
-    });
-};
+        const companies = await User_data.findAll({
+        where: {
+          full_name: { [Op.iLike]: `%${full_name}%` }
+        },
+        include: {
+          model: Posts
+          // include: Comment 
+        }
+      });
+      return companies;
+}
 
 module.exports = {
     createCompany,
+    setCompanyRol,
     setCompanyPremium,
     getAllCompanies,
     getCompanyById,
@@ -77,47 +110,3 @@ module.exports = {
 }
 
 
-
-
-
-
-
-
-
-
-
-// const { user_data } = require('../../models/user_data')
-
-
-// const postUsers = async (full_name) => {
-//   const newUser = await user_data.create({
-//           full_name,
-         
-//       })
-    
-//       res.json(newUser);
-//   }
-
-    
-// const getUsers = async (req, res) => {
-//   // try {
-//   //   const users = await user_data.findAll();
-//   //   res.json(users); 
-//   // } catch (error) {
-//   //   res.status(500).json({ error: 'Error al obtener los usuarios' });
-//   // }
-// }
-
-// const getUsersById = (req, res) => {
-//     res.send('getUsersById Funciona')
-//   };
-
-// const updateUsers = (req, res) => {
-//     res.send('updateUsers Funciona')
-//   };
-
-// const deleteUsers = (req, res) => {
-//     res.send('deleteUsers Funciona')
-//   };
-
-// module.exports = {postUsers, getUsers, getUsersById, updateUsers, deleteUsers}
