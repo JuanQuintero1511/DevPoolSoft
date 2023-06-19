@@ -61,6 +61,10 @@ module.exports = (sequelize) => {
     authentication: {
       type: DataTypes.ENUM (["CUIT", "CUIL", "PASSPORT"]),
       allowNull: false,
+    },
+    image: {
+      type: DataTypes.JSONB,
+      allowNull: false
     }
   },
   {
