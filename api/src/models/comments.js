@@ -6,7 +6,7 @@ module.exports = (sequelize) => {
         {
             id_coments: {
                 type: DataTypes.UUID,
-                defaultValue: DataTypes.UUIDV4W,
+                defaultValue: DataTypes.UUIDV4,
                 primaryKey: true,
                 unique: true
             },
