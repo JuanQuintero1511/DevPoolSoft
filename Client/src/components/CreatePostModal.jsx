@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const CreatePostModal = ({ addPost, closeModal, similpostArray }) => {
+const CreatePostModal = ({ addPost, closeModal}) => {
   const [title, setTitle] = useState("");
   const [resume, setResume] = useState("");
   const [description, setDescription] = useState("");

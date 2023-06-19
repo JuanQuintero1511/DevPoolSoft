@@ -56,7 +56,8 @@ const JobDetailsModal = ({ post, handleCloseModal }) => {
                   alt="Foto del entrevistador"
                   className="w-8 h-8 rounded-full mr-2"
                 />
-                <p className="text-sm">{post.interviewerName}</p>
+                <p>Interviewer name: </p>
+                <p className="text-sm"> {post.interviewerName}</p>
               </div>
             </div>
 
@@ -66,13 +67,13 @@ const JobDetailsModal = ({ post, handleCloseModal }) => {
                 className="bg-blue-500 text-white py-2 px-4 rounded-lg mr-4"
                 onClick={handleApplyJob}
               >
-                Inscribirse
+                Join to us!
               </button>
               <button
                 className="bg-yellow-500 text-white py-2 px-4 rounded-lg"
                 onClick={handleSaveJob}
               >
-                Guardar
+                Save job for later
               </button>
             </div>
           </div>
