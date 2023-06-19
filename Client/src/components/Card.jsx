@@ -20,16 +20,16 @@ const Card = () => {
   };
 
   return (
-    <div className="card bg-white rounded-lg shadow-lg" style={{ width: '300px', marginLeft: '100px' }}>
+    <div className="card bg-white rounded-lg shadow-lg" style={{ width: '450px',  marginLeft: '100px', marginTop:'50px' }}>
       <div className="card-header d-flex align-items-center p-2">
-        <img src="https://img.freepik.com/psd-gratis/plantilla-publicacion-instagram-redes-sociales_47618-73.jpg?w=2000" className="rounded-circle me-2" style={{ width: '40px', height: '40px' }} alt="Imagen de perfil" />
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmPVTYhTBmrVTQl-bZzTn7z0rEdrN6G-0RqQ&usqp=CAU" className="rounded-circle me-2" style={{ width: '40px', height: '40px' }} alt="Imagen de perfil" />
         <h5 className="card-title m-0">Título de la publicación</h5>
       </div>
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpfo_i9-se_ckyc7ALb6lb3m9Kwe1IehODtyAEdGF8PET9AJsd8tm7FLQcqLckbdAEWJI&usqp=CAU" className="card-img-top rounded-t-lg" alt="Imagen de la publicación" />
-      <div className="card-body p-2">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpfo_i9-se_ckyc7ALb6lb3m9Kwe1IehODtyAEdGF8PET9AJsd8tm7FLQcqLckbdAEWJI&usqp=CAU" className="card-img-top rounded-t-lg w-50"  alt="Imagen de la publicación" style={{alignSelf: 'center'}}  />
+      <div className="card-body p-1">
       </div>
 
-      <div className="d-flex">
+      <div className="d-flex" style={{alignSelf: 'flex-end'}}>
         <button className="btn btn-link btn-sm">
           <i className="bi-heart-fill me-1 text-danger"></i>
         </button>
