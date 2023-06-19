@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 const PostCommunity = ({ post }) => {
 
     return (
+        <div className="bg-gray-100">
         <div className="bg-white rounded-lg shadow-md p-4 transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg">
             <div className="mb-4">
                 <Link to={`/community/${post.id_post}`}>
@@ -36,6 +37,7 @@ const PostCommunity = ({ post }) => {
                     <span className="font-bold"> {post.comments} </span>
                 </div>
             </div>
+        </div>
         </div>
     );
 };
