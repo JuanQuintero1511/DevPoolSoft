@@ -13,7 +13,7 @@ const Community = () => {
   }, [dispatch]);
 
   return (
-    <div className="flex flex-col items-center mt-8 mr-8">
+    <div className="flex flex-col items-center mt-16 mr-8">
       <div className="flex items-center justify-between w-full mb-4 ">
       <h2 className="text-3xl font-bold text-teal-700 ml-[20vw]">COMMUNITY</h2>
         <div>
@@ -33,6 +33,4 @@ const Community = () => {
   );
         }  
 
-export default Community;
-
-
+export default Community;

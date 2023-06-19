@@ -13,7 +13,7 @@ const Detail = () => {
     }, [dispatch, id]);
 
     return (
-        <div className="bg-white rounded-lg shadow-md p-4 ml-[250px] mt-4 mr-4">
+        <div className="bg-white rounded-lg shadow-md p-4 ml-[350px] mt-14 mr-4">
             <div className="mb-4">
                 <h2 className="text-2xl font-bold underline text-blue-500">{post.title}</h2>
             </div>
@@ -35,24 +35,24 @@ const Detail = () => {
                 <div className="mr-2">
                     <Link to={`/inprogress`}>
                         <button className="select-none rounded-lg bg-teal-700 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
-                            VIEW ✉️
+                            VIEW ✉
                         </button>
                     </Link>  
                 </div>
                 <div>
                     <Link to={`/inprogress`}>  
                         <button className="select-none rounded-lg bg-teal-700 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
-                            WRITE ✉️
+                            WRITE ✉
                         </button>
                     </Link>
                 </div>
                 
                 <div className="ml-auto">
-                    <span>❤️ </span>
+                    <span>❤ </span>
                     <span className="font-bold"> {post.likes}</span>
                 </div>
                 <div>
-                    <span>✉️ </span>
+                    <span>✉ </span>
                     <span className="font-bold"> 0</span>
                 </div>
             </div>
@@ -60,7 +60,4 @@ const Detail = () => {
     );
 };
 
-export default Detail;
-
-
-
+export default Detail;
