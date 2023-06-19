@@ -1,7 +1,7 @@
-import {Routes, Route} from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { Landing } from './components/Landing';
-import  Home  from './components/Home';
-import {Register} from './components/Register'
+import Home from './components/Home';
+import { Register } from './components/Register'
 import { Login } from './components/Login';
 import { useLocation } from 'react-router-dom';
 import Nav from "./components/Nav";
