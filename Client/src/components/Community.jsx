@@ -120,6 +120,7 @@ const posts = [
 
 
   return (
+    <div className="bg-gray-100">
     <div className="flex flex-col items-center mt-10 mr-8">
       <div className="flex items-center justify-between w-full mb-4 mt-8">
   <h2 className="text-3xl font-bold text-teal-700 ml-[20vw]">COMMUNITY</h2>
@@ -137,6 +138,7 @@ const posts = [
           <PostCommunity key={post.id_post} post={post} />
         ))}
       </div>
+    </div>
     </div>
   );
         }  
