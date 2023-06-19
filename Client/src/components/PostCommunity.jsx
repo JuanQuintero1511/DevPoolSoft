@@ -33,7 +33,7 @@ const PostCommunity = ({ post }) => {
                 </div>
                 <div>
                     <span className="text-gray-600"> ✉ </span>
-                    <span className="font-bold"> 0</span>
+                    <span className="font-bold"> {post_comments}</span>
                 </div>
             </div>
         </div>
