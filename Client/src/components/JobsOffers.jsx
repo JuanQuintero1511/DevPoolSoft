@@ -103,6 +103,9 @@ const [showModal, setShowModal] = useState(false)
     setSimilpostArray([...similpostArray, newPost]);
   };
 
+  const closeModal = () => {
+    setShowModal(!showModal);
+  }
    
   
 
@@ -112,15 +115,22 @@ const [showModal, setShowModal] = useState(false)
   // bg-[url('./src/image/jobsearch.jpg')] bg imagen
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-200 bg-cover">
-       <button onClick={() => setShowModal(true)}>Create Post</button>
-      {showModal && <CreatePostModal addPost={addPost} />}
+   
+    {showModal && <CreatePostModal addPost={addPost} closeModal={closeModal} />}
     <div className="grid grid-cols-3 gap-5 mt-14 py-4 mx-2">
       {similpostArray.map((post) => (
         <OffersCards key={post.id} post={post} similpostArray={similpostArray}/>
       ))}
 
     </div>
-
+    <div className="relative">
+      <button
+        className="absolute top-0 left-28 text-gray-600 hover:text-gray-800"
+        onClick={() => setShowModal(true)}
+      >
+        Create Post
+      </button>
+    </div>
   </div>
   
   );

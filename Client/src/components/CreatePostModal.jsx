@@ -76,9 +76,11 @@ const CreatePostModal = ({ addPost, closeModal, similpostArray }) => {
           <button
             type="submit"
             className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600"
+            onClick={closeModal}
           >
             Create Post
           </button>
+         
         </form>
       </div>
     </div>

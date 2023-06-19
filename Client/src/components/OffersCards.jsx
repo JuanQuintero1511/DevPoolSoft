@@ -53,7 +53,7 @@ const OffersCards = ({ post }) => {
       </div>
       {isModalOpen && (
         <div className="fixed top-0 left-0 flex items-center justify-center w-screen h-screen bg-gray-900 bg-opacity-50 z-50">
-          <JobDetailsModal job={post} onClose={handleCloseModal} />
+          <JobDetailsModal post={post} handleCloseModal={handleCloseModal} />
         </div>
       )}
     </div>
