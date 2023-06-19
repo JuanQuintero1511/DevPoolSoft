@@ -12,7 +12,7 @@ export const getPostById = (id) => {
     return async function (dispatch) {
         const {data} = await axios.get(`http://localhost:3001/posts/${id}`);
         const post = data;
-        dispatch({ type: GET_ID_POST, payload: post });
+        dispatch({ type: GET_ID_POST, payload: post });        
     }
 }
 

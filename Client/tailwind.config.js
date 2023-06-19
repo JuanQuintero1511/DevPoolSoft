@@ -7,6 +7,7 @@ export default {
   theme: {
     extend: {
       backgroundImage:{
+        "bgjobsoffer": "url('./src/image/jobsearch.jpg')",
         'registerbg': "url('./src/image/leftside.jpg')"
       }
     },

@@ -1,0 +1,36 @@
+.card {
+      width: 300px;
+      background-color: #fafafa;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    .card-img-top {
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+    
+    .card-body {
+      padding: 16px;
+    }
+    
+    .card-title {
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: #333;
+    }
+    
+    .card-text {
+      color: #666;
+    }
+    
+    .btn-primary {
+      background-color: #3897f0;
+      color: #fff;
+      border: none;
+    }
+    
+    .btn-primary:hover {
+      background-color: #3366cc;
+    }
+    

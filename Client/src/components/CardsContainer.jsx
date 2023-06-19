@@ -1,7 +1,7 @@
 import Card from './Card';
+import CardDetail from './CardDetail';
 
-const CardsContainer = ({ selectedField }) => {
-  // Lógica para obtener la lista de campos y sus títulos correspondientes
+const CardsContainer = ({ selectedField, setSelectedField }) => {
   const fields = [
     { id: 'tech-news', title: 'Tech News' },
     { id: 'community', title: 'Community' },
@@ -11,24 +11,25 @@ const CardsContainer = ({ selectedField }) => {
     {id: 'Secundario' , title: 'Secundario'}
   ];
 
-  // Filtrar la lista de campos para obtener el campo seleccionado
-  const selectedFieldData = fields.find(field => field.id === selectedField);
+  const handleToggleDetail = (fieldId) => {
+    setSelectedField(fieldId);
+  };
 
-  // Renderizar la lista de Cards correspondiente al campo seleccionado
   const renderCards = () => {
-      return Array(10).fill().map((_, index) => (
-        <div className="mb-4">
-          <Card
-            key={`${selectedFieldData.id}-${index}`}
-            title={`${selectedFieldData.title} - Card ${index + 1}`}
-          />
-        </div>
-      ));
-    };
+    return fields.map((field) => (
+      <div className="mb-4" key={field.id}>
+        <Card
+          title={field.title}
+          isSelected={selectedField === field.id}
+          onToggleDetail={() => handleToggleDetail(field.id)}
+        />
+        {selectedField === field.id && <CardDetail onCloseDetail={() => handleToggleDetail(null)} />}
+      </div>
+    ));
+  };
 
   return (
-        
-      <div className='mt-4'>
+    <div className='mt-4'>
       {renderCards()}
     </div>
   );
