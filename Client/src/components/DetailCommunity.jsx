@@ -52,8 +52,9 @@ const Detail = () => {
                     <span className="font-bold"> {post.likes}</span>
                 </div>
                 <div>
-                    <span>✉ </span>
-                    <span className="font-bold"> 0</span>
+                    <span>✉️ </span>
+                    <span className="font-bold"> 0 </span>
+
                 </div>
             </div>
         </div>
