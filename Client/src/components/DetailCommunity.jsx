@@ -53,7 +53,7 @@ const Detail = () => {
                 </div>
                 <div>
                     <span>✉️ </span>
-                    <span className="font-bold"> 0</span>
+                    <span className="font-bold"> 0 </span>
                 </div>
             </div>
         </div>
