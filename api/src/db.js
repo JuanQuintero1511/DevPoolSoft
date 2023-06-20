@@ -50,7 +50,7 @@ Comments.belongsTo(Posts, { foreignKey: 'id_post'})
 Posts.hasMany(Comments, {foreignKey: 'id_post'})
 Comments.belongsTo(Posts, {foreignKey: 'id_post'})
 
-Comments.hasMany(Posts, {foreignKey: 'id_coments'})
+Comments.hasMany(Posts, {foreignKey: 'id_post'})
 Posts.belongsTo(Comments, {foreignKey: 'id_coments'})
 
 module.exports = {

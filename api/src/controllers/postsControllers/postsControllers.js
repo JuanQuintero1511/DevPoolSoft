@@ -1,4 +1,4 @@
-const { Posts, User_data } = require ("../../db");
+const { Posts, User_data, Comments } = require ("../../db");
 const cloudinary= require ("../../utils/cloudinary")
 
 const createNewPost = async (title, body, state, id_user_data, image) => {
@@ -35,13 +35,19 @@ const getAllPosts = async () => {
       include: { 
         model: User_data, 
         attributes: ['full_name'] 
-      }});
+      },
+    include: {
+      model: Comments,
+      attributes: ['description', 'id_coments', 'likes']
+    }});
   return AllPosts;
 };
+
 const getPostById = async (id) => {
   const PostById = await Posts.findByPk(id)
     return PostById;
 };
+
 
 const updatePost = async ( id, title, body, state, id_user_data) => {
   const postUpdate = await Posts.update(
@@ -60,4 +66,4 @@ const deletePost = async (post) => {
 
 
 
-module.exports = {createNewPost, getAllPosts, getPostById, updatePost, deletePost}
+module.exports = {createNewPost, getAllPosts, getPostById, updatePost, deletePost}
