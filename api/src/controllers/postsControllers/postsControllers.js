@@ -1,4 +1,4 @@
-const { Posts, User_data } = require ("../../db");
+const { Posts, User_data, Comments } = require ("../../db");
 const cloudinary= require ("../../utils/cloudinary")
 
 const createNewPost = async (title, body, state, id_user_data, image) => {
@@ -24,7 +24,7 @@ const createNewPost = async (title, body, state, id_user_data, image) => {
     image: {
       public_id: imageUploadResult.public_id,
       url: imageUploadResult.url,
-    },
+    }
   });
 
   return newPost;
@@ -32,22 +32,32 @@ const createNewPost = async (title, body, state, id_user_data, image) => {
 
 const getAllPosts = async () => {
   const AllPosts = await Posts.findAll({ 
-      include: { 
-        model: User_data, 
-        attributes: ['full_name'] 
-      }});
+    include: [{
+      model: User_data,
+      attributes: ['full_name'],
+      }, {
+      model: Comments
+      }]
+      });
   return AllPosts;
 };
 
 const getPostById = async (id) => {
-  const PostById = await Posts.findByPk(id)
+  const PostById = await Posts.findByPk(id,{
+    include: [{
+      model: User_data,
+      attributes: ['full_name'],
+      }, {
+      model: Comments
+      }]
+      });
     return PostById;
 };
 
-const updatePost = async ( id, title, body, state, id_user_data) => {
+const updatePost = async ( id, title, body, state, id_user_data, image) => {
   const postUpdate = await Posts.update(
         { title: title, body: body, state: state },
-        { where: { id_post:  id, id_user_data:id_user_data  } }
+        { where: { id_post:  id, id_user_data:id_user_data, image: image} }
       );
     return postUpdate;
   };
