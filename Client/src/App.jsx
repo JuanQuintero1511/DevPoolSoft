@@ -5,7 +5,7 @@ import { Register } from './components/Register'
 import { Login } from './components/Login';
 import { useLocation } from 'react-router-dom';
 import Nav from "./components/Nav";
-import SideBar from "./components/SideBar";
+import SideBar from "./components/sidebar";
 import { Profile } from "./components/Profile";
 import Community from "./components/Community";
 import Detail from "./components/DetailCommunity";

@@ -38,10 +38,12 @@ const getAllPosts = async () => {
       }});
   return AllPosts;
 };
+
 const getPostById = async (id) => {
   const PostById = await Posts.findByPk(id)
     return PostById;
 };
+
 
 const updatePost = async ( id, title, body, state, id_user_data) => {
   const postUpdate = await Posts.update(
