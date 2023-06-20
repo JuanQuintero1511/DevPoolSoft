@@ -4,7 +4,8 @@ const createCommentHandler = async (req, res) => {
         const { description, id_post} = req.body;
     try{
         if (!description, !id_post) throw new Error ('Falta description y id')
-        const newCommet = await createNewComment ( description, id_post )
+        console.log(description, id_post);
+        const newCommet = await createNewComment ( description, id_post ) 
         return res.status(201).json({ message: 'Comentario Creado', newCommet});
     } catch (error){
         return res.status(404).json({ error: error.message })

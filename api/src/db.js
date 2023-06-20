@@ -47,13 +47,13 @@ Comments.belongsTo(Posts, { foreignKey: 'id_post'})
 
 //ver relacion comentarios y user_data
 
-Posts.hasMany(Comments, {foreignKey: 'id_post'})
-Comments.belongsTo(Posts, {foreignKey: 'id_post'})
+// User_data.hasMany(Comments, { foreignKey: 'id_user_data' })
+// Comments.belongsTo(User_data,{ foreignKey: 'id_user_data' })
 
-Comments.hasMany(Posts, {foreignKey: 'id_post'})
-Posts.belongsTo(Comments, {foreignKey: 'id_coments'})
+// Comments.hasMany(Posts, {foreignKey: 'id_post'})
+// Posts.belongsTo(Comments, {foreignKey: 'id_coments'})
 
 module.exports = {
   ...sequelize.models, 
   conn: sequelize,     // para importar la conexión { conn } = require('./db.js');
-};
+  };
