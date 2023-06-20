@@ -1,4 +1,4 @@
-const { User_data, Roles, Posts } = require("../../db");
+const { User_data, Roles, Posts, Comments} = require("../../db");
 const { Op } = require("sequelize");
 const cloudinary = require("../../utils/cloudinary");
 
@@ -18,7 +18,7 @@ const createCompany = async (
   if (typeof image === 'string') {
     // `image` es una ruta de archivo, usar cloudinary.uploader.upload
     imageUploadResult = await cloudinary.uploader.upload(image, {
-      folder: 'posts',
+      folder: 'company',
     });
   } else if (typeof image === 'object' && image.public_id && image.url) {
     // `image` es un objeto de imagen con public_id y url, usar directamente
@@ -68,9 +68,7 @@ const setCompanyPremium = async (full_name) => {
 
 // //?Trae las empresas de la DB
 const getAllCompanies = async () => {
-    return await User_data.findAll(
-
-    );
+    return await User_data.findAll()  
 };
 
 
@@ -79,9 +77,11 @@ const getCompanyById = async (id) => {
       const companyById = await User_data.findByPk(id, {
         include: {
           model: Posts,
-          // include: Comment // Incluye los comentarios relacionados con cada post
+          include: {
+            model: Comments
+          }
         }
-      });     
+        });    
       return companyById;
     }
   
@@ -93,12 +93,14 @@ const searchCompanyByName = async (full_name) => {
           full_name: { [Op.iLike]: `%${full_name}%` }
         },
         include: {
-          model: Posts
-          // include: Comment 
+          model: Posts,
+          include: {
+            model: Comments
+          }
         }
-      });
-      return companies;
-}
+        });
+return companies;
+};
 
 module.exports = {
     createCompany,

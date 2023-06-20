@@ -32,7 +32,7 @@ const createNewPost = async (title, body, state, id_user_data, image) => {
 
 const getAllPosts = async () => {
   const AllPosts = await Posts.findAll({ 
-      include: { 
+   include: { 
         model: User_data, 
         attributes: ['full_name'] 
       },
@@ -44,7 +44,16 @@ const getAllPosts = async () => {
 };
 
 const getPostById = async (id) => {
-  const PostById = await Posts.findByPk(id)
+  const PostById = await Posts.findByPk(id,
+    { 
+      include: { 
+        model: User_data, 
+        attributes: ['full_name'] 
+      },
+    include: {
+      model: Comments,
+      attributes: ['description', 'id_coments', 'likes']
+    }});
     return PostById;
 };
 
