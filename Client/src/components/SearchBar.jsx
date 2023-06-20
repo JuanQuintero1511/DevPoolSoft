@@ -30,6 +30,6 @@ export const SearchBar = () => {
         ))}
       </ul>
     </div>
-  )
-}
+  );
+};
  
