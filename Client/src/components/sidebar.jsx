@@ -9,7 +9,7 @@ const SideBar = () => {
     <div className="container-fluid">
       <div className='row'>
 
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark col-2 position-fixed vh-100 p-0 align-to mt-5">
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark col-1 position-fixed vh-100 p-0 align-to mt-5">
           <div className="navbar-nav flex-column h-100 d-flex align-items-start">
             <a href='/home'
               className={`nav-link ${selectedField === 'tech-news' ? 'active' : ''}`}
