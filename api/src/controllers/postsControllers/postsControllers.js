@@ -38,6 +38,7 @@ const getAllPosts = async () => {
       }});
   return AllPosts;
 };
+
 const getPostById = async (id) => {
   const PostById = await Posts.findByPk(id)
     return PostById;
@@ -60,5 +61,4 @@ const deletePost = async (post) => {
 
 
 
-module.exports = {createNewPost, getAllPosts, getPostById, updatePost, deletePost}
-
+module.exports = {createNewPost, getAllPosts, getPostById, updatePost, deletePost}
