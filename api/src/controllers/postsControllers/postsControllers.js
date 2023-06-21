@@ -38,7 +38,7 @@ const getAllPosts = async () => {
       },
     include: {
       model: Comments,
-      attributes: ['description', 'id_coments', 'likes']
+      attributes: ['description', 'id_comments', 'likes']
     }});
   return AllPosts;
 };
@@ -52,7 +52,7 @@ const getPostById = async (id) => {
       },
     include: {
       model: Comments,
-      attributes: ['description', 'id_coments', 'likes']
+      attributes: ['description', 'id_comments', 'likes']
     }});
     return PostById;
 };
@@ -75,4 +75,4 @@ const deletePost = async (post) => {
 
 
 
-module.exports = {createNewPost, getAllPosts, getPostById, updatePost, deletePost}
+module.exports = {createNewPost, getAllPosts, getPostById, updatePost, deletePost}

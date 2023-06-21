@@ -1,5 +1,4 @@
 const { User_data, Roles, Posts, Comments, Users} = require("../../db");
-
 const { Op } = require("sequelize");
 const cloudinary = require("../../utils/cloudinary");
 
@@ -125,6 +124,7 @@ const searchCompanyByName = async (full_name) => {
           }
         }
         });
+        
 return companies;
 };
 
@@ -137,7 +137,7 @@ module.exports = {
   getAllCompanies,
   getCompanyById,
   searchCompanyByName,
-  searchUsersByUserName
+ 
 }
 
 
