@@ -11,7 +11,7 @@ export const Landing = () => {
             </h1>
             <h2 className="text-3xl md:text-4xl font-bold text-center mt-6">
 
-            The tranquility of having everything in your world developed in one place.
+            The tranquility of having everything in your world developed in one place.
 
  
             </h2>

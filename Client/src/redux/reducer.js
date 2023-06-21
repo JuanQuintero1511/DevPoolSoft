@@ -1,4 +1,4 @@
-import { GET_ALL_POSTS, GET_ID_POST, CREATE_COMPANY } from "./action-types";
+import { GET_ALL_POSTS, GET_ID_POST, CREATE_COMPANY  } from "./action-types";
 
 const initialState = {
     allPosts:[],
@@ -16,8 +16,6 @@ const reducer = (state = initialState, action) => {
 
         case GET_ID_POST:
             return { ...state, idPost: action.payload};
-            
-        
         case CREATE_COMPANY:
             return {
                 ...state,
