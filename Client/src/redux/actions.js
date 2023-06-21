@@ -1,4 +1,4 @@
-import { GET_ALL_POSTS, GET_ID_POST, CREATE_COMPANY } from "./action-types";
+import { GET_ALL_POSTS, GET_ID_POST, CREATE_COMPANY, CREATE_POST_USER } from "./action-types";
 import axios from "axios";
 
 export const getAllPosts = () => {
@@ -13,6 +13,13 @@ export const getPostById = (id) => {
         const {data} = await axios.get(`http://localhost:3001/posts/${id}`);
         const post = data;
         dispatch({ type: GET_ID_POST, payload: post });        
+    }
+}
+export const createPostUser = (cpuData) => {
+    return async function (dispatch) {
+        const {data} = await axios.post(`http://localhost:3001/posts`, cpuData);
+        const postCpu = data;
+        dispatch({ type: CREATE_POST_USER, payload: postCpu });
     }
 }
 
