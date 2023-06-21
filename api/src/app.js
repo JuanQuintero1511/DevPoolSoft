@@ -5,10 +5,10 @@ const morgan = require('morgan');
 const routes = require('./routes/index.js');
 const cors = require("cors");
 require('dotenv').config();
+
+
 //auth0
 const { auth } = require('express-openid-connect');
-
-
 const config = {
   authRequired: process.env.AUTHREQUIRED_AUTH0,
   auth0Logout: process.env.AUTH0LOGOUT_AUTH0,
@@ -17,9 +17,6 @@ const config = {
   clientID: process.env.CLIENTID_AUTH0,
   issuerBaseURL: process.env.ISSUERBASEURL_AUTH0,
 };
-
-
-
 
 require('./db.js');
 
