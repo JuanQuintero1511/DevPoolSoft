@@ -73,8 +73,8 @@ detalles: "La nueva plataforma de realidad virtual de Facebook busca llevar la i
     <div className="card-list">
       {techNews.map((news, index) => (
         <div
-          className="card bg-white rounded-lg shadow-lg my-4"
-          style={{ width: '450px' }}
+          className="card rounded-lg shadow-lg my-4 border-success"
+          style={{ width: '450px', }}
           key={index}
         >
           <div className="card-header d-flex align-items-center p-2">
@@ -128,7 +128,7 @@ detalles: "La nueva plataforma de realidad virtual de Facebook busca llevar la i
                 marginLeft: '50px'
               }}
             >
-              <div className="card">
+              <div className="card border-success">
                 <h5 className="card-header">Aplica Ahora</h5>
                 <div className="card-body">
                   <h5 className="card-title">{news.titulo}</h5>
