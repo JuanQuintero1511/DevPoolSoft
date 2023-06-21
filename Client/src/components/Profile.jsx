@@ -3,7 +3,7 @@ export const Profile = () => {
   const perfiles = [
     {
       nombre: "Ramiro Fassetta",
-      profileImage: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+      profileImage: "https://cdn-icons-png.flaticon.com/512/3135/3135768.png",
       cargo: "Desarrollador Full Stack",
       acercaDeMi: "Apasionado por la programación y el desarrollo web.",
       skills: ["JavaScript", "HTML", "CSS", "Node.js", "React"],
@@ -34,9 +34,28 @@ export const Profile = () => {
     },
   ];
 
+  const handleClick = () => {
+    console.log("Haz hecho clic en la flecha");
+  };
+
   return (
-    <div className="max-w-4xl mx-auto py-10 px-4">
-      <div className="bg-white shadow-md rounded-md p-6 mb-4">
+    <div className="max-w-4xl mx-auto py-10 px-4 mt-8">
+      <div className="bg-white shadow-md rounded-md p-6 mb-4 relative">
+      <div className="absolute top-0 right-0 transform -translate-x-2 translate-y-2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="w-6 h-6 text-gray-400 cursor-pointer"
+            onClick={handleClick}
+          >
+            <path d="M15 18l-6-6 6-6" />
+          </svg>
+        </div>
         <div className="text-center mb-6">
           <div className="border-4 border-gray-200 rounded-full overflow-hidden w-40 h-40 mx-auto mb-4">
             <img
@@ -51,12 +70,13 @@ export const Profile = () => {
         <div className="flex">
           <div className="w-1/4 pr-6">
             <div className="bg-gray-200 rounded-md p-4 mb-4">
-              <h2 className="text-lg font-bold mb-2">About</h2>
-              {/* la info del about se deberia poder editar */}
+              <h2 className="text-lg font-bold mb-2 text-blue-500">About</h2>
               <p className="text-gray-600">{perfiles[0].acercaDeMi}</p>
             </div>
             <div className="bg-gray-200 rounded-md p-4">
-              <h2 className="text-lg font-bold mb-2">Experience</h2>
+              <h2 className="text-lg font-bold mb-2 text-blue-500">
+                Experience
+              </h2>
               {perfiles[0].experiencia.map((exp, index) => (
                 <p key={index} className="text-gray-600">
                   {exp.puesto} at {exp.empresa}
@@ -66,7 +86,9 @@ export const Profile = () => {
           </div>
           <div className="w-3/4">
             <div className="bg-gray-200 rounded-md p-4 mb-4">
-              <h2 className="text-lg font-bold mb-2">Education</h2>
+              <h2 className="text-lg font-bold mb-2 text-blue-500">
+                Education
+              </h2>
               {perfiles[0].educacion.map((edu, index) => (
                 <p key={index} className="text-gray-600">
                   {edu.titulo} at {edu.institucion}
@@ -74,7 +96,7 @@ export const Profile = () => {
               ))}
             </div>
             <div className="bg-gray-200 rounded-md p-4">
-              <h2 className="text-lg font-bold mb-2">Skills</h2>
+              <h2 className="text-lg font-bold mb-2 text-blue-500">Skills</h2>
               <ul className="list-disc pl-6">
                 {perfiles[0].skills.map((skill, index) => (
                   <li key={index} className="text-gray-600">

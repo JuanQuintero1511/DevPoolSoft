@@ -1,7 +1,9 @@
 import { useState } from 'react';
 
-const JobDetailsModal = ({ job, onClose }) => {
-  
+const JobDetailsModal = ({ post, handleCloseModal }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+
 
   const handleApplyJob = () => {
     // Lógica para inscribirse al trabajo
@@ -14,17 +16,14 @@ const JobDetailsModal = ({ job, onClose }) => {
   return (
     <>
      
-
-      {/* Modal */}
-     
         <div className="fixed top-0 left-0 flex items-center justify-center w-screen h-screen bg-gray-900 bg-opacity-50">
           <div className="bg-white rounded-lg shadow-lg w-1/2">
             {/* Encabezado del modal */}
             <div className="p-4 flex items-center justify-between bg-teal-700 text-white">
-              <h3 className="text-2xl font-bold">{job.title}</h3>
+              <h3 className="text-2xl font-bold">{post.title}</h3>
               <button
                 className="text-white hover:text-gray-300 focus:outline-none"
-                onClick={onClose}
+                onClick={handleCloseModal}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -46,18 +45,19 @@ const JobDetailsModal = ({ job, onClose }) => {
             {/* Contenido del modal */}
             <div className="p-4">
               <img
-                src={job.companyLogo}
+                src={post.companyLogo}
                 alt="Logo de la empresa"
                 className="w-32 h-32 mx-auto mb-4"
               />
-              <p>{job.description}</p>
+              <p>{post.description}</p>
               <div className="flex items-center mt-4">
                 <img
-                  src={job.interviewerImage}
+                  src={post.interviewerImage}
                   alt="Foto del entrevistador"
-                  className="w-14 h-14 rounded-full mr-2"
+                  className="w-8 h-8 rounded-full mr-2"
                 />
-                <p className="text-sm">{job.interviewerName}</p>
+                <p>Interviewer name: </p>
+                <p className="text-sm"> {post.interviewerName}</p>
               </div>
             </div>
 
@@ -67,18 +67,18 @@ const JobDetailsModal = ({ job, onClose }) => {
                 className="bg-blue-500 text-white py-2 px-4 rounded-lg mr-4"
                 onClick={handleApplyJob}
               >
-                Inscribirse
+                Join to us!
               </button>
               <button
                 className="bg-yellow-500 text-white py-2 px-4 rounded-lg"
                 onClick={handleSaveJob}
               >
-                Guardar
+                Save job for later
               </button>
             </div>
           </div>
         </div>
-    
+      
     </>
   );
 };
