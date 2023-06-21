@@ -35,7 +35,7 @@ const CreatePostCommunity = ({ addPost, closeModal }) => {
     };
 
     const handleImageUpload = (event) => {
-        // Aquí puedes implementar la lógica para subir la imagen
+        // lógica para subir la imagen
     };
 
     return (
