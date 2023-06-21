@@ -1,4 +1,5 @@
-const { User_data, Roles, Posts, Comments} = require("../../db");
+const { User_data, Roles, Posts, Comments, Users} = require("../../db");
+
 const { Op } = require("sequelize");
 const cloudinary = require("../../utils/cloudinary");
 
@@ -43,32 +44,58 @@ const createCompany = async (
   });
 };
 
+const createCompanyUser = async (userName, email, password) => {
+  await Users.create({
+    userName, email, password
+  })
+}
+
+const setCompanyUsers = async (userName, email, password, full_name) => {
+  const [companyUser, created] = await Users.findOrCreate({
+    where: {
+      userName: `${userName}`,
+      email: `${email}`,
+      password: `${password}`,
+    }
+  })  
+  console.log(companyUser.dataValues)
+  const usersToSet = companyUser.dataValues.id_users
+  await User_data.update({ id_users: `${usersToSet}`}, {
+    where: {
+      full_name: { [Op.iLike]: `%${full_name}%`}
+    }
+  })
+}
+
 
 const setCompanyRol = async (rol_type, full_name) => {
-    const [companyRol, created] = await Roles.findOrCreate({
-        where: { 
-            rol_type: `${rol_type}`}
-    })
-    const atributoToSet = companyRol.dataValues.id_roles
-    await User_data.update({id_roles: `${atributoToSet}`},{
-        where: {
-            full_name: { [Op.iLike]: `%${full_name}%` }
-        }
-    })
-} 
+  const [companyRol, created] = await Roles.findOrCreate({
+    where: {
+      rol_type: `${rol_type}`
+    }
+  })
+  const atributoToSet = companyRol.dataValues.id_roles
+  await User_data.update({ id_roles: `${atributoToSet}` }, {
+    where: {
+      full_name: { [Op.iLike]: `%${full_name}%` }
+    }
+  })
+}
 
 const setCompanyPremium = async (full_name) => {
-    await User_data.update({isPremium: true},{
-        where: {
-            full_name: { [Op.iLike]: `%${full_name}%` }
-        }
-    })
-} 
+  await User_data.update({ isPremium: true }, {
+    where: {
+      full_name: { [Op.iLike]: `%${full_name}%` }
+    }
+  })
+}
 
 
 // //?Trae las empresas de la DB
 const getAllCompanies = async () => {
-    return await User_data.findAll()  
+  return await User_data.findAll(
+
+  );
 };
 
 
@@ -84,7 +111,6 @@ const getCompanyById = async (id) => {
         });    
       return companyById;
     }
-  
 
 //* Obtiene la empresa por nombre
 const searchCompanyByName = async (full_name) => {
@@ -103,12 +129,15 @@ return companies;
 };
 
 module.exports = {
-    createCompany,
-    setCompanyRol,
-    setCompanyPremium,
-    getAllCompanies,
-    getCompanyById,
-    searchCompanyByName,
+  createCompany,
+  setCompanyRol,
+  createCompanyUser,
+  setCompanyUsers,
+  setCompanyPremium,
+  getAllCompanies,
+  getCompanyById,
+  searchCompanyByName,
+  searchUsersByUserName
 }
 
 
