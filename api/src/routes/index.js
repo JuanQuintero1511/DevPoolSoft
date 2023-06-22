@@ -4,7 +4,7 @@ const { Router } = require('express');
 const companyRouter = require('../routes/companyRouter/companyRouter');
 const postsRouter = require('../routes/postsRouter/postsRouter');
 const commentRouter = require('../routes/commentsRouter/commentsRouter');
-const loginRouter = require('../routes/loginRouter/loginrouter');
+const loginRouter = require('../routes/loginRouter/loginRouter');
 const usersRouter = require('../routes/usersRouter/usersRouter');
 
 const router = Router();
@@ -14,6 +14,7 @@ router.use('/company', companyRouter);
 router.use('/posts', postsRouter);
 router.use('/comments', commentRouter);
 router.use('/login', loginRouter);
+router.use('/profile', loginRouter);
 router.use('/users', usersRouter)
 // Agrega más routers si es necesario
 

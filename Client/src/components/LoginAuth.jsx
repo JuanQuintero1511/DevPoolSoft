@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
-export const Login = (props) => {
+export const LoginAuth0 = (props) => {
 
   const users = [
     { email: "henry@hotmail.com", password: "AsD@$18628!" },

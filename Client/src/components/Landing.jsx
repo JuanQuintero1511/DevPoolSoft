@@ -1,6 +1,12 @@
 import { Link } from "react-router-dom"
 
 export const Landing = () => {
+
+  const handleLogin = () => {
+    // Redirigir al usuario a la página de inicio de sesión de Auth0
+    window.location.href = 'URL_DE_INICIO_DE_SESION_DE_AUTH0';
+  };
+  
   return (
     <div className="flex flex-col md:flex-row h-screen items-center">
       <div className="bg-cover bg-center w-full h-screen" style={{ backgroundImage: "url('src/image/fondo.jpg')" }}>
@@ -16,10 +22,10 @@ export const Landing = () => {
  
             </h2>
             <div className="mt-8 flex justify-center space-x-4">
-              <button className="bg-blue-500 hover:bg-blue-400 focus:bg-blue-400 text-white font-semibold rounded-lg px-4 py-3">
-                <Link to="/login">
+              <button className= "bg-blue-500 hover:bg-blue-400 focus:bg-blue-400 text-white font-semibold rounded-lg px-4 py-3" onClick={handleLogin}> Iniciar sesión
+                {/* <Link to="/login">
                   Login
-                </Link>
+                </Link> */}
               </button>
               <button className="bg-white hover:bg-gray-100 focus:bg-gray-100 text-gray-900 font-semibold rounded-lg px-4 py-3 border border-gray-300">
                 <Link to="/register">
