@@ -3,6 +3,9 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { createPostUser } from "../redux/actions";
 
+import CloudinaryUploadWidget from "./Cloudinary/UploadWidget"
+
+
 const CreatePostCommunity = ({ closeModal }) => {
 
   const [postData, setPostData] = useState({
@@ -11,10 +14,16 @@ const CreatePostCommunity = ({ closeModal }) => {
     state: "In Progress",
     image: {
       public_id: "olympic_flag",
-      url: "https://upload.wikimedia.org/wikipedia/commons/a/ae/Olympic_flag.jpg",
+
+      url: "",
+
     },
     id_user_data: "3d271575-f97a-4c3c-8228-f043563849bc",
   });
+
+  const handleImageUpload = (url) => {
+    setPostData({image:{url:url,}});
+};
 
 
   const handleChange = (event) => {
@@ -130,18 +139,14 @@ const CreatePostCommunity = ({ closeModal }) => {
           ></textarea>
           {errors.body && <p className="text-red-500 text-sm">{errors.body}</p>}
 
-          <label htmlFor="image" className="block mb-2">
+
+          <label htmlFor="image" className="">
             Image:
           </label>
-          <div className="flex">
-            <input
-              type="file"
-              name="image"
-              className="border border-gray-300 px-3 py-2 rounded-l-md w-full mb-2"
-              accept="image/*"
-              // value={postData.image}
-              onChange={handleChange}
-            />
+          <div className="flex justify-center items-center">
+            <div className="-my-[400px]">
+           <CloudinaryUploadWidget onImageUpload={handleImageUpload} />
+          </div>
           </div>
 
           <div className="flex justify-end">
