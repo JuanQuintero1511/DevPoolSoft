@@ -10,17 +10,25 @@ const CreatePostCommunity = ({ closeModal }) => {
     title: "",
     body: "",
     state: "In Progress",
+    id_user_data: "767c95a4-179c-4450-9b3f-cb85a9ea1501",
     image: {
       public_id: "olympic_flag",
       url: "",
     },
-    id_user_data: "df5d3403-013e-428b-a616-1bd9ceb3ec10",
+   
   });
 
   const handleImageUpload = (url) => {
-    setPostData({image:{url:url,}});
-};
-
+    setPostData((prevPostData) => ({
+      ...prevPostData,
+      image: {
+        ...prevPostData.image,
+        url: url,
+      },
+    }));
+  };
+  
+console.log(postData.image.url)
   const handleChange = (event) => {
     setPostData({ ...postData, [event.target.name]: event.target.value });
   };

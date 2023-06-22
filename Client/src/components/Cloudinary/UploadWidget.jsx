@@ -41,7 +41,7 @@ class CloudinaryUploadWidget extends Component {
   render() {
     return (<div className="flex justify-center items-center h-screen">
 
-      <button id="upload_widget" className="cloudinary-button">
+      <button  type="button" id="upload_widget" className="cloudinary-button bg-blue-300">
         Upload
       </button>
       </div>
