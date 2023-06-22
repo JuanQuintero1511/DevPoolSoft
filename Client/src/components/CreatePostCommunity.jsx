@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { createPostUser } from "../redux/actions";
+
 import CloudinaryUploadWidget from "./Cloudinary/UploadWidget"
+
 
 const CreatePostCommunity = ({ closeModal }) => {
 
@@ -13,7 +15,9 @@ const CreatePostCommunity = ({ closeModal }) => {
     id_user_data: "767c95a4-179c-4450-9b3f-cb85a9ea1501",
     image: {
       public_id: "olympic_flag",
+
       url: "",
+
     },
    
   });
@@ -142,6 +146,7 @@ console.log(postData.image.url)
           ></textarea>
           {errors.body && <p className="text-red-500 text-sm">{errors.body}</p>}
 
+
           <label htmlFor="image" className="">
             Image:
           </label>
@@ -150,6 +155,7 @@ console.log(postData.image.url)
            <CloudinaryUploadWidget onImageUpload={handleImageUpload} />
           </div>
           </div>
+
           <div className="flex justify-end">
             <button
               type="submit"
