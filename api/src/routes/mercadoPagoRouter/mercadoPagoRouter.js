@@ -3,7 +3,11 @@ const { createOrderHandler } = require ('../../handlers/mercadoPagoHandlers/merc
 
 const mercadoPagoRouter = Router();
 
-mercadoPagoRouter.get ("/", createOrderHandler); // Crear pago
+mercadoPagoRouter.post ("/", createOrderHandler); // Crear pago
+mercadoPagoRouter.get ('/success', createOrderHandler);
+mercadoPagoRouter.get ('/failure', createOrderHandler);
+mercadoPagoRouter.get ('/pendig', createOrderHandler);
+mercadoPagoRouter.post ('/webhook', createOrderHandler);
 // mercadoPagoRouter.delete ("/", deleteOrder) // Borrar pago 
  
 module.exports = mercadoPagoRouter

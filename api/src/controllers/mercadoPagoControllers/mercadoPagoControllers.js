@@ -1,12 +1,15 @@
-// const createOrder = (req, res) => {
-//     res.send("Funcionando CreateOrder")
-// }
+const { Mercado_pago } = require('../../db')
 
-// const deleteOrder = (req, res) => {
-//     res.send("Funcionando Delete")
-// }
+const createOrder = async (TypeOfService) => {
+   const newOrder = await Mercado_pago.create ({TypeOfService})
+   return newOrder
+}
 
-// module.exports = {
-//     createOrder,
-//     deleteOrder
-// }
+const deleteOrder = (req, res) => {
+    res.send("Funcionando Delete")
+}
+
+module.exports = {
+    createOrder,
+    deleteOrder
+}

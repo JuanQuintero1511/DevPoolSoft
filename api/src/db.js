@@ -33,7 +33,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 //* En sequelize.models están todos los modelos importados como propiedades
 //* Para relacionarlos hacemos un destructuring
-const { Comments, Posts, Roles, User_data, Users } = sequelize.models;
+const { Comments, Posts, Roles, User_data, Users, Mercado_pago } = sequelize.models;
 
 //? Aca vendrian las relaciones y la creacion de la tabla intermedia
 Users.hasOne(User_data, { foreignKey: 'id_users' });
@@ -45,13 +45,9 @@ Posts.belongsTo(User_data,{ foreignKey: 'id_user_data' })
 Posts.hasMany(Comments, { foreignKey: 'id_post' })
 Comments.belongsTo(Posts, { foreignKey: 'id_post'})
 
-//ver relacion comentarios y user_data
+Mercado_pago.hasOne(Mercado_pago, { foreignKey: 'id_pay'})
+Users.belongsTo (User_data, { foreignKey: 'id_users'})
 
-Posts.hasMany(Comments, {foreignKey: 'id_post'})
-Comments.belongsTo(Posts, {foreignKey: 'id_post'})
-
-Comments.hasMany(Posts, {foreignKey: 'id_coments'})
-Posts.belongsTo(Comments, {foreignKey: 'id_coments'})
 
 module.exports = {
   ...sequelize.models, 
