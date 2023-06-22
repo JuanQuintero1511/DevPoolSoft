@@ -16,7 +16,7 @@ const PostCommunity = ({ post }) => {
 
             <div className="mb-2 flex items-center">
                 <span role="img" aria-label="Developer">🧑🏻‍💻 </span>
-                <span className="font-bold"> {post.user_datum.full_name}</span>
+                <span className="font-bold"> {post.user_datum?.full_name}</span>
             </div>
 
             <div className="flex">
