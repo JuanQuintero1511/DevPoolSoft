@@ -2,7 +2,7 @@ const { DataTypes } = require('sequelize')
 
 module.exports = (sequelize) => {
     sequelize.define(
-        'devData',
+        'devdata',
         {
             id_devData: {
                 type: DataTypes.UUID,
@@ -24,6 +24,12 @@ module.exports = (sequelize) => {
             },
             skills: {
                 type: DataTypes.JSON,                
+            },
+            ratings: {
+                type: DataTypes.FLOAT, 
+                validate: {
+                    len: [0, 5]
+                }               
             },
         },
         {

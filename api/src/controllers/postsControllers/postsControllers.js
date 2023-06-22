@@ -1,4 +1,4 @@
-const { Posts, User_data } = require ("../../db");
+const { Posts, User_data, Comments } = require ("../../db");
 const cloudinary= require ("../../utils/cloudinary")
 
 const createNewPost = async (title, body, state, id_user_data, image) => {
@@ -32,15 +32,28 @@ const createNewPost = async (title, body, state, id_user_data, image) => {
 
 const getAllPosts = async () => {
   const AllPosts = await Posts.findAll({ 
-      include: { 
+   include: { 
         model: User_data, 
         attributes: ['full_name'] 
-      }});
+      },
+    include: {
+      model: Comments,
+      attributes: ['description', 'id_comments', 'likes']
+    }});
   return AllPosts;
 };
 
 const getPostById = async (id) => {
-  const PostById = await Posts.findByPk(id)
+  const PostById = await Posts.findByPk(id,
+    { 
+      include: { 
+        model: User_data, 
+        attributes: ['full_name'] 
+      },
+    include: {
+      model: Comments,
+      attributes: ['description', 'id_comments', 'likes']
+    }});
     return PostById;
 };
 
