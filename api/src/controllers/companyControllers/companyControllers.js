@@ -126,6 +126,8 @@ const searchCompanyByName = async (full_name) => {
 return companies;
 };
 
+
+
 module.exports = {
   createCompany,
   setCompanyRol,

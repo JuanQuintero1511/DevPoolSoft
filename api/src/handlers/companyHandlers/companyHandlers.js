@@ -7,16 +7,13 @@ const {
     getCompanyById,
     createCompanyUser, 
     setCompanyUsers,
-    } = require('../../controllers/companyControllers/companyControllers')
+    } = require('../../controllers/companyControllers/companyControllers');
 
-    const {sequelize} = require('../../db')
+const { searchUsersByUserName } = require('../../controllers/usersControllers/usersControllers');
 
 
-    const createCompanyHandler = async (req, res) => {
-        const maxAttempts = 3;
-        let attempt = 1;
-      
-        while (attempt <= maxAttempts) {
+
+    const createCompanyHandler = async (req, res) => {       
           try {
             const {
               full_name,
@@ -33,8 +30,7 @@ const {
             const userName = req.body.userName;
             const password = req.body.password;
             const email = req.body.email;
-            const full_nameAux = req.body.full_name;
-      
+            const full_nameAux = req.body.full_name;      
                        
               await createCompany(
                 full_name,
@@ -46,28 +42,25 @@ const {
                 profile_image,
                 authentication,
                 image,
-                t
+                
               );
               await setCompanyUsers(userName, email, password, full_nameAux);
               await setCompanyRol(rol_type, full_nameAux);
-            
-      
-            const newUsers = await searchCompanyByName(userName);
+                  
+            const newUsers = await searchUsersByUserName(userName);
       
             res.status(201).json(newUsers);
       
             // Si todo va bien, salir del bucle
             return;
           } catch (error) {
-            // Si se produce un error, imprimirlo y continuar al siguiente intento
-            console.error("Error en la creación del usuario:", {error:error.message});
-            attempt++;
+            
+            res.status(400).json({ error: error.message});
           }
         }
+       
       
-        // Si se alcanzó el número máximo de intentos sin éxito, enviar una respuesta de error
-        res.status(400).json({ error: "No se pudo crear el usuario después de varios intentos." });
-      };
+      
 //*Trae empresa por nombre o todas si no tiene nombre
 const getCompanyHandler = async (req, res) => {
     try {

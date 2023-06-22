@@ -1,5 +1,4 @@
-const { createUser, getAllUsers } = require('../../controllers/usersControllers/usersControllers')
-const { searchUsersByUserName } = require("../../controllers/companyControllers/companyControllers");
+const { createUser, getAllUsers, searchUsersByUserName } = require("../../controllers/usersControllers/usersControllers")
 
 const getUserHandler = async (req, res) => {
     try {
