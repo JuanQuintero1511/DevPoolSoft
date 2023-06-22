@@ -44,6 +44,7 @@ const getPostById = async (id) => {
     return PostById;
 };
 
+
 const updatePost = async ( id, title, body, state, id_user_data) => {
   const postUpdate = await Posts.update(
         { title: title, body: body, state: state },
@@ -61,4 +62,4 @@ const deletePost = async (post) => {
 
 
 
-module.exports = {createNewPost, getAllPosts, getPostById, updatePost, deletePost}
+module.exports = {createNewPost, getAllPosts, getPostById, updatePost, deletePost}

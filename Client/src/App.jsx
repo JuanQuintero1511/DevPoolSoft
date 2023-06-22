@@ -11,13 +11,14 @@ import Community from "./components/Community";
 import Detail from "./components/DetailCommunity";
 import JobsOffers from "./components/JobsOffers";
 import InProgress from "./components/InProgress";
-import UploadWidgetCloud from "./components/Cloudinary/UploadWidget";
+import CloudinaryUploadWidget from "./components/Cloudinary/UploadWidget";
 
 
 
 function App() {
  
 const location = useLocation();
+
 
   return (
     <>
@@ -37,7 +38,7 @@ const location = useLocation();
         <Route path='/community' element={ <Community />}/>
         <Route path="/community/:id" element={ <Detail />} />
         <Route path="/inprogress" element={ <InProgress /> }/>
-        <Route path= "/cloudtest" element={ <UploadWidgetCloud /> } />
+        <Route path= "/cloudtest" element={ <CloudinaryUploadWidget /> } />
 
       </Routes>
     </>
