@@ -13,7 +13,7 @@ const CreatePostCommunity = ({ closeModal }) => {
       public_id: "olympic_flag",
       url: "https://upload.wikimedia.org/wikipedia/commons/a/ae/Olympic_flag.jpg",
     },
-    id_user_data: "df5d3403-013e-428b-a616-1bd9ceb3ec10",
+    id_user_data: "3d271575-f97a-4c3c-8228-f043563849bc",
   });
 
 
@@ -63,8 +63,8 @@ const CreatePostCommunity = ({ closeModal }) => {
     const { body } = postData;
     if (body.length < 10) {
       setErrors({ ...errors, body: "Requires a minimum of 10 characters." });
-    } else if (body.length > 300) {
-      setErrors({ ...errors, body: "Maximum 300 characters." });
+    } else if (body.length > 500) {
+      setErrors({ ...errors, body: "Maximum 500 characters." });
     } else {
       setErrors({ ...errors, body: "" });
     }
@@ -102,7 +102,7 @@ const CreatePostCommunity = ({ closeModal }) => {
 
         <form onSubmit={handleSubmit}>
           <label htmlFor="title" className="block mb-2">
-            Title:
+            Title: <span className="text-red-500 text-sm">*</span>
           </label>
           <input
             type="text"
@@ -117,7 +117,7 @@ const CreatePostCommunity = ({ closeModal }) => {
           {errors.title && <p className="text-red-500 text-sm">{errors.title}</p>}
 
           <label htmlFor="body" className="block mb-2">
-            Description:
+            Description: <span className="text-red-500 text-sm">*</span>
           </label>
           <textarea
             name="body"
