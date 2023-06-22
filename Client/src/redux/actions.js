@@ -1,4 +1,6 @@
+
 import { GET_ALL_POSTS, GET_ID_POST, CREATE_COMPANY, CREATE_POST_USER, CREATE_USER } from "./action-types";
+
 import axios from "axios";
 
 export const getAllPosts = () => {

@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { createPostUser } from "../redux/actions";
+
 import CloudinaryUploadWidget from "./Cloudinary/UploadWidget"
+
 
 const CreatePostCommunity = ({ closeModal }) => {
 
@@ -12,7 +14,9 @@ const CreatePostCommunity = ({ closeModal }) => {
     state: "In Progress",
     image: {
       public_id: "olympic_flag",
+
       url: "",
+
     },
     id_user_data: "df5d3403-013e-428b-a616-1bd9ceb3ec10",
   });
@@ -20,6 +24,7 @@ const CreatePostCommunity = ({ closeModal }) => {
   const handleImageUpload = (url) => {
     setPostData({image:{url:url,}});
 };
+
 
   const handleChange = (event) => {
     setPostData({ ...postData, [event.target.name]: event.target.value });
@@ -134,6 +139,7 @@ const CreatePostCommunity = ({ closeModal }) => {
           ></textarea>
           {errors.body && <p className="text-red-500 text-sm">{errors.body}</p>}
 
+
           <label htmlFor="image" className="">
             Image:
           </label>
@@ -142,6 +148,7 @@ const CreatePostCommunity = ({ closeModal }) => {
            <CloudinaryUploadWidget onImageUpload={handleImageUpload} />
           </div>
           </div>
+
           <div className="flex justify-end">
             <button
               type="submit"
