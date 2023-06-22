@@ -15,11 +15,10 @@ export const getPostById = (id) => {
         dispatch({ type: GET_ID_POST, payload: post });        
     }
 }
-export const createPostUser = (cpuData) => {
+export const createPostUser = (postData) => {
     return async function (dispatch) {
-        const {data} = await axios.post(`http://localhost:3001/posts`, cpuData);
-        const postCpu = data;
-        dispatch({ type: CREATE_POST_USER, payload: postCpu });
+        const {data} = await axios.post(`http://localhost:3001/posts`, postData);
+        dispatch({ type: CREATE_POST_USER, payload: data });
     }
 }
 
