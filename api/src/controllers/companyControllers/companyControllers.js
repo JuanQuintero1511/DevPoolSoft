@@ -20,8 +20,8 @@ const createCompany = async (
     imageUploadResult = await cloudinary.uploader.upload(image, {
       folder: 'company',
     });
-  } else if (typeof image === 'object' && image.public_id && image.url) {
-    // `image` es un objeto de imagen con public_id y url, usar directamente
+  } else if (typeof image === 'object'  && image.url) {
+    // `image` es un objeto de imagen con url, usar directamente
     imageUploadResult = image;
   } else {
     throw new Error('Invalid image data');
@@ -36,8 +36,7 @@ const createCompany = async (
     phone_number,
     profile_image,
     authentication,
-    image: {
-      public_id: imageUploadResult.public_id,
+    image: {     
       url: imageUploadResult.url,
     },
   });
