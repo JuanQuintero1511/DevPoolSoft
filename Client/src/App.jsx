@@ -11,7 +11,8 @@ import Community from "./components/Community";
 import Detail from "./components/DetailCommunity";
 import JobsOffers from "./components/JobsOffers";
 import InProgress from "./components/InProgress";
-import Test1 from "./components/test1";
+import Test1 from "./components/test1"; // borrar esto
+import Test2 from "./components/test2"; // borrar esto
 
 
 
@@ -39,7 +40,9 @@ const location = useLocation();
         <Route path='/community' element={ <Community />}/>
         <Route path="/community/:id" element={ <Detail />} />
         <Route path="/inprogress" element={ <InProgress /> }/>
-        <Route path="/test1" element={ <Test1 /> }/>
+        <Route path="/test1" element={ <Test1 /> }/> {/* borrar esta linea */}
+        <Route path="/test2" element={ <Test2 />} />{/* borrar esta linea */}
+        
 
       </Routes>
     </>
