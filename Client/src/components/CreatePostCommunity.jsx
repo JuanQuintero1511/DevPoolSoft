@@ -12,7 +12,7 @@ const CreatePostCommunity = ({ closeModal }) => {
     title: "",
     body: "",
     state: "In Progress",
-    id_user_data: "767c95a4-179c-4450-9b3f-cb85a9ea1501",
+    id_user_data: "2b325cb2-e8f7-4d74-a732-e2171b1f3245",
     image: {
       public_id: "olympic_flag",
 
