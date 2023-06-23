@@ -5,7 +5,7 @@ const createPostHandler = async (req, res) => {
       const { title, body, state, id_user_data, image} = req.body;    
        
 
-      if (!title && !body && !state && !id_user_data) throw new Error("Missing required data");
+      if (!title && !body && !id_user_data) throw new Error("Missing required data");
 
       const newPost = await createNewPost(
         title, 

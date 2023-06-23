@@ -4,31 +4,31 @@ const cloudinary= require ("../../utils/cloudinary")
 const createNewPost = async (title, body, state, id_user_data, image) => {
   let imageUploadResult;
 
-  if (typeof image === 'string') {
-    // `image` es una ruta de archivo, usar cloudinary.uploader.upload
-    imageUploadResult = await cloudinary.uploader.upload(image, {
-      folder: 'posts',
-    });
-  } else if (typeof image === 'object'  && image.url) {
-    // `image` es un objeto de imagen cony url, usar directamente
-    imageUploadResult = image;
-  } else {
-    throw new Error('Invalid image data');
+  if (image) {
+    if (typeof image === 'string') {
+      // `image` es una ruta de archivo, usar cloudinary.uploader.upload
+      imageUploadResult = await cloudinary.uploader.upload(image, {
+        folder: 'posts',
+      });
+    } else if (typeof image === 'object' && image.url) {
+      // `image` es un objeto de imagen con url, usar directamente
+      imageUploadResult = image;
+    } else {
+      throw new Error('Invalid image data');
+    }
   }
 
   const newPost = await Posts.create({
     title,
     body,
-    state,
+    state: state ? state : null,
     id_user_data,
-    image: {
-      
-      url: imageUploadResult.url,
-    },
+    image: imageUploadResult ? { url: imageUploadResult.url } : null,
   });
 
   return newPost;
 };
+
 
 const getAllPosts = async () => {
   const AllPosts = await Posts.findAll({ 
