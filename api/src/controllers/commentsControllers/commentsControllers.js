@@ -1,7 +1,7 @@
 const {Comments} = require('../../db');
 
-const createNewComment = async (description, id_posts) => {
-        const newComment = await Comments.create({description, id_posts});
+const createNewComment = async (description, id_post, id_user_data) => {
+        const newComment = await Comments.create({description, id_post, id_user_data});
         return newComment;
 }
 

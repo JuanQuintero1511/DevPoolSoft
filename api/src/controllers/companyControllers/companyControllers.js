@@ -1,4 +1,4 @@
-const { User_data, Roles, Posts, Comments} = require("../../db");
+const { User_data, Roles, Posts, Comments, Users} = require("../../db");
 const { Op } = require("sequelize");
 const cloudinary = require("../../utils/cloudinary");
 
@@ -20,8 +20,8 @@ const createCompany = async (
     imageUploadResult = await cloudinary.uploader.upload(image, {
       folder: 'company',
     });
-  } else if (typeof image === 'object' && image.public_id && image.url) {
-    // `image` es un objeto de imagen con public_id y url, usar directamente
+  } else if (typeof image === 'object'  && image.url) {
+    // `image` es un objeto de imagen con url, usar directamente
     imageUploadResult = image;
   } else {
     throw new Error('Invalid image data');
@@ -36,60 +36,83 @@ const createCompany = async (
     phone_number,
     profile_image,
     authentication,
-    image: {
-      public_id: imageUploadResult.public_id,
+    image: {     
       url: imageUploadResult.url,
     },
   });
 };
 
+const createCompanyUser = async (userName, email, password) => {
+  await Users.create({
+    userName, email, password
+  })
+}
+
+const setCompanyUsers = async (userName, email, password, full_name) => {
+  const [companyUser, created] = await Users.findOrCreate({
+    where: {
+      userName: `${userName}`,
+      email: `${email}`,
+      password: `${password}`,
+    }
+  })  
+  console.log(companyUser.dataValues)
+  const usersToSet = companyUser.dataValues.id_users
+  await User_data.update({ id_users: `${usersToSet}`}, {
+    where: {
+      full_name: { [Op.iLike]: `%${full_name}%`}
+    }
+  })
+}
+
 
 const setCompanyRol = async (rol_type, full_name) => {
-    const [companyRol, created] = await Roles.findOrCreate({
-        where: { 
-            rol_type: `${rol_type}`}
-    })
-    const atributoToSet = companyRol.dataValues.id_roles
-    await User_data.update({id_roles: `${atributoToSet}`},{
-        where: {
-            full_name: { [Op.iLike]: `%${full_name}%` }
-        }
-    })
-} 
+  const [companyRol, created] = await Roles.findOrCreate({
+    where: {
+      rol_type: `${rol_type}`
+    }
+  })
+  const atributoToSet = companyRol.dataValues.id_roles
+  await User_data.update({ id_roles: `${atributoToSet}` }, {
+    where: {
+      full_name: { [Op.iLike]: `%${full_name}%` }
+    }
+  })
+}
 
 const setCompanyPremium = async (full_name) => {
-    await User_data.update({isPremium: true},{
-        where: {
-            full_name: { [Op.iLike]: `%${full_name}%` }
-        }
-    })
-} 
+  await User_data.update({ isPremium: true }, {
+    where: {
+      full_name: { [Op.iLike]: `%${full_name}%` }
+    }
+  })
+}
 
 
 // //?Trae las empresas de la DB
 const getAllCompanies = async () => {
-    return await User_data.findAll({ 
-      include: [
-        {
-          model: Posts,
-          include: [Comments]
-        }
-      ]})  
+  return await User_data.findAll({
+    include: {
+      model: Posts,
+      include: {
+        model: Comments
+      }
+    }});
 };
 
 
 //? Obtiene la empresa por ID especifico mas los posteos
 const getCompanyById = async (id) => {
       const companyById = await User_data.findByPk(id, {
-        include: [
-          {
-            model: Posts,
-            include: [Comments]
+        include: {
+          model: Posts,
+          include: {
+            model: Comments
           }
-        ]})      
+        }
+        });    
       return companyById;
     }
-  
 
 //* Obtiene la empresa por nombre
 const searchCompanyByName = async (full_name) => {
@@ -104,16 +127,22 @@ const searchCompanyByName = async (full_name) => {
           }
         }
         });
+        
 return companies;
 };
 
+
+
 module.exports = {
-    createCompany,
-    setCompanyRol,
-    setCompanyPremium,
-    getAllCompanies,
-    getCompanyById,
-    searchCompanyByName,
+  createCompany,
+  setCompanyRol,
+  createCompanyUser,
+  setCompanyUsers,
+  setCompanyPremium,
+  getAllCompanies,
+  getCompanyById,
+  searchCompanyByName,
+ 
 }
 
 
