@@ -4,7 +4,10 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const routes = require('./routes/index.js');
 const cors = require("cors");
-const path = require("path")
+
+//autenticacion
+const passport = require("passport")
+const session = require('express-session')
 
 
 
@@ -29,47 +32,22 @@ server.use((req, res, next) => {
   next();
 });
 
-
-//autenticacion
-
-const session = require('express-session')
-require('dotenv').config();
-
+//inicializamos passport
+// app.set('trust proxy', 1) // descomentar esto 
+// en https trust first proxy
 server.use(session({
   secret: 'misecreto que debe ir en variable de entorno',
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: false }
+  //poner cookie en true cunado estemos en https
+  cookie: { secure: false },
 }))
 
-const passport = require("passport")
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
-
-
-
-passport.use(
-  new GoogleStrategy({
-    clientID: process.env.GOOGLE_CLIENTID_PASSPORT,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET_PASSPORT,
-    callbackURL: "http://localhost:3001/auth/google/callback",
-    passReqToCallback: true
-  },
-    function (request, accessToken, refreshToken, profile, done) {
-      // User_data.findOrCreate({ googleId: profile.id }, function (err, user) {
-      //   return done(err, user);
-      // });
-      done(null, profile)
-    }
-  ));
-passport.serializeUser((user, done) => {
-  done(null, user)
-})
-passport.deserializeUser((user, done) => {
-  done(null, user)
-})
-
-//inicializamos passport
+// server.use(connect.session())
 server.use(passport.initialize())
+server.use(passport.session())
+
+
 
 server.use('/', routes);
 

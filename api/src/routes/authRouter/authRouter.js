@@ -1,34 +1,65 @@
-const { Router } = require('express');
-const path = require('path')
-// const authGoogleHandler = require('../../handlers/authHandler/authGoogleHandler');
-require('../../controllers/authController/authController')
 const passport = require("passport")
-
-
+const { Router } = require('express');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 const authRouter = Router();
 
-function isLoggedIn(req, res ,next) {
- req.user ? next() : res.sendStatus(401)
+
+//autenticacion
+function isLoggedIn(req, res, next) {
+ if (req.user) {
+   next();
+ } else {
+   res.redirect('/auth/google');
+ }
 }
 
+
 authRouter.get('/',
-  passport.authenticate('google', { scope:
-      [ 'email', 'profile' ] }
+  passport.authenticate('google', { 
+   scope: [ 'email', 'profile' ] }
 ));
+
+passport.use(
+ new GoogleStrategy({
+   clientID: process.env.GOOGLE_CLIENTID_PASSPORT,
+   clientSecret: process.env.GOOGLE_CLIENT_SECRET_PASSPORT,
+   callbackURL: "http://localhost:3001/auth/google/callback",
+   passReqToCallback: true
+ },
+   function (request, accessToken, refreshToken, profile, done) {
+     // User_data.findOrCreate({ googleId: profile.id }, function (err, user) {
+     //   return done(err, user);
+     // });
+     done(null, profile)
+   }
+ ));
+passport.serializeUser((user, done) => {
+ done(null, user)
+})
+passport.deserializeUser((user, done) => {
+ done(null, user)
+})
 
 authRouter.get( '/google/callback',
     passport.authenticate( 'google', {
-        successRedirect: '/auth/protected',
-        failureRedirect: '/auth/failure'
+        successRedirect: '/auth/google/protected',
+        failureRedirect: '/auth/google/failure'
 }));
 
-authRouter.get('/protected', isLoggedIn, (req, res) =>{
-res.send ('Inicio de sesión exitoso')
+authRouter.get('/google/protected', isLoggedIn, (req, res) =>{
+ let name = req.user.displayName
+res.send (`Hola ${name}`)
 })
 
-authRouter.get('/failure', (req, res) =>{
-res.send ('Inicio de sesión fallido')
+authRouter.get('/google/failure', isLoggedIn, (req, res) =>{
+res.send ("Inicio de sesion fallido", error)
+})
+
+
+authRouter.use('/google/logout', (req, res) =>{
+ req.session.destroy();
+ res.send ('Nos vemos pronto')
 })
 
 module.exports = authRouter;
