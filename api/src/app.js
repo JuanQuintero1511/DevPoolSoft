@@ -4,19 +4,10 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const routes = require('./routes/index.js');
 const cors = require("cors");
-require('dotenv').config();
+const path = require("path")
 
 
-//auth0
-const { auth } = require('express-openid-connect');
-const config = {
-  authRequired: process.env.AUTHREQUIRED_AUTH0,
-  auth0Logout: process.env.AUTH0LOGOUT_AUTH0,
-  secret: process.env.SECRET_AUTH0,
-  baseURL: process.env.BASEURL_AUTH0,
-  clientID: process.env.CLIENTID_AUTH0,
-  issuerBaseURL: process.env.ISSUERBASEURL_AUTH0,
-};
+
 
 require('./db.js');
 
@@ -29,8 +20,7 @@ server.use(bodyParser.json({ limit: '50mb' }));
 server.use(cookieParser());
 server.use(cors());
 server.use(morgan('dev'));
-// auth router attaches /login, /logout, and /callback routes to the baseURL
-server.use(auth(config));
+
 server.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', 'http://localhost:5173'); // update to match the domain you will make the request from
   res.header('Access-Control-Allow-Credentials', 'true');
@@ -38,6 +28,48 @@ server.use((req, res, next) => {
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
   next();
 });
+
+
+//autenticacion
+
+const session = require('express-session')
+require('dotenv').config();
+
+server.use(session({
+  secret: 'misecreto que debe ir en variable de entorno',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false }
+}))
+
+const passport = require("passport")
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+
+
+
+passport.use(
+  new GoogleStrategy({
+    clientID: process.env.GOOGLE_CLIENTID_PASSPORT,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET_PASSPORT,
+    callbackURL: "http://localhost:3001/auth/google/callback",
+    passReqToCallback: true
+  },
+    function (request, accessToken, refreshToken, profile, done) {
+      // User_data.findOrCreate({ googleId: profile.id }, function (err, user) {
+      //   return done(err, user);
+      // });
+      done(null, profile)
+    }
+  ));
+passport.serializeUser((user, done) => {
+  done(null, user)
+})
+passport.deserializeUser((user, done) => {
+  done(null, user)
+})
+
+//inicializamos passport
+server.use(passport.initialize())
 
 server.use('/', routes);
 
