@@ -1,4 +1,4 @@
-import { GET_ALL_POSTS, GET_ID_POST, CREATE_COMPANY, CREATE_USER } from "./action-types";
+import { GET_ALL_POSTS, GET_ID_POST, CREATE_USER_DATA, CREATE_USER, GET_BY_USER_NAME } from "./action-types";
 
 const initialState = {
     allPosts:[],
@@ -6,6 +6,7 @@ const initialState = {
     users: [],
     users_date: [],
     companyies: [],
+    byUserName: ["hola"],
 
 }
 
@@ -17,7 +18,14 @@ const reducer = (state = initialState, action) => {
         case GET_ID_POST:
             return { ...state, idPost: action.payload};
             
-        
+        case GET_BY_USER_NAME:
+            return {
+                ...state, byUserName: action.payload
+            };
+        case CREATE_USER_DATA:
+            return {
+                ...state, 
+            }
         case CREATE_USER:
             return {
                 ...state,

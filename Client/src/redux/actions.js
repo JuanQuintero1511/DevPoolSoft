@@ -1,5 +1,5 @@
 
-import { GET_ALL_POSTS, GET_ID_POST, CREATE_COMPANY, CREATE_POST_USER, CREATE_USER } from "./action-types";
+import { GET_ALL_POSTS, GET_ID_POST, CREATE_USER_DATA, CREATE_POST_USER, CREATE_USER, GET_BY_USER_NAME } from "./action-types";
 
 import axios from "axios";
 
@@ -31,17 +31,22 @@ export const createUser = (userData) => {
     }
 }
 
-export const getUsers = () => {
-   
-}
+export const getByUserName = (userName) => {
+    return async function (dispatch) {
+      const { data } = await axios.get(`http://localhost:3001/users?userName=${userName}`);
+      dispatch({ type: GET_BY_USER_NAME, payload: Array.isArray(data) ? data : [data] }); // Convertir a array si es un objeto individual
+    };
+  };
+  
+
 
 export const getCompanies = () => {
     
 }
 
-export const createCompany = (payload) => {
+export const createUserData = (payload) => {
     return async function (dispatch) {
         await axios.post("http://localhost:3001/company/", payload)
-        return dispatch({type: CREATE_COMPANY})
+        return dispatch({type: CREATE_USER_DATA})
     }
 }

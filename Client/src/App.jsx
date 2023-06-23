@@ -11,6 +11,7 @@ import Community from "./components/Community";
 import Detail from "./components/DetailCommunity";
 import JobsOffers from "./components/JobsOffers";
 import InProgress from "./components/InProgress";
+import Test1 from "./components/test1";
 
 
 
@@ -38,6 +39,7 @@ const location = useLocation();
         <Route path='/community' element={ <Community />}/>
         <Route path="/community/:id" element={ <Detail />} />
         <Route path="/inprogress" element={ <InProgress /> }/>
+        <Route path="/test1" element={ <Test1 /> }/>
 
       </Routes>
     </>

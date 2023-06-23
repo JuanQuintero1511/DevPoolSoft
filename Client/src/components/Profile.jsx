@@ -1,4 +1,3 @@
-
 export const Profile = () => {
   const perfiles = [
     {
@@ -39,9 +38,9 @@ export const Profile = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto py-10 px-4 mt-8">
-      <div className="bg-white shadow-md rounded-md p-6 mb-4 relative">
-      <div className="absolute top-0 right-0 transform -translate-x-2 translate-y-2">
+    <div className="max-w-4xl mx-auto py-10 px-4 mt-8 flex">
+      <div className="bg-white shadow-md rounded-md p-6 mb-4 flex flex-wrap">
+        <div className="absolute top-0 right-0 transform -translate-x-2 translate-y-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -50,7 +49,7 @@ export const Profile = () => {
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
-            className="w-6 h-6 text-gray-400 cursor-pointer"
+            className="w-6 h-6 text-gray-400 cursor-pointer "
             onClick={handleClick}
           >
             <path d="M15 18l-6-6 6-6" />
@@ -68,13 +67,15 @@ export const Profile = () => {
           <p className="text-gray-500">{perfiles[0].cargo}</p>
         </div>
         <div className="flex">
-          <div className="w-1/4 pr-6">
+          <div className="w-full pr-6 ">
             <div className="bg-gray-200 rounded-md p-4 mb-4">
-              <h2 className="text-lg font-bold mb-2 text-blue-500">About</h2>
+              <h2 className="text-lg font-bold mb-2 bg-gradient-to-r from-indigo-500 via-emerald-500 to-indigo-500 text-transparent bg-clip-text">
+                About
+              </h2>
               <p className="text-gray-600">{perfiles[0].acercaDeMi}</p>
             </div>
-            <div className="bg-gray-200 rounded-md p-4">
-              <h2 className="text-lg font-bold mb-2 text-blue-500">
+            <div className="bg-gray-200 rounded-md p-4 mb-4">
+              <h2 className="text-lg font-bold mb-2 bg-gradient-to-r from-indigo-500 via-emerald-500 to-indigo-500 text-transparent bg-clip-text">
                 Experience
               </h2>
               {perfiles[0].experiencia.map((exp, index) => (
@@ -83,10 +84,8 @@ export const Profile = () => {
                 </p>
               ))}
             </div>
-          </div>
-          <div className="w-3/4">
             <div className="bg-gray-200 rounded-md p-4 mb-4">
-              <h2 className="text-lg font-bold mb-2 text-blue-500">
+              <h2 className="text-lg font-bold mb-2 bg-gradient-to-r from-indigo-500 via-emerald-500 to-indigo-500 text-transparent bg-clip-text">
                 Education
               </h2>
               {perfiles[0].educacion.map((edu, index) => (
@@ -95,8 +94,10 @@ export const Profile = () => {
                 </p>
               ))}
             </div>
-            <div className="bg-gray-200 rounded-md p-4">
-              <h2 className="text-lg font-bold mb-2 text-blue-500">Skills</h2>
+            <div className="bg-gray-200 rounded-md p-4 mb-4">
+              <h2 className="text-lg font-bold mb-2 bg-gradient-to-r from-indigo-500 via-emerald-500 to-indigo-500 text-transparent bg-clip-text">
+                Skills
+              </h2>
               <ul className="list-disc pl-6">
                 {perfiles[0].skills.map((skill, index) => (
                   <li key={index} className="text-gray-600">
@@ -108,6 +109,13 @@ export const Profile = () => {
           </div>
         </div>
       </div>
-    </div>
-  );
+      <div className="relative w-1/2 ml-auto">
+        <div className="bg-white shadow-md rounded-md p-6 w-1/2 px-2 ml-3 w-100">
+          <h2 className="text-lg font-bold mb-2 bg-gradient-to-r from-indigo-500 via-emerald-500 to-indigo-500 text-transparent bg-clip-text">
+            Posts
+          </h2>
+        </div>
+      </div>
+    </div>
+  );
 };
