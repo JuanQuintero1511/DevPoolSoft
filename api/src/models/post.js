@@ -39,7 +39,7 @@ module.exports = (sequelize) => {
         },
         image: {
           type: DataTypes.JSONB,
-          allowNull: true,
+          allowNull: true
         }
       },
       {
