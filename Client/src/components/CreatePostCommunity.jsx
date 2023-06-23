@@ -11,12 +11,10 @@ const CreatePostCommunity = ({ closeModal }) => {
   const [postData, setPostData] = useState({
     title: "",
     body: "",
-    state: "In Progress",
+    // state: "In Progress",
     image: {
-      public_id: "olympic_flag",
-
-      url: "",
-
+      // public_id: "olympic_flag",
+      url: ""
     },
     id_user_data: "3d271575-f97a-4c3c-8228-f043563849bc",
   });
