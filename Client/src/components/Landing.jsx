@@ -10,7 +10,10 @@ export const Landing = () => {
               Welcome to <span className="text-blue-500">DevPool</span>
             </h1>
             <h2 className="text-3xl md:text-4xl font-bold text-center mt-6">
-              The tranquility to have everything your world developer in the only place.
+
+            The tranquility of having everything in your world developed in one place.
+
+ 
             </h2>
             <div className="mt-8 flex justify-center space-x-4">
               <button className="bg-blue-500 hover:bg-blue-400 focus:bg-blue-400 text-white font-semibold rounded-lg px-4 py-3">
