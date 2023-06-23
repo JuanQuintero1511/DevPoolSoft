@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllPosts } from "../redux/actions";
 import PostCommunity from "./PostCommunity";
 import CreatePostCommunity from "./CreatePostCommunity";
+import { Link } from "react-router-dom";
 
 const Community = () => {
   const dispatch = useDispatch();
@@ -131,12 +132,13 @@ const Community = () => {
           <h2 className="text-3xl font-bold text-teal-700 ml-[20vw]">COMMUNITY</h2>
           <div className="flex">
             <div>
-              <button
-                onClick={() => setShowModal(true)}
-                className="select-none rounded-lg bg-teal-700 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none mr-2"
-              >
-                MY POSTS
-              </button>
+              <Link to={`/community/myposts`}>
+                <button
+                  className="select-none rounded-lg bg-teal-700 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none mr-2"
+                >
+                  MY POSTS
+                </button>
+              </Link>
             </div>
             <div>
               <button
