@@ -11,7 +11,7 @@ const {
 
 const { searchUsersByUserName } = require('../../controllers/usersControllers/usersControllers');
 
-const  { sendNotification }  = require('./send.email')
+const  { sendNotification }  = require('../../utils/send.email')
 
     const createCompanyHandler = async (req, res) => {       
           try {
@@ -49,7 +49,8 @@ const  { sendNotification }  = require('./send.email')
                   
             const newUsers = await searchUsersByUserName(userName);
       
-            sendNotification(email, full_name);
+             sendNotification(email, full_name);
+            
             
             res.status(201).json(newUsers);
             

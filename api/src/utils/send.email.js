@@ -34,7 +34,7 @@ const sendNotification = async (email, full_name) => {
       text:       
           `¡Bienvenido(a) ${full_name} a nuestra plataforma de búsqueda de desarrolladores web!
 
-          Estamos encantados de contar con tu empresa como parte de nuestra comunidad. Nuestro objetivo es brindarte una experiencia excepcional para que encuentres a los mejores talentos en desarrollo web que se ajusten a tus necesidades.
+          Estamos encantados de contar contigo como parte de nuestra comunidad. Nuestro objetivo es brindarte una experiencia excepcional para que encuentres a los mejores talentos en desarrollo web que se ajusten a tus necesidades.
 
           Con nuestra plataforma, podrás explorar perfiles de desarrolladores altamente calificados, revisar su experiencia y habilidades, y conectarte directamente con aquellos que mejor se adapten a tus requisitos. Te ofrecemos una amplia gama de opciones para encontrar al candidato perfecto que impulse el crecimiento y éxito de tu empresa.
 
