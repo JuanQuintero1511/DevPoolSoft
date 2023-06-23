@@ -2,12 +2,7 @@ const {createNewPost, getAllPosts, getPostById, updatePost, deletePost} = requir
 
 const createPostHandler = async (req, res) => {
     try {
-      const {
-        title, 
-        body,
-        state,
-        id_user_data,
-        image} = req.body;    
+      const { title, body, state, id_user_data, image} = req.body;    
        
 
       if (!title && !body && !state && !id_user_data) throw new Error("Missing required data");

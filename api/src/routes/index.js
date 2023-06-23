@@ -7,6 +7,7 @@ const commentRouter = require('../routes/commentsRouter/commentsRouter');
 const usersRouter = require('../routes/usersRouter/usersRouter');
 const devDataRouter = require('../routes/devDataRouter/devDataRouter')
 
+
 const router = Router();
 
 // Agrega los routers al enrutador principal
@@ -16,5 +17,7 @@ router.use('/comments', commentRouter);
 router.use('/users', usersRouter)
 router.use('/devdata', devDataRouter)
 // Agrega más routers si es necesario
+
+
 
 module.exports = router;
