@@ -92,7 +92,13 @@ const setCompanyPremium = async (full_name) => {
 
 // //?Trae las empresas de la DB
 const getAllCompanies = async () => {
-  return await User_data.findAll();
+  return await User_data.findAll({
+    include: {
+      model: Posts,
+      include: {
+        model: Comments
+      }
+    }});
 };
 
 
