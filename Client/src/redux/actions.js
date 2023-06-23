@@ -1,6 +1,4 @@
-
-import { GET_ALL_POSTS, GET_ID_POST, CREATE_COMPANY, CREATE_POST_USER, CREATE_USER } from "./action-types";
-
+import { GET_ALL_POSTS, GET_ID_POST, CREATE_COMPANY, CREATE_POST_USER } from "./action-types";
 import axios from "axios";
 
 export const getAllPosts = () => {
@@ -22,6 +20,12 @@ export const createPostUser = (postData) => {
         const {data} = await axios.post(`http://localhost:3001/posts`, postData);
         dispatch({ type: CREATE_POST_USER, payload: data });
     }
+}
+export const deletePostUser = (id_post) => {
+    return async function (dispatch) {
+        const {data} = await axios.delete(`http://localhost:3001/posts/${id_post}`);
+        dispatch({ type: DELETE_POST_USER, payload: data });        
+    }    
 }
 
 export const createUser = (userData) => {
