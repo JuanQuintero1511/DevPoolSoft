@@ -31,7 +31,21 @@ const sendNotification = async (email, full_name) => {
       from: GMAIL_USER,
       to: email,
       subject: 'Welcome to DEVPOOL',
-      text: `Se ha creado una nueva compañía: ${full_name}`,
+      text:       
+          `¡Bienvenido(a) ${full_name} a nuestra plataforma de búsqueda de desarrolladores web!
+
+          Estamos encantados de contar con tu empresa como parte de nuestra comunidad. Nuestro objetivo es brindarte una experiencia excepcional para que encuentres a los mejores talentos en desarrollo web que se ajusten a tus necesidades.
+
+          Con nuestra plataforma, podrás explorar perfiles de desarrolladores altamente calificados, revisar su experiencia y habilidades, y conectarte directamente con aquellos que mejor se adapten a tus requisitos. Te ofrecemos una amplia gama de opciones para encontrar al candidato perfecto que impulse el crecimiento y éxito de tu empresa.
+
+          No dudes en explorar todas las funciones y herramientas que nuestra plataforma tiene para ofrecerte. Si tienes alguna pregunta o necesitas asistencia en cualquier momento, nuestro equipo de soporte estará encantado de ayudarte.
+
+          ¡Una vez más, te damos la bienvenida a nuestra comunidad de búsqueda de desarrolladores web! Esperamos que encuentres a los profesionales más talentosos que impulsen el éxito de tus proyectos.
+
+          ¡Mucho éxito en tu búsqueda!
+
+          Atentamente,
+          El equipo de DevPool`,
     };
 
     const result = await transporter.sendMail(mailOptions);
