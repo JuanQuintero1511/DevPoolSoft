@@ -12,7 +12,6 @@ const CreatePostCommunity = ({ closeModal }) => {
     title: "",
     body: "",
     state: "In Progress",
-    id_user_data: "2b325cb2-e8f7-4d74-a732-e2171b1f3245",
     image: {
       public_id: "olympic_flag",
 
@@ -36,11 +35,6 @@ console.log(postData.image.url)
   const handleChange = (event) => {
     setPostData({ ...postData, [event.target.name]: event.target.value });
   };
-
-  // const handleImageChange = (event) => {
-  //   const file = event.target.files[0];
-  //   setPostData({ ...postData, image: file });
-  // };
 
   const dispatch = useDispatch();
   const navigate = useNavigate();

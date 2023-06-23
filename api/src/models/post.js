@@ -35,11 +35,11 @@ module.exports = (sequelize) => {
         },
         state: {
           type: DataTypes.ENUM (["In Progress", "Finished"]),
-          allowNull: false,
+          allowNull: true,
         },
         image: {
           type: DataTypes.JSONB,
-          allowNull: false
+          allowNull: true,
         }
       },
       {
