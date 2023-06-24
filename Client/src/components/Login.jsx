@@ -4,8 +4,8 @@ import { useNavigate, Link } from "react-router-dom";
 export const Login = (props) => {
 
   const handleLogin = () => {
-    // Redirigir al usuario a la página de inicio de sesión de Auth0
-    window.location.href = 'https://dev-devpool92877djkhjbhvb82dg.us.auth0.com/u/login?state=hKFo2SBoTEN4Y2NCNE80VnpGTndIc1dOaW5ac1dJei0xUEFtWaFur3VuaXZlcnNhbC1sb2dpbqN0aWTZIENxRlFlWXhpNVlwZ25zbEhNTF8wQjNDdjVjNUZtSDJzo2NpZNkgcWF3R01ScnU0ZTBmRDJNS2FESWtwcEZWbVNPZ3MzaFE';
+    // Redirigir al usuario a la página de inicio de sesión de GOOGLE
+    window.location.href = 'http://localhost:3001/auth';
   };
 
   const users = [
