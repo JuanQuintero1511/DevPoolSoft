@@ -1,5 +1,5 @@
 
-import { GET_ALL_POSTS, GET_ID_POST, CREATE_COMPANY, CREATE_POST_USER, GET_ALL_POSTS_ID_USER, CREATE_USER_DATA , CREATE_USER, GET_BY_USER_NAME} from "./action-types";
+import { GET_ALL_POSTS, GET_ID_POST, CREATE_POST_USER, GET_ALL_POSTS_ID_USER, CREATE_USER_DATA , CREATE_USER, GET_BY_USER_NAME} from "./action-types";
 import axios from "axios";
 
 export const getAllPosts = () => {
