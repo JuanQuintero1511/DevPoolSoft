@@ -25,7 +25,6 @@ const CreatePostCommunity = ({ closeModal }) => {
     }));
   };
   
-console.log(postData.image.url)
   const handleChange = (event) => {
     setPostData({ ...postData, [event.target.name]: event.target.value });
   };
@@ -45,7 +44,7 @@ console.log(postData.image.url)
     }    
   };
 
-  //*validaciones**//
+  //*validaciones*//
 
   const [errors, setErrors] = useState({
     title: "",

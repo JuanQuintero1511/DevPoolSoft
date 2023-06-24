@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { getAllUsers } from "../redux/actions";
-import { useDispatch, useSelector } from "react-redux";
-import { userLogin } from "../redux/actions";
+import { createUser } from "../redux/actions";
+import { useDispatch } from "react-redux";
 
 export const Login = () => {
 
@@ -18,15 +17,6 @@ export const Login = () => {
   //   { email: "henry@hotmail.com", password: "asd123", username: "henry" },
   // ];
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  const users = useSelector((state) => state.allUsers);
-
-  useEffect(() => {
-    dispatch(getAllUsers());
-  }, [dispatch]);
-
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -37,13 +27,15 @@ export const Login = () => {
     setUserData({ ...userData, [event.target.name]: event.target.value });
   };
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const user = users.find((user) => user.email === userData.email);
+    const user = userData.find((user) => user.email === userData.email);
 
-    if (user && user.password === userData.password && user.userName === userData.username) {
-      dispatch(userLogin(user));
+    if (user && user.password === userData.password && user.username === userData.username) {
       navigate("/home");
     } else {
       alert("Invalid username, email or password");
