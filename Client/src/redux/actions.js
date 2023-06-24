@@ -49,6 +49,12 @@ export const userLogin = (user) => {
     return { type: USER_LOGIN, payload: user}
 }
 
+export const userLogin_App = (userName) => {
+    return async function (dispatch){
+        const {data} = await axios.get(`http://localhost:3001/users/?userName=${userName}`);
+        dispatch({ type: USER_LOGIN, payload: data });
+    }
+}
 
 
 

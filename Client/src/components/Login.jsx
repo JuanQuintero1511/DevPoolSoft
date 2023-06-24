@@ -6,18 +6,6 @@ import { userLogin } from "../redux/actions";
 
 export const Login = () => {
 
-  //   BODY USER
-  // RUTA http://localhost:3001/users
-  // {
-  //   "userName": "Andi211110",
-  //   "email": "dandi211111@gmail.com",
-  //   "password": "draddnza25"
-  // }
-
-  // const users = [
-  //   { email: "henry@hotmail.com", password: "asd123", username: "henry" },
-  // ];
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

@@ -27,15 +27,8 @@ const reducer = (state = initialState, action) => {
       return { ...state, allPosts: action.payload };
 
     case USER_LOGIN:
-      localStorage.setItem("id_user_data", action.payload.user_datum?.id_user_data);
+      localStorage.setItem("userName", action.payload.userName);
       return { ...state, userLogin: action.payload };
-
-      // const { remember, token }: { remember: boolean; token: string } =
-      //   action.payload;
-
-      // remember && localStorage.setItem("token", token);
-
-      // return { ...state, user: action.payload };
 
 
     default:
