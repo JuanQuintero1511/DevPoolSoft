@@ -134,7 +134,7 @@ const [formData, setFormData] = useState({
         {rolSelected.company || rolSelected.user ? null : <div className="flex justify-center space-x-4 h-12 mb-2">
           <a onClick={() => {
             setRolSelected({ user: true, company: false });
-            setForm({...form, rol_type: "admin" });
+            setForm({...form, rol_type: "userDev" });
           }} className="relative inline-flex items-center justify-center px-9 py-3 overflow-hidden font-mono font-medium tracking-normal text-white bg-gray-800 rounded-lg group">
             <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-green-500 rounded-full group-hover:w-56 group-hover:h-56"></span>
             <span className="absolute inset-0 w-full h-full -mt-1 rounded-lg opacity-30 bg-gradient-to-b from-transparent via-transparent to-teal-200"></span>
@@ -143,7 +143,7 @@ const [formData, setFormData] = useState({
           <a
             onClick={() => {
               setRolSelected({ company: true, user: false });
-              setForm({...form, rol_type: "admin" });
+              setForm({...form, rol_type: "company" });
             }}
             className="relative inline-flex items-center justify-center px-10 py-4 overflow-hidden font-mono font-medium tracking-widest text-white bg-gray-800 rounded-lg group focus:bg-teal-200 focus:outline-none"
           >
@@ -265,8 +265,9 @@ const [formData, setFormData] = useState({
           </div>
             </div>
 
+              {form.rol_type === "userDev" && (<div>
 
-            {/* <div className="relative mb-2">
+            <div className="relative mb-2">
               <label
                 className="flex flex-col font-mono tracking-widest">
                 <textarea name="description" value={form.description}
@@ -368,7 +369,8 @@ const [formData, setFormData] = useState({
             onChange={handleInputChange}
             className="w-full px-2 py-1 border rounded"
           />
-        </div> */}
+        </div>
+        </div>)}
 
 
 
