@@ -2,15 +2,10 @@ const {createNewPost, getAllPosts, getPostById, updatePost, deletePost} = requir
 
 const createPostHandler = async (req, res) => {
     try {
-      const {
-        title, 
-        body,
-        state,
-        id_user_data,
-        image} = req.body;    
+      const { title, body, state, id_user_data, image} = req.body;    
        
 
-      if (!title && !body && !state && !id_user_data) throw new Error("Missing required data");
+      if (!title && !body && !id_user_data) throw new Error("Missing required data");
 
       const newPost = await createNewPost(
         title, 
@@ -59,9 +54,10 @@ const createPostHandler = async (req, res) => {
       title, 
       body, 
       state, 
-      id_user_data } = req.body;
+      id_user_data,
+      image } = req.body;
 
-      if (!id && !title && !body && !state && !id_user_data) throw new Error("Missing required data");
+      if (!id && !title && !body && !state && !id_user_data ) throw new Error("Missing required data");
   
     try {
       if(isNaN(id)) {
@@ -70,7 +66,7 @@ const createPostHandler = async (req, res) => {
         if (!postById) throw Error("The user's post was not found.");
       
       }
-      const postChanges = await updatePost(id, title, body, state, id_user_data);
+      const postChanges = await updatePost(id, title, body, state, id_user_data, image);
   
       return res.status(200).json({ message: "The post was updated successfully.", postChanges });
   

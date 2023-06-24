@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const PostCommunity = ({ post }) => {
+const CardMyPostCommunity = ({ post, user }) => {
 
     return (
-        <div className="bg-gray-100">
+        <div className="bg-gray-100 h-screen">
         <div className="bg-white rounded-lg shadow-md p-4 transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg">
             <div className="mb-4">
                 <Link to={`/community/${post.id_post}`}>
@@ -16,7 +16,7 @@ const PostCommunity = ({ post }) => {
 
             <div className="mb-2 flex items-center">
                 <span role="img" aria-label="Developer">🧑🏻‍💻 </span>
-                <span className="font-bold"> {post.user_datum?.full_name}</span>
+                <span className="font-bold"> {user}</span>
             </div>
 
             <div className="flex">
@@ -42,4 +42,4 @@ const PostCommunity = ({ post }) => {
     );
 };
 
-export default PostCommunity;
+export default CardMyPostCommunity;

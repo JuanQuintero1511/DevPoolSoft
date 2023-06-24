@@ -11,12 +11,15 @@ import Community from "./components/Community";
 import Detail from "./components/DetailCommunity";
 import JobsOffers from "./components/JobsOffers";
 import InProgress from "./components/InProgress";
+import MyPostCommunity from "./components/MyPostsCommunity";
+
 
 
 
 function App() {
  
 const location = useLocation();
+
 
   return (
     <>
@@ -35,6 +38,7 @@ const location = useLocation();
         <Route path='/profile' element={ <Profile />}/>
         <Route path='/community' element={ <Community />}/>
         <Route path="/community/:id" element={ <Detail />} />
+        <Route path="/community/myposts/:id" element={ <MyPostCommunity />} />
         <Route path="/inprogress" element={ <InProgress /> }/>
 
       </Routes>

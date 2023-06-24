@@ -7,60 +7,62 @@ const {
     getCompanyById,
     createCompanyUser, 
     setCompanyUsers,
-    searchUsersByUserName} = require('../../controllers/companyControllers/companyControllers')
+    } = require('../../controllers/companyControllers/companyControllers');
 
-    const createCompanyHandler = async (req, res) => {
-        const maxAttempts = 3;
-        let attempt = 1;
-        
-        while (attempt <= maxAttempts) {
-            try {
-                const {
-                    full_name,
-                    backup_email,
-                    description,
-                    date_birthday,
-                    address,
-                    phone_number,
-                    profile_image,
-                    authentication,
-                    image } = req.body;
-                const rol_type = req.body.rol_type
-                const userName = req.body.userName
-                const password = req.body.password
-                const email = req.body.email
-                const full_nameAux = req.body.full_name
-    
-                await createCompanyUser(userName, email, password)
-                await createCompany(
-                    full_name,
-                    backup_email,
-                    description,
-                    date_birthday,
-                    address,
-                    phone_number,
-                    profile_image,
-                    authentication,
-                    image);
-                await setCompanyUsers(userName, email, password, full_nameAux)
-                await setCompanyRol(rol_type, full_nameAux)
-                const newUser = await searchUsersByUserName(userName)
+const { searchUsersByUserName } = require('../../controllers/usersControllers/usersControllers');
+
+const  { sendNotification }  = require('../../utils/send.email')
+
+    const createCompanyHandler = async (req, res) => {       
+          try {
+            const {
+              full_name,
+              backup_email,
+              description,
+              date_birthday,
+              address,
+              phone_number,
+              profile_image,
+              authentication,
+              image
+            } = req.body;
+            const rol_type = req.body.rol_type;
+            const userName = req.body.userName;
+            const password = req.body.password;
+            const email = req.body.email;
+            const full_nameAux = req.body.full_name;      
+                       
+              await createCompany(
+                full_name,
+                backup_email,
+                description,
+                date_birthday,
+                address,
+                phone_number,
+                profile_image,
+                authentication,
+                image,
                 
-                res.status(201).json(newUser)
-                
-                // Si todo va bien, salir del bucle
-                return;
-            } catch (error) {
-                // Si se produce un error, imprimirlo y continuar al siguiente intento
-                console.error("Error en la creación del usuario:", error);
-                attempt++;
-            }
+              );
+              await setCompanyUsers(userName, email, password, full_nameAux);
+              await setCompanyRol(rol_type, full_nameAux);
+                  
+            const newUsers = await searchUsersByUserName(userName);
+      
+             sendNotification(email, full_name);
+            
+            
+            res.status(201).json(newUsers);
+            
+
+          } catch (error) {
+            
+            res.status(400).json({ error: error.message});
+          }
         }
-    
-        // Si se alcanzó el número máximo de intentos sin éxito, enviar una respuesta de error
-        res.status(400).json({ error: "No se pudo crear el usuario después de varios intentos." });
-    }
-
+       
+      
+      
 //*Trae empresa por nombre o todas si no tiene nombre
 const getCompanyHandler = async (req, res) => {
     try {
@@ -106,6 +108,14 @@ const deleteCompanyHandler = async (req, res) => {
 
 }
 
+
+module.exports = {
+    getCompanyHandler,
+    getCompanyHandlerId,
+    createCompanyHandler,
+    updateCompanyPremiumHandler,
+    deleteCompanyHandler,
+}
 
 module.exports = {
     getCompanyHandler,

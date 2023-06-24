@@ -1,8 +1,10 @@
-import { GET_ALL_POSTS, GET_ID_POST, CREATE_COMPANY  } from "./action-types";
+
+import { GET_ALL_POSTS, GET_ID_POST, DELETE_POST_USER, GET_ALL_POSTS_ID_USER } from "./action-types";
 
 const initialState = {
     allPosts:[],
     idPost: {},
+    allPostsIdUser: [],
     users: [],
     users_date: [],
     companyies: [],
@@ -20,6 +22,14 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
             }
+
+        case GET_ALL_POSTS_ID_USER:
+            return { ...state, allPostsIdUser: action.payload}
+            
+        case DELETE_POST_USER:
+            return { ...state, allPosts: action.payload};
+        
+        
         default:
             return{...state};
     }
