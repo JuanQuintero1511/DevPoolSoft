@@ -106,7 +106,15 @@ const [formData, setFormData] = useState({
     }));
   };
   
-console.log(form)
+  const handleSkillsChange = (event) => {
+    const selectedSkills = Array.from(event.target.selectedOptions, (option) => option.value);
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      skills: selectedSkills
+    }));
+  };
+
+
   function handleSubmit(event) {
     event.preventDefault();
 
@@ -258,24 +266,7 @@ console.log(form)
             </div>
 
 
-            {/* <div className="max-w-xl">
-              <label
-                className="flex justify-center w-full h-24 px-4 transition bg-white border-2 border-gray-300 border-dashed rounded-md appearance-none cursor-pointer hover:border-gray-400 focus:outline-none">
-                <span className="flex items-center space-x-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor" strokeWidth="2">
-                    <path strokeLinecap="round" strokeLinejoin="round"
-                      d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                  </svg>
-                  <span className="font-medium text-gray-600 font-mono tracking-widest">
-                    Drop, or upload your image here...or
-                    <span className="text-blue-600 underline"> browse</span>
-                  </span>
-                </span>
-                <input type="file" name="file_upload" className="hidden" />
-              </label>
-            </div> */}
-            <div className="relative mb-2">
+            {/* <div className="relative mb-2">
               <label
                 className="flex flex-col font-mono tracking-widest">
                 <textarea name="description" value={form.description}
@@ -284,6 +275,103 @@ console.log(form)
                   className="bg-black-300 py-3 px-6 placeholder:text-secondary text-black rounded-lg font-medium" />
               </label>
             </div>
+            <div className="mb-4">
+          <label className="block mb-1" htmlFor="puesto">Puesto</label>
+          <input
+            type="text"
+            id="puesto"
+            name="experience.puesto"
+            value={formData.experience.puesto}
+            onChange={handleInputChange}
+            className="w-full px-2 py-1 border rounded"
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block mb-1" htmlFor="duracion">Duración</label>
+          <input
+            type="text"
+            id="duracion"
+            name="experience.duracion"
+            value={formData.experience.duracion}
+            onChange={handleInputChange}
+            className="w-full px-2 py-1 border rounded"
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block mb-1" htmlFor="empresa">Empresa</label>
+          <input
+            type="text"
+            id="empresa"
+            name="experience.empresa"
+            value={formData.experience.empresa}
+            onChange={handleInputChange}
+            className="w-full px-2 py-1 border rounded"
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block mb-1" htmlFor="titulo">Título</label>
+          <input
+            type="text"
+            id="titulo"
+            name="education.titulo"
+            value={formData.education.titulo}
+            onChange={handleInputChange}
+            className="w-full px-2 py-1 border rounded"
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block mb-1" htmlFor="institucion">Institución</label>
+          <input
+            type="text"
+            id="institucion"
+            name="education.institucion"
+            value={formData.education.institucion}
+            onChange={handleInputChange}
+            className="w-full px-2 py-1 border rounded"
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block mb-1" htmlFor="año">Año</label>
+          <input
+            type="number"
+            id="año"
+            name="education.año"
+            value={formData.education.año}
+            onChange={handleInputChange}
+            className="w-full px-2 py-1 border rounded"
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block mb-1" htmlFor="skills">Habilidades</label>
+          <select
+            id="skills"
+            name="skills"
+            multiple
+            value={formData.skills}
+            onChange={handleSkillsChange}
+            className="w-full px-2 py-1 border rounded"
+          >
+            <option value="JavaScript">JavaScript</option>
+            <option value="HTML">HTML</option>
+            <option value="CSS">CSS</option>
+            <option value="Node.js">Node.js</option>
+            <option value="React">React</option>
+          </select>
+        </div>
+        <div className="mb-4">
+          <label className="block mb-1" htmlFor="ratings">Ratings</label>
+          <input
+            type="number"
+            id="ratings"
+            name="ratings"
+            value={formData.ratings}
+            onChange={handleInputChange}
+            className="w-full px-2 py-1 border rounded"
+          />
+        </div> */}
+
+
+
             <div className="flex items-center justify-center my-2 h-4">
               <a onClick={handleSubmit}
                 className="relative inline-flex items-center justify-center px-9 py-3 overflow-hidden font-mono font-medium tracking-widest text-white bg-gray-800 rounded-lg group mx-4 mt-14">
