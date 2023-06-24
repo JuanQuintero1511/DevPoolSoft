@@ -14,14 +14,14 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
-              len: [0, 50] // Establece que la longitud máxima es de 255 caracteres
+              len: [3, 50] // Establece que la longitud máxima es de 255 caracteres
             }
           },
         body: {
           type: DataTypes.STRING,
           allowNull: false,
           validate: {
-            len: [0, 255] // Establece que la longitud máxima es de 255 caracteres
+            len: [10, 500] // Establece que la longitud máxima es de 500 caracteres
           }
         },
         likes: {
@@ -35,11 +35,11 @@ module.exports = (sequelize) => {
         },
         state: {
           type: DataTypes.ENUM (["In Progress", "Finished"]),
-          allowNull: false,
+          allowNull: true,
         },
         image: {
           type: DataTypes.JSONB,
-          allowNull: false
+          allowNull: true
         }
       },
       {

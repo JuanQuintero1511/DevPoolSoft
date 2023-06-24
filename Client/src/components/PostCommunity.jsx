@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 const PostCommunity = ({ post }) => {
 
     return (
+        <div className="bg-gray-100">
         <div className="bg-white rounded-lg shadow-md p-4 transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg">
             <div className="mb-4">
                 <Link to={`/community/${post.id_post}`}>
@@ -15,7 +16,7 @@ const PostCommunity = ({ post }) => {
 
             <div className="mb-2 flex items-center">
                 <span role="img" aria-label="Developer">🧑🏻‍💻 </span>
-                <span className="font-bold"> {post.user_datum.full_name}</span>
+                <span className="font-bold"> {post.user_datum?.full_name}</span>
             </div>
 
             <div className="flex">
@@ -28,16 +29,17 @@ const PostCommunity = ({ post }) => {
 
             <div className="flex justify-end">
                 <div className="mr-4">
-                    <span className="text-gray-600">❤ </span>
+                    <span className="text-gray-600">❤️ </span>
                     <span className="font-bold"> {post.likes}</span>
                 </div>
                 <div>
-                    <span className="text-gray-600"> ✉ </span>
-                    <span className="font-bold"> 0</span>
+                    <span className="text-gray-600"> ✉️ </span>
+                    <span className="font-bold"> {post.comments} </span>
                 </div>
             </div>
+        </div>
         </div>
     );
 };
 
-export default PostCommunity;
+export default PostCommunity;

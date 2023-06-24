@@ -1,4 +1,4 @@
-import { GET_ALL_POSTS, GET_ID_POST, CREATE_COMPANY } from "./action-types";
+import { GET_ALL_POSTS, GET_ID_POST, CREATE_COMPANY, CREATE_POST_USER, GET_ALL_POSTS_ID_USER } from "./action-types";
 import axios from "axios";
 
 export const getAllPosts = () => {
@@ -13,6 +13,32 @@ export const getPostById = (id) => {
         const {data} = await axios.get(`http://localhost:3001/posts/${id}`);
         const post = data;
         dispatch({ type: GET_ID_POST, payload: post });        
+    }
+}
+export const getAllPostsIdUser = (id) => {
+    return async function (dispatch){
+        const {data} = await axios.get(`http://localhost:3001/company/${id}`);
+        dispatch({ type: GET_ALL_POSTS_ID_USER, payload: data });
+    }
+}
+
+export const createPostUser = (postData) => {
+    return async function (dispatch) {
+        const {data} = await axios.post(`http://localhost:3001/posts`, postData);
+        dispatch({ type: CREATE_POST_USER, payload: data });
+    }
+}
+export const deletePostUser = (id_post) => {
+    return async function (dispatch) {
+        const {data} = await axios.delete(`http://localhost:3001/posts/${id_post}`);
+        dispatch({ type: DELETE_POST_USER, payload: data });        
+    }    
+}
+
+export const createUser = (userData) => {
+    return async function (dispatch) {
+       await axios.post(`http://localhost:3001/users`, userData);
+        dispatch({ type: CREATE_USER });
     }
 }
 

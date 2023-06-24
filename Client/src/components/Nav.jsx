@@ -6,6 +6,7 @@ import { SearchBar } from "./SearchBar";
 import { SearchSuggestionsList } from "./SearchSuggestionsList";
 
 const Nav = () => {
+
   const [suggestions, setSuggestions] = useState([]);
   const searchRef = useRef(null);
   const suggestionsRef = useRef(null);
@@ -25,6 +26,7 @@ const Nav = () => {
         setSuggestions([]);
       }
     };
+
 
     document.addEventListener("click", handleClickOutside);
 
@@ -60,3 +62,4 @@ const Nav = () => {
 };
 
 export default Nav;
+

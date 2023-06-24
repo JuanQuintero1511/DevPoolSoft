@@ -4,11 +4,11 @@ module.exports = (sequelize) => {
     sequelize.define(
         'comments',
         {
-            id_coments: {
+            id_comments: {
                 type: DataTypes.UUID,
                 defaultValue: DataTypes.UUIDV4,
                 primaryKey: true,
-                unique: true
+                allowNull: false
             },
             description: {
                 type: DataTypes.STRING,
