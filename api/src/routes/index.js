@@ -6,7 +6,6 @@ const postsRouter = require('../routes/postsRouter/postsRouter');
 const commentRouter = require('../routes/commentsRouter/commentsRouter');
 const usersRouter = require('../routes/usersRouter/usersRouter');
 const authRouter = require('../routes/authRouter/authRouter');
-const usersRouter = require('../routes/usersRouter/usersRouter');
 const devDataRouter = require('../routes/devDataRouter/devDataRouter')
 
 
