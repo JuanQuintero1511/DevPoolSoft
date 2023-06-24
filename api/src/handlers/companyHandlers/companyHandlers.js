@@ -4,41 +4,65 @@ const {
     setCompanyPremium,
     getAllCompanies,
     searchCompanyByName,
-    getCompanyById } = require('../../controllers/companyControllers/companyControllers')
+    getCompanyById,
+    createCompanyUser, 
+    setCompanyUsers,
+    } = require('../../controllers/companyControllers/companyControllers');
 
-const createCompanyHandler = async (req, res) => {
-    try {
-        const {
-            full_name,
-            backup_email,
-            description,
-            date_birthday,
-            address,
-            phone_number,
-            profile_image,
-            authentication,
-            image} = req.body;
-        const rol_type = req.body.rol_type
-        const full_nameAux = req.body.full_name
+const { searchUsersByUserName } = require('../../controllers/usersControllers/usersControllers');
 
-        await createCompany(
-            full_name,
-            backup_email,
-            description,
-            date_birthday,
-            address,
-            phone_number,
-            profile_image,
-            authentication,
-            image);        
-        await setCompanyRol(rol_type, full_nameAux)
-        const newCompany = await searchCompanyByName(full_nameAux)    
-        res.status(201).json(newCompany);
-    } catch (error) {
-        res.status(400).json({ error: error.message })
-    }
-}
+const  { sendNotification }  = require('../../utils/send.email')
 
+    const createCompanyHandler = async (req, res) => {       
+          try {
+            const {
+              full_name,
+              backup_email,
+              description,
+              date_birthday,
+              address,
+              phone_number,
+              profile_image,
+              authentication,
+              image
+            } = req.body;
+            const rol_type = req.body.rol_type;
+            const userName = req.body.userName;
+            const password = req.body.password;
+            const email = req.body.email;
+            const full_nameAux = req.body.full_name;      
+                       
+              await createCompany(
+                full_name,
+                backup_email,
+                description,
+                date_birthday,
+                address,
+                phone_number,
+                profile_image,
+                authentication,
+                image,
+                
+              );
+              await setCompanyUsers(userName, email, password, full_nameAux);
+              await setCompanyRol(rol_type, full_nameAux);
+                  
+            const newUsers = await searchUsersByUserName(userName);
+      
+             sendNotification(email, full_name);
+            
+            
+            res.status(201).json(newUsers);
+            
+
+          } catch (error) {
+            
+            res.status(400).json({ error: error.message});
+          }
+        }
+       
+      
+      
 //*Trae empresa por nombre o todas si no tiene nombre
 const getCompanyHandler = async (req, res) => {
     try {
@@ -46,7 +70,7 @@ const getCompanyHandler = async (req, res) => {
         const results = name ? await searchCompanyByName(name) : await getAllCompanies()
         res.status(200).json(results);
     } catch (error) {
-        res.status(400).json({ error:"Error occurred while found company:", detail: error.message })
+        res.status(400).json({ error: "Error occurred while found company:", detail: error.message })
     }
 }
 
@@ -60,10 +84,10 @@ const getCompanyHandlerId = async (req, res) => {
         const companyById = await getCompanyById(id, source)
         if (!companyById) {
             throw new Error(`Company with ID ${id} not found`);
-          }
+        }
         res.status(200).json(companyById)
     } catch (error) {
-        res.status(400).json({ error: `Error occurred while fetching company with ID ${id}:` , detail: error.message })
+        res.status(400).json({ error: `Error occurred while fetching company with ID ${id}:`, detail: error.message })
     }
 
 }
@@ -84,6 +108,14 @@ const deleteCompanyHandler = async (req, res) => {
 
 }
 
+
+module.exports = {
+    getCompanyHandler,
+    getCompanyHandlerId,
+    createCompanyHandler,
+    updateCompanyPremiumHandler,
+    deleteCompanyHandler,
+}
 
 module.exports = {
     getCompanyHandler,

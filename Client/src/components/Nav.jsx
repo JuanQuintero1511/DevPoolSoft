@@ -1,57 +1,58 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 
 const Nav = () => {
+
+  const [suggestions, setSuggestions] = useState([]);
+  const searchRef = useRef(null);
+  const suggestionsRef = useRef(null);
+
+  const closeSuggestions = () => {
+    setSuggestions([]);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        searchRef.current &&
+        !searchRef.current.contains(event.target) &&
+        suggestionsRef.current &&
+        !suggestionsRef.current.contains(event.target)
+      ) {
+        setSuggestions([]);
+      }
+    };
+
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
+  const handleSetSuggestions = (filteredSuggestions) => {
+    setSuggestions(filteredSuggestions);
+  };
+
   return (
-    <nav class="navbar bg-dark border-bottom border-bottom-dark fixed-top bg-transparent" data-bs-theme="dark">
+    <nav class="navbar bg-dark border-bottom border-bottom-dark fixed-top" data-bs-theme="dark">
       <div class="container-fluid">
-        <a class="navbar-brand text-dark">DEVPOOL</a>
-        <div class="dropdown">
-          <button class="btn btn-secondary dropdown-toggle bg-gradient-to-r from-indigo-500 via-emerald-500 to-indigo-500" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Tecnologias
-          </button>
-          <ul class="dropdown-menu dropdown-menu-dark">
-            <li><a class="dropdown-item active" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-            <li><hr class="dropdown-divider" /></li>
-            <li><a class="dropdown-item" href="#">Separated link</a></li>
-          </ul>
-        </div>
-
-        <div class="dropdown">
-          <button class="btn btn-secondary dropdown-toggle bg-gradient-to-r from-indigo-500 via-emerald-500 to-indigo-500" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            otro filtro
-          </button>
-          <ul class="dropdown-menu dropdown-menu-dark">
-            <li><a class="dropdown-item active" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-            <li><hr class="dropdown-divider" /></li>
-            <li><a class="dropdown-item" href="#">Separated link</a></li>
-          </ul>
-        </div>
-
+  
+        <a className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400 mr-4 mt-0 text-4xl font-extrabold">DEVPOOL</a>
         <form class="d-flex flex-grow-2 w-50" role="search">
           <input class="form-control me-2 rounded-pill" type="search" placeholder="Search" aria-label="Search" />
         </form>
-        {/* <Link> */}
-        <button type="button" class="btn btn-warning">
-          <i class="bi bi-patch-check mr-1" ></i>
-          Premium
-        </button>
-
-
-        {/* </Link> */}
-
-        <i class="bi bi-person-circle Heading"></i>
-
+        <NavLink to="/profile">
+          <button class="btn btn-outline-light">Perfil</button>
+        </NavLink>
       </div>
     </nav>
 
 
   );
-}
+};
 
 export default Nav;
+

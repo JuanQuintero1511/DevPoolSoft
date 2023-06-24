@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const SideBar = () => {
@@ -21,8 +21,18 @@ const SideBar = () => {
               <i className="bi bi-briefcase fs-4 text-success "></i>
             </a>
 
-            <a className={`nav-link ${selectedField === 'settings' ? 'active' : ''}`} onClick={() => setSelectedField('settings')}>
-              <i className="bi bi-gear fs-4 text-success"></i>
+            <a href='/JobsOffers'
+              className={`nav-link ${selectedField === 'job-applications' ? 'active' : ''}`}
+              onClick={() => setSelectedField('job-applications')}
+            >
+              Job Applications
+            </a>
+
+            <a href='/test1'
+              className={`nav-link ${selectedField === 'settings' ? 'active' : ''}`}
+              onClick={() => setSelectedField('settings')}
+            >
+              Settings
             </a>
           </div>
         </nav>
