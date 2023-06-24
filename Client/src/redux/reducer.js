@@ -8,7 +8,7 @@ const initialState = {
     users_date: [],
     companyies: [],
     byUserName: [],
-
+    usersYcompanies: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -41,7 +41,9 @@ const reducer = (state = initialState, action) => {
         case DELETE_POST_USER:
             return { ...state, allPosts: action.payload};
         
-        
+        case "GET_USERS_COMPANIES":
+            return { ...state, usersYcompanies: action.payload };
+            
         default:
             return{...state};
     }
