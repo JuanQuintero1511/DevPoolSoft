@@ -1,5 +1,4 @@
-
-import { GET_ALL_POSTS, GET_ID_POST, CREATE_POST_USER, GET_ALL_POSTS_ID_USER, CREATE_USER_DATA , CREATE_USER, GET_BY_USER_NAME} from "./action-types";
+import { GET_ALL_POSTS, GET_ID_POST, CREATE_COMPANY, CREATE_POST_USER, GET_ALL_POSTS_ID_USER, CREATE_USER, DELETE_POST_USER, GET_BY_USER_NAME,GET_ALL_USERS, USER_LOGIN } from "./action-types";
 import axios from "axios";
 
 export const getAllPosts = () => {
@@ -22,11 +21,22 @@ export const getAllPostsIdUser = (id) => {
         dispatch({ type: GET_ALL_POSTS_ID_USER, payload: data });
     }
 }
-
 export const createPostUser = (postData) => {
     return async function (dispatch) {
         const {data} = await axios.post(`http://localhost:3001/posts`, postData);
         dispatch({ type: CREATE_POST_USER, payload: data });
+    }
+}
+export const getAllUsers = () => {
+    return async function (dispatch){
+        const {data} = await axios.get(`http://localhost:3001/users`);
+        dispatch({ type: GET_ALL_USERS, payload: data });
+    }
+}
+export const createUser = (userData) => {
+    return async function (dispatch) {
+       await axios.post(`http://localhost:3001/users`, userData);
+        dispatch({ type: CREATE_USER });
     }
 }
 export const deletePostUser = (id_post) => {
@@ -35,11 +45,14 @@ export const deletePostUser = (id_post) => {
         dispatch({ type: DELETE_POST_USER, payload: data });        
     }    
 }
+export const userLogin = (user) => {
+    return { type: USER_LOGIN, payload: user}
+}
 
-export const createUser = (userData) => {
-    return async function (dispatch) {
-       await axios.post(`http://localhost:3001/users`, userData);
-        dispatch({ type: CREATE_USER });
+export const userLogin_App = (userName) => {
+    return async function (dispatch){
+        const {data} = await axios.get(`http://localhost:3001/users/?userName=${userName}`);
+        dispatch({ type: USER_LOGIN, payload: data });
     }
 }
 
