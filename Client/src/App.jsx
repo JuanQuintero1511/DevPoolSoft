@@ -22,11 +22,10 @@ import { useDispatch} from 'react-redux';
 function App() {
  
 const location = useLocation();
-const dispatch = useDispatch()
+const dispatch = useDispatch();
 
 useEffect(() => {
   const userName = localStorage.getItem('userName');
-
   if (userName) dispatch(userLogin_App(userName));
 }, [])
 
