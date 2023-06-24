@@ -84,7 +84,7 @@ export const Register = () => {
 
       dispatch(createUser(users))
       setSuccessufully(true)
-      dispatch(getByUserName(users.userName))
+      // dispatch(getByUserName(users.userName)) este es el dispatch que hay que mover
       Swal.fire({
         icon: 'success',
         title: 'User Created',

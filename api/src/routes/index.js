@@ -4,12 +4,9 @@ const { Router } = require('express');
 const companyRouter = require('../routes/companyRouter/companyRouter');
 const postsRouter = require('../routes/postsRouter/postsRouter');
 const commentRouter = require('../routes/commentsRouter/commentsRouter');
-const mercadoPagoRouter = require ('../routes/mercadoPagoRouter/mercadoPagoRouter');
 const usersRouter = require('../routes/usersRouter/usersRouter');
 const devDataRouter = require('../routes/devDataRouter/devDataRouter')
 
-const usersRouter = require('../routes/usersRouter/usersRouter');
-const devDataRouter = require('../routes/devDataRouter/devDataRouter')
 
 const mercadoPagoRouter = require ('../routes/mercadoPagoRouter/mercadoPagoRouter');
 
