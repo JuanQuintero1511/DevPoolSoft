@@ -21,12 +21,6 @@ export const Login = () => {
     window.location.href = 'http://localhost:3001/auth';
   };
 
-  const users = [
-    { email: "henry@hotmail.com", password: "AsD18628" },
-    { email: "devpool@hotmail.com", password: "AsD@$18628" }
-  ];
-
-
   const [userData, setUserData] = useState({
     email: "",
     password: "",
