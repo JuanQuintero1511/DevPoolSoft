@@ -32,7 +32,7 @@ const SideBar = () => {
               Job Applications
             </a>
 
-            <a
+            <a href='/test1'
               className={`nav-link ${selectedField === 'settings' ? 'active' : ''}`}
               onClick={() => setSelectedField('settings')}
             >

@@ -6,7 +6,7 @@ const initialState = {
     users: [],
     users_date: [],
     companyies: [],
-    byUserName: ["hola"],
+    byUserName: [],
 
 }
 
