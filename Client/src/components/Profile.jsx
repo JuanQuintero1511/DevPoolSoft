@@ -116,6 +116,7 @@ export const Profile = () => {
           </h2>
         </div>
       </div>
-    </div>
-  );
+    </div>
+  );
 };
+

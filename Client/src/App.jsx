@@ -16,6 +16,7 @@ import MyPostCommunity from "./components/MyPostsCommunity";
 
 
 
+
 function App() {
  
 const location = useLocation();
@@ -40,6 +41,8 @@ const location = useLocation();
         <Route path="/community/:id" element={ <Detail />} />
         <Route path="/community/myposts/:id" element={ <MyPostCommunity />} />
         <Route path="/inprogress" element={ <InProgress /> }/>
+     
+        
 
       </Routes>
     </>
