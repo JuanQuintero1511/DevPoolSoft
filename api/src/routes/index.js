@@ -5,11 +5,8 @@ const companyRouter = require('../routes/companyRouter/companyRouter');
 const postsRouter = require('../routes/postsRouter/postsRouter');
 const commentRouter = require('../routes/commentsRouter/commentsRouter');
 const usersRouter = require('../routes/usersRouter/usersRouter');
+const authRouter = require('../routes/authRouter/authRouter');
 const devDataRouter = require('../routes/devDataRouter/devDataRouter')
-
-
-const mercadoPagoRouter = require ('../routes/mercadoPagoRouter/mercadoPagoRouter');
-
 
 const router = Router();
 
@@ -21,8 +18,12 @@ router.use('/comments', commentRouter);
 router.use('/users', usersRouter)
 router.use('/devdata', devDataRouter)
 
-router.use('/mercadoPago', mercadoPagoRouter)
+
+// Autenticación con google
+router.use("/auth", authRouter);
 
 // Agrega más routers si es necesario
+
+
 
 module.exports = router;

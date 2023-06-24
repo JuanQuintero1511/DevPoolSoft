@@ -9,6 +9,7 @@ const createUser = async (userName, email, password) => {
 
 const getAllUsers = async () => {
     return await Users.findAll({
+        attributes: ['id_users', 'userName', 'email'],
         include: {
             model: User_data,
         }
@@ -20,6 +21,7 @@ const searchUsersByUserName = async (userName) => {
       where: {
         userName: { [Op.iLike ]: `%${userName}%`}
       },
+      attributes: ['id_users', 'userName', 'email'],
       include: {
         model: User_data,
         include: {
@@ -27,11 +29,27 @@ const searchUsersByUserName = async (userName) => {
         }
       }
     })
-    return users
+    return users;
   }
+
+  const searchUserById = async (id) => {
+    const UserById = await Users.findByPk(id,
+      {  
+        attributes: ['id_users', 'userName', 'email'],
+        include: {
+          model: User_data,
+          include: {
+            model: Posts
+          }
+        }
+      })
+
+      return UserById;
+  };
 
 module.exports = {
     createUser,
     getAllUsers,
-    searchUsersByUserName
+    searchUsersByUserName,
+    searchUserById
 }

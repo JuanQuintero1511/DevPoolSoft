@@ -9,17 +9,10 @@ import CloudinaryUploadWidget from "./Cloudinary/UploadWidget"
 const CreatePostCommunity = ({ closeModal }) => {
 
   const [postData, setPostData] = useState({
+    id_user_data: "dc774cdb-7d3e-4e60-9c39-22da9ec061fa",
     title: "",
     body: "",
-    state: "In Progress",
-    id_user_data: "2b325cb2-e8f7-4d74-a732-e2171b1f3245",
-    image: {
-      public_id: "olympic_flag",
-
-      url: "",
-
-    },
-   
+    image: ""
   });
 
   const handleImageUpload = (url) => {
@@ -36,11 +29,6 @@ console.log(postData.image.url)
   const handleChange = (event) => {
     setPostData({ ...postData, [event.target.name]: event.target.value });
   };
-
-  // const handleImageChange = (event) => {
-  //   const file = event.target.files[0];
-  //   setPostData({ ...postData, image: file });
-  // };
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -79,8 +67,8 @@ console.log(postData.image.url)
     const { body } = postData;
     if (body.length < 10) {
       setErrors({ ...errors, body: "Requires a minimum of 10 characters." });
-    } else if (body.length > 300) {
-      setErrors({ ...errors, body: "Maximum 300 characters." });
+    } else if (body.length > 500) {
+      setErrors({ ...errors, body: "Maximum 500 characters." });
     } else {
       setErrors({ ...errors, body: "" });
     }
@@ -118,7 +106,7 @@ console.log(postData.image.url)
 
         <form onSubmit={handleSubmit}>
           <label htmlFor="title" className="block mb-2">
-            Title:
+            Title: <span className="text-red-500 text-sm">*</span>
           </label>
           <input
             type="text"
@@ -133,7 +121,7 @@ console.log(postData.image.url)
           {errors.title && <p className="text-red-500 text-sm">{errors.title}</p>}
 
           <label htmlFor="body" className="block mb-2">
-            Description:
+            Description: <span className="text-red-500 text-sm">*</span>
           </label>
           <textarea
             name="body"
@@ -151,12 +139,21 @@ console.log(postData.image.url)
             Image:
           </label>
           <div className="flex justify-center items-center">
+            {postData.image? 
+            <div className="-my-[400px]">
+            <h4>Uploaded ✅</h4>
+          </div>:
             <div className="-my-[400px]">
            <CloudinaryUploadWidget onImageUpload={handleImageUpload} />
-          </div>
+            </div>
+}
+            
           </div>
 
-          <div className="flex justify-end">
+          
+          </form>
+
+          <div className="flex justify-end mt-10">
             <button
               type="submit"
               className="select-none rounded-lg bg-teal-700 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
@@ -164,7 +161,7 @@ console.log(postData.image.url)
               CREATE POST
             </button>
           </div>
-        </form>
+        
       </div>
     </div>
   );

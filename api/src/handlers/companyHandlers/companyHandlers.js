@@ -11,7 +11,7 @@ const {
 
 const { searchUsersByUserName } = require('../../controllers/usersControllers/usersControllers');
 
-
+const  { sendNotification }  = require('../../utils/send.email')
 
     const createCompanyHandler = async (req, res) => {       
           try {
@@ -49,10 +49,12 @@ const { searchUsersByUserName } = require('../../controllers/usersControllers/us
                   
             const newUsers = await searchUsersByUserName(userName);
       
+             sendNotification(email, full_name);
+            
+            
             res.status(201).json(newUsers);
-      
-            // Si todo va bien, salir del bucle
-            return;
+            
+
           } catch (error) {
             
             res.status(400).json({ error: error.message});

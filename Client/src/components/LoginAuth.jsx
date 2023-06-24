@@ -1,16 +1,11 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
-export const Login = (props) => {
-
-  const handleLogin = () => {
-    // Redirigir al usuario a la página de inicio de sesión de GOOGLE
-    window.location.href = 'http://localhost:3001/auth';
-  };
+export const LoginAuth0 = (props) => {
 
   const users = [
-    { email: "henry@hotmail.com", password: "AsD18628" },
-    { email: "devpool@hotmail.com", password: "AsD@$18628" }
+    { email: "henry@hotmail.com", password: "AsD@$18628!" },
+    { email: "devpool@hotmail.com", password: "AsD@$18628!" }
   ];
 
   const [userData, setUserData] = useState({
@@ -212,7 +207,7 @@ export const Login = (props) => {
                     d="M48 48L17 24l-4-3 35-10z"
                   />
                 </svg>
-              <button className= "ml-4" onClick={handleLogin}> Log in with Google</button>
+                <span className="ml-4">Log in with Google</span>
               </div>
             </button>
 
