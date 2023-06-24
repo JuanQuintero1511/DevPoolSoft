@@ -10,6 +10,10 @@ const Nav = () => {
   const searchRef = useRef(null);
   const suggestionsRef = useRef(null);
 
+  const closeSuggestions = () => {
+    setSuggestions([]);
+  };
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -47,7 +51,7 @@ const Nav = () => {
             <button className="btn btn-outline-light">Perfil</button>
           </NavLink>
           <div ref={suggestionsRef}>
-            <SearchSuggestionsList suggestions={suggestions} />
+            <SearchSuggestionsList suggestions={suggestions}  closeSuggestions={closeSuggestions}/>
           </div>
         </div>
       </nav>
