@@ -9,10 +9,10 @@ import CloudinaryUploadWidget from "./Cloudinary/UploadWidget"
 const CreatePostCommunity = ({ closeModal }) => {
 
   const [postData, setPostData] = useState({
-    id_user_data: "1c123f39-4363-4868-b13f-653b53435d75",
+    id_user_data: "dc774cdb-7d3e-4e60-9c39-22da9ec061fa",
     title: "",
     body: "",
-    image: {url: ""}
+    image: ""
   });
 
   const handleImageUpload = (url) => {
@@ -139,12 +139,21 @@ console.log(postData.image.url)
             Image:
           </label>
           <div className="flex justify-center items-center">
+            {postData.image? 
+            <div className="-my-[400px]">
+            <h4>Uploaded ✅</h4>
+          </div>:
             <div className="-my-[400px]">
            <CloudinaryUploadWidget onImageUpload={handleImageUpload} />
-          </div>
+            </div>
+}
+            
           </div>
 
-          <div className="flex justify-end">
+          
+          </form>
+
+          <div className="flex justify-end mt-10">
             <button
               type="submit"
               className="select-none rounded-lg bg-teal-700 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
@@ -152,7 +161,7 @@ console.log(postData.image.url)
               CREATE POST
             </button>
           </div>
-        </form>
+        
       </div>
     </div>
   );
