@@ -1,62 +1,29 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { getAllUsers } from "../redux/actions";
-import { useDispatch, useSelector } from "react-redux";
-import { userLogin } from "../redux/actions";
 
-export const Login = () => {
-
-
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  const users = useSelector((state) => state.allUsers);
-
-  useEffect(() => {
-    dispatch(getAllUsers());
-  }, [dispatch]);
-
-  const handleLogin = () => {
-    // Redirigir al usuario a la página de inicio de sesión de GOOGLE
-    window.location.href = 'http://localhost:3001/auth';
-  };
+export const LoginAuth0 = (props) => {
 
   const users = [
-    { email: "henry@hotmail.com", password: "AsD18628" },
-    { email: "devpool@hotmail.com", password: "AsD@$18628" }
+    { email: "henry@hotmail.com", password: "AsD@$18628!" },
+    { email: "devpool@hotmail.com", password: "AsD@$18628!" }
   ];
-
 
   const [userData, setUserData] = useState({
     email: "",
     password: "",
-    username: ""
   });
 
-  const handleChange = (event) => {
+  const handleChangeEmail = (event) => {
     setUserData({ ...userData, [event.target.name]: event.target.value });
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    const user = users.find((user) => user.email === userData.email);
-
-    if (user && user.password === userData.password && user.userName === userData.username) {
-      dispatch(userLogin(user));
-      navigate("/home");
-    } else {
-      alert("Invalid username, email or password");
-    }
-  }
-
-
-  //*validaciones*//
+  const handleChangePassword = (event) => {
+    setUserData({ ...userData, [event.target.name]: event.target.value });
+  };
 
   const [errors, setErrors] = useState({
     email: "",
     password: "",
-    username: ""
   });
 
   const validateEmail = () => {
@@ -95,38 +62,19 @@ export const Login = () => {
     }
   };
 
-  const validateUsername = () => {
-    if (userData.username.length < 3 || userData.username.length > 10
-    ) {
-      setErrors({
-        ...errors,
-        username: "have a length between 3 and 10 characters",
-      });
+  const navigate = useNavigate();
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const user = users.find((user) => user.email === userData.email);
+
+    if (user && user.password === userData.password) {
+      navigate("/home");
     } else {
-      setErrors({
-        ...errors,
-        username: "",
-      });
+      alert("Invalid email or password");
     }
   };
-
-  //   let validation = () => {
-  //     if (errors.email === "" && errors.password === "" && errors.username === "") {
-  //       return true
-  //     }
-  //     return false
-  //   }
-
-  //   if (validation()) {
-  //     dispatch(createUser(userData));
-  //     navigate("/home");
-  //     window.location.reload("/home");
-  //   } else {
-  //     alert("Please fill in the required fields");
-  //   }    
-  // };
-
-
 
   return (
     <div>
@@ -144,7 +92,7 @@ export const Login = () => {
             <h1 className="text-blue-500 text-2xl md:text-4xl font-bold">
               DevPool
             </h1>
-            <h1 className="text-xl md:text-2xl font-bold leading-tight mt-6">
+            <h1 className="text-xl md:text-2xl font-bold leading-tight mt-12">
               Log in to your account
             </h1>
 
@@ -155,34 +103,14 @@ export const Login = () => {
               method="POST"
             >
               <div>
-                <label className="block text-gray-700">Username</label>
-                <input
-                  type="text"
-                  name="username"
-                  value={userData.username}
-                  onChange={handleChange}
-                  onBlur={validateUsername}
-                  placeholder="Enter username"
-                  className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none"
-                  autoFocus
-                  autoComplete="username"
-                  required
-                />
-
-                {errors.username && (
-                  <p className="text-red-500">{errors.username}</p>
-                )}
-              </div>
-
-              <div className="mt-4">
-                <label className="block text-gray-700">Email</label>
+                <label className="block text-gray-700">Email Address</label>
                 <input
                   type="email"
                   name="email"
                   value={userData.email}
-                  onChange={handleChange}
+                  onChange={handleChangeEmail}
                   onBlur={validateEmail}
-                  placeholder="Enter email"
+                  placeholder="Enter Email Address"
                   className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none"
                   autoFocus
                   autoComplete="email"
@@ -199,9 +127,9 @@ export const Login = () => {
                   type="password"
                   name="password"
                   value={userData.password}
-                  onChange={handleChange}
+                  onChange={handleChangePassword}
                   onBlur={validatePassword}
-                  placeholder="Enter password"
+                  placeholder="Enter Password"
                   className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none"
                   minLength="6"
                   maxLength="10"
@@ -279,7 +207,7 @@ export const Login = () => {
                     d="M48 48L17 24l-4-3 35-10z"
                   />
                 </svg>
-              <button className= "ml-4" onClick={handleLogin}> Log in with Google</button>
+                <span className="ml-4">Log in with Google</span>
               </div>
             </button>
 

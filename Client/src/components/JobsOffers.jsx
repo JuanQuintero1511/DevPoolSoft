@@ -7,7 +7,10 @@ import CreatePostModal from "./CreatePostModal";
 
 const JobsOffers = () => {
 const [showModal, setShowModal] = useState(false)
-
+const closeModal = () => {
+  setShowModal(!showModal);
+}
+ 
   //const dispatch = useDispatch();
 
   // useEffect(() => {
@@ -103,10 +106,7 @@ const [showModal, setShowModal] = useState(false)
     setSimilpostArray([...similpostArray, newPost]);
   };
 
-  const closeModal = () => {
-    setShowModal(!showModal);
-  }
-   
+  
   
 
 
