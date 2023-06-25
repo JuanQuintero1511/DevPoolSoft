@@ -40,7 +40,7 @@ const CreatePostCommunity = ({ closeModal }) => {
 
     if (validation()) {
       dispatch(createPostUser(postData));
-      navigate("/community");
+      closeModal();
     } else {
       alert("Please fill in the required fields");
     }    
@@ -152,7 +152,7 @@ const CreatePostCommunity = ({ closeModal }) => {
           </div>
 
           
-          </form>
+          
 
           <div className="flex justify-end mt-10">
             <button
@@ -162,7 +162,7 @@ const CreatePostCommunity = ({ closeModal }) => {
               CREATE POST
             </button>
           </div>
-        
+          </form>
       </div>
     </div>
   );
