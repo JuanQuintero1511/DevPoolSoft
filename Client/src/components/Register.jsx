@@ -55,10 +55,10 @@ export const Register = () => {
     if (!values.userName && !values.password && !values.email) {
       errors.username = "All camps are required"
     }
-    if(values.userName && !noSymbols.test(values.userName)){
-      errors.username = "Username can not contain symbols!"
+    // if(values.userName && !noSymbols.test(values.userName)){
+    //   errors.username = "Username can not contain symbols!"
     
-    }
+    //}
     // if(values.password === confirmPassword.password) {
     //   errors.passowrds = "The passwords must be equals"
     // }
