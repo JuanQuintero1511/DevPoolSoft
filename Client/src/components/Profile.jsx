@@ -9,7 +9,7 @@ export const Profile = () => {
   return (
 
     <div>
-      {user.user_datum ?<div className="flex items-center w-screen h-screen bg-teal-500 bg-transparent-[30%]">
+      {user.user_datum ?<div className="flex items-center w-screen h-screen bg-teal-500 bg-opacity-30">
           
             <div className="ml-[270px] mt-14 bg-white shadow-md rounded-lg overflow-hidden w-[80%] h-[80%] ">
               <div className="p-4">
@@ -46,20 +46,21 @@ export const Profile = () => {
                   </p>
                 </div>
               </div>
-              <div className="px-4 py-2 bg-gray-200">
-                <h3 className="text-lg font-semibold">Posts</h3>
-                {user.user_datum.posts.length > 0 ? (
-                  <ul className="mt-2 ">
-                    {user.user_datum.posts.map((post, index) => (
-                      <li key={index} className="mb-2">
-                        {post}
-                      </li>
-                    ))}
-                  </ul>
-                ) : (
-                  <p className="text-gray-600">No posts available.</p>
-                )}
-              </div>
+               <div className="px-4 py-2 bg-gray-200">
+  <h3 className="text-lg font-semibold">Posts</h3>
+  {user.user_datum.posts && user.user_datum.posts.length > 0 ? (
+    <ul className="mt-2">
+      {user.user_datum.posts.map((post, index) => (
+        <li key={index} className="mb-2">
+          {post}
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <p className="text-gray-600">No posts available.</p>
+  )}
+</div>
+ 
             </div>
             </div>
              :<div className="flex justify-center w-full ">

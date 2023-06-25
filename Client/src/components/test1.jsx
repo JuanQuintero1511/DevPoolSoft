@@ -42,7 +42,6 @@ const Test1 = () => {
     authentication: "",
     rol_type: "",
     image: {
-      public_id: "",
       url: ""
     }
 
