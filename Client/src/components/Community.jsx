@@ -15,7 +15,7 @@ const Community = () => {
 
   useEffect(() => {
     dispatch(getAllPosts());
-  }, [dispatch]);
+  }, [dispatch, showModal]);
 
   const closeModal = () => {
     setShowModal(!showModal);

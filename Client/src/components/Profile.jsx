@@ -5,7 +5,7 @@ import Test1 from "./test1";
 export const Profile = () => {
 
   const user = useSelector((state) => state.userLogin);
-
+  console.log(user)
 
   return (
 
@@ -26,7 +26,8 @@ export const Profile = () => {
             </div>
           </div>
           <div className="mt-4 items-center justify-center ml-4">
-            <h3 className="text-2xl font-semibold ml-[20%]">Company Information</h3>
+            {user.user_datum.rol_type == "user"?  <h3 className="text-2xl font-semibold ml-[20%]">Developer Information</h3> : <h3 className="text-2xl font-semibold ml-[20%]">Company Information</h3>}
+           
             <p>
               <span className="font-medium text-xl font-mono">Full Name:</span> {user.user_datum.full_name}
             </p>
@@ -46,19 +47,21 @@ export const Profile = () => {
           </div>
         </div>
         <div className="px-4 py-2 bg-gray-200">
-          <h3 className="text-lg font-semibold">Posts</h3>
-          {user.user_datum.posts && user.user_datum.posts.length > 0 ? (
-            <ul className="mt-2">
-              {user.user_datum.posts.map((post, index) => (
-                <li key={index} className="mb-2">
-                  {post}
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p className="text-gray-600">No posts available.</p>
-          )}
-        </div>
+  <h3 className="text-lg font-semibold">Posts</h3>
+  {user.user_datum.posts && user.user_datum.posts.length > 0 ? (
+    <ul className="mt-2">
+      {user.user_datum.posts.map((post, index) => (
+        <li key={index} className="mb-2">
+          <h4>{post.title}</h4>
+          <p>{post.body}</p>
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <p className="text-gray-600">No posts available.</p>
+  )}
+</div>
+
       </div>
     </div>
   ) : (

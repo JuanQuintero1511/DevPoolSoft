@@ -151,6 +151,7 @@ console.log(form)
         profile_image: '',
         authentication: "",
         rol_type: "",
+        isPremium: "",
         image: {
           url: ""
         }
@@ -163,7 +164,7 @@ console.log(form)
     }
 
   }
-
+console.log(form)
 
   return (
     <div className=" flex items-center justify-center min-h-screen" >
@@ -173,7 +174,7 @@ console.log(form)
         {rolSelected.company || rolSelected.user ? null : <div className="flex justify-center space-x-4 h-12 mb-2">
           <a onClick={() => {
             setRolSelected({ user: true, company: false });
-            setForm({ ...form, rol_type: "userDev" });
+            setForm({ ...form, rol_type: "user", isPremium: true, authentication: "CUIT" });
           }} className="relative inline-flex items-center justify-center px-9 py-3 overflow-hidden font-mono font-medium tracking-normal text-white bg-gray-800 rounded-lg group">
             <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-green-500 rounded-full group-hover:w-56 group-hover:h-56"></span>
             <span className="absolute inset-0 w-full h-full -mt-1 rounded-lg opacity-30 bg-gradient-to-b from-transparent via-transparent to-teal-200"></span>
@@ -183,6 +184,7 @@ console.log(form)
             onClick={() => {
               setRolSelected({ company: true, user: false });
               setForm({ ...form, rol_type: "company" });
+
             }}
             className="relative inline-flex items-center justify-center px-10 py-4 overflow-hidden font-mono font-medium tracking-widest text-white bg-gray-800 rounded-lg group focus:bg-teal-200 focus:outline-none"
           >
