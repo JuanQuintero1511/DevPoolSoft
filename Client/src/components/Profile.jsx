@@ -2,137 +2,72 @@ import { useSelector } from "react-redux";
 import Test1 from "./test1";
 
 export const Profile = () => {
-  const perfiles = [
-    {
-      nombre: "Ramiro Fassetta",
-      profileImage: "https://cdn-icons-png.flaticon.com/512/3135/3135768.png",
-      cargo: "Desarrollador Full Stack",
-      acercaDeMi: "Apasionado por la programación y el desarrollo web.",
-      skills: ["JavaScript", "HTML", "CSS", "Node.js", "React"],
-      experiencia: [
-        {
-          puesto: "Desarrollador Junior",
-          duracion: "1 año",
-          empresa: "ABC Solutions",
-        },
-        {
-          puesto: "Desarrollador Senior",
-          duracion: "2 años",
-          empresa: "XYZ Tech",
-        },
-      ],
-      educacion: [
-        {
-          titulo: "Licenciatura en Ingeniería de Software",
-          institucion: "Universidad Nacional",
-          año: 2018,
-        },
-        {
-          titulo: "Diplomado en Desarrollo Web Full Stack",
-          institucion: "Henry",
-          año: 2017,
-        },
-      ],
-    },
-  ];
-  const userLoged = useSelector((state) => state.userLogin);
-  const handleClick = () => {
-    console.log("Haz hecho clic en la flecha");
-  };
+
+  const user = useSelector((state) => state.userLogin);
+
 
   return (
 
-<div>
-{userLoged.user_datum? <div>
-    <div className="max-w-4xl mx-auto py-10 px-4 mt-8 flex">
-   
-      <div className="bg-white shadow-md rounded-md p-6 mb-4 flex flex-wrap">
-        <div className="absolute top-0 right-0 transform -translate-x-2 translate-y-2">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="w-6 h-6 text-gray-400 cursor-pointer "
-            onClick={handleClick}
-          >
-            <path d="M15 18l-6-6 6-6" />
-          </svg>
-        </div>
-        <div className="text-center mb-6">
-          <div className="border-4 border-gray-200 rounded-full overflow-hidden w-40 h-40 mx-auto mb-4">
-            <img
-              src={perfiles[0].profileImage}
-              alt="Profile Picture"
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <h1 className="text-2xl font-bold">{perfiles[0].nombre}</h1>
-          <p className="text-gray-500">{perfiles[0].cargo}</p>
-        </div>
-        <div className="flex">
-          <div className="w-full pr-6 ">
-            <div className="bg-gray-200 rounded-md p-4 mb-4">
-              <h2 className="text-lg font-bold mb-2 bg-gradient-to-r from-indigo-500 via-emerald-500 to-indigo-500 text-transparent bg-clip-text">
-                About
-              </h2>
-              <p className="text-gray-600">{perfiles[0].acercaDeMi}</p>
+    <div>
+      {user.user_datum ?<div className="flex items-center w-screen h-screen bg-teal-500 bg-transparent-[30%]">
+          
+            <div className="ml-[270px] mt-14 bg-white shadow-md rounded-lg overflow-hidden w-[80%] h-[80%] ">
+              <div className="p-4">
+                <div className="flex items-center">
+                  <img
+                    src={user.user_datum.image.url}
+                    alt="Profile"
+                    className="w-16 h-16 rounded-full mr-4"
+                  />
+                  <div>
+                    <h2 className="text-xl font-bold">{user.userName}</h2>
+                    <p className="text-gray-600">{user.email}</p>
+                  </div>
+                </div>
+                <div className="mt-4">
+                  <h3 className="text-lg font-semibold">User Information</h3>
+                  <p>
+                    <span className="font-medium">Full Name:</span> {user.user_datum.full_name}
+                  </p>
+                  <p>
+                    <span className="font-medium">Backup Email:</span> {user.user_datum.backup_email}
+                  </p>
+                  <p>
+                    <span className="font-medium">Description:</span> {user.user_datum.description}
+                  </p>
+                  <p>
+                    <span className="font-medium">Date of Birth:</span> {user.user_datum.date_birthday}
+                  </p>
+                  <p>
+                    <span className="font-medium">Address:</span> {user.user_datum.address}
+                  </p>
+                  <p>
+                    <span className="font-medium">Phone Number:</span> {user.user_datum.phone_number}
+                  </p>
+                </div>
+              </div>
+              <div className="px-4 py-2 bg-gray-200">
+                <h3 className="text-lg font-semibold">Posts</h3>
+                {user.user_datum.posts.length > 0 ? (
+                  <ul className="mt-2 ">
+                    {user.user_datum.posts.map((post, index) => (
+                      <li key={index} className="mb-2">
+                        {post}
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p className="text-gray-600">No posts available.</p>
+                )}
+              </div>
             </div>
-            <div className="bg-gray-200 rounded-md p-4 mb-4">
-              <h2 className="text-lg font-bold mb-2 bg-gradient-to-r from-indigo-500 via-emerald-500 to-indigo-500 text-transparent bg-clip-text">
-                Experience
-              </h2>
-              {perfiles[0].experiencia.map((exp, index) => (
-                <p key={index} className="text-gray-600">
-                  {exp.puesto} at {exp.empresa}
-                </p>
-              ))}
             </div>
-            <div className="bg-gray-200 rounded-md p-4 mb-4">
-              <h2 className="text-lg font-bold mb-2 bg-gradient-to-r from-indigo-500 via-emerald-500 to-indigo-500 text-transparent bg-clip-text">
-                Education
-              </h2>
-              {perfiles[0].educacion.map((edu, index) => (
-                <p key={index} className="text-gray-600">
-                  {edu.titulo} at {edu.institucion}
-                </p>
-              ))}
-            </div>
-            <div className="bg-gray-200 rounded-md p-4 mb-4">
-              <h2 className="text-lg font-bold mb-2 bg-gradient-to-r from-indigo-500 via-emerald-500 to-indigo-500 text-transparent bg-clip-text">
-                Skills
-              </h2>
-              <ul className="list-disc pl-6">
-                {perfiles[0].skills.map((skill, index) => (
-                  <li key={index} className="text-gray-600">
-                    {skill}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="relative w-1/2 ml-auto">
-        <div className="bg-white shadow-md rounded-md p-6 w-1/2 px-2 ml-3 w-100">
-          <h2 className="text-lg font-bold mb-2 bg-gradient-to-r from-indigo-500 via-emerald-500 to-indigo-500 text-transparent bg-clip-text">
-            Posts
-          </h2>
-        </div>
-      </div>
-      </div> 
-      
-    </div>
-    : (
-      <div className="flex justify-center w-full">
-        <div className="w-full">
-          <Test1 />
-        </div>
-      </div>
-    )}
+             :<div className="flex justify-center w-full ">
+              <div className="w-full ">
+                <Test1 />
+              </div>
+            </div>}
+        
     </div>
   );
 };
