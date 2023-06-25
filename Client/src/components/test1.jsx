@@ -1,21 +1,12 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { createUserData, getByUserName } from "../redux/actions";
+import { useState } from "react";
+import { useDispatch} from "react-redux";
+import { createUserData} from "../redux/actions";
 import CloudinaryUploadWidget from "./Cloudinary/UploadWidget";
 
 const Test1 = () => {
 
   const dispatch = useDispatch();
 
-
-  const user = useSelector((state )=> state.byUserName)
-  //  const juan555 = "Pepito"
-  // useEffect(() => {
-  //    dispatch(getByUserName(juan555))
-  //  }, [dispatch])
-  console.log(user)
-
-  // lo de arriba funciona si hace ese useEffect, hay que de un elemento padre, pasarle al register ese state, y traerlo aca de alguna manera, peude que setee el estado tmb, veremos.
 
   
 

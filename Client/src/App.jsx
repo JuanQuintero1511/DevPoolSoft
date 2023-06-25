@@ -12,6 +12,9 @@ import Detail from "./components/DetailCommunity";
 import JobsOffers from "./components/JobsOffers";
 import InProgress from "./components/InProgress";
 import MyPostCommunity from "./components/MyPostsCommunity";
+import {useEffect} from "react";
+import { userLogin_App } from "./redux/actions";
+import { useDispatch} from 'react-redux';
 import Test1 from "./components/test1";
 
 
@@ -21,6 +24,13 @@ import Test1 from "./components/test1";
 function App() {
  
 const location = useLocation();
+const dispatch = useDispatch()
+
+useEffect(() => {
+  const userName = localStorage.getItem('userName');
+
+  if (userName) dispatch(userLogin_App(userName));
+}, [])
 
 
   return (

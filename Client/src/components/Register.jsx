@@ -1,6 +1,6 @@
 import { useState} from "react";
 import { useDispatch } from "react-redux"
-import { createUser, getByUserName } from "../redux/actions";
+import { createUser } from "../redux/actions";
 import Swal from 'sweetalert2';
 
 import React from "react";
@@ -84,7 +84,6 @@ export const Register = () => {
 
       dispatch(createUser(users))
       setSuccessufully(true)
-      // dispatch(getByUserName(users.userName)) este es el dispatch que hay que mover
       Swal.fire({
         icon: 'success',
         title: 'User Created',

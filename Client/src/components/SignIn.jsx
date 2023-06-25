@@ -1,27 +1,20 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { getAllUsers } from "../redux/actions";
-import { useDispatch, useSelector } from "react-redux";
-import { userLogin } from "../redux/actions";
+import { createUser } from "../redux/actions";
+import { useDispatch } from "react-redux";
 
 export const Login = () => {
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  const users = useSelector((state) => state.allUsers);
-
-  useEffect(() => {
-    dispatch(getAllUsers());
-  }, [dispatch]);
-  const handleLogin = () => {
-    // Redirigir al usuario a la página de inicio de sesión de GOOGLE
-    window.location.href = 'http://localhost:3001/auth';
-  };
+  //   BODY USER
+  // RUTA http://localhost:3001/users
+  // {
+  //   "userName": "Andi211110",
+  //   "email": "dandi211111@gmail.com",
+  //   "password": "draddnza25"
+  // }
 
   // const users = [
-  //   { email: "henry@hotmail.com", password: "AsD18628" },
-  //   { email: "devpool@hotmail.com", password: "AsD@$18628" }
+  //   { email: "henry@hotmail.com", password: "asd123", username: "henry" },
   // ];
 
   const [userData, setUserData] = useState({
@@ -34,13 +27,15 @@ export const Login = () => {
     setUserData({ ...userData, [event.target.name]: event.target.value });
   };
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const user = users.find((user) => user.email === userData.email);
+    const user = userData.find((user) => user.email === userData.email);
 
-    if (user && user.password === userData.password && user.userName === userData.username) {
-      dispatch(userLogin(user));
+    if (user && user.password === userData.password && user.username === userData.username) {
       navigate("/home");
     } else {
       alert("Invalid username, email or password");
@@ -276,7 +271,7 @@ export const Login = () => {
                     d="M48 48L17 24l-4-3 35-10z"
                   />
                 </svg>
-              <button className= "ml-4" onClick={handleLogin}> Log in with Google</button>
+                <span className="ml-4">Log in with Google</span>
               </div>
             </button>
 
