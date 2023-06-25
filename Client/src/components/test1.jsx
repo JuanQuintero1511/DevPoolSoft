@@ -298,6 +298,15 @@ const Test1 = () => {
                   Image title:
                 </label>
               </div>
+              <div className="relative mb-2">
+              <label
+                className="flex flex-col font-mono tracking-widest">
+                <textarea name="description" value={form.description}
+                  onChange={handleInputChange}
+                  placeholder="Description about you..."
+                  className="bg-black-300 py-3 px-6 placeholder:text-secondary text-black rounded-lg font-medium" />
+              </label>
+            </div>
               <div className="flex justify-center items-center">
                 {form.image.url ?
                   <div className="-my-[400px]">
