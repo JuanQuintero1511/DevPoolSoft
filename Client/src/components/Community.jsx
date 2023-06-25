@@ -15,7 +15,7 @@ const Community = () => {
 
   useEffect(() => {
     dispatch(getAllPosts());
-  }, [dispatch]);
+  }, [dispatch, showModal]);
 
   const closeModal = () => {
     setShowModal(!showModal);
@@ -29,7 +29,6 @@ const Community = () => {
           <h2 className="text-3xl font-bold text-teal-700 ml-[20vw]">COMMUNITY</h2>
           <div className="flex">
             <div>
-              {/* <Link to={`/community/myposts/${user.id}`}> */}
               <Link to={`/community/myposts/${user?.user_datum?.id_user_data}`}>
                 <button
                   className="select-none rounded-lg bg-teal-700 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none mr-2"
@@ -40,7 +39,13 @@ const Community = () => {
             </div>
             <div>
               <button
-                onClick={() => setShowModal(true)}
+                onClick={() => {
+                  if (user?.user_datum?.id_user_data) {
+                    setShowModal(true);
+                  } else {
+                    alert("You need to register to create posts.");
+                  }
+                }}
                 className="select-none rounded-lg bg-teal-700 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
               >
                 CREATE POST
@@ -57,7 +62,8 @@ const Community = () => {
       </div>
     </div>
   );
-}
+  
+          }  
 
 export default Community;
 

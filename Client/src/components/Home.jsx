@@ -2,7 +2,6 @@ import { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import CardsContainer from './CardsContainer';
 
-
 const Home = () => {
   const [selectedField, setSelectedField] = useState(null);
 

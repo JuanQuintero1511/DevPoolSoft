@@ -44,7 +44,7 @@ const Nav = () => {
       <nav className="navbar bg-dark border-bottom border-bottom-dark fixed-top" data-bs-theme="dark">
         <div className="container-fluid relative">
           <NavLink to="/home">
-            <a className="navbar-brand text-white">DEVPOOL</a>
+          <h3 className="flex justify-center mb-3 -mt-8 text-3xl font-extrabold text-gray-900 md:text-2xl lg:text-4xl lg:mt-0.5 py-0"><span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400 mr-4 mt-0">DevPool </span></h3>
           </NavLink>
           <div className="d-flex flex-grow-2 w-50" ref={searchRef}>
             <SearchBar setSuggestions={handleSetSuggestions} />
