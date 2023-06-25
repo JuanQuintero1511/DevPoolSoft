@@ -8,7 +8,7 @@ const getUserHandler = async (req, res) => {
         if (results.length === 0) throw Error ({message: "No se encontraron usuarios"})
         res.status(200).json(results);
     } catch (error) {
-        res.status(400).json({ error: `Error occurred while found users: ${userName}`, detail: error.message })
+        res.status(400).json({ error: `Error occurred while found users`, detail: error.message })
     }
 }
 
