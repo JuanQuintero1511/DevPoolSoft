@@ -29,7 +29,7 @@ export const Register = () => {
   })
 
   const [confirmPassword, setConfirmPassword] = useState({
-    password: "",
+    password2: "",
   })
 
 
@@ -59,9 +59,9 @@ export const Register = () => {
     //   errors.username = "Username can not contain symbols!"
     
     //}
-    // if(values.password === confirmPassword.password) {
-    //   errors.passowrds = "The passwords must be equals"
-    // }
+     if(values.password !== confirmPassword.password2) {
+      errors.passowrds = "The passwords must be equals"
+     }
     if (values.email && !emailRegex.test(values.email)) {
       errors.email = 'Invalid email address'
     }
@@ -97,6 +97,9 @@ export const Register = () => {
         userName:'',
         email:'',
         password:'',
+      })
+      setConfirmPassword({
+        password2:"",
       })
     }
   }
@@ -148,7 +151,7 @@ export const Register = () => {
       id="floating_outlined2"
       className="block px-2.5 pb-2.5 pt-4 w-full sm:w-[405%] text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-black font-mono dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
       placeholder=" "
-      name="password"
+      name="password2"
       onChange={handleInputChange}
       value={confirmPassword.password}
       required
