@@ -1,7 +1,9 @@
 const { createUser, getAllUsers, searchUsersByUserName, searchUserById } = require("../../controllers/usersControllers/usersControllers")
 
 const getUserHandler = async (req, res) => {
+
     const {userName} = req.query;  
+    try {    
     try {     
         const results = userName ? await searchUsersByUserName(userName) : await getAllUsers()
         if (results.length === 0) throw Error ({message: "No se encontraron usuarios"})
@@ -35,7 +37,7 @@ const getUserByIdHandler = async (req, res) => {
       return res.status(400).json({ details: error.message });
     }
 }
-
+}
 module.exports = {
     getUserHandler,
     postUserHandler,

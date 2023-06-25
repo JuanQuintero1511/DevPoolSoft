@@ -24,11 +24,10 @@ import Test1 from "./components/test1";
 function App() {
  
 const location = useLocation();
-const dispatch = useDispatch()
+const dispatch = useDispatch();
 
 useEffect(() => {
   const userName = localStorage.getItem('userName');
-
   if (userName) dispatch(userLogin_App(userName));
 }, [])
 

@@ -1,11 +1,16 @@
 import { useState } from "react";
-import { useDispatch} from "react-redux";
+import { useDispatch, useSelector} from "react-redux";
 import { createUserData} from "../redux/actions";
 import CloudinaryUploadWidget from "./Cloudinary/UploadWidget";
+import Swal from 'sweetalert2';
+
 
 const Test1 = () => {
 
   const dispatch = useDispatch();
+  const userLoged = useSelector((state) => state.userLogin);
+  
+  console.log(userLoged);
 
 
   
@@ -45,6 +50,20 @@ const Test1 = () => {
 
   })
 //si es dev
+const onValidation = (values) => {
+const noSymbols = /[ `!@#$%^&*()+\-=\[\]{};':"\\|,.<>\/?~]/;
+const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+
+
+let errors
+if (!values.full_name && !values.backup_email && !values.description && !values.date_birthday && !values.address && !values.phone_number &&  !values.profile_image && !values.authentication && !values.image.url) {
+  errors = "All camps are required"
+}
+if(values.full_name.lenght > 30 && noSymbols.test(values.full_name)){
+  errors += "\nFull name must be less than or equal to 30 characters and can not contain symbols";
+}
+
+}
 
 const [formData, setFormData] = useState({
   experience: {
@@ -111,8 +130,29 @@ const [formData, setFormData] = useState({
 
 
     dispatch(createUserData(form));
-    console.log(form)
+    Swal.fire({
+      icon: 'success',
+      title: 'Profile completed',
+      text: 'The user info has been successfully updated!',
+    });
+    setForm({
+      full_name: "",
+      backup_email: "",
+      description: "",
+      date_birthday: "",
+      address: "",
+      phone_number: "",
+      profile_image:'',
+      authentication: "",
+      rol_type: "",
+      image: {
+      public_id: "",
+      url: ""
+     }
 
+    })
+    console.log(form)
+    
 
   }
 
@@ -120,7 +160,7 @@ const [formData, setFormData] = useState({
   return (
     <div className=" flex items-center justify-center min-h-screen" >
       <div className="w-full sm:w-[40%] bg-gray-100 mx-auto px-6 py-12 border-0 shadow-lg sm:rounded-3xl">
-        <h1 className="flex justify-center mb-3 -mt-8 text-3xl font-extrabold text-gray-900 md:text-2xl lg:text-5xl"><span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400 mr-4 mt-0">DevPool </span>  Pofile Form.</h1>
+        <h1 className="flex justify-center mb-3 -mt-8 text-3xl font-extrabold text-gray-900 md:text-2xl lg:text-5xl"><span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400 mr-4 mt-0">DevPool </span>  Pofile form required.</h1>
 
         {rolSelected.company || rolSelected.user ? null : <div className="flex justify-center space-x-4 h-12 mb-2">
           <a onClick={() => {
@@ -246,17 +286,21 @@ const [formData, setFormData] = useState({
                 required />
                 <label for="floating_outlined" className="absolute text-sm text-blue-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1 font-mono tracking-widest"
                   >
-                  Soy una imagen:
+                 Image title:
                 </label>
               </div>
+              {form.image.url?
+              <div className="-my-[400px]">
+            <h4>Uploaded ✅</h4>
+          </div>:
               <div className="flex justify-center items-center">
             <div className="-my-[430px]">
            <CloudinaryUploadWidget onImageUpload={handleImageUpload}  handleImageId={handleImageId}/>
           </div>
-          </div>
+          </div>}
             </div>
 
-              {form.rol_type === "userDev" && (<div>
+              {/* {form.rol_type === "userDev" && (<div>
 
             <div className="relative mb-2">
               <label
@@ -361,7 +405,7 @@ const [formData, setFormData] = useState({
             className="w-full px-2 py-1 border rounded"
           />
         </div>
-        </div>)}
+        </div>)} */}
 
 
 
