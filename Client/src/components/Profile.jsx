@@ -1,3 +1,6 @@
+import { useSelector } from "react-redux";
+import Test1 from "./test1";
+
 export const Profile = () => {
   const perfiles = [
     {
@@ -32,13 +35,17 @@ export const Profile = () => {
       ],
     },
   ];
-
+  const userLoged = useSelector((state) => state.userLogin);
   const handleClick = () => {
     console.log("Haz hecho clic en la flecha");
   };
 
   return (
+
+<div>
+{userLoged.user_datum? <div>
     <div className="max-w-4xl mx-auto py-10 px-4 mt-8 flex">
+   
       <div className="bg-white shadow-md rounded-md p-6 mb-4 flex flex-wrap">
         <div className="absolute top-0 right-0 transform -translate-x-2 translate-y-2">
           <svg
@@ -116,7 +123,17 @@ export const Profile = () => {
           </h2>
         </div>
       </div>
-    </div>
-  );
+      </div> 
+      
+    </div>
+    : (
+      <div className="flex justify-center w-full">
+        <div className="w-full">
+          <Test1 />
+        </div>
+      </div>
+    )}
+    </div>
+  );
 };
 

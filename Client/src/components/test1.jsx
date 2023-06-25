@@ -9,8 +9,7 @@ const Test1 = () => {
 
   const dispatch = useDispatch();
   const userLoged = useSelector((state) => state.userLogin);
-
-  //console.log(userLoged);
+  console.log(userLoged)
 
 
 
@@ -30,9 +29,9 @@ const Test1 = () => {
 
 
   const [form, setForm] = useState({
-    userName: "Juan840",
-    email: "test1234@hotmail.com",
-    password: "Test1234",
+    userName: userLoged.userName,
+    email: userLoged.email,
+    password: userLoged.password,
     full_name: "",
     backup_email: "",
     description: "",
@@ -122,9 +121,9 @@ const Test1 = () => {
     if (values.full_name.lenght > 30 && noSymbols.test(values.full_name)) {
       errors.full_name = "\nFull name must be less than or equal to 30 characters and can not contain symbols";
     }
-    if (values.backup_email && emailRegex.test(values.backup_email)) {
-      errors.backup_email = `\nBackup Email is invalid`;
-    }
+    // if (values.backup_email && emailRegex.test(values.backup_email)) {
+    //   errors.backup_email = `\nBackup Email is invalid`;
+    // }
     return errors
 
   }
@@ -159,6 +158,10 @@ const Test1 = () => {
         }
 
       })
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
+
     }
 
   }
