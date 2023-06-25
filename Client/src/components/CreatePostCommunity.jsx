@@ -33,7 +33,6 @@ const CreatePostCommunity = ({ closeModal }) => {
   };
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -41,6 +40,7 @@ const CreatePostCommunity = ({ closeModal }) => {
     if (validation()) {
       dispatch(createPostUser(postData));
       closeModal();
+      window.location.reload();
     } else {
       alert("Please fill in the required fields");
     }

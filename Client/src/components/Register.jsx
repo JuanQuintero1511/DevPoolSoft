@@ -59,7 +59,7 @@ export const Register = () => {
     //   errors.username = "Username can not contain symbols!"
     
     //}
-     if(values.password !== confirmPassword.password2) {
+     if(values.password == confirmPassword.password2) {
       errors.passowrds = "The passwords must be equals"
      }
     if (values.email && !emailRegex.test(values.email)) {
