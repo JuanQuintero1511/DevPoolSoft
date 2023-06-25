@@ -17,7 +17,7 @@ const getAllUsers = async () => {
 }
 
 const searchUsersByUserName = async (userName) => {
-    const users = await Users.findAll({
+    const users = await Users.findOne({
       where: {
         userName: { [Op.iLike ]: `%${userName}%`}
       },
