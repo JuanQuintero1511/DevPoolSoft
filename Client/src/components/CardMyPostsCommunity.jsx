@@ -3,14 +3,15 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { deletePostUser } from "../redux/actions";
 
-const CardMyPostCommunity = ({ post, user }) => {
+const CardMyPostCommunity = ({ post, user}) => {
 
   const dispatch = useDispatch();
   
   const handleSubmit = (event) => {
     event.preventDefault();
     
-      dispatch(deletePostUser(post.id_post));    
+      dispatch(deletePostUser(post.id_post)); 
+      window.location.reload();
   };
 
   return (

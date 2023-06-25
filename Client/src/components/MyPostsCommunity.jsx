@@ -13,10 +13,11 @@ const MyPostCommunity = () => {
   const user = useSelector((state) => state.allPostsIdUser.full_name);
   const [showModal, setShowModal] = useState(false)
 
+
   useEffect(() => {
     dispatch(getAllPostsIdUser(id));
 
-  }, [dispatch, id, posts]);
+  }, [dispatch, id, showModal]);
 
   const closeModal = () => {
     setShowModal(!showModal);
@@ -51,7 +52,7 @@ const MyPostCommunity = () => {
         </div>
         {posts?.length > 0 ? <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 ml-[20vw]">
           {posts?.map((post) => (
-            <CardMyPostCommunity key={post.id_post} post={post} user={user}/>
+            <CardMyPostCommunity key={post.id_post} post={post} user={user} />
           ))}
         </div>
         : <h1>You don´t have any post yet.</h1>
