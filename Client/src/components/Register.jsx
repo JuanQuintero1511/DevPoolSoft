@@ -59,9 +59,9 @@ export const Register = () => {
     //   errors.username = "Username can not contain symbols!"
     
     //}
-     if(values.password !== confirmPassword.password2) {
-      errors.passowrds = "The passwords must be equals"
-     }
+    //  if(values.password !== confirmPassword.password2) {
+    //   errors.passowrds = "The passwords must be equals"
+    //  }
     if (values.email && !emailRegex.test(values.email)) {
       errors.email = 'Invalid email address'
     }
@@ -153,7 +153,7 @@ export const Register = () => {
       placeholder=" "
       name="password2"
       onChange={handleInputChange}
-      value={confirmPassword.password}
+      
       required
     />
     <label

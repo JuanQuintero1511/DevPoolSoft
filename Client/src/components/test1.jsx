@@ -48,7 +48,7 @@ const Test1 = () => {
   })
 
   //si es dev
-
+console.log(form)
 
   const [formData, setFormData] = useState({
     experience: {
@@ -152,7 +152,6 @@ const Test1 = () => {
         authentication: "",
         rol_type: "",
         image: {
-          public_id: "",
           url: ""
         }
 
