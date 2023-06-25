@@ -1,5 +1,5 @@
 
-import { GET_ALL_POSTS, GET_ID_POST, CREATE_POST_USER, GET_ALL_POSTS_ID_USER, CREATE_USER_DATA, CREATE_USER, GET_BY_USER_NAME } from "./action-types";
+import { GET_ALL_POSTS, GET_ID_POST, CREATE_POST_USER, GET_ALL_POSTS_ID_USER, CREATE_USER_DATA, CREATE_USER, GET_BY_USER_NAME, GET_USERS_COMPANIES  } from "./action-types";
 import axios from "axios";
 
 export const getAllPosts = () => {
@@ -67,16 +67,16 @@ export const getCompanies = () => { //trae solo companies
 
 }
 
-export const getUsersAndCompanies = () => { //trae ambos
-    return async (dispatch) => {
-        const usersResponse = await axios.get("http://localhost:3001/users");
-        const companiesResponse = await axios.get("http://localhost:3001/company");
+export const getUsersAndCompanies = () => {
+  return async (dispatch) => {
+    const usersResponse = await axios.get("http://localhost:3001/users");
+    const companiesResponse = await axios.get("http://localhost:3001/company");
+    console.log(usersResponse);
+    const users = usersResponse.data;
+    const companies = companiesResponse.data;
 
-        const users = usersResponse.data;
-        const companies = companiesResponse.data;
-
-        return dispatch({type: "FETCH_DATA_SUCCESS", payload: {users, companies}});
-    };
+    return dispatch({ type: GET_USERS_COMPANIES, payload: users, companies });
+  };
 };
 
 export const createUserData = (payload) => {

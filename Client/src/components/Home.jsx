@@ -9,13 +9,13 @@ import { useDispatch } from "react-redux";
 const Home = () => {
   const [selectedField, setSelectedField] = useState(null);
   const dispatch = useDispatch();
-  const juan840 = "Juan840";
+const juan840 = "Juan840"
   useEffect(() => {
-    dispatch(getByUserName(juan840));
-  });
+    dispatch(getByUserName(juan840))
+  })
 
   return (
-    <div className="container-fluid ">
+    <div className="container-fluid"  >
       <div className="row">
         <div className="col-6 offset-2">
           <div className="container mt-5">

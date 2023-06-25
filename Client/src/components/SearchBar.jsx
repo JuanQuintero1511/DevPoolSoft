@@ -8,6 +8,7 @@ export const SearchBar = ({ setSuggestions }) => {
   const [name, setName] = useState("");
   const dispatch = useDispatch();
   const usersYcompanies = useSelector((state) => state.usersYcompanies);
+  console.log(usersYcompanies);
 
   useEffect(() => {
     dispatch(getUsersAndCompanies());
@@ -19,8 +20,10 @@ export const SearchBar = ({ setSuggestions }) => {
 
     // Filtrar la lista de nombres según el valor de búsqueda
     const filteredSuggestions = usersYcompanies.filter(
-      (user) => user.nombre.toLowerCase().includes(searchValue)
+      (user) => user.userName.toLowerCase().includes(searchValue)
     );
+    console.log(filteredSuggestions)
+  
 
     setSuggestions(searchValue ? filteredSuggestions : []);
   };

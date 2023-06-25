@@ -16,25 +16,25 @@ const Card = () => {
       detalles: "El iPhone 14 promete revolucionar la experiencia de los usuarios con su diseño elegante y rendimiento excepcional. Para obtener más información sobre sus características y disponibilidad, visita el sitio web oficial de Apple.",
     },
     {
-      titulo: "Google anuncia el lanzamiento de su nuevo servicio de almacenamiento en la nube",
-      imagen: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToS33A6ZEFSRYnHO5W9_t828BWLJiKqY3j3g&usqp=CAU",
-      imagenperfil: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmPVTYhTBmrVTQl-bZzTn7z0rEdrN6G-0RqQ&usqp=CAU",
-      descripcion: "Google ha presentado su última apuesta en el mercado de almacenamiento en la nube con su nuevo servicio innovador. Con esta plataforma, los usuarios podrán almacenar y acceder a sus datos de forma segura desde cualquier dispositivo y en cualquier momento. Además, ofrece funciones avanzadas de colaboración y sincronización.",
-      detalles: "El nuevo servicio de almacenamiento en la nube de Google promete ser una solución integral para empresas y usuarios individuales que buscan una forma segura y eficiente de gestionar sus archivos. Para obtener más información sobre sus características y precios, visita el sitio web oficial de Google Cloud.",
+      titulo: "Oportunidad laboral: Desarrollador full-stack en Empresa ABC",
+      imagen: "https://img.freepik.com/vector-gratis/coleccion-logotipos-codigo-plano_23-2148829940.jpg",
+imagenperfil: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmPVTYhTBmrVTQl-bZzTn7z0rEdrN6G-0RqQ&usqp=CAU",
+      descripcion: "Empresa ABC está contratando un desarrollador full-stack con conocimientos en React, Node.js y bases de datos SQL.",
+      detalles: "El candidato ideal tendrá experiencia previa en proyectos de desarrollo web y podrá trabajar en equipo. Si cumples con los requisitos, envía tu CV y portafolio a nuestro correo electrónico.",
     },
     {
-      titulo: "Samsung presenta su última línea de televisores con tecnología OLED",
-      imagen: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrAWv5Wy4OcskKhPiVF9SGA64R0yR3J5KdyA&usqp=CAU",
-      imagenperfil: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmPVTYhTBmrVTQl-bZzTn7z0rEdrN6G-0RqQ&usqp=CAU",
-      descripcion: "Samsung ha anunciado el lanzamiento de su serie de televisores OLED de última generación. Estos televisores ofrecen una calidad de imagen impresionante con colores vibrantes y negros profundos. Además, cuentan con tecnología de inteligencia artificial que optimiza automáticamente la calidad de imagen y el sonido según el contenido que se esté reproduciendo.",
-      detalles: "Los nuevos televisores OLED de Samsung prometen brindar a los usuarios una experiencia de visualización envolvente y realista. Con tamaños de pantalla variados y funciones inteligentes integradas, esta línea de televisores se adapta a las necesidades de entretenimiento de cada usuario. Visita el sitio web oficial de Samsung para obtener más información sobre los modelos disponibles.",
+      titulo: "Desarrollador backend senior requerido en Compañía XYZ",
+      imagen: "https://www.pngfind.com/pngs/m/426-4264848_creative-web-solutions-logos-para-empresas-de-diseo.png",
+imagenperfil: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmPVTYhTBmrVTQl-bZzTn7z0rEdrN6G-0RqQ&usqp=CAU",
+      descripcion: "Compañía XYZ está buscando un desarrollador backend senior con experiencia en Python, Django y bases de datos NoSQL.",
+      detalles: "Ofrecemos un salario competitivo, un entorno de trabajo flexible y la oportunidad de trabajar en proyectos desafiantes. Si estás interesado en unirte a nuestro equipo, envíanos tu currículum y muestra de trabajo.",
     },
     {
-      titulo: "Microsoft anuncia el lanzamiento de Windows 11 con un diseño renovado",
-      imagen: "	https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoryU3C184XMsHvpB-VBw61QkMqwhNb1cy0A&usqp=CAU",
-      imagenperfil: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmPVTYhTBmrVTQl-bZzTn7z0rEdrN6G-0RqQ&usqp=CAU",
-      descripcion: "Microsoft ha revelado su último sistema operativo, Windows 11, que viene con una interfaz de usuario renovada y mejoras significativas en el rendimiento. La actualización incluye un nuevo menú de inicio centrado, ventanas rediseñadas y una integración más estrecha con servicios en la nube. Además, se han agregado nuevas funciones de productividad y entretenimiento.",
-      detalles: "Windows 11 promete brindar a los usuarios una experiencia más fluida y eficiente en sus dispositivos. Con nuevas capacidades de multitarea, opciones de personalización y una mayor compatibilidad con aplicaciones, este sistema operativo se posiciona como una actualización emocionante para los usuarios de Windows. Para obtener más información sobre sus características y disponibilidad, visita el sitio web oficial de Microsoft.",
+      titulo: "Empresa ABC busca desarrollador móvil",
+      imagen: "https://img.freepik.com/vector-premium/letra-c-concepto-logo-flecha_302761-170.jpg?w=2000",
+imagenperfil: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmPVTYhTBmrVTQl-bZzTn7z0rEdrN6G-0RqQ&usqp=CAU",
+      descripcion: "Empresa ABC está en busca de un desarrollador móvil con experiencia en desarrollo de aplicaciones para iOS y Android.",
+      detalles: "Ofrecemos un ambiente de trabajo colaborativo, proyectos emocionantes y la oportunidad de contribuir al desarrollo de aplicaciones móviles líderes en el mercado. Si estás interesado, contáctanos para más detalles.",
     },
     {
       titulo: "Sony anuncia la fecha de lanzamiento de la tan esperada PlayStation 5 Pro",
@@ -46,13 +46,11 @@ const Card = () => {
     {
       titulo: "Facebook anuncia el desarrollo de una nueva plataforma de realidad virtual",
       imagen: "https://i.pinimg.com/280x280_RS/c8/07/fd/c807fd2824655fc60149460c6c18b4f2.jpg",
-      imagenperfil: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmPVTYhTBmrVTQl-bZzTn7z0rEdrN6G-0RqQ&usqp=CAU",
-      descripcion: "Facebook está trabajando en una nueva plataforma de realidad virtual que promete llevar la experiencia de inmersión a un nivel superior. Esta plataforma contará con visores avanzados, controles intuitivos y una amplia biblioteca de experiencias virtuales. Además, se espera que permita la interacción social en entornos virtuales compartidos.",
-      detalles: "La nueva plataforma de realidad virtual de Facebook busca llevar la interacción y la exploración a nuevas fronteras. Con avances en tecnología y contenido innovador, la compañía espera ofrecer una experiencia de realidad virtual envolvente y accesible para usuarios de todo el mundo. Visita el sitio web oficial de Facebook para obtener más detalles sobre este emocionante proyecto.",
-    },
-  ];
-
-
+imagenperfil: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmPVTYhTBmrVTQl-bZzTn7z0rEdrN6G-0RqQ&usqp=CAU",
+      descripcion: "Empresa XYZ está buscando un ingeniero de datos con experiencia en extracción, transformación y carga de datos.",
+      detalles: "Si eres un profesional proactivo con habilidades en Python, SQL y herramientas de big data, únete a nuestro equipo y trabaja en proyectos emocionantes de análisis de datos y machine learning.",
+    },
+  ];
   const [showDetails, setShowDetails] = useState(Array(techNews.length).fill(false));
 
   const handleToggleDetail = (index) => {
@@ -75,8 +73,8 @@ const Card = () => {
     <div className="card-list">
       {techNews.map((news, index) => (
         <div
-          className="card bg-white rounded-lg shadow-lg my-4"
-          style={{ width: '450px' }}
+          className="card rounded-lg shadow-lg my-4 border-success"
+          style={{ width: '450px', }}
           key={index}
         >
           <div className="card-header d-flex align-items-center p-2">
@@ -92,7 +90,7 @@ const Card = () => {
             src={news.imagen}
             className="card-img-top rounded-t-lg w-50"
             alt="Imagen de la publicación"
-            style={{ alignSelf: 'center' }}
+            style={{ alignSelf: 'center', }}
           />
           <div className="card-body p-1"></div>
 
@@ -130,7 +128,7 @@ const Card = () => {
                 marginLeft: '50px'
               }}
             >
-              <div className="card">
+              <div className="card border-success">
                 <h5 className="card-header">Aplica Ahora</h5>
                 <div className="card-body">
                   <h5 className="card-title">{news.titulo}</h5>
