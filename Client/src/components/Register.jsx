@@ -1,6 +1,6 @@
 import { useState} from "react";
 import { useDispatch } from "react-redux"
-import { createUser, getByUserName } from "../redux/actions";
+import { createUser } from "../redux/actions";
 import Swal from 'sweetalert2';
 
 import React from "react";

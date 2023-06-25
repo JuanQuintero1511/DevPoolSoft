@@ -235,6 +235,7 @@ export const Login = () => {
             <button
               type="button"
               className="w-full block bg-white hover:bg-gray-100 focus:bg-gray-100 text-gray-900 font-semibold rounded-lg px-4 py-3 border border-gray-300"
+              onClick={handleLogin}
             >
               <div className="flex items-center justify-center">
                 <svg
@@ -272,8 +273,8 @@ export const Login = () => {
                     fill="#4285F4"
                     d="M48 48L17 24l-4-3 35-10z"
                   />
-                </svg>
-              <button className= "ml-4" onClick={handleLogin}> Log in with Google</button>
+                </svg>  
+                <h3 className="ml-4">Log in with Google</h3>
               </div>
             </button>
 

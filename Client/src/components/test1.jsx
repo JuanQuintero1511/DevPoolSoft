@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createUserData, getByUserName } from "../redux/actions";
+import { createUserData } from "../redux/actions";
 import CloudinaryUploadWidget from "./Cloudinary/UploadWidget";
 
 const Test1 = () => {
