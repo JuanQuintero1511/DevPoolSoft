@@ -55,6 +55,10 @@ export const Register = () => {
     if (!values.userName && !values.password && !values.email) {
       errors.username = "All camps are required"
     }
+    // if(values.userName && !noSymbols.test(values.userName)){
+    //   errors.username = "Username can not contain symbols!"
+    
+    //}
     // if(values.password === confirmPassword.password) {
     //   errors.passowrds = "The passwords must be equals"
     // }
@@ -84,19 +88,17 @@ export const Register = () => {
 
       dispatch(createUser(users))
       setSuccessufully(true)
-      // dispatch(getByUserName(users.userName)) este es el dispatch que hay que mover
       Swal.fire({
         icon: 'success',
         title: 'User Created',
         text: 'The user has been successfully created!',
       });
-      
+      setUsers({
+        userName:'',
+        email:'',
+        password:'',
+      })
     }
-
-
-
-
-
   }
 
 
@@ -140,18 +142,27 @@ export const Register = () => {
               </div>
             </div>
             <div className="relative mb-2">
-              <div className="w-1/2 px-2">
-                <input type="password" id="floating_outlined2" className="block px-2.5 pb-2.5 pt-4 w-[420%] text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-black font-mono dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " name="password"
-                  onChange={handleInputChange}
-                  value={users.password}
-                  required />
-                <label for="floating_outlined2" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1 font-mono tracking-widest ml-2"
-                  type="password"
-                >
-                  Confirm Password:
-                </label>
-              </div>
-            </div>
+  <div className="w-full sm:w-1/2 px-2">
+    <input
+      type="password"
+      id="floating_outlined2"
+      className="block px-2.5 pb-2.5 pt-4 w-full sm:w-[405%] text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-black font-mono dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+      placeholder=" "
+      name="password"
+      onChange={handleInputChange}
+      value={confirmPassword.password}
+      required
+    />
+    <label
+      htmlFor="floating_outlined2"
+      className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1 font-mono tracking-widest ml-2"
+      type="password"
+    >
+      Confirm Password:
+    </label>
+  </div>
+</div>
+
           </div>
 
 

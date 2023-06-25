@@ -49,7 +49,6 @@ User_data.hasMany(Comments, {foreignKey: 'id_user_data' })
 Comments.belongsTo(User_data, {foreignKey: 'id_user_data' })
 
 Mercado_pago.hasOne(Mercado_pago, { foreignKey: 'id_pay'})
-Users.belongsTo (User_data, { foreignKey: 'id_users'})
 User_data.hasOne(Devdata, { foreignKey: 'id_user_data' } )
 
 

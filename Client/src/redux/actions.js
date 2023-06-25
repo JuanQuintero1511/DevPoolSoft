@@ -55,7 +55,27 @@ export const userLogin_App = (userName) => {
         dispatch({ type: USER_LOGIN, payload: data });
     }
 }
+  
 
+// export const getByUserName = (userName) => {
+//     return async function (dispatch) {
+//       const { data } = await axios.get(`http://localhost:3001/users?userName=${userName}`);
+//       dispatch({ type: GET_BY_USER_NAME, payload: Array.isArray(data) ? data : [data] }); // Convertir a array si es un objeto individual
+//     };
+//   };
+  
+
+
+
+
+export const getUsers = () => {
+   
+}
+
+
+export const getCompanies = () => {
+    
+}
 
 export const createUserData = (payload) => {
     return async function (dispatch) {
