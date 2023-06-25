@@ -15,7 +15,8 @@ const MyPostCommunity = () => {
 
   useEffect(() => {
     dispatch(getAllPostsIdUser(id));
-  }, [dispatch, id]);
+
+  }, [dispatch, id, posts]);
 
   const closeModal = () => {
     setShowModal(!showModal);

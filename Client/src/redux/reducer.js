@@ -26,9 +26,6 @@ const reducer = (state = initialState, action) => {
     case GET_ALL_USERS:
       return { ...state, allUsers: action.payload };
 
-    case DELETE_POST_USER:
-      return { ...state, allPosts: action.payload };
-
     case USER_LOGIN:
       localStorage.setItem("userName", action.payload.userName);
       return { ...state, userLogin: action.payload };
