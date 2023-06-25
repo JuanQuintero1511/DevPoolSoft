@@ -7,4 +7,6 @@ export const GET_ALL_POSTS_ID_USER = "GET_ALL_POSTS_ID_USER";
 export const GET_ALL_USERS = "GET_ALL_USERS";
 export const USER_LOGIN = "USER_LOGIN";
 export const DELETE_POST_USER = "DELETE_POST_USER";
+export const GET_USERS_COMPANIES = "GET_USERS_COMPANIES";
 export const LOGOUT_USER = "LOGOUT_USER";
+
