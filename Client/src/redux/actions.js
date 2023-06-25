@@ -1,4 +1,4 @@
-import { GET_ALL_POSTS, GET_ID_POST, CREATE_POST_USER, GET_ALL_POSTS_ID_USER, CREATE_USER, DELETE_POST_USER, GET_ALL_USERS, USER_LOGIN, CREATE_USER_DATA } from "./action-types";
+import { GET_ALL_POSTS, GET_ID_POST, CREATE_POST_USER, GET_ALL_POSTS_ID_USER, CREATE_USER, DELETE_POST_USER, GET_ALL_USERS, USER_LOGIN, CREATE_USER_DATA, LOGOUT_USER } from "./action-types";
 import axios from "axios";
 
 export const getAllPosts = () => {
@@ -55,6 +55,10 @@ export const userLogin_App = (userName) => {
         dispatch({ type: USER_LOGIN, payload: data });
     }
 }
+
+export function logoutUser() {
+    return { type: LOGOUT_USER };
+  }
   
 
 // export const getByUserName = (userName) => {

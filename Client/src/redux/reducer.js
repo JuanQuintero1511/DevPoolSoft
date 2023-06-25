@@ -1,4 +1,4 @@
-import { GET_ALL_POSTS, GET_ID_POST, DELETE_POST_USER, GET_ALL_POSTS_ID_USER, GET_ALL_USERS, USER_LOGIN, CREATE_USER_DATA, CREATE_USER } from "./action-types";
+import { GET_ALL_POSTS, GET_ID_POST, DELETE_POST_USER, GET_ALL_POSTS_ID_USER, GET_ALL_USERS, USER_LOGIN, CREATE_USER_DATA, CREATE_USER, LOGOUT_USER } from "./action-types";
 
 
 const initialState = {
@@ -29,6 +29,9 @@ const reducer = (state = initialState, action) => {
     case USER_LOGIN:
       localStorage.setItem("userName", action.payload.userName);
       return { ...state, userLogin: action.payload };
+
+    case LOGOUT_USER:
+      return { ...state, userLogin: null };
 
     // case GET_BY_USER_NAME:
     //     return { ...state, byUserName: action.payload};
