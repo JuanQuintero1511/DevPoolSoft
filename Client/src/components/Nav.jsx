@@ -142,6 +142,9 @@ const Nav = () => {
               <i className="bi bi-person-circle"></i>
             </button>
           </NavLink>
+          <button type="button" className="btn btn-danger text-white">
+            <i className="bi bi-box-arrow-right"></i>
+          </button>
           <div ref={suggestionsRef}>
             <SearchSuggestionsList
               suggestions={suggestions}
