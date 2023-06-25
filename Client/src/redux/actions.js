@@ -70,15 +70,15 @@ export const getCompanies = () => { //trae solo companies
 export const getUsersAndCompanies = () => {
   return async (dispatch) => {
     const usersResponse = await axios.get("http://localhost:3001/users");
-    const companiesResponse = await axios.get("http://localhost:3001/company");
+    // const companiesResponse = await axios.get("http://localhost:3001/company");
     console.log(usersResponse);
     const users = usersResponse.data;
-    const companies = companiesResponse.data;
+    // const companies = companiesResponse.data;
 
-    return dispatch({ type: GET_USERS_COMPANIES, payload: users, companies });
+    return dispatch({ type: GET_USERS_COMPANIES, payload: users });
   };
 };
-
+// , companies
 export const createUserData = (payload) => {
     return async function (dispatch) {
         await axios.post("http://localhost:3001/company/", payload)
