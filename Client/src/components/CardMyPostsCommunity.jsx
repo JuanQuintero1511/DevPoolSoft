@@ -1,10 +1,21 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { deletePostUser } from "../redux/actions";
 
-const CardMyPostCommunity = ({ post, user }) => {
+const CardMyPostCommunity = ({ post, user}) => {
+
+  const dispatch = useDispatch();
+  
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    
+      dispatch(deletePostUser(post.id_post)); 
+      window.location.reload();
+  };
 
   return (
-    <div className="bg-gray-100 h-screen">
+    <div className="bg-gray-100">
       <div className="bg-white rounded-lg shadow-md p-4 transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg">
 
         <div className="mb-4">
@@ -29,7 +40,7 @@ const CardMyPostCommunity = ({ post, user }) => {
         </div>
         <div className="flex justify-between items-center mt-4">
   <div>
-    <button>
+    <button onClick={handleSubmit}>
       🗑️
     </button>
     <button>

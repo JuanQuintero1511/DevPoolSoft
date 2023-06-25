@@ -11,7 +11,7 @@ const CreatePostCommunity = ({ closeModal }) => {
   const user = useSelector((state) => state.userLogin);
 
   const [postData, setPostData] = useState({
-    id_user_data: user.user_datum.id_user_data ,
+    id_user_data: user.user_datum.id_user_data,
     title: "",
     body: "",
     image: ""
@@ -27,23 +27,23 @@ const CreatePostCommunity = ({ closeModal }) => {
       },
     }));
   };
-  
+
   const handleChange = (event) => {
     setPostData({ ...postData, [event.target.name]: event.target.value });
   };
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
     if (validation()) {
       dispatch(createPostUser(postData));
-      navigate("/community");
+      closeModal();
+      window.location.reload();
     } else {
       alert("Please fill in the required fields");
-    }    
+    }
   };
 
   //*validaciones*//
@@ -140,20 +140,15 @@ const CreatePostCommunity = ({ closeModal }) => {
             Image:
           </label>
           <div className="flex justify-center items-center">
-            {postData.image? 
-            <div className="-my-[400px]">
-            <h4>Uploaded ✅</h4>
-          </div>:
-            <div className="-my-[400px]">
-           <CloudinaryUploadWidget onImageUpload={handleImageUpload} />
-            </div>
-}
-            
+            {postData.image ?
+              <div className="-my-[400px]">
+                <h4>Uploaded ✅</h4>
+              </div> :
+              <div className="-my-[400px]">
+                <CloudinaryUploadWidget onImageUpload={handleImageUpload} />
+              </div>
+            }
           </div>
-
-          
-          </form>
-
           <div className="flex justify-end mt-10">
             <button
               type="submit"
@@ -162,7 +157,7 @@ const CreatePostCommunity = ({ closeModal }) => {
               CREATE POST
             </button>
           </div>
-        
+        </form>
       </div>
     </div>
   );

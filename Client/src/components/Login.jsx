@@ -15,7 +15,6 @@ export const Login = () => {
   useEffect(() => {
     dispatch(getAllUsers());
   }, [dispatch]);
-
   const handleLogin = () => {
     // Redirigir al usuario a la página de inicio de sesión de GOOGLE
     window.location.href = 'http://localhost:3001/auth';
@@ -133,7 +132,7 @@ export const Login = () => {
           />
         </div>
 
-        <div className="bg-white w-full md:max-w-md lg:max-w-full md:mx-auto md:mx-0 md:w-1/2 xl:w-1/3 h-screen px-6 lg:px-16 xl:px-12 flex items-center justify-center">
+        <div className="bg-white w-full md:max-w-md lg:max-w-full md:mx-auto md:w-1/2 xl:w-1/3 h-screen px-6 lg:px-16 xl:px-12 flex items-center justify-center">
           <div className="w-full h-100">
             <h1 className="text-blue-500 text-2xl md:text-4xl font-bold">
               DevPool
@@ -235,6 +234,7 @@ export const Login = () => {
             <button
               type="button"
               className="w-full block bg-white hover:bg-gray-100 focus:bg-gray-100 text-gray-900 font-semibold rounded-lg px-4 py-3 border border-gray-300"
+              onClick={handleLogin}
             >
               <div className="flex items-center justify-center">
                 <svg
@@ -272,8 +272,8 @@ export const Login = () => {
                     fill="#4285F4"
                     d="M48 48L17 24l-4-3 35-10z"
                   />
-                </svg>
-              <button className= "ml-4" onClick={handleLogin}> Log in with Google</button>
+                </svg>  
+                <h3 className="ml-4">Log in with Google</h3>
               </div>
             </button>
 
