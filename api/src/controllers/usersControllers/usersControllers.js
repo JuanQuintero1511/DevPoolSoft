@@ -9,7 +9,7 @@ const createUser = async (userName, email, password) => {
 
 const getAllUsers = async () => {
     return await Users.findAll({
-        attributes: ['id_users', 'userName', 'email'],
+        attributes: ['id_users', 'userName', 'email', 'password'],
         include: {
             model: User_data,
         }
@@ -17,11 +17,11 @@ const getAllUsers = async () => {
 }
 
 const searchUsersByUserName = async (userName) => {
-    const users = await Users.findAll({
+    const users = await Users.findOne({
       where: {
         userName: { [Op.iLike ]: `%${userName}%`}
       },
-      attributes: ['id_users', 'userName', 'email'],
+      attributes: ['id_users', 'userName', 'email', 'password'],
       include: {
         model: User_data,
         include: {

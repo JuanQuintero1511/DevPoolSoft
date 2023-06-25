@@ -1,9 +1,11 @@
 import { useState, useEffect, useRef } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import { SearchBar } from "./SearchBar";
 import { SearchSuggestionsList } from "./SearchSuggestionsList";
+import { logoutUser } from "../redux/actions";
+import { useDispatch } from "react-redux";
 
 const Nav = () => {
   const [suggestions, setSuggestions] = useState([]);
@@ -37,6 +39,20 @@ const Nav = () => {
   const handleSetSuggestions = (filteredSuggestions) => {
     setSuggestions(filteredSuggestions);
   };
+
+//*BOTON LOGOUT*//
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handlerLogout = () => {
+    localStorage.removeItem('userName')
+
+    dispatch(logoutUser());
+
+    navigate('/login');
+  }
+  
 
   return (
     <>
@@ -142,9 +158,11 @@ const Nav = () => {
               <i className="bi bi-person-circle"></i>
             </button>
           </NavLink>
-          <button type="button" className="btn btn-danger text-white">
+
+          <button type="button" onClick={handlerLogout} className="btn btn-danger text-white">
             <i className="bi bi-box-arrow-right"></i>
           </button>
+
           <div ref={suggestionsRef}>
             <SearchSuggestionsList
               suggestions={suggestions}

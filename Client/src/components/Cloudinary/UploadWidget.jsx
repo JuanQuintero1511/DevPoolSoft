@@ -21,7 +21,7 @@ class CloudinaryUploadWidget extends Component {
           // .getElementById("uploadedimage").src = result.info.secure_url
           //   .setAttribute("src", result.info.url); NO BORRAR POR EL MOMENTO
           this.props.onImageUpload(result.info.url);
-          this.props.handleImageId(result.info.public_id);
+          //this.props.handleImageId(result.info.public_id);
 
             
           

@@ -6,13 +6,10 @@ import { getByUserName } from "../redux/actions";
 
 import { useDispatch } from "react-redux";
 
+
 const Home = () => {
   const [selectedField, setSelectedField] = useState(null);
-  const dispatch = useDispatch();
-const juan840 = "Juan840"
-  useEffect(() => {
-    dispatch(getByUserName(juan840))
-  })
+
 
   return (
     <div className="container-fluid"  >
