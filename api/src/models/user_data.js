@@ -63,7 +63,7 @@ module.exports = (sequelize) => {
       defaultValue: false,
     },
     authentication: {
-      type: DataTypes.ENUM (["CUIT", "CUIL", "PASSPORT"]),
+      type: DataTypes.ENUM (["CUIT", "CUIL", "PASSPORT, DNI"]),
       allowNull: false,
     },
     image: {
