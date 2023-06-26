@@ -69,7 +69,11 @@ module.exports = (sequelize) => {
     image: {
       type: DataTypes.JSONB,
       allowNull: false
-    }
+    },
+    rol: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
   },
   {
     timestamps:false
