@@ -40,6 +40,10 @@ module.exports = (sequelize) => {
         image: {
           type: DataTypes.JSONB,
           allowNull: true
+        },
+        jobPost: {
+          type: DataTypes.BOOLEAN,
+          defaultValue: false
         }
       },
       {
