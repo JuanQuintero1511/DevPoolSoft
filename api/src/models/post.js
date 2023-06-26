@@ -41,9 +41,9 @@ module.exports = (sequelize) => {
           type: DataTypes.JSONB,
           allowNull: true
         },
-        jobPost: {
-          type: DataTypes.BOOLEAN,
-          defaultValue: false
+        typePost: {
+          type: DataTypes.ENUM (["Job", "Community"]),
+          allowNull: true,
         }
       },
       {
