@@ -13,7 +13,7 @@ module.exports = (sequelize) => {
             aboutMe: {
                 type: DataTypes.STRING,                
                 validate: {
-                    len: [0, 255]
+                    len: [0, 500]
                 }
             },
             experience: {

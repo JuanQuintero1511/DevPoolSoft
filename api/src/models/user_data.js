@@ -27,7 +27,7 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        len: [0, 255] 
+        len: [0, 500] 
       }
     },
     date_birthday: {

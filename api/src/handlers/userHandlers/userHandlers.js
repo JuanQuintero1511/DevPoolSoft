@@ -4,6 +4,7 @@ const getUserHandler = async (req, res) => {
 
     const {userName} = req.query;      
     try {     
+
         const results = userName ? await searchUsersByUserName(userName) : await getAllUsers()
         if (results.length === 0) throw Error ({message: "No se encontraron usuarios"})
         res.status(200).json(results);
@@ -11,6 +12,7 @@ const getUserHandler = async (req, res) => {
         res.status(400).json({ error: `Error occurred while found users`, detail: error.message })
     }
 }
+
 
 const postUserHandler = async (req, res) => {
     try {
