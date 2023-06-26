@@ -21,7 +21,7 @@ const SideBar = () => {
               <i className="bi bi-briefcase fs-4 text-success "></i>
             </a>
 
-            <a href='/JobsOffers'
+            {/* <a href='/JobsOffers'
               className={`nav-link ${selectedField === 'job-applications' ? 'active' : ''}`}
               onClick={() => setSelectedField('job-applications')}
             >
@@ -33,7 +33,7 @@ const SideBar = () => {
               onClick={() => setSelectedField('settings')}
             >
               Settings
-            </a>
+            </a> */}
           </div>
         </nav>
       </div>

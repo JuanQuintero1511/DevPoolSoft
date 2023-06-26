@@ -34,7 +34,7 @@ const PostCommunity = ({ post }) => {
                 </div>
                 <div>
                     <span className="text-gray-600"> ✉️ </span>
-                    <span className="font-bold"> {post.comments} </span>
+                    <span className="font-bold"> 0 </span>
                 </div>
             </div>
         </div>
