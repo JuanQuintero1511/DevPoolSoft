@@ -45,14 +45,14 @@ const JobDetailsModal = ({ post, handleCloseModal }) => {
             {/* Contenido del modal */}
             <div className="p-4">
               <img
-                src={post.companyLogo}
+                src={post.image?.url}
                 alt="Logo de la empresa"
                 className="w-32 h-32 mx-auto mb-4"
               />
-              <p>{post.description}</p>
+              <p>{post.body}</p>
               <div className="flex items-center mt-4">
                 <img
-                  src={post.interviewerImage}
+                  src={post.interviewerImage?.url}
                   alt="Foto del entrevistador"
                   className="w-8 h-8 rounded-full mr-2"
                 />

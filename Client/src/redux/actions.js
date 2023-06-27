@@ -94,3 +94,20 @@ export const createUserData = (payload) => {
         return dispatch({ type: CREATE_USER_DATA })
     }
 }
+
+export const newGoogleUser = (data) => {
+    return async function (dispatch) {
+        try {
+            console.log(data);
+            const response = await axios.post(`/auth/google`, data)
+            console.log(response.data);
+            return dispatch({
+                type: CREATE_GOOGLE_USER,
+                payload: response.data
+            })
+        }
+        catch (error) {
+            alert(error)
+        }
+    }
+}
