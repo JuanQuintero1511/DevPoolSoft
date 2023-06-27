@@ -6,12 +6,20 @@ import { SearchBar } from "./SearchBar";
 import { SearchSuggestionsList } from "./SearchSuggestionsList";
 import { logoutUser } from "../redux/actions";
 import { useDispatch } from "react-redux";
+import MercadoPagoModal from "./MercadoPago/MercadoPagoModal"
 
 const Nav = () => {
   const [suggestions, setSuggestions] = useState([]);
   const searchRef = useRef(null);
   const suggestionsRef = useRef(null);
   const location = useLocation();
+
+ const [showModal, setShowModal] = useState(false);
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
+
 
   const closeSuggestions = () => {
     setSuggestions([]);
@@ -148,11 +156,11 @@ const Nav = () => {
           <div className="d-flex flex-grow-2 w-50" ref={searchRef}>
             <SearchBar setSuggestions={handleSetSuggestions} />
           </div>
-          <button type="button" className="btn btn-warning text-white">
+          <button onClick={() => setShowModal(true)} type="button" className="btn btn-warning text-white">
             <i className="bi bi-patch-check mr-1"></i>
             Premium
           </button>
-
+             {showModal && <MercadoPagoModal closemodal={closeModal} />}
           <NavLink to="/profile">
             <button className="btn btn-outline-light">
               <i className="bi bi-person-circle"></i>
