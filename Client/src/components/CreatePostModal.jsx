@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { createPostUser } from "../redux/actions";
 import CloudinaryUploadWidget from "./Cloudinary/UploadWidget";
+import Swal from "sweetalert2";
 
 const CreatePostModal = ({ addPost, closeModal }) => {
 
@@ -127,7 +128,7 @@ let validation = () => {
           Little resume: 
         </label>
         <textarea
-          name="body"
+          name="resume"
           placeholder="Insert description"
           className="border border-gray-300 px-3 py-2 rounded-md w-full mb-2"
           value={postData.resume}
@@ -135,7 +136,6 @@ let validation = () => {
           onBlur={validateBody}
           required
         ></textarea>
-        {errors.body && <p className="text-red-500 text-sm">{errors.body}</p>}
         <label htmlFor="body" className="block mb-2">
           Description: <span className="text-red-500 text-sm">*</span>
         </label>
@@ -155,7 +155,7 @@ let validation = () => {
         </label>
         <input
           type="text"
-          name="title"
+          name="interviewerName"
           placeholder="Insert title"
           className="border border-gray-300 px-3 py-2 rounded-md w-full mb-2"
           value={postData.interviewerName}

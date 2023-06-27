@@ -12,13 +12,11 @@ const JobDetailsModal = ({ post, handleCloseModal }) => {
   const handleSaveJob = () => {
     // Lógica para guardar el trabajo como favorito
   };
-
   return (
     <>
      
         <div className="fixed top-0 left-0 flex items-center justify-center w-screen h-screen bg-gray-900 bg-opacity-50">
           <div className="bg-white rounded-lg shadow-lg w-1/2">
-            {/* Encabezado del modal */}
             <div className="p-4 flex items-center justify-between bg-teal-700 text-white">
               <h3 className="text-2xl font-bold">{post.title}</h3>
               <button
@@ -42,7 +40,7 @@ const JobDetailsModal = ({ post, handleCloseModal }) => {
               </button>
             </div>
 
-            {/* Contenido del modal */}
+           
             <div className="p-4">
               <img
                 src={post.image?.url}
@@ -52,16 +50,17 @@ const JobDetailsModal = ({ post, handleCloseModal }) => {
               <p>{post.body}</p>
               <div className="flex items-center mt-4">
                 <img
-                  src={post.interviewerImage?.url}
+                  src={post.interviewer.interviewerImage?.url}
                   alt="Foto del entrevistador"
                   className="w-8 h-8 rounded-full mr-2"
                 />
                 <p>Interviewer name: </p>
-                <p className="text-sm"> {post.interviewerName}</p>
+                
+                <p className="text-sm ml-2"> {post.interviewer.interviewerName}</p>
               </div>
             </div>
 
-            {/* Botones del modal */}
+           
             <div className="flex justify-end p-4">
               <button
                 className="bg-blue-500 text-white py-2 px-4 rounded-lg mr-4"

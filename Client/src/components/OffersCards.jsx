@@ -34,7 +34,7 @@ const OffersCards = ({ post }) => {
           {post.title}
         </h5>
         <p className="block font-sans text-base font-light leading-relaxed text-inherit antialiased">
-          {post.body}
+          {post.resume}
         </p>
         <span className="text-gray-600">❤️</span>
         <span className="font-bold">{post.likes}</span>
