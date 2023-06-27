@@ -128,7 +128,8 @@ const closeModal = () => {
       </div>
       <div className="mt-8 mb-8">
       {showModal && <CreatePostModal addPost={addPost} closeModal={closeModal} />}
-      <div className="grid grid-cols-3 gap-5 mt-16 py-4 ml-20 mr-4">
+      <div className="grid grid-cols-3 gap-5 mt-16 py-4 ml-14">
+
         {similpostArray.map((post) => (
           <OffersCards key={post.id} post={post} similpostArray={similpostArray} />
         ))}
