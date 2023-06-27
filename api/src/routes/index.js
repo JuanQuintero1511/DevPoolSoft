@@ -8,6 +8,7 @@ const usersRouter = require('../routes/usersRouter/usersRouter');
 const authRouter = require('../routes/authRouter/authRouter');
 const devDataRouter = require('../routes/devDataRouter/devDataRouter')
 const mercadoPagoRouter = require('../routes/mercadoPagoRouter/mercadoPagoRouter');
+const confirmEmailRouter = require('../routes/confirmEmailRouter/confirmEmailRouter')
 
 const router = Router();
 
@@ -18,6 +19,7 @@ router.use('/comments', commentRouter);
 router.use('/mercadoPago', mercadoPagoRouter);
 router.use('/users', usersRouter)
 router.use('/devdata', devDataRouter)
+router.use('/confirm', confirmEmailRouter)
 
 
 // Autenticación con google

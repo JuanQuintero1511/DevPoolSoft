@@ -25,7 +25,11 @@ module.exports = (sequelize) => {
                 validate: {
                     len: [0, 20] 
                   }
-            }
+            },
+            emailConfirmed: {
+                type: DataTypes.BOOLEAN,
+                defaultValue: false,
+              },
         },
         {
             timestamps:false

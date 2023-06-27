@@ -1,20 +1,26 @@
 const {createNewPost, getAllPosts, getPostById, updatePost, deletePost} = require('../../controllers/postsControllers/postsControllers')
+const  { sendNotification }  = require('../../utils/sendEmail')
 
 const createPostHandler = async (req, res) => {
     try {
-      const { title, body, state, id_user_data, image, typePost} = req.body;           
+      const { title, body, state, id_user_data, full_name, email,image, typePost} = req.body;           
 
       if (!title && !body && !id_user_data) throw new Error("Missing required data");
-
+      
+      
       const newPost = await createNewPost(
         title, 
         body, 
         state, 
         id_user_data,
+        full_name,
+        email,
         image,
-        typePost);
-              
-      return res.status(200).json({ newPost });      
+        typePost);       
+       
+        sendNotification(email, full_name);
+        return res.status(201).json({ newPost });
+        
     } catch (error) {
       return res.status(400).json({ error: error.message });
     }
