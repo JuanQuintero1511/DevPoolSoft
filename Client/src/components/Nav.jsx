@@ -37,6 +37,10 @@ const Nav = () => {
   //   setSuggestions(filteredSuggestions);
   // };
 
+  const handleTypeChange = (type) => {
+    setSelectedType(type);
+  };
+
   return (
     <nav className="navbar bg-dark border-bottom border-bottom-dark fixed-top" data-bs-theme="dark">
       <div className="container-fluid">
@@ -49,9 +53,9 @@ const Nav = () => {
               Tipo De Empleo
             </button>
             <ul className="dropdown-menu dropdown-menu-dark">
-              <li><a className="dropdown-item active" href="#">On-Site</a></li>
-              <li><a className="dropdown-item" href="#">Remote</a></li>
-              <li><a className="dropdown-item" href="#">Part-Time</a></li>
+              <li><a className="dropdown-item active" href="#" onClick={() => handleTypeChange('On-Site')}>On-Site</a></li>
+              <li><a className="dropdown-item" href="#" onClick={() => handleTypeChange('Remote')}>Remote</a></li>
+              <li><a className="dropdown-item" href="#" onClick={() => handleTypeChange('Full-Time')}>Full-Time</a></li>
             </ul>
           </div>
         )}
