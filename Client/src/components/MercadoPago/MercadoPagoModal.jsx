@@ -58,6 +58,7 @@ const MercadoPagoModal = ({ closemodal }) => {
               </a>
             </button>
             <button className="bg-yellow-500 text-white py-2 px-2 rounded-lg mb-2 md:mb-0 md:mr-4">
+
               <a href="https://www.mercadopago.com.co/checkout/v1/redirect?pref_id=1390863745-55b8e754-a21e-4260-8fd1-3fe6e378d93f" className="text-white">
                 BUY SECOND OFFER
               </a>

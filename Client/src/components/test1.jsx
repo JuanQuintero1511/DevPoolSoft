@@ -169,7 +169,9 @@ console.log(form)
   return (
     <div className=" flex items-center justify-center min-h-screen" >
       <div className="w-full sm:w-[40%] bg-gray-100 mx-auto px-6 py-12 border-0 shadow-lg sm:rounded-3xl">
+
         <h1 className="flex justify-center mb-3 -mt-8 text-3xl font-extrabold text-gray-900 md:text-2xl lg:text-5xl"><span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400 mr-6 mt-0">DevPool </span>  Profile form required.</h1>
+
 
         {rolSelected.company || rolSelected.user ? null : <div className="flex justify-center space-x-4 h-12 mb-2">
           <a onClick={() => {
