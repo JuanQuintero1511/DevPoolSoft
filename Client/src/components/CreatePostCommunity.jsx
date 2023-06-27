@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { createPostUser } from "../redux/actions";
 
@@ -8,12 +8,15 @@ import CloudinaryUploadWidget from "./Cloudinary/UploadWidget"
 
 const CreatePostCommunity = ({ closeModal }) => {
 
+  const user = useSelector((state) => state.userLogin);
+
   const [postData, setPostData] = useState({
-    id_user_data: "dc774cdb-7d3e-4e60-9c39-22da9ec061fa",
+    id_user_data: user.user_datum.id_user_data,
     title: "",
     body: "",
     image: ""
   });
+
 
   const handleImageUpload = (url) => {
     setPostData((prevPostData) => ({
@@ -24,28 +27,26 @@ const CreatePostCommunity = ({ closeModal }) => {
       },
     }));
   };
-  
-console.log(postData.image.url)
+
   const handleChange = (event) => {
     setPostData({ ...postData, [event.target.name]: event.target.value });
   };
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
     if (validation()) {
       dispatch(createPostUser(postData));
-      navigate("/community");
-      window.location.reload("/community");
+      closeModal();
+      window.location.reload();
     } else {
       alert("Please fill in the required fields");
-    }    
+    }
   };
 
-  //*validaciones**//
+  //*validaciones*//
 
   const [errors, setErrors] = useState({
     title: "",
@@ -139,20 +140,15 @@ console.log(postData.image.url)
             Image:
           </label>
           <div className="flex justify-center items-center">
-            {postData.image? 
-            <div className="-my-[400px]">
-            <h4>Uploaded ✅</h4>
-          </div>:
-            <div className="-my-[400px]">
-           <CloudinaryUploadWidget onImageUpload={handleImageUpload} />
-            </div>
-}
-            
+            {postData.image ?
+              <div className="-my-[400px]">
+                <h4>Uploaded ✅</h4>
+              </div> :
+              <div className="-my-[400px]">
+                <CloudinaryUploadWidget onImageUpload={handleImageUpload} />
+              </div>
+            }
           </div>
-
-          
-          </form>
-
           <div className="flex justify-end mt-10">
             <button
               type="submit"
@@ -161,7 +157,7 @@ console.log(postData.image.url)
               CREATE POST
             </button>
           </div>
-        
+        </form>
       </div>
     </div>
   );

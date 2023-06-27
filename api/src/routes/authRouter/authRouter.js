@@ -51,8 +51,7 @@ authRouter.get( '/google/callback',
 
 //ruta cuando ya estas iniciado sesion
 authRouter.get('/google/protected', isLoggedIn, (req, res) =>{
- let name = req.user.displayName
-res.send (`Hola ${name}`)
+ res.redirect('http://localhost:5173/home');
 })
 
 //ruta cuando falla el inicio de sesion

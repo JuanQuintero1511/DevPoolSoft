@@ -13,3 +13,5 @@ export const SearchSuggestions = ({ suggestions, closeSuggestions }) => {
     </NavLink>
   );
 };
+
+{/* <NavLink to={`/profile/${suggestions.id_users}`} onClick={handleClick}></NavLink> */}

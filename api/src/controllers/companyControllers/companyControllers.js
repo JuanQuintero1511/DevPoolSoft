@@ -11,6 +11,7 @@ const createCompany = async (
   phone_number,
   profile_image,
   authentication,
+  rol,
   image
 ) => {
   let imageUploadResult;
@@ -36,6 +37,7 @@ const createCompany = async (
     phone_number,
     profile_image,
     authentication,
+    rol,
     image: {     
       url: imageUploadResult.url,
     },

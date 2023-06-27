@@ -7,6 +7,7 @@ const commentRouter = require('../routes/commentsRouter/commentsRouter');
 const usersRouter = require('../routes/usersRouter/usersRouter');
 const authRouter = require('../routes/authRouter/authRouter');
 const devDataRouter = require('../routes/devDataRouter/devDataRouter')
+const mercadoPagoRouter = require('../routes/mercadoPagoRouter/mercadoPagoRouter');
 
 const router = Router();
 
@@ -14,7 +15,7 @@ const router = Router();
 router.use('/company', companyRouter);
 router.use('/posts', postsRouter);
 router.use('/comments', commentRouter);
-
+router.use('/mercadoPago', mercadoPagoRouter);
 router.use('/users', usersRouter)
 router.use('/devdata', devDataRouter)
 

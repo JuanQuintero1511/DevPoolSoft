@@ -1,7 +1,7 @@
 const { Posts, User_data, Comments } = require ("../../db");
 const cloudinary= require ("../../utils/cloudinary")
 
-const createNewPost = async (title, body, state, id_user_data, image) => {
+const createNewPost = async (title, body, state, id_user_data, image, typePost) => {
   let imageUploadResult;
 
   if (image) {
@@ -24,6 +24,7 @@ const createNewPost = async (title, body, state, id_user_data, image) => {
     state: state ? state : null,
     id_user_data,
     image: imageUploadResult ? { url: imageUploadResult.url } : null,
+    typePost: typePost ? typePost : null,
   });
 
   return newPost;
