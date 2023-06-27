@@ -1,4 +1,4 @@
-const { createNewPost, createNewJobPost, getAllPosts, getPostById, updatePost, deletePost } = require('../../controllers/postsControllers/postsControllers')
+const { createNewPost, createNewJobPost, getAllPosts, getPostById, updatePost, deletePost, searchPostByType } = require('../../controllers/postsControllers/postsControllers')
 
 const createPostHandler = async (req, res) => {
 
@@ -28,7 +28,8 @@ const createPostHandler = async (req, res) => {
 
 const getAllPostsHandler = async (req, res) => {
   try {
-    const allPosts = await getAllPosts();
+    const { typePost } = req.query;
+    const allPosts = typePost ? await searchPostByType(typePost) : await getAllPosts();
     if (allPosts.length === 0) {
       throw new Error("The posts do not exist.");
     }
