@@ -138,10 +138,7 @@ export const Login = () => {
             <h1 className="text-blue-500 text-2xl md:text-4xl font-bold">
               DevPool
             </h1>
-            <h1 className="text-xl md:text-2xl font-bold leading-tight mt-6">
-              Log in to your account
-            </h1>
-
+          
             <form
               onSubmit={handleSubmit}
               className="mt-6"
@@ -224,18 +221,18 @@ export const Login = () => {
                   errors.email ||
                   errors.password
                 }
-                className="w-full block bg-blue-500 hover:bg-blue-400 focus:bg-blue-400 text-white font-semibold rounded-lg px-4 py-3 mt-6"
+                className="w-full block bg-blue-500 hover:bg-blue-400 focus:bg-blue-400 text-white font-semibold rounded-lg px-4 py-3 mt-6 mb-2"
               >
                 Log In
               </button>
             </form>
 
-            <hr className="my-6 border-gray-300 w-full" />
+          
 
             <LoginButton/>
                     
 
-            <p className="mt-8">
+            <p className="mt-2">
               Need an account?{' '}
               <Link to="/register" className="text-blue-500 hover:text-blue-700 font-semibold">
                 Create an account

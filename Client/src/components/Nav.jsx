@@ -48,7 +48,7 @@ const Nav = () => {
     setSuggestions(filteredSuggestions);
   };
 
-//*BOTON LOGOUT*//
+//BOTON LOGOUT//
 
   const dispatch = useDispatch();
   const navigate = useNavigate();

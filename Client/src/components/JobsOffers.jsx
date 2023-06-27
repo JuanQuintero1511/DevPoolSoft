@@ -50,7 +50,7 @@ const closeModal = () => {
               icon: 'error',
               title: 'Need to be a company',
               text: 'Please complete your profile before create a post',
-            });
+    });
           }}
           }
             className="relative inline-flex items-center justify-center px-9 py-3 overflow-hidden font-mono font-medium tracking-normal text-white bg-gray-800 rounded-lg group"
