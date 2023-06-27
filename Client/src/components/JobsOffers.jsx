@@ -134,18 +134,21 @@ const JobsOffers = () => {
         <button
 
           onClick={() => setShowModal(true)}
-          className="relative inline-flex items-center justify-center px-9 py-3 overflow-hidden font-mono font-medium tracking-normal text-white bg-gray-800 rounded-lg group"
-        >
-          <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-green-500 rounded-full group-hover:w-56 group-hover:h-56"></span>
-          <span className="absolute inset-0 w-full h-full -mt-1 rounded-lg opacity-30 bg-gradient-to-b from-transparent via-transparent to-teal-200"></span>
-          <span className="relative">CREATE POST</span>
+            className="relative inline-flex items-center justify-center px-9 py-3 overflow-hidden font-mono font-medium tracking-normal text-white bg-gray-800 rounded-lg group z-50"
+            >
+            <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-green-500 rounded-full group-hover:w-56 group-hover:h-56"></span>
+            <span className="absolute inset-0 w-full h-full -mt-1 rounded-lg opacity-30 bg-gradient-to-b from-transparent via-transparent to-teal-200"></span>
+            <span className="relative">CREATE POST</span>
         </button>
       </div>
+      <div className="mt-8 mb-8">
       {showModal && <CreatePostModal addPost={addPost} closeModal={closeModal} />}
-      <div className="grid grid-cols-3 gap-5 mt-16 py-4 mx-2">
-        {filteredPosts.map((post) => (
+      <div className="grid grid-cols-3 gap-5 mt-16 py-4 ml-14">
+
+        {similpostArray.map((post) => (
           <OffersCards key={post.id} post={post} similpostArray={similpostArray} />
         ))}
+      </div>
       </div>
     </div>
 
