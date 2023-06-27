@@ -40,6 +40,10 @@ module.exports = (sequelize) => {
         image: {
           type: DataTypes.JSONB,
           allowNull: true
+        },
+        typePost: {
+          type: DataTypes.ENUM (["Job", "Community"]),
+          allowNull: true,
         }
       },
       {

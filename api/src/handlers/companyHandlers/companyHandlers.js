@@ -26,6 +26,7 @@ const  { sendNotification }  = require('../../utils/send.email')
               authentication,
               image
             } = req.body;
+            const rol = req.body.rol_type;
             const rol_type = req.body.rol_type;
             const userName = req.body.userName;
             const password = req.body.password;
@@ -41,8 +42,8 @@ const  { sendNotification }  = require('../../utils/send.email')
                 phone_number,
                 profile_image,
                 authentication,
-                image,
-                
+                rol,
+                image                
               );
               await setCompanyUsers(userName, email, password, full_nameAux);
               await setCompanyRol(rol_type, full_nameAux);
