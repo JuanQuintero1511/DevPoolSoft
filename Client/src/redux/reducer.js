@@ -53,6 +53,10 @@ const reducer = (state = initialState, action) => {
         
         case GET_USERS_COMPANIES:
             return { ...state, usersYcompanies: action.payload };
+
+            // case CREATE_GOOGLE_USER:
+            //   localStorage.setItem("userName", action.payload.userName);
+            //   return { ...state, userLogin: action.payload };
             
         default:
             return{...state};
