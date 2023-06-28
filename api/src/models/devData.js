@@ -31,6 +31,9 @@ module.exports = (sequelize) => {
                     len: [0, 5]
                 }               
             },
+            curriculumVitae: {
+                type: DataTypes.JSONB,                
+              },
         },
         {
             timestamps: false

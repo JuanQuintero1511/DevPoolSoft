@@ -12,9 +12,9 @@ const getDevDataHandler = async (req, res) => {
 
 const postDevDataHandler = async (req, res) => {
     try {
-        const { id_user_data, aboutMe, experience, education, skills, ratings } = req.body;
+        const { id_user_data, aboutMe, experience, education, skills, ratings, curriculumVitae } = req.body;
     
-        const newDevData = await createDevData(id_user_data, aboutMe, experience, education, skills, ratings);
+        const newDevData = await createDevData(id_user_data, aboutMe, experience, education, skills, ratings, curriculumVitae);
     
         return res.status(200).json({ newDevData }); 
              
