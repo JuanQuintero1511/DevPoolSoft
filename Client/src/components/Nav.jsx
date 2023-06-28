@@ -66,17 +66,18 @@ const app = initializeApp(firebaseConfig);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    localStorage.removeItem('userName');
-    const auth = getAuth();
-    signOut(auth)
-      .then(() => {
-        navigate('/login');
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
+  const handlerLogout = () => {
+    localStorage.removeItem('userName')
+    dispatch(logoutUser());
+const auth = getAuth();
+signOut(auth).then(() => {
+  navigate('/login')
+}).catch((error) => {
+  send(error);
+});
+
+    navigate('/login');
+  }
   
 
   return (
