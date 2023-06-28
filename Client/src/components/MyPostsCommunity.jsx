@@ -4,6 +4,7 @@ import { useParams, Link } from "react-router-dom";
 import { getAllPostsIdUser } from "../redux/actions";
 import CardMyPostCommunity from "./CardMyPostsCommunity";
 import CreatePostCommunity from "./CreatePostCommunity";
+import Swal from 'sweetalert2';
 
 const MyPostCommunity = () => {
 
@@ -12,6 +13,9 @@ const MyPostCommunity = () => {
   const posts = useSelector((state) => state.allPostsIdUser.posts);
   const user = useSelector((state) => state.allPostsIdUser.full_name);
   const [showModal, setShowModal] = useState(false)
+  console.log(user)
+
+  const userId = useSelector((state) => state.userLogin);
 
 
   useEffect(() => {
@@ -41,7 +45,18 @@ const MyPostCommunity = () => {
             </div>
             <div>
               <button
-                onClick={() => setShowModal(true)}
+                onClick={() => {
+                  if (userId?.user_datum?.id_user_data) {
+                    setShowModal(true);
+                  } else {
+                    Swal.fire({
+                      icon: 'error',
+                      title: 'Sorry..',
+                      text: 'You need to register to create posts.',
+                      confirmButtonColor: '#ff7f7f',
+                    });
+                  }
+                }}
                 className="select-none rounded-lg bg-teal-700 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
               >
                 CREATE POST
@@ -50,12 +65,16 @@ const MyPostCommunity = () => {
           </div>
           {showModal && <CreatePostCommunity closeModal={closeModal} />}
         </div>
-        {posts?.length > 0 ? <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 ml-[20vw]">
+        {posts?.length > 0 ? 
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 ml-[20vw]">
           {posts?.map((post) => (
             <CardMyPostCommunity key={post.id_post} post={post} user={user} />
           ))}
         </div>
-        : <h1>You don´t have any post yet.</h1>
+        : 
+        <h1 className="text-3xl font-bold text-red-500 mt-20">
+          You don't have any post yet.
+        </h1>
         }
       </div>
     </div>

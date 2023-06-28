@@ -3,6 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { getAllUsers } from "../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { userLogin } from "../redux/actions";
+import Swal from 'sweetalert2';
 import LoginButton from "./Google.Login"
 
 export const Login = () => {
@@ -40,7 +41,13 @@ export const Login = () => {
       dispatch(userLogin(user));
       navigate("/home");
     } else {
-      alert("Invalid username, email or password");
+      Swal.fire({
+        icon: 'error',
+        title: 'Login incompleted !',
+        text: 'Invalid username, email or password..',
+        confirmButtonColor: '#ff7f7f',
+      });
+      
     }
   }
 

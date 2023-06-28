@@ -40,9 +40,7 @@ const closeModal = () => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-200 bg-cover">
       <div className="absolute top-16 right-8">
-        <button
-          
-          onClick={() => 
+        <button onClick={() => 
           {if(user?.user_datum?.rol === "company") {
             setShowModal(true)
           }else{
@@ -60,8 +58,6 @@ const closeModal = () => {
             <span className="relative">CREATE POST</span>
         </button>
       </div>
-
-
       {showModal && <CreatePostModal  closeModal={closeModal} />}
      <div className="grid grid-cols-3 gap-5 mt-16 py-4 ml-14">
         {posts.filter((post) => post.typePost === "Job").map((filteredPost) => (

@@ -2,16 +2,28 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { deletePostUser } from "../redux/actions";
+import Swal from 'sweetalert2';
 
 const CardMyPostCommunity = ({ post, user}) => {
 
   const dispatch = useDispatch();
   
   const handleSubmit = (event) => {
-    event.preventDefault();
-    
-      dispatch(deletePostUser(post.id_post)); 
-      window.location.reload();
+    Swal.fire({
+      icon: 'question',
+      title: 'Are you sure?',
+      text: 'This action cannot be undone.',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Delete',
+      cancelButtonText: 'Cancel'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(deletePostUser(post.id_post));
+        window.location.reload();
+      }
+    });
   };
 
   return (

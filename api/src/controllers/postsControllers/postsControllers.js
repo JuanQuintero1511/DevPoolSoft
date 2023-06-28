@@ -122,8 +122,20 @@ const deletePost = async (post) => {
     return postDelete;
 };
 
+const searchPostByType = async (typePost) => {
+  const posts = await Posts.findAll({
+  where: {
+    typePost: `${typePost}`
+  },
+  include: {
+    model: Comments    
+  }
+  });  
+return posts;
+};
 
 
 
 
-module.exports = {createNewPost, createNewJobPost, getAllPosts, getPostById, updatePost, deletePost}
+
+module.exports = {createNewPost, createNewJobPost, getAllPosts, getPostById, updatePost, deletePost, searchPostByType}
