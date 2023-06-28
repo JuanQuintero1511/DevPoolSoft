@@ -1,9 +1,16 @@
 const { Users, User_data, Posts } = require("../../db");
+const { encrypt, compare } = require('../../helpers/bcryptHandler/bcryptHelper');
 const { Op } = require("sequelize")
 
 const createUser = async (userName, email, password) => {
+
+    //se encripta la password
+    const passwordHash = await encrypt(password);
     await Users.create({
-        userName, email, password
+         userName,
+         email, 
+        //  password, 
+         password: passwordHash,
       })
 }
 
