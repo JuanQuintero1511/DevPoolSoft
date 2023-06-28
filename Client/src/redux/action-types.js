@@ -9,4 +9,4 @@ export const USER_LOGIN = "USER_LOGIN";
 export const DELETE_POST_USER = "DELETE_POST_USER";
 export const GET_USERS_COMPANIES = "GET_USERS_COMPANIES";
 export const LOGOUT_USER = "LOGOUT_USER";
-
+export const GET_USER_BY_ID = "GET_USER_BY_ID";

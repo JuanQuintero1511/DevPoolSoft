@@ -1,11 +1,19 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch} from "react-redux";
+import { getUserById } from "../redux/actions";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 
-import Test1 from "./test1";
+export const IdProfile = () => {
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  const usersYcompanies = useSelector((state) => state.usersYcompanies);
+  const user = usersYcompanies.find((user) => user.id === id);
 
-export const Profile = () => {
-  const user = useSelector((state) => state.userLogin);
-  console.log(user);
-  
+  useEffect(() => {
+    dispatch(getUserById(id));
+  }, [dispatch, id]);
+
+
   return (
     <div>
       {user.user_datum ? (
@@ -28,7 +36,7 @@ export const Profile = () => {
                 </div>
               </div>
               <div className="mt-4 items-center justify-center ml-4">
-                {user.user_datum.rol_type == "user" ? (
+                {user.user_datum.rol_type === "user" ? (
                   <h3 className="text-2xl font-semibold ml-[20%]">
                     Developer Information
                   </h3>
@@ -92,10 +100,11 @@ export const Profile = () => {
       ) : (
         <div className="flex justify-center w-full">
           <div className="w-full">
-            <Test1 />
+            <Test1 /> {/* Agrega el componente que desees mostrar si no hay un usuario seleccionado */}
           </div>
         </div>
       )}
     </div>
-  );
-};
+  )
+}
+

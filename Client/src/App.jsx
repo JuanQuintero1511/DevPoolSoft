@@ -16,6 +16,8 @@ import { useEffect } from "react";
 import { userLogin_App } from "./redux/actions";
 import { useDispatch } from "react-redux";
 import Test1 from "./components/test1";
+import { IdProfile } from "./components/IdProfile";
+
 
 function App() {
   const location = useLocation();
@@ -44,7 +46,7 @@ function App() {
         <Route path="/JobsOffers" element={<JobsOffers />} />
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profile />} />
-        {/* <Route path="/profile/:id" element={<Profile />} /> */}
+        <Route path="/profile/:id" element={<IdProfile />} />
         <Route path="/community" element={<Community />} />
         <Route path="/community/:id" element={<Detail />} />
         <Route path="/community/myposts/:id" element={<MyPostCommunity />} />

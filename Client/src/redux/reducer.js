@@ -1,4 +1,4 @@
-import { GET_ALL_POSTS, GET_ID_POST, DELETE_POST_USER, GET_ALL_POSTS_ID_USER, GET_ALL_USERS, USER_LOGIN, CREATE_USER_DATA, CREATE_USER, LOGOUT_USER, GET_USERS_COMPANIES } from "./action-types";
+import { GET_ALL_POSTS, GET_ID_POST, DELETE_POST_USER, GET_ALL_POSTS_ID_USER, GET_ALL_USERS, USER_LOGIN, CREATE_USER_DATA, CREATE_USER, LOGOUT_USER, GET_USERS_COMPANIES, GET_USER_BY_ID } from "./action-types";
 
 const initialState = {
 
@@ -7,8 +7,7 @@ const initialState = {
     allPostsIdUser: [],
     allUsers: [],
     userLogin: {},
-    usersYcompanies: [],
-    JobsPosts: []
+    usersYcompanies: []
 
 }
 
@@ -52,6 +51,9 @@ const reducer = (state = initialState, action) => {
         case GET_USERS_COMPANIES:
             return { ...state, usersYcompanies: action.payload };
 
+
+        case GET_USER_BY_ID: // Nuevo caso de acción para almacenar el ID de usuario
+            return { ...state, usersYcompanies: action.payload };
         default:
             return { ...state };
     }
