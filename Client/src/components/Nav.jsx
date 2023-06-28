@@ -4,6 +4,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import { SearchBar } from "./SearchBar";
 import { SearchSuggestionsList } from "./SearchSuggestionsList";
+import { logoutUser } from "../redux/actions";
+import { useDispatch } from "react-redux";
+import MercadoPagoModal from "./MercadoPago/MercadoPagoModal"
+import { getAuth, signOut } from "firebase/auth";
+import { initializeApp } from "firebase/app";
+
 
 const Nav = () => {
 
@@ -41,13 +47,31 @@ const Nav = () => {
 
 //BOTON LOGOUT//
 
-  // const dispatch = useDispatch();
-  // const navigate = useNavigate();
+const firebaseConfig = {
+  apiKey: "AIzaSyCwCe7BBMtInaRu422Myrvg5d-qO-LAtHc",
+  authDomain: "devpoolsoft.firebaseapp.com",
+  projectId: "devpoolsoft",
+  storageBucket: "devpoolsoft.appspot.com",
+  messagingSenderId: "759683741972",
+  appId: "1:759683741972:web:bc2b1d5c9746d5c728aa01",
+  measurementId: "G-2549PBCD08"
+};
 
-  // const handlerLogout = () => {
-  //   localStorage.removeItem('userName')
+const app = initializeApp(firebaseConfig);
 
-  //   // dispatch(logoutUser());
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handlerLogout = () => {
+    localStorage.removeItem('userName')
+    dispatch(logoutUser());
+const auth = getAuth();
+signOut(auth).then(() => {
+  navigate('/login')
+}).catch((error) => {
+  send(error);
+});
 
   //   navigate('/login');
   // }
