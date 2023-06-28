@@ -50,19 +50,17 @@ const createCompanyUser = async (userName, email, password) => {
   })
 }
 
-const setCompanyUsers = async (userName, email, password, full_name) => {
-  const [companyUser, created] = await Users.findOrCreate({
+const setCompanyUsers = async (userName, full_name) => {
+  const companyUser = await Users.findOne({
     where: {
       userName: `${userName}`,
-      email: `${email}`,
-      password: `${password}`,
     }
   })  
-  console.log(companyUser.dataValues)
+  console.log(companyUser)
   const usersToSet = companyUser.dataValues.id_users
   await User_data.update({ id_users: `${usersToSet}`}, {
     where: {
-      full_name: { [Op.iLike]: `%${full_name}%`}
+      full_name: `${full_name}`
     }
   })
 }

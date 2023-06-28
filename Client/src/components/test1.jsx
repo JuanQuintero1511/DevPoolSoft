@@ -31,7 +31,6 @@ const Test1 = () => {
   const [form, setForm] = useState({
     userName: userLoged.userName,
     email: userLoged.email,
-    password: userLoged.password,
     full_name: "",
     backup_email: "",
     description: "",
