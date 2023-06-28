@@ -54,9 +54,9 @@ module.exports = (sequelize) => {
           allowNull: false          
         },
         interviewerImage: {
-        type: DataTypes.JSONB,
-        allowNull: true
-        },
+          type: DataTypes.JSONB,
+          allowNull: true
+          },
         resume: {
           type: DataTypes.STRING,
           allowNull: true
@@ -65,7 +65,6 @@ module.exports = (sequelize) => {
           type: DataTypes.JSONB,
           allowNull: true
         }
-
       },
       {
         paranoid: true, // Habilita soft deletes
