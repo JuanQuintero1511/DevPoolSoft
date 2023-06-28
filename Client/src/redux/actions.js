@@ -1,4 +1,4 @@
-import { GET_ALL_POSTS, GET_ID_POST, CREATE_POST_USER, GET_ALL_POSTS_ID_USER, CREATE_USER, DELETE_POST_USER, GET_ALL_USERS, USER_LOGIN, CREATE_USER_DATA, LOGOUT_USER, GET_USERS_COMPANIES, CREATE_GOOGLE_USER } from "./action-types";
+import { GET_ALL_POSTS, GET_ID_POST, CREATE_POST_USER, GET_ALL_POSTS_ID_USER, CREATE_USER, DELETE_POST_USER, GET_ALL_USERS, USER_LOGIN, CREATE_USER_DATA, LOGOUT_USER, GET_USERS_COMPANIES, CREATE_GOOGLE_USER, CREATE_PUBLICATION } from "./action-types";
 import axios from "axios";
 
 export const getAllPosts = () => {
@@ -111,3 +111,14 @@ export const newGoogleUser = (data) => {
         // }
     }
 }
+
+export const createPublication = (publicationData) => {
+    return async function (dispatch) {
+      try {
+        const { data } = await axios.post("http://localhost:3001/", publicationData);
+        dispatch({ type: CREATE_PUBLICATION, payload: data });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  };

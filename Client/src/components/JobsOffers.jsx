@@ -12,10 +12,17 @@ const user = useSelector((state) => state.userLogin);
 const posts = useSelector((state) => state.allPosts);
 const [showModal, setShowModal] = useState(false);
 
+const [filteredPosts, setFilteredPosts] = useState(posts);
+
+const selectedTipoEmpleo = useSelector((state) => state.selectedTipoEmpleo);
+const selectedCargo = useSelector((state) => state.selectedCargo);
+
+
 
 const closeModal = () => {
   setShowModal(!showModal);
 }
+
  
   const dispatch = useDispatch();
 
@@ -23,9 +30,26 @@ const closeModal = () => {
      dispatch(getAllPosts());
    }, [dispatch]);
   
-  
+   useEffect(() => {
+    filterPosts();
+  }, [selectedTipoEmpleo, selectedCargo]);
 
-  
+  const filterPosts = () => {
+    let filtered = posts.filter((post) => {
+      if (selectedTipoEmpleo && post.tipoEmpleo !== selectedTipoEmpleo) {
+        return false;
+      }
+      if (selectedCargo && post.cargo !== selectedCargo) {
+        return false;
+      }
+      return true;
+    });
+
+    setFilteredPosts(filtered);
+  };
+
+
+
 
   // const addPost = (newPost) => {
   //   setSimilpostArray([...similpostArray, newPost]);
