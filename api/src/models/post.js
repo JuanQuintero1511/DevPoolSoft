@@ -53,6 +53,15 @@ module.exports = (sequelize) => {
           type: DataTypes.STRING,
           allowNull: false          
         },
+          allowNull: true,
+        },
+        resume: {
+          type: DataTypes.STRING
+        },
+        interviewer: {
+          type: DataTypes.JSONB
+        }
+
       },
       {
         paranoid: true, // Habilita soft deletes

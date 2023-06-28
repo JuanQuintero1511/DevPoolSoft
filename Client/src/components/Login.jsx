@@ -3,6 +3,8 @@ import { useNavigate, Link } from "react-router-dom";
 import { getAllUsers } from "../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { userLogin } from "../redux/actions";
+import Swal from 'sweetalert2';
+import LoginButton from "./Google.Login"
 
 export const Login = () => {
 
@@ -39,7 +41,13 @@ export const Login = () => {
       dispatch(userLogin(user));
       navigate("/home");
     } else {
-      alert("Invalid username, email or password");
+      Swal.fire({
+        icon: 'error',
+        title: 'Login incompleted !',
+        text: 'Invalid username, email or password..',
+        confirmButtonColor: '#ff7f7f',
+      });
+      
     }
   }
 
@@ -137,10 +145,7 @@ export const Login = () => {
             <h1 className="text-blue-500 text-2xl md:text-4xl font-bold">
               DevPool
             </h1>
-            <h1 className="text-xl md:text-2xl font-bold leading-tight mt-6">
-              Log in to your account
-            </h1>
-
+          
             <form
               onSubmit={handleSubmit}
               className="mt-6"
@@ -223,61 +228,18 @@ export const Login = () => {
                   errors.email ||
                   errors.password
                 }
-                className="w-full block bg-blue-500 hover:bg-blue-400 focus:bg-blue-400 text-white font-semibold rounded-lg px-4 py-3 mt-6"
+                className="w-full block bg-blue-500 hover:bg-blue-400 focus:bg-blue-400 text-white font-semibold rounded-lg px-4 py-3 mt-6 mb-2"
               >
                 Log In
               </button>
             </form>
 
-            <hr className="my-6 border-gray-300 w-full" />
+          
 
-            <button
-              type="button"
-              className="w-full block bg-white hover:bg-gray-100 focus:bg-gray-100 text-gray-900 font-semibold rounded-lg px-4 py-3 border border-gray-300"
-              onClick={handleLogin}
-            >
-              <div className="flex items-center justify-center">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  xmlnsXlink="http://www.w3.org/1999/xlink"
-                  className="w-6 h-6"
-                  viewBox="0 0 48 48"
-                >
-                  <defs>
-                    <path
-                      id="a"
-                      d="M44.5 20H24v8.5h11.8C34.7 33.9 30.1 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z"
-                    />
-                  </defs>
-                  <clipPath id="b">
-                    <use xlinkHref="#a" overflow="visible" />
-                  </clipPath>
-                  <path
-                    clipPath="url(#b)"
-                    fill="#FBBC05"
-                    d="M0 37V11l17 13z"
-                  />
-                  <path
-                    clipPath="url(#b)"
-                    fill="#EA4335"
-                    d="M0 11l17 13 7-6.1L48 14V0H0z"
-                  />
-                  <path
-                    clipPath="url(#b)"
-                    fill="#34A853"
-                    d="M0 37l30-23 7.9 1L48 0v48H0z"
-                  />
-                  <path
-                    clipPath="url(#b)"
-                    fill="#4285F4"
-                    d="M48 48L17 24l-4-3 35-10z"
-                  />
-                </svg>  
-                <h3 className="ml-4">Log in with Google</h3>
-              </div>
-            </button>
+            <LoginButton/>
+                    
 
-            <p className="mt-8">
+            <p className="mt-2">
               Need an account?{' '}
               <Link to="/register" className="text-blue-500 hover:text-blue-700 font-semibold">
                 Create an account

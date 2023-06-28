@@ -5,9 +5,6 @@ const morgan = require('morgan');
 const routes = require('./routes/index.js');
 const cors = require("cors");
 
-//autenticacion
-const passport = require("passport")
-const session = require('express-session')
 
 
 
@@ -31,22 +28,6 @@ server.use((req, res, next) => {
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
   next();
 });
-
-//inicializamos passport
-// app.set('trust proxy', 1) // descomentar esto 
-// en https trust first proxy
-server.use(session({
-  secret: 'misecreto que debe ir en variable de entorno',
-  resave: false,
-  saveUninitialized: true,
-  //poner cookie en true cunado estemos en https
-  cookie: { secure: false },
-}))
-
-// server.use(connect.session())
-server.use(passport.initialize())
-server.use(passport.session())
-
 
 
 server.use('/', routes);
