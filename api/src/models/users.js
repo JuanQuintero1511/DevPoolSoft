@@ -23,7 +23,7 @@ module.exports = (sequelize) => {
                 type: DataTypes.STRING,
                 allowNull: false,
                 validate: {
-                    len: [0, 20] 
+                    len: [6, 20] 
                   }
             },
             emailConfirmed: {
