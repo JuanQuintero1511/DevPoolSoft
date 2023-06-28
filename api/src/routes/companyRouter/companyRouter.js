@@ -4,7 +4,7 @@ const {
     getCompanyHandler,
     getCompanyHandlerId,
     createCompanyHandler,
-    updateCompanyHandler,
+    updateCompanyPremiumHandler,
     deleteCompanyHandler
  } = require("../../handlers/companyHandlers/companyHandlers")
 
@@ -12,9 +12,9 @@ const {
 const companyRouter = Router();
 
 companyRouter.get("/", getCompanyHandler);
-companyRouter.get("/:id", getCompanyHandlerId)
 companyRouter.post("/", createCompanyHandler);
-companyRouter.put("/:id", updateCompanyHandler);
+companyRouter.get("/:id", getCompanyHandlerId)
+companyRouter.put("/:full_name", updateCompanyPremiumHandler);
 companyRouter.delete("/:id", deleteCompanyHandler);
 
 

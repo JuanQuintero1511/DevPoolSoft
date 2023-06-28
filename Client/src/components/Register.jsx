@@ -1,255 +1,227 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
+import { useDispatch } from "react-redux"
+import { createUser } from "../redux/actions";
+import Swal from 'sweetalert2';
+
+import React from "react";
 
 
+let docTitle = document.title;
+window.addEventListener("blur", () => {
+  document.title = "Come Back ;(";
+})
+window.addEventListener("focus", () => {
+  document.title = docTitle;
+})
 
 export const Register = () => {
-    const [rolSelected, setRolSelected] = useState({
-        company: false,
-        user: false,
-    });
-    const [error, setError] = useState({})
-
-    const [companyForm, setCompanyForm] = useState({
-        id_company: "",
-        id_rol: "company",
-        username_company: "",
-        password_company: "",
-        fullName_owner: "",
-        email: "",
-        dateOfCreate: "",
-        phoneNumber: "",
-        isActive: false,
-        isPremium: false,
-        authentication_pdf: "",
 
 
-    })
-    const [userForm, setUserForm] = useState({
-        id_user: "",
-        id_rol: "user",
-        username_user: "",
-        password_user: "",
-        fullName_user: "",
-        email: "",
-        dateOfBirth: "",
-        phoneNumber: "",
-        isActive: false,
-        isPremium: false,
-        isAdmin: false,
+  const dispatch = useDispatch();
 
 
-    })
+  const [error, setError] = useState({});
+  const [successfully, setSuccessufully] = useState(false)
+  const [users, setUsers] = useState({
+    userName: "",
+    email: "",
+    password: "",
+  })
 
-    const handleInputChange = event => {
-       
-        const { name, value } = event.target;
-       
-            setCompanyForm(prevCompany=> ({
-                ...prevCompany,
-                [name]: value
-            }))
-        
-    };
-    
+  const [confirmPassword, setConfirmPassword] = useState({
+    password2: "",
+  })
 
-    const handleSubmit = event => {
-        event.preventDefault();
-        let errors= {};
-        if (!rolSelected.company) {
-            errors = onValidate(userForm)
-        } else {
-            errors = onValidate(companyForm)
-        }
-        if(errors.length > 0) {
-          setError(errors)
-        }
-        
-            console.log(companyForm)
-        
 
+
+  const handleInputChange = event => {
+
+    const { name, value } = event.target;
+    setUsers(prevUsers => ({
+      ...prevUsers,
+      [name]: value
+    }));
+
+
+  };
+
+
+  const onValidate = (values) => {
+    const errors = {};
+    const bestPassword = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+  
+    if (!values.userName.trim()) {
+      errors.userName = "Username is required";
     }
 
-    const onValidate = (values) => {
-        const errors = {};
-        const noSymbols = /[ `!@#$%^&*()+\-=\[\]{};':"\\|,.<>\/?~]/;
-        const bestPassword = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
-
-        if(!values.username_company && !values.username_user) {
-          errors.username = "User name is required"
-        }
-        if(values.fullName_owner && noSymbols.test(values.fullName_owner)) {
-          errors.fullName = "Name can't contain symbols"
-        }
-        if(values.fullName_user && noSymbols.test(values.fullName_user)) {
-          errors.fullName = "Name can't contain symbols"
-        }
-        if (values.password_company && !bestPassword.test(values.password_company)) {
-          errors.password = "Password must be at least 8 characters and contain at least one uppercase letter, one lowercase letter, and one number"
-        }
-        if (values.password_user && !bestPassword.test(values.password_user)) {
-          errors.password = "Password must be at least 8 characters and contain at least one uppercase letter, one lowercase letter, and one number"
-        }
-        
-    };
-
-    console.log(companyForm.username_company)
+    if (!values.email.trim()) {
+      errors.email = "Email is required";
+    } else if (!emailRegex.test(values.email.toLowerCase())) {
+      errors.email = "Invalid email address";
+    }
+  
+    if (!values.password.trim()) {
+      errors.password = "Password is required";
+    } else if (!bestPassword.test(values.password)) {
+      errors.password =
+        "Password must be at least 8 characters and contain at least one uppercase letter, one lowercase letter, and one number";
+    }
+  
+    return errors;
+  };
+  ;
 
 
-    return (
-        <div className="container mx-auto">
-      <h1 className="text-center font-bold text-3xl mb-4 mt-5 ml-2" >
-       USER REGISTER:
+  function handleSubmit(event) {
+    event.preventDefault();
+    let errors = {};
+
+    errors = onValidate(users)
+    if (errors && Object.keys(errors).length > 0) {
+      setError(errors)
+    } else {
+
+      dispatch(createUser(users))
+      setSuccessufully(true)
+      Swal.fire({
+        icon: 'success',
+        title: 'User Created',
+        text: 'The user has been successfully created!',
+      });
+      setUsers({
+        userName: '',
+        email: '',
+        password: '',
+      })
+      setConfirmPassword({
+        password2: "",
+      })
+    }
+  }
+
+
+  return (
+
+
+
+    <div className="bg-[url('./src/image/leftside.jpg')] flex items-center justify-center min-h-screen">
+    <div className="w-full sm:w-[40%] bg-gray-100 mx-auto px-6 py-12 border-0 shadow-lg sm:rounded-3xl">
+      <h1 className="flex justify-center mb-3 -mt-8 text-3xl font-extrabold text-gray-900 md:text-2xl lg:text-5xl">
+        <span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400 mr-4 mt-0">DevPool</span> Register Form.
       </h1>
-      <div className="flex justify-center gap-4 mb-4">
-        <button
-          className={`${
-            rolSelected.user ? "bg-blue-500 text-white" : "bg-gray-200"
-          } p-2 px-4 rounded`}
-          onClick={() =>
-            setRolSelected({ user: true, company: false })
-          }
-        >
-          DEVELOPER
-        </button>
-        <button
-          className={`${
-            rolSelected.company ? "bg-blue-500 text-white" : "bg-gray-200"
-          } p-2 px-4 rounded`}
-          onClick={() =>
-            setRolSelected({ company: true, user: false })
-          }
-        >
-          COMPANY
-        </button>
-      </div>
-      {rolSelected.company || rolSelected.user ? 
-      <form className="bg-gray-100 p-8 rounded shadow-md">
-        <div className="mb-4">
-          <label className="block text-gray-700 font-bold mb-2">
-            User Name:
+      <form>
+        <div>
+          <div className="relative mb-2">
             <input
               type="text"
-              name={rolSelected.company ? "username_company" : "username_user"}
+              id="floating_outlined"
+              className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-blue-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-black font-mono dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              placeholder=" "
+              name="userName"
               onChange={handleInputChange}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              placeholder="User name here..."
+              value={users.userName}
+              required
             />
-          </label>
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 font-bold mb-2">
-            Password:
-            <input
-              type="password"
-              name={rolSelected.company ? "password_company" : "password_user"}
-              placeholder="Password..."
-              onChange={handleInputChange}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            />
-          </label>
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 font-bold mb-2">
-            Confirm password:
-            <input
-              type="password"
-              name="confirmPassword"
-              placeholder="Confirm password..."
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            />
-          </label>
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 font-bold mb-2">
-            {rolSelected.company
-              ? "Company owner name:"
-              : "Full name of the user:"}
-            <input
-              type="text"
-              name={rolSelected.company ? "fullName_owner" : "fullName_user"}
-              placeholder={
-                rolSelected.company ? "Company owner full name..." : "Full name of the user..."
-              }
-              onChange={handleInputChange}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            />
-          </label>
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 font-bold mb-2">
-            Email:
-            <input
-              type="text"
-              name="email"
-              placeholder="Email..."
-              onChange={handleInputChange}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            />
-          </label>
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 font-bold mb-2">
-            Phone Number:
-            <input
-              type="number"
-              name="phoneNumber"
-              placeholder="Phone number..."
-              onChange={handleInputChange}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            />
-          </label>
-        </div>
-        {rolSelected.company && (
-          <div className="mb-6">
-            <label className="block text-gray-700 font-bold mb-2">
-              Authentication archive:
-              <input
-                type="text"
-                name="authentication_pdf"
-                placeholder="Load authentication..."
-                onChange={handleInputChange}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              />
+            <label htmlFor="floating_outlined" className="absolute text-sm text-blue-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1 font-mono tracking-widest">
+              User Name:
             </label>
           </div>
-        )}
-        {rolSelected.company ? (
-          <div className="mb-6">
-            <label className="block text-gray-700 font-bold mb-2">
-              Date of create:
+        </div>
+  
+        <div className="flex flex-wrap -mx-2">
+          <div className="w-1/2 px-2">
+            <div className="relative mb-2">
               <input
-                type="text"
-                name="dateOfCreate"
-                placeholder="Date of birth..."
+                type="password"
+                id="floating_outlined1"
+                className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-black font-mono dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                placeholder=" "
+                name="password"
                 onChange={handleInputChange}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                value={users.password}
+                required
               />
-            </label>
+              <label htmlFor="floating_outlined1" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1 font-mono tracking-widest">
+                Password:
+              </label>
+              {error.userName && (
+                  <p className="text-red-500">{error.userName}</p>)}
+            </div>
           </div>
-        ): <div className="mb-6">
-        <label className="block text-gray-700 font-bold mb-2">
-          Date of create:
+          <div className="w-full sm:w-1/2 px-2">
+            <div className="relative mb-2">
+              <input
+                type="password"
+                id="floating_outlined2"
+                className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-black font-mono dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                placeholder=" "
+                name="password2"
+                onChange={handleInputChange}
+                required
+              />
+              <label htmlFor="floating_outlined2" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1 font-mono tracking-widest">
+                Confirm Password:
+              </label>
+            </div>
+          </div>
+        </div>
+  
+        <div className="relative mb-2">
           <input
             type="text"
-            name="dateOfBirth"
-            placeholder="Date of birth..."
+            id="floating_outlined3"
+            className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-black font-mono dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            placeholder=" "
+            name="email"
+            value={users.email}
             onChange={handleInputChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            required
           />
-        </label>
-      </div>}
-        <div className="flex justify-center mt-6">
-          <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            onClick={handleSubmit}
-          >
-            Submit
-          </button>
+          <label htmlFor="floating_outlined3" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1 font-mono tracking-widest">
+            Email:
+          </label>
+        </div>
+  
+        {Object.keys(error).length > 0 && (
+          <div className="bg-red-100 text-red-900 p-4 -mb-2 rounded">
+            {Object.values(error).map((errorMsg, index) => (
+              <p key={index}>{errorMsg}</p>
+            ))}
+          </div>
+        )}
+  
+        <div className="flex items-center justify-center my-2 h-4">
+          <a onClick={handleSubmit} className="relative inline-flex items-center justify-center px-9 py-3 overflow-hidden font-mono font-medium tracking-widest text-white bg-gray-800 rounded-lg group mx-4 mt-14">
+            <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-green-500 rounded-full group-hover:w-56 group-hover:h-56"></span>
+            <span className="absolute inset-0 w-full h-full -mt-1 rounded-lg opacity-30 bg-gradient-to-b from-transparent via-transparent to-teal-300"></span>
+            <span className="relative">SUBMIT</span>
+          </a>
+  
+          <a href="/" className="relative inline-flex items-center justify-center px-9 py-3 overflow-hidden font-mono font-medium tracking-widest text-white bg-gray-800 rounded-lg group mx-4 mt-14">
+            <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-green-500 rounded-full group-hover:w-56 group-hover:h-56"></span>
+            <span className="absolute inset-0 w-full h-full -mt-1 rounded-lg opacity-30 bg-gradient-to-b from-transparent via-transparent to-teal-300"></span>
+            <span className="relative">BACK</span>
+          </a>
+  
+          {successfully && (
+            <div>
+              <a href="/login" className="relative inline-flex items-center justify-center px-9 py-3 overflow-hidden font-mono font-medium tracking-widest text-white bg-gray-800 rounded-lg group mx-4 mt-14">
+                <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-green-500 rounded-full group-hover:w-56 group-hover:h-56"></span>
+                <span className="absolute inset-0 w-full h-full -mt-1 rounded-lg opacity-30 bg-gradient-to-b from-transparent via-transparent to-teal-300"></span>
+                <span className="relative">LOGIN</span>
+              </a>
+            </div>
+          )}
         </div>
       </form>
-      :null/* image soon*/}
+
     </div>
+  </div>
+  
+
   );
+
 
 
 }
