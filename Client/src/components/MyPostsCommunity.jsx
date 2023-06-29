@@ -13,7 +13,6 @@ const MyPostCommunity = () => {
   const posts = useSelector((state) => state.allPostsIdUser.posts);
   const user = useSelector((state) => state.allPostsIdUser.full_name);
   const [showModal, setShowModal] = useState(false)
-  console.log(user)
 
   const userId = useSelector((state) => state.userLogin);
 

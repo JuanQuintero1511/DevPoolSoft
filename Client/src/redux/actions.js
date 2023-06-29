@@ -1,4 +1,4 @@
-import { GET_ALL_POSTS, GET_ID_POST, CREATE_POST_USER, GET_ALL_POSTS_ID_USER, CREATE_USER, DELETE_POST_USER, GET_ALL_USERS, USER_LOGIN, CREATE_USER_DATA, LOGOUT_USER, GET_USERS_COMPANIES, CREATE_GOOGLE_USER } from "./action-types";
+import { GET_ALL_POSTS, GET_ID_POST, CREATE_POST_USER, GET_ALL_POSTS_ID_USER, CREATE_USER, DELETE_POST_USER, GET_ALL_USERS, USER_LOGIN, CREATE_USER_DATA, LOGOUT_USER, GET_USERS_COMPANIES, CREATE_GOOGLE_USER, MODIFY_POST_USER } from "./action-types";
 import axios from "axios";
 
 export const getAllPosts = () => {
@@ -45,6 +45,14 @@ export const deletePostUser = (id_post) => {
         dispatch({ type: DELETE_POST_USER, payload: data });
     }
 }
+
+export const modifyPostUser = (postData) => {
+    return async function (dispatch) {
+        const { data } = await axios.put(`http://localhost:3001/posts/${postData.id}`, postData);
+        dispatch({ type: MODIFY_POST_USER, payload: data });
+    }
+}
+
 export const userLogin = (user) => {
     return { type: USER_LOGIN, payload: user}
 }
