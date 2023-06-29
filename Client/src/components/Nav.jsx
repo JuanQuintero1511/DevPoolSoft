@@ -17,7 +17,7 @@ const Nav = () => {
   const suggestionsRef = useRef(null);
   const location = useLocation();
 
- const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   const closeModal = () => {
     setShowModal(false);
@@ -51,37 +51,38 @@ const Nav = () => {
     setSuggestions(filteredSuggestions);
   };
 
-//BOTON LOGOUT//
-
-const firebaseConfig = {
-  apiKey: "AIzaSyCwCe7BBMtInaRu422Myrvg5d-qO-LAtHc",
-  authDomain: "devpoolsoft.firebaseapp.com",
-  projectId: "devpoolsoft",
-  storageBucket: "devpoolsoft.appspot.com",
-  messagingSenderId: "759683741972",
-  appId: "1:759683741972:web:bc2b1d5c9746d5c728aa01",
-  measurementId: "G-2549PBCD08"
-};
-
-const app = initializeApp(firebaseConfig);
 
 
+  const firebaseConfig = {
+    apiKey: "AIzaSyCwCe7BBMtInaRu422Myrvg5d-qO-LAtHc",
+    authDomain: "devpoolsoft.firebaseapp.com",
+    projectId: "devpoolsoft",
+    storageBucket: "devpoolsoft.appspot.com",
+    messagingSenderId: "759683741972",
+    appId: "1:759683741972:web:bc2b1d5c9746d5c728aa01",
+    measurementId: "G-2549PBCD08"
+  };
+
+  const app = initializeApp(firebaseConfig);
+
+
+  //BOTON LOGOUT//
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handlerLogout = () => {
     localStorage.removeItem('userName')
     dispatch(logoutUser());
-const auth = getAuth();
-signOut(auth).then(() => {
-  navigate('/login')
-}).catch((error) => {
-  send(error);
-});
+    const auth = getAuth();
+    signOut(auth).then(() => {
+      navigate('/login')
+    }).catch((error) => {
+      send(error);
+    });
 
     navigate('/login');
   }
-  
+
 
   return (
     <>
@@ -181,7 +182,7 @@ signOut(auth).then(() => {
             <i className="bi bi-patch-check mr-1"></i>
             Premium
           </button>
-             {showModal && <MercadoPagoModal closemodal={closeModal} />}
+          {showModal && <MercadoPagoModal closemodal={closeModal} />}
           <NavLink to="/profile">
             <button className="btn btn-outline-light">
               <i className="bi bi-person-circle"></i>
