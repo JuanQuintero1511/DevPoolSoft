@@ -3,7 +3,7 @@ const { Router } = require("express");
 const {
  getUserHandler,
  postUserHandler,
- getUserByIdHandler}  = require("../../handlers/userHandlers/userHandlers");
+ getUserByIdHandler}  = require('../../handlers/userHandlers/userHandlers');
 
 // const {deleteUsers} = require("");
 
