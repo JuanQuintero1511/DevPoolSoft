@@ -22,6 +22,7 @@
     "express-session": "^1.17.3",
     "google-auth-library": "^8.8.0",
     "googleapis": "^118.0.0",
+    "jsonwebtoken": "^9.0.0",
     "mercadopago": "^1.5.16",
     "morgan": "^1.10.0",
     "mysql2": "^3.3.5",

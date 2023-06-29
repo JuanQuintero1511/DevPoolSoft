@@ -1,9 +1,9 @@
-import style from './GoogleLogin.module.css'
+
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth"
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { userLogin } from '../redux/actions';
+import { loginUser } from '../redux/actions';
 import { useDispatch } from "react-redux";
 import { newGoogleUser } from '../redux/actions';
 // import jwtDecode from 'jwt-decode';
@@ -104,10 +104,10 @@ function LoginButton() {
 
   return (
     <>{success ? (
-      dispatch(userLogin(dataa)),
+      dispatch(loginUser(dataa)),
       navigate("/home")
     ) : (
-      <><button onClick={handleOnClickGoogle} type="button" className={style.loginBtnGoogle}>
+      <><button onClick={handleOnClickGoogle} className="w-full block bg-red-500 hover:bg-red-400 focus:bg-blue-400 text-white font-semibold rounded-lg px-4 py-3 mt-6 mb-2" type="button">
         Sign in with Google
       </button></>
     )}</>

@@ -1,4 +1,4 @@
-const { createUser, getAllUsers, searchUsersByUserName, searchUserById } = require("../../controllers/usersControllers/usersControllers")
+const { postNewUser, postLoginUser, getAllUsers, searchUsersByUserName, searchUserById } = require("../../controllers/usersControllers/usersControllers")
 
 const getUserHandler = async (req, res) => {
 
@@ -17,13 +17,28 @@ const getUserHandler = async (req, res) => {
 const postUserHandler = async (req, res) => {
     try {
         const { userName, email, password } = req.body;
-        await createUser(userName, email, password)
+        await postNewUser(userName, email, password)
         const newUser = await searchUsersByUserName(userName)
         res.status(201).json(newUser)
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
 }
+
+const postLoginUserHandler = async (req, res) => {
+    try {
+      const { email, password } = req.body;
+  
+      const userLogin = await postLoginUser({
+        email,
+        password,
+      });
+  
+      res.status(200).json(userLogin);
+    } catch (error) {
+      res.status(400).json({ message: error.message });
+    }
+  };
 
 const getUserByIdHandler = async (req, res) => {
     const {id} = req.params;
@@ -42,5 +57,6 @@ const getUserByIdHandler = async (req, res) => {
 module.exports = {
     getUserHandler,
     postUserHandler,
+    postLoginUserHandler,
     getUserByIdHandler
 }

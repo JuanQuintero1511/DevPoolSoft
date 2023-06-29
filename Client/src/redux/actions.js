@@ -51,8 +51,14 @@ export const getAllUsers = () => {
 
 export const createUser = (userData) => {
     return async function (dispatch) {
-        await axios.post(`http://localhost:3001/users`, userData);
+        await axios.post(`http://localhost:3001/users/register`, userData);
         dispatch({ type: CREATE_USER });
+    }
+}
+export const loginUser = (userData) => {
+    return async function (dispatch) {
+        await axios.post(`http://localhost:3001/users/login`, userData);
+        dispatch({ type: LOGIN_USER });
     }
 }
 export const deletePostUser = (id_post) => {
@@ -61,9 +67,9 @@ export const deletePostUser = (id_post) => {
         dispatch({ type: DELETE_POST_USER, payload: data });
     }
 }
-export const loginUser = (user) => {
-    return { type: LOGIN_USER, payload: user }
-}
+// export const loginUser = (user) => {
+//     return { type: LOGIN_USER, payload: user }
+// }
 
 export const loginUser_App = (userName) => {
     return async function (dispatch) {

@@ -1,18 +1,65 @@
 const { Users, User_data, Posts } = require("../../db");
 const { encrypt, compare } = require('../../helpers/bcryptHandler/bcryptHelper');
+const { generateTokenJwt } = require('../../helpers/jsonWebToken/generateTokenJwt');
 const { Op } = require("sequelize")
 
-const createUser = async (userName, email, password) => {
+const postNewUser = async (userName, email, password) => {
 
-    //se encripta la password
+    try {
+      //se encripta la password
     const passwordHash = await encrypt(password);
-    await Users.create({
+    const [user, created] = await Users.findOrCreate({
+         where: { email},
+         defaults: {
          userName,
-         email, 
-        //  password, 
          password: passwordHash,
+         email,
+         }
       })
+
+      if (!created) throw new Error('The email is already registered');
+
+      return {
+        message: 'User created successfully',
+        user: {
+          id: user.id,
+          userName: user.userName,
+          email: user.email,
+        },
+      };
+
+    } catch (error) {
+      throw new Error(error.message);
+    }
 }
+
+//En este me faltaría agregar la autenticación con token
+const postLoginUser = async ({ email, password }) => {
+  try {
+    const user = await Users.findOne({ where: { email } });
+
+    if (!user) throw new Error('User not registered with that email');
+
+    const checkPassword = await compare(password, user.password);
+
+    if (!checkPassword) throw new Error('Invalid password');
+
+    const token = await generateTokenJwt(user);
+
+    return {
+      message: 'User successfully logged in',
+      user: {
+        id_users: user.id_users,
+        userName: user.userName,
+        email: user.email,
+      },
+      token,
+    };
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
 
 const getAllUsers = async () => {
     return await Users.findAll({
@@ -55,7 +102,8 @@ const searchUsersByUserName = async (userName) => {
   };
 
 module.exports = {
-    createUser,
+    postNewUser,
+    postLoginUser,
     getAllUsers,
     searchUsersByUserName,
     searchUserById

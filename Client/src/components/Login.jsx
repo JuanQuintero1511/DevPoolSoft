@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { getAllUsers } from "../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
-import { userLogin } from "../redux/actions";
+import { loginUser } from "../redux/actions";
 import Swal from 'sweetalert2';
 import LoginButton from "./Google.Login"
 
@@ -17,15 +17,11 @@ export const Login = () => {
   useEffect(() => {
     dispatch(getAllUsers());
   }, [dispatch]);
-  const handleLogin = () => {
-    // Redirigir al usuario a la página de inicio de sesión de GOOGLE
-    window.location.href = 'http://localhost:3001/auth';
-  };
 
   const [userData, setUserData] = useState({
     email: "",
     password: "",
-    username: ""
+    // username: ""
   });
 
   const handleChange = (event) => {
@@ -152,7 +148,7 @@ export const Login = () => {
               action="#"
               method="POST"
             >
-              <div>
+              {/* <div>
                 <label className="block text-gray-700">Username</label>
                 <input
                   type="text"
@@ -170,7 +166,7 @@ export const Login = () => {
                 {errors.username && (
                   <p className="text-red-500">{errors.username}</p>
                 )}
-              </div>
+              </div> */}
 
               <div className="mt-4">
                 <label className="block text-gray-700">Email</label>
@@ -181,7 +177,7 @@ export const Login = () => {
                   onChange={handleChange}
                   onBlur={validateEmail}
                   placeholder="Enter email"
-                  className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none"
+                  className="flex flex-col w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none"
                   autoFocus
                   autoComplete="email"
                   required
