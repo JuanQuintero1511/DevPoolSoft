@@ -47,11 +47,11 @@ module.exports = (sequelize) => {
         },
         full_name: {
           type: DataTypes.STRING,
-          allowNull: false
+          allowNull: true
         },
         email: {
           type: DataTypes.STRING,
-          allowNull: false          
+          allowNull: true          
         },
         interviewerImage: {
           type: DataTypes.JSONB,

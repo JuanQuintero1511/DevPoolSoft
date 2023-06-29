@@ -75,7 +75,7 @@ const setCompanyRol = async (rol_type, full_name) => {
   const atributoToSet = companyRol.dataValues.id_roles
   await User_data.update({ id_roles: `${atributoToSet}` }, {
     where: {
-      full_name: { [Op.iLike]: `%${full_name}%` }
+      full_name: `${full_name}`
     }
   })
 }
