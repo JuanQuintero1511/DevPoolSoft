@@ -84,9 +84,20 @@ const CommentsCommunity = () => {
           <span>🧑🏻‍💻 </span>
           <span className="font-bold">{post?.user_datum?.full_name}</span>
         </div>
-        <div className="mb-4">
+        <div className="mb-1">
           <h2 className="text-2xl font-bold underline text-blue-500">{post?.title}</h2>
+
         </div>
+          <div className="flex items-center">
+          <div className="ml-auto">
+            <span>❤️ </span>
+            <span className="font-bold"> {post.likes}</span>
+          </div>
+          <div className="ml-6">
+            <span>✉️ </span>
+            <span className="font-bold"> {post.comments?.length} </span>
+          </div>
+          </div>
       </div>
 
       <form onSubmit={handleSubmit} className="mt-4">
