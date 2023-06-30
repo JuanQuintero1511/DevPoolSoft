@@ -17,7 +17,7 @@ export const getPostById = (id) => {
 }
 export const getAllPostsIdUser = (id) => {
     return async function (dispatch) {
-        const { data } = await axios.get(`http://localhost:3001/company/${id}`);
+        const { data } = await axios.get(`http://localhost:3001/client/${id}`);
         dispatch({ type: GET_ALL_POSTS_ID_USER, payload: data });
     }
 }
@@ -79,7 +79,7 @@ export const getCompanies = () => { //trae solo companies
 export const getUsersAndCompanies = () => {
   return async (dispatch) => {
     const usersResponse = await axios.get("http://localhost:3001/users");
-    // const companiesResponse = await axios.get("http://localhost:3001/company");
+    // const companiesResponse = await axios.get("http://localhost:3001/client");
     console.log(usersResponse);
     const users = usersResponse.data;
     // const companies = companiesResponse.data;
@@ -90,7 +90,7 @@ export const getUsersAndCompanies = () => {
 // , companies
 export const createUserData = (payload) => {
     return async function (dispatch) {
-        await axios.post("http://localhost:3001/company/", payload)
+        await axios.post("http://localhost:3001/client/", payload)
         return dispatch({ type: CREATE_USER_DATA })
     }
 }
