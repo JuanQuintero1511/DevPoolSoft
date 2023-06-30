@@ -1,18 +1,24 @@
-import { useSelector, useDispatch} from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { getUserById } from "../redux/actions";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+// import Test1 from "./test1";
 
 export const IdProfile = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const usersYcompanies = useSelector((state) => state.usersYcompanies);
-  const user = usersYcompanies.find((user) => user.id === id);
+  console.log(usersYcompanies);
+  const user = usersYcompanies.find((user) => user.id_users === id);
+  console.log(user);
 
   useEffect(() => {
     dispatch(getUserById(id));
   }, [dispatch, id]);
 
+  if (!user) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div>
@@ -98,13 +104,19 @@ export const IdProfile = () => {
           </div>
         </div>
       ) : (
-        <div className="flex justify-center w-full">
-          <div className="w-full">
-            <Test1 /> {/* Agrega el componente que desees mostrar si no hay un usuario seleccionado */}
+        <div className="flex items-center justify-center h-screen bg-teal-500 bg-opacity-30">
+        <div className="text-center">
+          <div>
+            <h1 className="text-3xl font-bold text-center font-mono">{user.userName}</h1>
+          </div>
+          <div className="mt-4">
+            <p className="text-xl">
+              This profile has not completed profile registration yet.
+            </p>
           </div>
         </div>
+      </div>
       )}
     </div>
-  )
-}
-
+  );
+};

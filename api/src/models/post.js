@@ -44,7 +44,14 @@ module.exports = (sequelize) => {
         typePost: {
           type: DataTypes.ENUM (["Job", "Community"]),
           allowNull: true,
+        },
+        resume: {
+          type: DataTypes.STRING
+        },
+        interviewer: {
+          type: DataTypes.JSONB
         }
+
       },
       {
         paranoid: true, // Habilita soft deletes
