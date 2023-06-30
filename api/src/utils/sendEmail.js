@@ -1,19 +1,20 @@
 const nodemailer = require('nodemailer');
 const { google } = require('googleapis');
-const {GMAIL_USER,  GMAIL_CLIENT_ID, GMAIL_CLIENT_SECRET, GMAIL_REFRESH_TOKEN, GMAIL_REDIRECT_URI} = process.env
-const {generateConfirmationToken} = require("./functionsConfirmEmail");
+const { GMAIL_USER, GMAIL_CLIENT_ID, GMAIL_CLIENT_SECRET, GMAIL_REFRESH_TOKEN, GMAIL_REDIRECT_URI } = process.env;
+const { generateConfirmationToken } = require('./functionsConfirmEmail');
 
 const sendNotification = async (email, full_name, rol) => {
+
   let result;
 
-  const token = generateConfirmationToken(email);
-  const confirmationLink = `http://localhost:3001/confirm/${token}`;
-
   try {
+    const token = generateConfirmationToken(email);
+    const confirmationLink = `http://localhost:3001/confirm/${token}`;
+
     const oAuth2Client = new google.auth.OAuth2(
       GMAIL_CLIENT_ID,
       GMAIL_CLIENT_SECRET,
-      GMAIL_REDIRECT_URI 
+      GMAIL_REDIRECT_URI
     );
 
     oAuth2Client.setCredentials({ refresh_token: GMAIL_REFRESH_TOKEN });
@@ -28,8 +29,8 @@ const sendNotification = async (email, full_name, rol) => {
         clientId: GMAIL_CLIENT_ID,
         clientSecret: GMAIL_CLIENT_SECRET,
         refreshToken: GMAIL_REFRESH_TOKEN,
-        accessToken: accessToken
-      }
+        accessToken: accessToken.token,
+      },
     });
    
 
@@ -92,6 +93,28 @@ const sendNotification = async (email, full_name, rol) => {
         </div>
       `
     };
+
+    const mailOptionsWelcomeAdmin = {
+      from: GMAIL_USER,
+      to: email,
+      subject: `Welcome ${full_name} to DEVPOOL`,
+      html: `
+        <div style="background-color: #f2f2f2; padding: 20px;">
+          <h1 style="color: #333333; text-align: center;">¡Bienvenido(a) ${full_name} a DEVPOOL como administrador!</h1>
+          <p style="color: #333333;">Estamos encantados de contar contigo como parte de nuestro equipo administrativo en DEVPOOL. Tu contribución como administrador será fundamental para mantener y mejorar nuestra plataforma, brindando a los usuarios una experiencia excepcional y asegurando un entorno seguro y confiable para todos.</p>
+          <p style="color: #333333;">Como administrador, tendrás acceso a funciones y herramientas especiales para administrar usuarios, gestionar contenido y mantener el buen funcionamiento de la plataforma. Tu experiencia y conocimientos serán valiosos para garantizar que DEVPOOL siga siendo un lugar de referencia para desarrolladores web y empresas.</p>
+          <p style="color: #333333;">No dudes en explorar todas las funciones y recursos disponibles para ti como administrador. Estamos seguros de que desempeñarás un papel crucial en el crecimiento y éxito continuo de nuestra comunidad.</p>
+          <p style="color: #333333;">Si tienes alguna pregunta o necesitas asistencia en cualquier momento, nuestro equipo de soporte estará encantado de ayudarte. Queremos asegurarnos de que tengas todas las herramientas y recursos necesarios para desempeñar tu rol de administrador de manera efectiva y satisfactoria.</p>
+          <p style="color: #333333;">Una vez más, te damos la bienvenida como administrador de DEVPOOL. Tu compromiso y dedicación son fundamentales para impulsar el crecimiento y el éxito de nuestra comunidad. ¡Juntos lograremos grandes cosas!</p>
+          <p style="color: #333333;">¡Mucho éxito en tu rol como administrador!</p>
+          <h1 style="color: #333333;">Confirma tu dirección de correo electrónico</h1>
+          <p style="color: #333333;">Haz clic en el siguiente enlace para confirmar tu dirección de correo electrónico:</p>
+          <a href="${confirmationLink}" style="color: #007bff; text-decoration: none;">${confirmationLink}</a>
+          <p style="color: #333333;">Atentamente,</p>
+          <p style="color: #333333;">El equipo de DevPool</p>
+        </div>
+      `
+    };
     
     if(!rol) {const result = await transporter.sendMail(mailOptionsNewPost)
       console.log('Notification email sent: ' + result.response);
@@ -102,11 +125,13 @@ const sendNotification = async (email, full_name, rol) => {
     if (rol === "developer") {const result = await transporter.sendMail(mailOptionsWelcomeDeveloper)
       console.log('Notification email sent: ' + result.response);
     }
-
+    if (rol === "admin") {const result = await transporter.sendMail(mailOptionsWelcomeAdmin)
+      console.log('Notification email sent: ' + result.response);
+    }
     return result
 
   } catch (error) {
-    console.log('Error in sending notification email: ' + error);
+    console.log('Error in sending notification email: ' + error);   
   }
   
 };

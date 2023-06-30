@@ -1,14 +1,19 @@
-const {Comments} = require('../../db');
+const {Comments, User_data} = require('../../db');
 
 const createNewComment = async (description, id_post, id_user_data) => {
         const newComment = await Comments.create({description, id_post, id_user_data});
         return newComment;
 }
 
-const getCommentById = async (id_coments) => {
-        const commentsById = await Comments.findByPk(id_coments)
+const getCommentById = async (id_comments) => {
+        const commentsById = await Comments.findByPk(id_comments, {
+            include: {
+                model: User_data,
+                attributes: ['full_name']
+            }
+        });
         return commentsById;
-} 
+}
 
 const updateComents = async (id, description, id_posts) => {
         const commentsUpdateResult = await Comments.update(

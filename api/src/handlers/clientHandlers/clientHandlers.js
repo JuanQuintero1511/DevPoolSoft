@@ -1,19 +1,19 @@
 const {
-    createCompany,
-    setCompanyRol,
-    setCompanyPremium,
-    getAllCompanies,
-    searchCompanyByName,
-    getCompanyById,
-    createCompanyUser, 
-    setCompanyUsers,
-    } = require('../../controllers/companyControllers/companyControllers');
+    createClient,
+    setClientRol,
+    setClientPremium,
+    getAllClient,
+    searchClientByName,
+    getClientById,
+    createclientUser, 
+    setClientUsers,
+    } = require('../../controllers/clientControllers/clientControllers');
 
 const { searchUsersByUserName } = require('../../controllers/usersControllers/usersControllers');
 
 const  { sendNotification }  = require('../../utils/sendEmail')
 
-    const createCompanyHandler = async (req, res) => {       
+    const createClientHandler = async (req, res) => {       
           try {
             const {
               full_name,
@@ -33,7 +33,7 @@ const  { sendNotification }  = require('../../utils/sendEmail')
             const email = req.body.email;
             const full_nameAux = req.body.full_name;      
                        
-              await createCompany(
+              await createClient(
                 full_name,
                 backup_email,
                 description,
@@ -45,8 +45,8 @@ const  { sendNotification }  = require('../../utils/sendEmail')
                 rol,
                 image                
               );
-              await setCompanyUsers(userName, email, password, full_nameAux);
-              await setCompanyRol(rol_type, full_nameAux);
+              await setClientUsers(userName, email, password, full_nameAux);
+              await setClientRol(rol_type, full_nameAux);
                   
             const newUsers = await searchUsersByUserName(userName);
       
@@ -65,63 +65,55 @@ const  { sendNotification }  = require('../../utils/sendEmail')
       
       
 //*Trae empresa por nombre o todas si no tiene nombre
-const getCompanyHandler = async (req, res) => {
+const getClientHandler = async (req, res) => {
     try {
         const { name } = req.query;
-        const results = name ? await searchCompanyByName(name) : await getAllCompanies()
+        const results = name ? await searchClientByName(name) : await getAllClient()
         res.status(200).json(results);
     } catch (error) {
-        res.status(400).json({ error: "Error occurred while found company:", detail: error.message })
+        res.status(400).json({ error: "Error occurred while found client:", detail: error.message })
     }
 }
 
 
 //? Obtiene la empresa por ID especifico mas los posteos
 
-const getCompanyHandlerId = async (req, res) => {
+const getClientHandlerId = async (req, res) => {
     const { id } = req.params;
     const source = isNaN(id) ? "bdd" : "api";
     try {
-        const companyById = await getCompanyById(id, source)
-        if (!companyById) {
-            throw new Error(`Company with ID ${id} not found`);
+        const clientById = await getClientById(id, source)
+        if (!clientById) {
+            throw new Error(`client with ID ${id} not found`);
         }
-        res.status(200).json(companyById)
+        res.status(200).json(clientById)
     } catch (error) {
-        res.status(400).json({ error: `Error occurred while fetching company with ID ${id}:`, detail: error.message })
+        res.status(400).json({ error: `Error occurred while fetching client with ID ${id}:`, detail: error.message })
     }
 
 }
 
 
-const updateCompanyPremiumHandler = async (req, res) => {
+const updateClientPremiumHandler = async (req, res) => {
     const { full_name } = req.params
     console.log(req.params.full_name)
     try {
-        await setCompanyPremium(full_name)
+        await setClientPremium(full_name)
         res.status(200).json({ message: "Actualizado a premium" })
     } catch (error) {
         res.status(404).json({ error: error.message })
     }
 }
 
-const deleteCompanyHandler = async (req, res) => {
+const deleteClientHandler = async (req, res) => {
 
 }
 
 
 module.exports = {
-    getCompanyHandler,
-    getCompanyHandlerId,
-    createCompanyHandler,
-    updateCompanyPremiumHandler,
-    deleteCompanyHandler,
-}
-
-module.exports = {
-    getCompanyHandler,
-    getCompanyHandlerId,
-    createCompanyHandler,
-    updateCompanyPremiumHandler,
-    deleteCompanyHandler,
+    getClientHandler,
+    getClientHandlerId,
+    createClientHandler,
+    updateClientPremiumHandler,
+    deleteClientHandler,
 }

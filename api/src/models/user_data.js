@@ -44,11 +44,11 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     phone_number: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      validate: {
-        len: [0, 15] 
-      }
+      type: DataTypes.STRING,
+      allowNull: true,
+      // validate: {
+      //   len: [0, 15] 
+      // }
     },
     profile_image: {
       type: DataTypes.STRING,
@@ -63,12 +63,12 @@ module.exports = (sequelize) => {
       defaultValue: false,
     },
     authentication: {
-      type: DataTypes.ENUM (["CUIT", "CUIL", "PASSPORT, DNI"]),
-      allowNull: false,
+      type: DataTypes.ENUM (["CUIT", "CUIL", "PASSPORT", "DNI"]),
+      allowNull: true,
     },
     image: {
       type: DataTypes.JSONB,
-      allowNull: false
+      allowNull: true
     },
     rol: {
       type: DataTypes.STRING,

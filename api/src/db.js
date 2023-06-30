@@ -39,6 +39,9 @@ const { Comments, Posts, Roles, User_data, Users, Mercado_pago, Devdata } = sequ
 Users.hasOne(User_data, { foreignKey: 'id_users' });
 Roles.hasOne(User_data, { foreignKey: 'id_roles' });
 
+User_data.belongsTo(Users, { foreignKey: 'id_users' });
+User_data.belongsTo(Roles, { foreignKey: 'id_roles' });
+
 User_data.hasMany(Posts, { foreignKey: 'id_user_data' })
 Posts.belongsTo(User_data,{ foreignKey: 'id_user_data' })
 
