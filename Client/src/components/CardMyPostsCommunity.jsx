@@ -84,7 +84,7 @@ const CardMyPostCommunity = ({ post, user }) => {
             </div>
             <div>
               <span className="text-gray-600"> ✉️ </span>
-              <span className="font-bold">{post.comments}</span>
+              {/* <span className="font-bold">{post.comments}</span> */}
             </div>
           </div>
         </div>
