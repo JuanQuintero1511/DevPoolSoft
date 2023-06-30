@@ -53,7 +53,7 @@ useEffect(() => {
         <Route path="/community/myposts/:id" element={ <MyPostCommunity />} />
         <Route path="/inprogress" element={ <InProgress /> }/>
         <Route path= "/test1" element={<Test1/>} / >
-        <Route path= "/comments" element={<CommentsCommunity/>} / >
+        <Route path= "/comments/:id" element={<CommentsCommunity/>} / >
      
         
 
