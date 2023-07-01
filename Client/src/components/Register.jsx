@@ -1,9 +1,11 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { createUser } from "../redux/actions";
 import Swal from 'sweetalert2';
 
 import React from "react";
+import { userLogin } from "../redux/actions";
+import { useNavigate } from "react-router-dom";
 
 
 let docTitle = document.title;
@@ -18,10 +20,10 @@ export const Register = () => {
 
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
 
   const [error, setError] = useState({});
-  const [successfully, setSuccessufully] = useState(false)
   const [users, setUsers] = useState({
     userName: "",
     email: "",
@@ -74,11 +76,9 @@ export const Register = () => {
 
   };
 
-
-
-
   function handleSubmit(event) {
     event.preventDefault();
+
     let errors = {};
 
     errors = onValidate(users)
@@ -87,12 +87,16 @@ export const Register = () => {
     } else {
 
       dispatch(createUser(users))
-      setSuccessufully(true)
+
       Swal.fire({
         icon: 'success',
         title: 'User Created',
         text: 'The user has been successfully created!',
       });
+
+      dispatch(userLogin(users));
+      navigate("/home");
+
       setUsers({
         userName: '',
         email: '',
@@ -100,7 +104,7 @@ export const Register = () => {
       })
       setConfirmPassword({
         password2: "",
-      })
+      })      
     }
   }
 
@@ -206,7 +210,7 @@ export const Register = () => {
             <span className="relative">BACK</span>
           </a>
   
-          {successfully && (
+          {/* {successfully && (
             <div>
               <a href="/login" className="relative inline-flex items-center justify-center px-9 py-3 overflow-hidden font-mono font-medium tracking-widest text-white bg-gray-800 rounded-lg group mx-4 mt-14">
                 <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-green-500 rounded-full group-hover:w-56 group-hover:h-56"></span>
@@ -214,7 +218,7 @@ export const Register = () => {
                 <span className="relative">LOGIN</span>
               </a>
             </div>
-          )}
+          )} */}
         </div>
       </form>
     </div>
