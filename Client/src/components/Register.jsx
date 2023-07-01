@@ -50,31 +50,29 @@ export const Register = () => {
 
   const onValidate = (values) => {
     const errors = {};
-    const noSymbols = /[ `!@#$%^&*()+\-=\[\]{};':"\\|,.<>\/?~]/;
     const bestPassword = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-
-    if (!values.userName && !values.password && !values.email) {
-      errors.username = "All camps are required"
-    }
-    // if(values.userName && !noSymbols.test(values.userName)){
-    //   errors.username = "Username can not contain symbols!"
-
-    //}
-    //  if(values.password !== confirmPassword.password2) {
-    //   errors.passowrds = "The passwords must be equals"
-    //  }
-    if (values.email && !emailRegex.test(values.email)) {
-      errors.email = 'Invalid email address'
+  
+    if (!values.userName.trim()) {
+      errors.userName = "Username is required";
     }
 
-    if (values.password && !bestPassword.test(values.password)) {
-      errors.password = "Password must be at least 8 characters and contain at least one uppercase letter, one lowercase letter, and one number"
+    if (!values.email.trim()) {
+      errors.email = "Email is required";
+    } else if (!emailRegex.test(values.email.toLowerCase())) {
+      errors.email = "Invalid email address";
     }
-
+  
+    if (!values.password.trim()) {
+      errors.password = "Password is required";
+    } else if (!bestPassword.test(values.password)) {
+      errors.password =
+        "Password must be at least 8 characters and contain at least one uppercase letter, one lowercase letter, and one number";
+    }
+  
     return errors;
-
   };
+
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -153,6 +151,8 @@ export const Register = () => {
               <label htmlFor="floating_outlined1" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1 font-mono tracking-widest">
                 Password:
               </label>
+              {error.userName && (
+                  <p className="text-red-500">{error.userName}</p>)}
             </div>
           </div>
           <div className="w-full sm:w-1/2 px-2">
@@ -221,10 +221,10 @@ export const Register = () => {
           )} */}
         </div>
       </form>
+
     </div>
   </div>
   
-
 
   );
 

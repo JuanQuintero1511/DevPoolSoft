@@ -10,6 +10,7 @@ import MercadoPagoModal from "./MercadoPago/MercadoPagoModal"
 import { getAuth, signOut } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 
+
 const Nav = () => {
   const [suggestions, setSuggestions] = useState([]);
   const searchRef = useRef(null);
@@ -51,6 +52,7 @@ const Nav = () => {
   };
 
 //BOTON LOGOUT//
+
 const firebaseConfig = {
   apiKey: "AIzaSyCwCe7BBMtInaRu422Myrvg5d-qO-LAtHc",
   authDomain: "devpoolsoft.firebaseapp.com",
@@ -62,6 +64,7 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+
 
   const dispatch = useDispatch();
   const navigate = useNavigate();

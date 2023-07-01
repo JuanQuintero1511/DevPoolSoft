@@ -1,5 +1,6 @@
 const { createUser, getAllUsers, searchUsersByUserName, searchUserById } = require("../../controllers/usersControllers/usersControllers")
 
+
 const getUserHandler = async (req, res) => {
 
     const {userName} = req.query;      
@@ -19,6 +20,7 @@ const postUserHandler = async (req, res) => {
         const { userName, email, password } = req.body;
         await createUser(userName, email, password)
         const newUser = await searchUsersByUserName(userName)
+        
         res.status(201).json(newUser)
     } catch (error) {
         res.status(400).json({ error: error.message });
