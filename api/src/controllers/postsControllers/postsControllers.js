@@ -82,16 +82,21 @@ const createNewJobPost = async (title, body, state, id_user_data, image, typePos
 
 
 const getAllPosts = async () => {
-  const AllPosts = await Posts.findAll({ 
-   include: [
+  const AllPosts = await Posts.findAll(
     { 
+      include: [
+      { 
         model: User_data, 
         attributes: ['full_name'] 
       },
     {
       model: Comments,
-      attributes: ['description', 'id_comments', 'likes']
-    }]});
+      attributes: ['description', 'id_comments', 'likes'],
+      include: {
+        model: User_data,
+        attributes: ['full_name']
+    }}
+    ]});
   return AllPosts;
 };
 
@@ -105,7 +110,11 @@ const getPostById = async (id) => {
       },
     {
       model: Comments,
-      attributes: ['description', 'id_comments', 'likes']}
+      attributes: ['description', 'id_comments', 'likes'],
+      include: {
+        model: User_data,
+        attributes: ['full_name']
+    }}
     ]});
     return PostById;
 };
@@ -125,15 +134,22 @@ const deletePost = async (post) => {
 };
 
 const searchPostByType = async (typePost) => {
+
   const posts = await Posts.findAll({
-  where: {
-    typePost: `${typePost}`
-  },
-  include: {
-    model: Comments    
-  }
+    where: {
+      typePost: `${typePost}`
+    },
+    include: [{
+      model: Comments,
+      attributes: ['description', 'id_comments', 'likes'],
+      include: [{
+        model: User_data,
+        attributes: ['full_name']   
+      }]
+    }]
   });  
-return posts;
+
+  return posts;
 };
 
 

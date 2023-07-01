@@ -82,10 +82,10 @@ const CardMyPostCommunity = ({ post, user }) => {
               <span className="text-gray-600">❤️ </span>
               <span className="font-bold">{post.likes}</span>
             </div>
-            <div>
-              <span className="text-gray-600"> ✉️ </span>
-              <span className="font-bold">{post.comments}</span>
-            </div>
+            <div className="ml-2">
+            <span>✉️ </span>
+            <span className="font-bold"> {post.comments.length} </span>
+          </div>
           </div>
         </div>
         
