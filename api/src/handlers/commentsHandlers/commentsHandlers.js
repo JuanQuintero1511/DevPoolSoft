@@ -52,8 +52,10 @@ const deleteCommentHandler = async (req, res) => {
             return res.status (404).json ({error: 'El comentario no existe'});
         }
 
-        const commentDelete = await deleteComment(comment);
-        return res.status(200).json ({ message: 'El comentario ha sido eliminado correctamente', commentDelete});
+        // const commentDelete = await deleteComment(comment);
+        return res.status(200).json ({ message: 'El comentario ha sido eliminado correctamente', 
+        // commentDelete
+    });
 
     } catch (error) {
         return res.status(400).json({error: error.message});

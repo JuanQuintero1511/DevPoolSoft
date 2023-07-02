@@ -1,18 +1,21 @@
 import style from './GoogleLogin.module.css'
 import { initializeApp } from "firebase/app";
-// import { getAnalytics } from "firebase/analytics";
-
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth"
-import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { userLogin } from '../redux/actions';
+import { useDispatch } from "react-redux";
+import { newGoogleUser } from '../redux/actions';
 // import jwtDecode from 'jwt-decode';
+// import { getAnalytics } from "firebase/analytics";
 
 
 function LoginButton() {
 
   const [success, setSuccess] = useState(false)
+  const [dataa, setDataa] = useState({})
   const navigate = useNavigate()
+  const dispatch = useDispatch();
 
   const firebaseConfig = {
     apiKey: "AIzaSyCwCe7BBMtInaRu422Myrvg5d-qO-LAtHc",
@@ -25,7 +28,7 @@ function LoginButton() {
   };
 
   const app = initializeApp(firebaseConfig);
-//   const analytics = getAnalytics(app);
+  //   const analytics = getAnalytics(app);
 
   const auth = getAuth()
 
@@ -34,86 +37,75 @@ function LoginButton() {
   const singInWithGoogle = () => {
 
     signInWithPopup(auth, provider).then(async (result) => {
-        console.log(result)
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken;
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+      const token = credential.accessToken;
+      const user = result.user;
+      const userName = result._tokenResponse.firstName + result._tokenResponse.lastName;
+      const email = result._tokenResponse.email
+      const data = { userName, email }
+      setDataa(data)
 
-        const user = result.user;
+      dispatch(newGoogleUser(data))
+      // try {
+      //   //Esto deberia estar en actions y reducer
+      //   const response = await axios.post("http://localhost:3001/auth/google", data);
+      // } catch (error) {
+      //   console.log(error.message)
+      // }
 
-        const userName = result._tokenResponse.firstName + result._tokenResponse.lastName;
-        const email = result._tokenResponse.email
-        const data = { userName, email }
-
-        try {
-            //Esto deberia estar en actions y reducer
-            const response = await axios.post("http://localhost:3001/auth/google", data);            
-        } catch (error) {
-            console.log(error.message)
-        }
-
-
-
-
-
-        setSuccess(true)
-
-        console.log(user)
+      setSuccess(true)
 
     }).catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-
-        const email = error.email;
-
-        const credential = GoogleAuthProvider.credentialFromError(error);
-    
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      const email = error.email;
+      const credential = GoogleAuthProvider.credentialFromError(error);
     })
+  }
 
-}
+  //   const name = result._tokenResponse.firstName;
+  //   const surname = result._tokenResponse.lastName;
+  //   const mail = result._tokenResponse.email;
 
-    //   const name = result._tokenResponse.firstName;
-    //   const surname = result._tokenResponse.lastName;
-    //   const mail = result._tokenResponse.email;
+  //   const data = { mail, surname, name };
 
-    //   const data = { mail, surname, name };
+  //   try {
 
-    //   try {
-
-    //     console.log(data, "data de google");
-    //     const response = await axios.post("/auth", data);
-    //     console.log(response.data, "soy data")
-    //     if (response.data.token) {
-    //       sessionStorage.setItem("token", response.data.token);
-    //       sessionStorage.setItem("Name", JSON.stringify(name));
-    //       sessionStorage.setItem("mail", JSON.stringify(mail));
-    //       sessionStorage.setItem("user", JSON.stringify(data));
+  //     console.log(data, "data de google");
+  //     const response = await axios.post("/auth", data);
+  //     console.log(response.data, "soy data")
+  //     if (response.data.token) {
+  //       sessionStorage.setItem("token", response.data.token);
+  //       sessionStorage.setItem("Name", JSON.stringify(name));
+  //       sessionStorage.setItem("mail", JSON.stringify(mail));
+  //       sessionStorage.setItem("user", JSON.stringify(data));
 
 
-    //       ;
-    //       const decodedToken = jwtDecode(response.data.token);
-    //       const userRole = decodedToken.rol;
-    //       const id = decodedToken.id;
-    //       sessionStorage.setItem('id', id);
-    //       // Guardar el rol en sessionStorage
-    //       sessionStorage.setItem("userRole", userRole);
-    //       console.log(response, "RESPUESTA AXIOS");
-    //       setSuccess(true)
+  //       ;
+  //       const decodedToken = jwtDecode(response.data.token);
+  //       const userRole = decodedToken.rol;
+  //       const id = decodedToken.id;
+  //       sessionStorage.setItem('id', id);
+  //       // Guardar el rol en sessionStorage
+  //       sessionStorage.setItem("userRole", userRole);
+  //       console.log(response, "RESPUESTA AXIOS");
+  //       setSuccess(true)
 
-    //     }
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-  
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+
 
   const handleOnClickGoogle = (event) => {
     event.preventDefault()
     singInWithGoogle()
   }
 
-
   return (
     <>{success ? (
-        navigate("/home")      
+      dispatch(userLogin(dataa)),
+      navigate("/home")
     ) : (
       <><button onClick={handleOnClickGoogle} type="button" className={style.loginBtnGoogle}>
         Sign in with Google
