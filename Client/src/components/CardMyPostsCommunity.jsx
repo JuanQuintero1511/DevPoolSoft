@@ -70,10 +70,10 @@ const CardMyPostCommunity = ({ post, user }) => {
         </div>
         <div className="flex justify-between items-center mt-4">
           <div>
-            <button onClick={handleSubmit}>
-              🗑️
+            <button onClick={handleSubmit} title="Delete" className="mr-2">
+              ❌
             </button>
-            <button onClick={() => setShowModal(true)} >
+            <button onClick={() => setShowModal(true)} title="Modify">
               📝
             </button>
           </div>
