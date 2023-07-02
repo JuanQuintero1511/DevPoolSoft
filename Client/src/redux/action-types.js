@@ -14,3 +14,5 @@ export const MODIFY_POST_USER = "MODIFY_POST_USER";
 export const CREATE_COMMENT_POST = "CREATE_COMMENT_POST";
 export const DELETE_COMMENT = "DELETE_COMMENT";
 
+export const DEV_DATA = "DEV_DATA";
+

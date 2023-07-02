@@ -36,10 +36,7 @@ const OffersCards = ({ post }) => {
         <p className="block font-sans text-base font-light leading-relaxed text-inherit antialiased">
           {post.resume}
         </p>
-        <span className="text-gray-600">❤️</span>
-        <span className="font-bold">{post.likes}</span>
-        <span className="text-gray-600"> 📨 </span>
-        <span className="font-bold">{post.comments}</span>
+       
       </div>
       <div className="p-6 pt-0">
         <button

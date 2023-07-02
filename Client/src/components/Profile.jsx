@@ -13,7 +13,12 @@ export const Profile = () => {
   {user.user_datum ? (
     <div className="flex items-center justify-center w-screen h-screen bg-teal-500 bg-opacity-30">
       <div className="ml-[180px] mt-14 bg-white shadow-md rounded-lg overflow-hidden w-[80%] h-[80%]">
+       
         <div className="p-4">
+        <button className=" ml-[90%] mt-0 bg-blue-500 text-white px-4 py-2 rounded" onClick={() => window.location.href = '/devdata'}>
+  DevData CV
+</button>
+
           <div className="flex items-center">
             <img
               src={user.user_datum.image.url}
@@ -26,7 +31,7 @@ export const Profile = () => {
             </div>
           </div>
           <div className="mt-4 items-center justify-center ml-4">
-            {user.user_datum.rol_type == "user"?  <h3 className="text-2xl font-semibold ml-[20%]">Developer Information</h3> : <h3 className="text-2xl font-semibold ml-[20%]">Company Information</h3>}
+            {user.user_datum.rol == "developer"?  <h3 className="text-2xl font-semibold ml-[20%]">Developer Information</h3> : <h3 className="text-2xl font-semibold ml-[20%]">Company Information</h3>}
            
             <p>
               <span className="font-medium text-xl font-mono">Full Name:</span> {user.user_datum.full_name}
