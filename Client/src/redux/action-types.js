@@ -12,3 +12,5 @@ export const LOGOUT_USER = "LOGOUT_USER";
 
 export const CREATE_GOOGLE_USER = "CREATE_GOOGLE_USER"
 
+export const DEV_DATA = "DEV_DATA";
+
