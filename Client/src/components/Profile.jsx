@@ -65,8 +65,8 @@ export const Profile = () => {
       </div>
     </div>
   ) : (
-    <div className="flex justify-center w-full">
-      <div className="w-full">
+    <div className="flex justify-center w-full bg-[url(./src/image/bgprofile.png)] bg-cover">
+      <div className="w-full backdrop-blur-lg">
         <Test1 />
       </div>
     </div>

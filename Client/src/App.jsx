@@ -17,6 +17,8 @@ import { userLogin_App } from "./redux/actions";
 import { useDispatch} from 'react-redux';
 import Test1 from "./components/test1";
 import CommentsCommunity from "./components/CommentsCommunity";
+import MercadoPagoButton from "./components/MercadoPago/MercadoPagoButton";
+
 
 
 
@@ -54,7 +56,7 @@ useEffect(() => {
         <Route path="/inprogress" element={ <InProgress /> }/>
         <Route path= "/test1" element={<Test1/>} / >
         <Route path= "/comments/:id" element={<CommentsCommunity/>} / >
-     
+        <Route path="/test2" element={<MercadoPagoButton/>} />
         
 
       </Routes>
