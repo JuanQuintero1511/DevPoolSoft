@@ -155,5 +155,4 @@ const searchPostByType = async (typePost) => {
 
 
 
-
 module.exports = {createNewPost, createNewJobPost, getAllPosts, getPostById, updatePost, deletePost, searchPostByType}

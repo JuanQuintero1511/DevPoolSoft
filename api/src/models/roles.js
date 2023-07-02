@@ -10,7 +10,7 @@ module.exports = (sequelize) => {
                 autoIncrement: true,
             },
             rol_type: {
-                type: DataTypes.ENUM (["admin", "company", "developer"]),
+                type: DataTypes.STRING,
                 allowNull: false,
             }
         },
@@ -19,3 +19,4 @@ module.exports = (sequelize) => {
         }
     )
 }
+

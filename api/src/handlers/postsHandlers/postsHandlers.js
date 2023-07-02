@@ -1,5 +1,6 @@
-const {createNewPost, getAllPosts, getPostById, updatePost, deletePost, createNewJobPost, searchPostByType} = require('../../controllers/postsControllers/postsControllers')
+const {createNewPost, getAllPosts, getPostById, updatePost, deletePost, createNewJobPost, searchPostByType, likePost } = require('../../controllers/postsControllers/postsControllers')
 const  { sendNotification }  = require('../../utils/sendEmail')
+
 
 const createPostHandler = async (req, res) => {
 
@@ -106,11 +107,33 @@ const createPostHandler = async (req, res) => {
     }
   };
 
+  const likePostHandler = async (req, res) => {
+    const { id, likes } = req.body;
+    try {
+      const postById = await getPostById(id);
+      if (!postById) throw Error("The user's post was not found.");
+  
+      const likesCount = parseInt(likes);
+      if (isNaN(likesCount)) throw Error("Invalid value for likes");
+  
+      const postLiked = await likePost(postById, likesCount);
+      console.log(postLiked);
+  
+      return res.status(200).json({ message: 'Post liked successfully' });
+    } catch (error) {
+      return res.status(400).json({ details: error.message });
+    }
+  };
+  
+
+
 
 module.exports = {
     createPostHandler,
     getAllPostsHandler,
     getPostByIdHandler,
     updatePostHandler,
-    deletePostHandler
+    deletePostHandler,
+    likePostHandler,
+    
 };

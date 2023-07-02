@@ -18,7 +18,7 @@ const getAdmin = async () => {
     return allAdmin;
   };
 
-  const updateAdmin = async (id, full_name, backup_email, date_birthday, address, phone_number, profile_image, authentication, image) => {       
+const updateAdmin = async (id, full_name, backup_email, date_birthday, address, phone_number, profile_image, authentication, image, rol) => {       
     const [numUpdated, updatedAdmin] = await User_data.update(
       {
         full_name: full_name,
@@ -28,7 +28,8 @@ const getAdmin = async () => {
         phone_number: phone_number,
         profile_image: profile_image,
         authentication: authentication,
-        image: image
+        image: image,
+        rol:rol
       },
       {
         where: {
@@ -46,8 +47,26 @@ const getAdmin = async () => {
     return updatedAdmin[0]; // Devuelve el administrador actualizado
   };
 
+  
+  const setToAdmin = async (id, rol) => {       
+    
+    const setAdmin = await User_data.update(
+      {
+        rol: rol
+      },
+      {
+        where: {
+          id_user_data: id
+        }
+      }
+    );
+     
+      return setAdmin;
+    }
+
 
 module.exports = {
     getAdmin,
-    updateAdmin
+    updateAdmin,
+    setToAdmin
 }
