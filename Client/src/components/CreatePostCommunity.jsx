@@ -19,7 +19,6 @@ const CreatePostCommunity = ({ closeModal }) => {
     typePost: "Community",
     full_name: user.user_datum.full_name,
     email: user.email
-
   });
 
 
