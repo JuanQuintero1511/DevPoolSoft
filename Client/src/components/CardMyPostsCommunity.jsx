@@ -1,18 +1,48 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from 'react';
+import { Link, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { deletePostUser } from "../redux/actions";
+import Swal from 'sweetalert2';
+import { getAllPostsIdUser } from "../redux/actions";
+import ModifyPostCommunity from "./ModifyPostCommunity";
 
-const CardMyPostCommunity = ({ post, user}) => {
+const CardMyPostCommunity = ({ post, user }) => {
 
   const dispatch = useDispatch();
-  
+
   const handleSubmit = (event) => {
-    event.preventDefault();
-    
-      dispatch(deletePostUser(post.id_post)); 
-      window.location.reload();
+    Swal.fire({
+      icon: 'question',
+      title: 'Are you sure?',
+      text: 'This action cannot be undone.',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Delete',
+      cancelButtonText: 'Cancel'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(deletePostUser(post.id_post));
+        window.location.reload();
+      }
+    });
   };
+
+
+  const [showModal, setShowModal] = useState(false)
+  const userLogin = useSelector((state) => state.userLogin);
+
+  const { id } = useParams();
+
+  useEffect(() => {
+
+    dispatch(getAllPostsIdUser(id));
+
+  }, [dispatch, id, showModal]);
+
+  const closeModal = () => {
+    setShowModal(!showModal);
+  }
 
   return (
     <div className="bg-gray-100">
@@ -39,28 +69,28 @@ const CardMyPostCommunity = ({ post, user}) => {
           </Link>
         </div>
         <div className="flex justify-between items-center mt-4">
-  <div>
-    <button onClick={handleSubmit}>
-      🗑️
-    </button>
-    <button>
-      📝
-    </button>
-  </div>
-  <div className="flex items-center">
-    <div className="mr-4">
-      <span className="text-gray-600">❤️ </span>
-      <span className="font-bold">{post.likes}</span>
-    </div>
-    <div>
-      <span className="text-gray-600"> ✉️ </span>
-      <span className="font-bold">{post.comments}</span>
-    </div>
-  </div>
-</div>
-
-
+          <div>
+            <button onClick={handleSubmit} title="Delete" className="mr-2">
+              ❌
+            </button>
+            <button onClick={() => setShowModal(true)} title="Modify">
+              📝
+            </button>
+          </div>
+          <div className="flex items-center">
+            <div className="mr-4">
+              <span className="text-gray-600">❤️ </span>
+              <span className="font-bold">{post.likes}</span>
+            </div>
+            <div className="ml-2">
+            <span>✉️ </span>
+            <span className="font-bold"> {post.comments.length} </span>
+          </div>
+          </div>
+        </div>
+        
       </div>
+      {showModal && <ModifyPostCommunity post={post} closeModal={closeModal} />}
     </div>
   );
 };

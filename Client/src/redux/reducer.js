@@ -1,4 +1,5 @@
-import { GET_ALL_POSTS, GET_ID_POST, DELETE_POST_USER, GET_ALL_POSTS_ID_USER, GET_ALL_USERS, USER_LOGIN, CREATE_USER_DATA, CREATE_USER, LOGOUT_USER, GET_USERS_COMPANIES, GET_USER_BY_ID } from "./action-types";
+
+import { GET_ALL_POSTS, GET_ID_POST, DELETE_POST_USER, GET_ALL_POSTS_ID_USER, GET_ALL_USERS, USER_LOGIN, CREATE_USER_DATA, CREATE_USER, LOGOUT_USER, GET_USERS_COMPANIES, GET_USER_BY_ID, DEV_DATA, MODIFY_POST_USER, DELETE_COMMENT} from "./action-types";
 
 const initialState = {
 
@@ -17,11 +18,14 @@ const reducer = (state = initialState, action) => {
         case GET_ALL_POSTS:
             return { ...state, allPosts: action.payload };
 
-        case GET_ID_POST:
-            return { ...state, idPost: action.payload };
+    case GET_ID_POST:
+      return { ...state, idPost: action.payload };
+    
+      case MODIFY_POST_USER:
+        return { ...state, idPost: action.payload };
 
-        case GET_ALL_POSTS_ID_USER:
-            return { ...state, allPostsIdUser: action.payload }
+    case GET_ALL_POSTS_ID_USER:
+      return { ...state, allPostsIdUser: action.payload }
 
         case GET_ALL_USERS:
             return { ...state, allUsers: action.payload };
@@ -51,9 +55,19 @@ const reducer = (state = initialState, action) => {
         case GET_USERS_COMPANIES:
             return { ...state, usersYcompanies: action.payload };
 
+        // case DELETE_COMMENT:
+        //   return { ...state, comments: action.payload};
+
             // case CREATE_GOOGLE_USER:
             //   localStorage.setItem("userName", action.payload.userName);
             //   return { ...state, userLogin: action.payload };
+
+
+
+        case DEV_DATA:
+          return {
+            ...state,
+          }
             
         default:
             return { ...state };

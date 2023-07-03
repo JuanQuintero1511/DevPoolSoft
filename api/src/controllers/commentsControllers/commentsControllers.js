@@ -19,10 +19,20 @@ const updateComents = async (id, description, id_posts) => {
 }
 
 
-const deleteComment = async (comment) => {
-        const comentDelete = await Comments.destroy(comment);
-        return comentDelete;
-} 
+// const deleteComment = async (comment) => {
+//         const comentDelete = await Comments.destroy(comment);
+//         return comentDelete;
+// } 
+const deleteComment = async (commentId) => {
+        const options = {
+          where: {
+            id_comments: commentId
+          }
+        };      
+        const commentDelete = await Comments.destroy(options);
+        return commentDelete;
+      };
+      
 
 
 module.exports = {

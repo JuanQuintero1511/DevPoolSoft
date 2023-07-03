@@ -11,6 +11,13 @@ export const GET_USERS_COMPANIES = "GET_USERS_COMPANIES";
 export const LOGOUT_USER = "LOGOUT_USER";
 export const GET_USER_BY_ID = "GET_USER_BY_ID";
 export const CREATE_GOOGLE_USER = "CREATE_GOOGLE_USER"
+export const MODIFY_POST_USER = "MODIFY_POST_USER";
+export const CREATE_COMMENT_POST = "CREATE_COMMENT_POST";
+export const DELETE_COMMENT = "DELETE_COMMENT";
+
+export const DEV_DATA = "DEV_DATA";
+
+
 
 
 
