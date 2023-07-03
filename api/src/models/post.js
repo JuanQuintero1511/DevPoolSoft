@@ -1,4 +1,4 @@
-const { DataTypes } = require('sequelize')
+const { DataTypes, JSONB } = require('sequelize')
 
 module.exports = (sequelize) => {
     sequelize.define(
@@ -25,8 +25,8 @@ module.exports = (sequelize) => {
           }
         },
         likes: {
-          type: DataTypes.INTEGER,
-          defaultValue: 0
+          type: JSONB,
+          defaultValue: [], 
         },
         date_register: {
           type: DataTypes.DATE,
@@ -42,7 +42,7 @@ module.exports = (sequelize) => {
           allowNull: true
         },
         typePost: {
-          type: DataTypes.ENUM (["Job", "Community"]),
+          type: DataTypes.ENUM (["Job", "Community", "Tech News"]),
           allowNull: true
         },
         full_name: {

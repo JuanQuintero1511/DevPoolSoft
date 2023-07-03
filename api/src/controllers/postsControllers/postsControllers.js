@@ -1,5 +1,6 @@
 const { Posts, User_data, Comments } = require ("../../db");
-const cloudinary= require ("../../utils/cloudinary")
+const cloudinary= require ("../../utils/cloudinary");
+const { Sequelize } = require('sequelize');
 
 const createNewPost = async (title, body, state, id_user_data, full_name, email,image, typePost) => {
   let imageUploadResult;
@@ -120,9 +121,9 @@ const getPostById = async (id) => {
 };
 
 
-const updatePost = async ( id, title, body, state, id_user_data, image) => {
+const updatePost = async ( id, title, body, state, id_user_data, image, likes) => {
   const postUpdate = await Posts.update(
-        { title: title, body: body, state: state, image:image },
+        { title: title, body: body, state: state, image:image, likes:likes ? Sequelize.literal('likes + 1') : null },
         { where: { id_post:  id, id_user_data:id_user_data  } }
       );
     return postUpdate;
@@ -153,6 +154,49 @@ const searchPostByType = async (typePost) => {
 };
 
 
+const updateLike = async (req, res) => {
+  try {
+    const { id, full_name } = req.body;
+    const post = await Posts.findByPk(id);
+    let likesArray = post.likes || [];
 
+    if (full_name && !likesArray.includes(full_name)) {
+      likesArray.push(full_name);
+    }
 
-module.exports = {createNewPost, createNewJobPost, getAllPosts, getPostById, updatePost, deletePost, searchPostByType}
+    await Posts.update(
+      { likes: likesArray },
+      { where: { id_post: id } }
+    );
+
+    res.send("Likes actualizados correctamente");
+  } catch (error) {
+    console.error("Error al actualizar los likes:", error);
+    res.status(500).send("Error al actualizar los likes");
+  }
+};
+
+const unlikePost = async (req, res) => {
+  try {
+    const { id, full_name } = req.body;
+    const post = await Posts.findByPk(id);
+    let likesArray = post.likes || [];
+
+    const index = likesArray.indexOf(full_name);
+    if (index !== -1) {
+      likesArray.splice(index, 1);
+    }
+
+    await Posts.update(
+      { likes: likesArray },
+      { where: { id_post: id } }
+    );
+
+    res.send("Unlike realizado correctamente");
+  } catch (error) {
+    console.error("Error al realizar el unlike:", error);
+    res.status(500).send("Error al realizar el unlike");
+  }
+};
+
+module.exports = {createNewPost, createNewJobPost, getAllPosts, getPostById, updatePost, deletePost, searchPostByType, updateLike, unlikePost }

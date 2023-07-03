@@ -70,7 +70,7 @@ const createPostHandler = async (req, res) => {
       body, 
       state, 
       id_user_data,
-      image } = req.body;
+      image, likes } = req.body;
 
       if (!id && !title && !body && !state && !id_user_data ) throw new Error("Missing required data");
   
@@ -81,7 +81,7 @@ const createPostHandler = async (req, res) => {
         if (!postById) throw Error("The user's post was not found.");
       
       }
-      const postChanges = await updatePost(id, title, body, state, id_user_data, image);
+      const postChanges = await updatePost(id, title, body, state, id_user_data, image, likes);
   
       return res.status(200).json({ message: "The post was updated successfully.", postChanges });
   
