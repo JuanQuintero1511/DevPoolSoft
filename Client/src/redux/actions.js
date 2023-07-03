@@ -115,7 +115,7 @@ export const newGoogleUser = (data) => {
 export const createPublication = (publicationData) => {
     return async function (dispatch) {
       try {
-        const { data } = await axios.post("http://localhost:3001/", publicationData);
+        const { data } = await axios.post("http://localhost:3001/posts", publicationData);
         dispatch({ type: CREATE_PUBLICATION, payload: data });
       } catch (error) {
         console.log(error);

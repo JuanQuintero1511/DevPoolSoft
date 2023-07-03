@@ -84,6 +84,29 @@ signOut(auth).then(() => {
 
     navigate('/login');
   }
+
+  const handleTipoEmpleoChange = (tipoEmpleo) => {
+    if (selectedCargo.includes(tipoEmpleo)) {
+      // El tipo de empleo ya está seleccionado, lo removemos del estado
+      setSelectedTipoEmpleo(prevState => prevState.filter(item => item !== tipoEmpleo));
+    } else {
+      // El tipo de empleo no está seleccionado, lo agregamos al estado
+      setSelectedTipoEmpleo(prevState => [...prevState, tipoEmpleo]);
+    }
+  };
+  console.log(selectedCargo);
+
+  const handleCargo = (cargo) => {
+    if (selectedTipoEmpleo.includes(cargo)) {
+      // El tipo de empleo ya está seleccionado, lo removemos del estado
+      setSelectedCargo(prevState => prevState.filter(item => item !== cargo));
+    } else {
+      // El tipo de empleo no está seleccionado, lo agregamos al estado
+      setSelectedCargo(prevState => [...prevState, cargo]);
+    }
+  };
+  console.log(selectedTipoEmpleo);
+
   
 
   return (
