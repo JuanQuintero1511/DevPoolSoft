@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 
 import Test1 from "./test1";
 
-export const Profile = () => {
+const Profile = () => {
 
   const user = useSelector((state) => state.userLogin);
   console.log(user)
@@ -81,3 +81,4 @@ export const Profile = () => {
   );
 };
 
+export default Profile;
