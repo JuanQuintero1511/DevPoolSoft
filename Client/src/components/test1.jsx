@@ -31,7 +31,6 @@ const Test1 = () => {
   const [form, setForm] = useState({
     userName: userLoged.userName,
     email: userLoged.email,
-    password: userLoged.password,
     full_name: "",
     backup_email: "",
     description: "",
@@ -76,15 +75,15 @@ console.log(form)
     }));
   };
 
-  const handleImageId = (public_id) => {
-    setForm((prevUser) => ({
-      ...prevUser,
-      image: {
-        ...prevUser.image,
-        public_id: public_id
-      },
-    }));
-  };
+  // const handleImageId = (public_id) => {
+  //   setForm((prevUser) => ({
+  //     ...prevUser,
+  //     image: {
+  //       ...prevUser.image,
+  //       public_id: public_id
+  //     },
+  //   }));
+  // };
 
 
   const handleInputChange = event => {
@@ -315,7 +314,7 @@ console.log(form)
                   </div> :
 
                   <div className="-my-[430px]">
-                    <CloudinaryUploadWidget onImageUpload={handleImageUpload} handleImageId={handleImageId} />
+                    <CloudinaryUploadWidget onImageUpload={handleImageUpload}/>
                   </div>}
               </div>
             </div>

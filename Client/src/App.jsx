@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import { useLocation } from 'react-router-dom';
-import { Landing} from './components/Landing';
+import { Landing } from './components/Landing';
 import Home from './components/Home';
 import { Register } from './components/Register'
 import { Login } from './components/Login';
@@ -12,11 +12,13 @@ import Detail from "./components/DetailCommunity";
 import JobsOffers from "./components/JobsOffers";
 import InProgress from "./components/InProgress";
 import MyPostCommunity from "./components/MyPostsCommunity";
-import {useEffect} from "react";
+import { useEffect } from "react";
 import { userLogin_App } from "./redux/actions";
-import { useDispatch} from 'react-redux';
+import { useDispatch } from 'react-redux';
 import Test1 from "./components/test1";
+import CommentsCommunity from "./components/CommentsCommunity";
 import MercadoPagoButton from "./components/MercadoPago/MercadoPagoButton";
+import Dashboard from "./components/Dashboard";
 
 
 
@@ -24,29 +26,34 @@ import MercadoPagoButton from "./components/MercadoPago/MercadoPagoButton";
 
 
 function App() {
- 
-const location = useLocation();
-const dispatch = useDispatch();
 
-useEffect(() => {
-  const userName = localStorage.getItem('userName');
-  if (userName) dispatch(userLogin_App(userName));
-}, [])
+  const location = useLocation();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const userName = localStorage.getItem('userName');
+    if (userName) dispatch(userLogin_App(userName));
+  }, [])
 
 
   return (
     <>
-    <div>
-     {location.pathname !== "/" && location.pathname !=="/login" && location.pathname !== "/register"  && <Nav/> }
-     {location.pathname !== "/" && location.pathname !=="/login" && location.pathname !== "/register" && <SideBar/>}
+      <div>
+        <Routes>
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Routes>
+      </div>
+      <div>
+        {location.pathname !== "/" && location.pathname !== "/login" && location.pathname !== "/register" && <Nav />}
+        {location.pathname !== "/" && location.pathname !== "/login" && location.pathname !== "/register" && <SideBar />}
       </div>
 
       <Routes>
-        
-        <Route path='/' element={ <Landing />}/>
-        <Route path='/login' element={ <Login /> }/>
-        <Route path='/home' element={ <Home />}/>
-        <Route path='/JobsOffers' element={<JobsOffers />}/>
+
+        <Route path='/' element={<Landing />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/home' element={<Home />} />
+        <Route path='/JobsOffers' element={<JobsOffers />} />
         <Route path='/register' element={<Register />} />
         <Route path='/profile' element={ <Profile />}/>
         <Route path='/community' element={ <Community />}/>
@@ -54,6 +61,7 @@ useEffect(() => {
         <Route path="/community/myposts/:id" element={ <MyPostCommunity />} />
         <Route path="/inprogress" element={ <InProgress /> }/>
         <Route path= "/test1" element={<Test1/>} / >
+        <Route path= "/comments/:id" element={<CommentsCommunity/>} / >
         <Route path="/test2" element={<MercadoPagoButton/>} />
         
 
