@@ -17,12 +17,14 @@ const Nav = () => {
   const suggestionsRef = useRef(null);
   const location = useLocation();
 
- const [showModal, setShowModal] = useState(false);
+  const [selectedTipoEmpleo, setSelectedTipoEmpleo] = useState("");
+  const [selectedCargo, setSelectedCargo] = useState("");
+
+  const [showModal, setShowModal] = useState(false);
 
   const closeModal = () => {
     setShowModal(false);
   };
-
 
   const closeSuggestions = () => {
     setSuggestions([]);
@@ -51,7 +53,7 @@ const Nav = () => {
     setSuggestions(filteredSuggestions);
   };
 
-//BOTON LOGOUT//
+  //BOTON LOGOUT//
 
 const firebaseConfig = {
   apiKey: "AIzaSyCwCe7BBMtInaRu422Myrvg5d-qO-LAtHc",
@@ -72,20 +74,96 @@ const app = initializeApp(firebaseConfig);
   const handlerLogout = () => {
     localStorage.removeItem('userName')
     dispatch(logoutUser());
-const auth = getAuth();
-signOut(auth).then(() => {
-  navigate('/login')
-}).catch((error) => {
-  send(error);
-});
+    const auth = getAuth();
+    signOut(auth)
+      .then(() => {
+        navigate("/login");
+      })
+      .catch((error) => {
+        send(error);
+      });
 
-    navigate('/login');
-  }
-  
+    navigate("/login");
+  };
+
+  const handleTipoEmpleoChange = (tipoEmpleo) => {
+    if (selectedCargo.includes(tipoEmpleo)) {
+      // El tipo de empleo ya está seleccionado, lo removemos del estado
+      setSelectedTipoEmpleo((prevState) =>
+        prevState.filter((item) => item !== tipoEmpleo)
+      );
+    } else {
+      // El tipo de empleo no está seleccionado, lo agregamos al estado
+      setSelectedTipoEmpleo((prevState) => [...prevState, tipoEmpleo]);
+    }
+  };
+  console.log(selectedCargo);
+
+  const handleCargo = (cargo) => {
+    if (selectedTipoEmpleo.includes(cargo)) {
+      // El tipo de empleo ya está seleccionado, lo removemos del estado
+      setSelectedCargo((prevState) =>
+        prevState.filter((item) => item !== cargo)
+      );
+    } else {
+      // El tipo de empleo no está seleccionado, lo agregamos al estado
+      setSelectedCargo((prevState) => [...prevState, cargo]);
+    }
+  };
+  console.log(selectedTipoEmpleo);
+  //   const [suggestions, setSuggestions] = useState([]);
+  //   const searchRef = useRef(null);
+  //   const suggestionsRef = useRef(null);
+  //   const location = useLocation();
+
+  //   const [showModal, setShowModal] = useState(false);
+
+  //    const closeModal = () => {
+  //      setShowModal(false);
+  //    };
+  //   const closeSuggestions = () => {
+  //     setSuggestions([]);
+  //   };
+
+  //   useEffect(() => {
+  //     const handleClickOutside = (event) => {
+  //       if (
+  //         searchRef.current &&
+  //         !searchRef.current.contains(event.target) &&
+  //         suggestionsRef.current &&
+  //         !suggestionsRef.current.contains(event.target)
+  //       ) {
+  //         setSuggestions([]);
+  //       }
+  //     };
+
+  //     document.addEventListener("click", handleClickOutside);
+
+  //     return () => {
+  //       document.removeEventListener("click", handleClickOutside);
+  //     };
+  //   }, []);
+
+  //   const handleSetSuggestions = (filteredSuggestions) => {
+  //     setSuggestions(filteredSuggestions);
+  //   };
+
+  // //BOTON LOGOUT//
+
+  //   const dispatch = useDispatch();
+  //   const navigate = useNavigate();
+
+  //   const handlerLogout = () => {
+  //     localStorage.removeItem('userName')
+
+  //     dispatch(logoutUser());
+
+  //     navigate('/login');
+  //   }
 
   return (
     <>
-      <nav
+       <nav
         className="navbar bg-dark border-bottom border-bottom-dark fixed-top"
         data-bs-theme="dark"
       >
@@ -107,17 +185,17 @@ signOut(auth).then(() => {
               </button>
               <ul className="dropdown-menu dropdown-menu-dark">
                 <li>
-                  <a className="dropdown-item active" href="#">
+                  <a className="dropdown-item active" onClick={() => setSelectedTipoEmpleo("On-Site")}>
                     On-Site
                   </a>
                 </li>
                 <li>
-                  <a className="dropdown-item" href="#">
+                  <a className="dropdown-item" onClick={() => setSelectedTipoEmpleo("Remote")}>
                     Remote
                   </a>
                 </li>
                 <li>
-                  <a className="dropdown-item" href="#">
+                  <a className="dropdown-item" onClick={() => setSelectedTipoEmpleo("Part-Time")}>
                     Part-Time
                   </a>
                 </li>
@@ -137,37 +215,37 @@ signOut(auth).then(() => {
               </button>
               <ul className="dropdown-menu dropdown-menu-dark">
                 <li>
-                  <a className="dropdown-item active" href="#">
+                  <a className="dropdown-item active" onClick={() => setSelectedCargo("Full-Stack")}>
                     Full-Stack
                   </a>
                 </li>
                 <li>
-                  <a className="dropdown-item" href="#">
+                  <a className="dropdown-item"  onClick={() => setSelectedCargo("Front-End")}>
                     Front-End
                   </a>
                 </li>
                 <li>
-                  <a className="dropdown-item" href="#">
+                  <a className="dropdown-item"  onClick={() => setSelectedCargo("Back-End")}>
                     Back-End
                   </a>
                 </li>
                 <li>
-                  <a className="dropdown-item" href="#">
+                  <a className="dropdown-item"  onClick={() => setSelectedCargo("Mobile App")}>
                     Mobile App
                   </a>
                 </li>
                 <li>
-                  <a className="dropdown-item" href="#">
+                  <a className="dropdown-item"  onClick={() => setSelectedCargo("Software Engineer")}>
                     Software Engineer
                   </a>
                 </li>
                 <li>
-                  <a className="dropdown-item" href="#">
+                  <a className="dropdown-item"  onClick={() => setSelectedCargo("Data Scientist")}>
                     Data Scientist
                   </a>
                 </li>
                 <li>
-                  <a className="dropdown-item" href="#">
+                  <a className="dropdown-item"  onClick={() => setSelectedCargo("DevOps Engineer")}>
                     DevOps Engineer
                   </a>
                 </li>
@@ -177,18 +255,26 @@ signOut(auth).then(() => {
           <div className="d-flex flex-grow-2 w-50" ref={searchRef}>
             <SearchBar setSuggestions={handleSetSuggestions} />
           </div>
-          <button onClick={() => setShowModal(true)} type="button" className="btn btn-warning text-white">
+          <button
+            onClick={() => setShowModal(true)}
+            type="button"
+            className="btn btn-warning text-white"
+          >
             <i className="bi bi-patch-check mr-1"></i>
             Premium
           </button>
-             {showModal && <MercadoPagoModal closemodal={closeModal} />}
+          {showModal && <MercadoPagoModal closemodal={closeModal} />}
           <NavLink to="/profile">
             <button className="btn btn-outline-light">
               <i className="bi bi-person-circle"></i>
             </button>
           </NavLink>
 
-          <button type="button" onClick={handlerLogout} className="btn btn-danger text-white">
+          <button
+            type="button"
+            onClick={handlerLogout}
+            className="btn btn-danger text-white"
+          >
             <i className="bi bi-box-arrow-right"></i>
           </button>
 

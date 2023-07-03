@@ -5,37 +5,73 @@ import OffersCards from "./OffersCards";
 import CreatePostModal from "./CreatePostModal";
 import Swal from 'sweetalert2';
 
-
 const JobsOffers = () => {
+  const user = useSelector((state) => state.userLogin);
+  const posts = useSelector((state) => state.allPosts);
 
-const user = useSelector((state) => state.userLogin);
-const posts = useSelector((state) => state.allPosts);
-const [showModal, setShowModal] = useState(false);
+  const selectedTipoEmpleo = useSelector((state) => state.selectedTipoEmpleo);
+  const selectedCargo = useSelector((state) => state.selectedCargo);
 
+  const [showModal, setShowModal] = useState(false);
 
-const closeModal = () => {
-  setShowModal(!showModal);
-}
- 
+  const [filteredPosts, setFilteredPosts] = useState([]);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
-     dispatch(getAllPosts());
-   }, [dispatch]);
-  
-  
+    dispatch(getAllPosts());
+  }, [dispatch]);
 
-  
+  const closeModal = () => {
+    setShowModal(false);
+  };
 
-  // const addPost = (newPost) => {
-  //   setSimilpostArray([...similpostArray, newPost]);
-  // };
+  const filterPosts = () => {
+    let filtered = posts.filter((post) => {
+      if (
+        selectedTipoEmpleo &&
+        post.tipoEmpleo.toLowerCase() !== selectedTipoEmpleo.toLowerCase()
+      ) {
+        return false;
+      }
+      if (
+        selectedCargo &&
+        post.cargo.toLowerCase() !== selectedCargo.toLowerCase()
+      ) {
+        return false;
+      }
+      return true;
+    });
+    console.log("filteredPosts:", filtered);
 
-  
-  
+    return filtered;
+  };
 
+  useEffect(() => {
+    const filtered = filterPosts();
+    setFilteredPosts(filtered);
+    console.log("filteredPosts state:", filtered);
+  }, [selectedTipoEmpleo, selectedCargo]);
 
- 
+  const handleTipoEmpleoChange = (tipoEmpleo) => {
+    if (selectedTipoEmpleo.includes(tipoEmpleo)) {
+      setSelectedTipoEmpleo((prevState) =>
+        prevState.filter((item) => item !== tipoEmpleo)
+      );
+    } else {
+      setSelectedTipoEmpleo((prevState) => [...prevState, tipoEmpleo]);
+    }
+  };
+
+  const handleCargoChange = (cargo) => {
+    if (selectedCargo.includes(cargo)) {
+      setSelectedCargo((prevState) =>
+        prevState.filter((item) => item !== cargo)
+      );
+    } else {
+      setSelectedCargo((prevState) => [...prevState, cargo]);
+    }
+  };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-200 bg-cover">
