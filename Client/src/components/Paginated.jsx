@@ -1,3 +1,5 @@
+//*paginado
+
 import React from "react";
 
 const Paginated = ({ currentPage, totalPages, onPageChange }) => {
@@ -17,7 +19,7 @@ const Paginated = ({ currentPage, totalPages, onPageChange }) => {
 
   return (
     <nav>
-      <ul className="flex justify-center items-center space-x-2 mt-4">
+      <ul className="flex justify-center items-center space-x-2 mt-4 mb-4">
         {currentPage > 1 && (
           <li>
             <button

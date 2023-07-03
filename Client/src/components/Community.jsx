@@ -74,8 +74,9 @@ const Community = () => {
           </div>
           {showModal && <CreatePostCommunity closeModal={closeModal} />}
         </div>
+        
+        {/* //*paginado       */}
         <div >    
-        //*paginado      
             <PostCommunity  posts={currentPosts}/>          
         </div>
 
