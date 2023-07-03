@@ -34,7 +34,7 @@ function App() {
         })
         .catch(() => {
           // Autenticación fallida, redirigir al login
-          navigate('/login');
+          navigate('/');
         });
     } else {
       // Si el usuario no está autenticado y no está en la página de login o registro, redirige al login
