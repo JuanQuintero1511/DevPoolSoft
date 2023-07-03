@@ -5,10 +5,9 @@ import Test1 from "./test1";
 const Profile = () => {
 
   const user = useSelector((state) => state.userLogin);
-  console.log(user)
-
+  console.log(user);
+  
   return (
-
     <div>
   {user.user_datum ? (
     <div className="flex items-center justify-center w-screen h-screen bg-teal-500 bg-opacity-30">
