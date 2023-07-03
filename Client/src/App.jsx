@@ -20,7 +20,7 @@ import CommentsCommunity from "./components/CommentsCommunity";
 import MercadoPagoButton from "./components/MercadoPago/MercadoPagoButton";
 
 import  Dashboard  from "./components/Dashboard/Dashboard";
-// import  HomeDash  from "./components/Dashboard/HomeDash";
+import  HomeDash  from "./components/Dashboard/HomeDash";
 
 
 
@@ -40,10 +40,10 @@ useEffect(() => {
 
   return (
     <>
-    <div>
+    {/* <div>
      {location.pathname !== "/" && location.pathname !=="/login" && location.pathname !== "/register"  && <Nav/> }
      {location.pathname !== "/" && location.pathname !=="/login" && location.pathname !== "/register" && <SideBar/>}
-      </div>
+      </div> */}
 
       <Routes>
         
@@ -63,7 +63,7 @@ useEffect(() => {
         
         //Dashboard routes
         <Route path="/dashboard/*" element={<Dashboard />} />
-        {/* <Route path="/*" element={<HomeDash />} /> */}
+        <Route path="/*" element={<HomeDash />} />
         
 
       </Routes>
