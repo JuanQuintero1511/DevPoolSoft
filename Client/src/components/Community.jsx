@@ -4,6 +4,7 @@ import { getAllPosts } from "../redux/actions";
 import PostCommunity from "./PostCommunity";
 import CreatePostCommunity from "./CreatePostCommunity";
 import { Link } from "react-router-dom";
+import Swal from 'sweetalert2';
 
 const Community = () => {
   const dispatch = useDispatch();
@@ -43,7 +44,12 @@ const Community = () => {
                   if (user?.user_datum?.id_user_data) {
                     setShowModal(true);
                   } else {
-                    alert("You need to register to create posts.");
+                    Swal.fire({
+                      icon: 'error',
+                      title: 'Sorry..',
+                      text: 'You need to register to create posts.',
+                      confirmButtonColor: '#ff7f7f',
+                    });
                   }
                 }}
                 className="select-none rounded-lg bg-teal-700 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"

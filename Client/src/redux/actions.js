@@ -1,4 +1,5 @@
-import { GET_ALL_POSTS, GET_ID_POST, CREATE_POST_USER, GET_ALL_POSTS_ID_USER, CREATE_USER, DELETE_POST_USER, GET_ALL_USERS, USER_LOGIN, CREATE_USER_DATA, LOGOUT_USER, GET_USERS_COMPANIES, DEV_DATA } from "./action-types";
+
+import { GET_ALL_POSTS, GET_ID_POST, CREATE_POST_USER, GET_ALL_POSTS_ID_USER, CREATE_USER, DELETE_POST_USER, GET_ALL_USERS, USER_LOGIN, CREATE_USER_DATA, LOGOUT_USER, GET_USERS_COMPANIES,  DEV_DATA, CREATE_GOOGLE_USER, MODIFY_POST_USER, CREATE_COMMENT_POST, DELETE_COMMENT  } from "./action-types";
 import axios from "axios";
 
 export const getAllPosts = () => {
@@ -45,6 +46,28 @@ export const deletePostUser = (id_post) => {
         dispatch({ type: DELETE_POST_USER, payload: data });
     }
 }
+
+export const deleteComment = (id_comments) => {
+    return async function (dispatch) {
+        const { data } = await axios.delete(`http://localhost:3001/comments/${id_comments}`);
+        dispatch({ type: DELETE_COMMENT, payload: data });
+    }
+}
+
+export const modifyPostUser = (postData) => {
+    return async function (dispatch) {
+        const { data } = await axios.put(`http://localhost:3001/posts/${postData.id}`, postData);
+        dispatch({ type: MODIFY_POST_USER, payload: data });
+    }
+}
+
+export const createCommentPost = (postData) => {
+    return async function (dispatch) {
+        const { data } = await axios.post(`http://localhost:3001/comments`, postData);
+        dispatch({ type: CREATE_COMMENT_POST, payload: data });
+    }
+}
+
 export const userLogin = (user) => {
     return { type: USER_LOGIN, payload: user}
 }
@@ -97,20 +120,21 @@ export const createUserData = (payload) => {
 
 export const newGoogleUser = (data) => {
     return async function (dispatch) {
-        try {
+        // try {
             console.log(data);
-            const response = await axios.post(`/auth/google`, data)
+            const response = await axios.post(`http://localhost:3001/auth/google`, data)
             console.log(response.data);
             return dispatch({
                 type: CREATE_GOOGLE_USER,
                 payload: response.data
             })
-        }
-        catch (error) {
-            alert(error)
-        }
+        // }
+        // catch (error) {
+        //     alert(error)
+        // }
     }
 }
+
 
 
 export const devData = (data) => {
@@ -119,3 +143,4 @@ export const devData = (data) => {
         dispatch({ type: DEV_DATA });
     }
 }
+
