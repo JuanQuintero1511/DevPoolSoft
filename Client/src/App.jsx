@@ -19,6 +19,9 @@ import Test1 from "./components/test1";
 import CommentsCommunity from "./components/CommentsCommunity";
 import MercadoPagoButton from "./components/MercadoPago/MercadoPagoButton";
 
+import  Dashboard  from "./components/Dashboard/Dashboard";
+// import  HomeDash  from "./components/Dashboard/HomeDash";
+
 
 
 
@@ -57,6 +60,10 @@ useEffect(() => {
         <Route path= "/test1" element={<Test1/>} / >
         <Route path= "/comments/:id" element={<CommentsCommunity/>} / >
         <Route path="/test2" element={<MercadoPagoButton/>} />
+        
+        //Dashboard routes
+        <Route path="/dashboard/*" element={<Dashboard />} />
+        {/* <Route path="/*" element={<HomeDash />} /> */}
         
 
       </Routes>
