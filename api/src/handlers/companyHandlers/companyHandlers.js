@@ -5,64 +5,67 @@ const {
     getAllCompanies,
     searchCompanyByName,
     getCompanyById,
-    createCompanyUser, 
     setCompanyUsers,
-    } = require('../../controllers/companyControllers/companyControllers');
+} = require('../../controllers/companyControllers/companyControllers');
 
 const { searchUsersByUserName } = require('../../controllers/usersControllers/usersControllers');
 
-const  { sendNotification }  = require('../../utils/sendEmail')
+const { sendNotification } = require('../../utils/sendEmail')
 
-    const createCompanyHandler = async (req, res) => {       
-          try {
-            const {
-              full_name,
-              backup_email,
-              description,
-              date_birthday,
-              address,
-              phone_number,
-              profile_image,
-              authentication,
-              image
-            } = req.body;
-            const rol = req.body.rol_type;
-            const rol_type = req.body.rol_type;
-            const userName = req.body.userName;
-            const email = req.body.email;
-            const full_nameAux = req.body.full_name;      
-                       
-              await createCompany(
-                full_name,
-                backup_email,
-                description,
-                date_birthday,
-                address,
-                phone_number,
-                profile_image,
-                authentication,
-                rol,
-                image                
-              );
-              await setCompanyUsers(userName, full_nameAux);
-              await setCompanyRol(rol_type, full_nameAux);
-                  
-            const newUsers = await searchUsersByUserName(userName);
-      
-             sendNotification(email, full_name, rol);
-            
-            
-            res.status(201).json(newUsers);
-            
+const createCompanyHandler = async (req, res) => {
+    try {
+        const {
+            userName,
+            email,
+            full_name,
+            backup_email,
+            description,
+            date_birthday,
+            address,
+            phone_number,
+            profile_image,
+            authentication,
+            rol_type,
+            image
+        } = req.body;
 
-          } catch (error) {
-            
-            res.status(400).json({ error: error.message});
-          }
-        }
-       
-      
-      
+        console.log(userName),
+        console.log(email),
+        console.log(full_name),        
+        console.log(image)
+
+        await createCompany(
+            full_name,
+            backup_email,
+            description,
+            date_birthday,
+            address,
+            phone_number,
+            profile_image,
+            authentication,
+            rol_type,
+            image
+        );
+        await setCompanyUsers(userName, full_name);
+        await setCompanyRol(rol_type, full_name);
+
+        const newUsers = await searchUsersByUserName(userName);
+
+        sendNotification(email, full_name, rol_type);
+
+
+        res.status(201).json(newUsers);
+
+
+    } catch (error) {
+        console.log(error.message)
+
+        res.status(400).json({ error: error.message });
+    }
+}
+
+
+
 //*Trae empresa por nombre o todas si no tiene nombre
 const getCompanyHandler = async (req, res) => {
     try {
