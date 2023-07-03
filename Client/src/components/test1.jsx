@@ -40,9 +40,7 @@ const Test1 = () => {
 
   })
 
-  //si es dev
-
- 
+ console.log(form);
 
 
   const handleImageUpload = (url) => {
@@ -84,9 +82,20 @@ const Test1 = () => {
 
 
     let errors = {}
-    if (!values.full_name && !values.backup_email && !values.description && !values.date_birthday && !values.address && !values.phone_number && !values.profile_image && !values.authentication && !values.image.url) {
-      errors.userName = "All camps are required"
+    if (
+      !values.full_name.trim() ||
+      !values.backup_email.trim() ||
+      !values.description.trim() ||
+      !values.date_birthday.trim() ||
+      !values.address.trim() ||
+      !values.phone_number ||
+      !values.profile_image.trim() ||
+      !values.authentication.trim() ||
+      !values.image.url.trim()
+    ) {
+      errors.userName = "All fields are required";
     }
+    
     if (values.full_name.lenght > 30 && noSymbols.test(values.full_name)) {
       errors.full_name = "\nFull name must be less than or equal to 30 characters and can not contain symbols";
     }
@@ -289,7 +298,7 @@ console.log(form)
                   </div> :
 
                   <div className="-my-[430px]">
-                    <CloudinaryUploadWidget onImageUpload={handleImageUpload} handleImageId={handleImageId} />
+                    <CloudinaryUploadWidget onImageUpload={handleImageUpload}  />
                   </div>}
               </div>
             </div>
