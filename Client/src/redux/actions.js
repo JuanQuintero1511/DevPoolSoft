@@ -13,7 +13,8 @@ import {
     CREATE_GOOGLE_USER,
     MODIFY_POST_USER,
     CREATE_COMMENT_POST,
-    DELETE_COMMENT
+    DELETE_COMMENT,
+    MODIFY_ROL
 } from "./action-types";
 
 import axios from "axios";
@@ -148,5 +149,12 @@ export const newGoogleUser = (data) => {
         // catch (error) {
         //     alert(error)
         // }
+    }
+}
+
+export const modifyRol = (postData) => {
+    return async function (dispatch) {
+        const { data } = await axios.patch(`http://localhost:3001/admin/`, postData);
+        dispatch({ type: MODIFY_ROL, payload: data });
     }
 }
