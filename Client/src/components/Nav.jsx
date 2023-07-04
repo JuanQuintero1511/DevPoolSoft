@@ -20,7 +20,10 @@ const Nav = () => {
   const suggestionsRef = useRef(null);
   const location = useLocation();
 
-  const [showModal, setShowModal] = useState(false);
+const [selectedTipoEmpleo, setSelectedTipoEmpleo] = useState("");
+const [selectedCargo, setSelectedCargo] = useState("");
+
+ const [showModal, setShowModal] = useState(false);
 
   const closeModal = () => {
     setShowModal(false);
@@ -84,9 +87,7 @@ const Nav = () => {
 
     navigate('/login');
   }
-
-  const user = useSelector((state) => state.userLogin);
-  console.log(user);
+  
 
   return (
     <>
@@ -112,17 +113,17 @@ const Nav = () => {
               </button>
               <ul className="dropdown-menu dropdown-menu-dark">
                 <li>
-                  <a className="dropdown-item active" href="#">
+                  <a className="dropdown-item active" onClick={() => setSelectedTipoEmpleo("On-Site")}>
                     On-Site
                   </a>
                 </li>
                 <li>
-                  <a className="dropdown-item" href="#">
+                  <a className="dropdown-item" onClick={() => setSelectedTipoEmpleo("Remote")}>
                     Remote
                   </a>
                 </li>
                 <li>
-                  <a className="dropdown-item" href="#">
+                  <a className="dropdown-item" onClick={() => setSelectedTipoEmpleo("Part-Time")}>
                     Part-Time
                   </a>
                 </li>
@@ -142,37 +143,37 @@ const Nav = () => {
               </button>
               <ul className="dropdown-menu dropdown-menu-dark">
                 <li>
-                  <a className="dropdown-item active" href="#">
+                  <a className="dropdown-item active" onClick={() => setSelectedCargo("Full-Stack")}>
                     Full-Stack
                   </a>
                 </li>
                 <li>
-                  <a className="dropdown-item" href="#">
+                  <a className="dropdown-item"  onClick={() => setSelectedCargo("Front-End")}>
                     Front-End
                   </a>
                 </li>
                 <li>
-                  <a className="dropdown-item" href="#">
+                  <a className="dropdown-item"  onClick={() => setSelectedCargo("Back-End")}>
                     Back-End
                   </a>
                 </li>
                 <li>
-                  <a className="dropdown-item" href="#">
+                  <a className="dropdown-item"  onClick={() => setSelectedCargo("Mobile App")}>
                     Mobile App
                   </a>
                 </li>
                 <li>
-                  <a className="dropdown-item" href="#">
+                  <a className="dropdown-item"  onClick={() => setSelectedCargo("Software Engineer")}>
                     Software Engineer
                   </a>
                 </li>
                 <li>
-                  <a className="dropdown-item" href="#">
+                  <a className="dropdown-item"  onClick={() => setSelectedCargo("Data Scientist")}>
                     Data Scientist
                   </a>
                 </li>
                 <li>
-                  <a className="dropdown-item" href="#">
+                  <a className="dropdown-item"  onClick={() => setSelectedCargo("DevOps Engineer")}>
                     DevOps Engineer
                   </a>
                 </li>

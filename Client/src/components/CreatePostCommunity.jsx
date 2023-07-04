@@ -5,6 +5,7 @@ import { createPostUser } from "../redux/actions";
 import CloudinaryUploadWidget from "./Cloudinary/UploadWidget"
 import Swal from 'sweetalert2';
 
+// {if(user?.user_datum?.rol === "company") {
 
 const CreatePostCommunity = ({ closeModal }) => {
 
@@ -15,10 +16,14 @@ const CreatePostCommunity = ({ closeModal }) => {
     title: "",
     body: "",
     image: "",
+<<<<<<< HEAD
     state: "In Progress",
     typePost: "Community",
     full_name: user.user_datum.full_name,
     email: user.email
+=======
+    typePost: "Community",
+>>>>>>> 234fa9591b634be5d2a7dd97abc91bcc3ddf29ef
   });
 
 

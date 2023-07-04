@@ -42,8 +42,8 @@ module.exports = (sequelize) => {
           allowNull: true
         },
         typePost: {
-          type: DataTypes.ENUM (["Job", "Community", "Tech"]),
-          allowNull: true
+          type: DataTypes.ENUM (["Job", "Community", "tech"]),
+          allowNull: true,
         },
         full_name: {
           type: DataTypes.STRING,
