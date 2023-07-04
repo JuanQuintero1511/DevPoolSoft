@@ -7,16 +7,19 @@ const CardsContainer = () => {
   const dispatch = useDispatch();
   const allPosts = useSelector((state) => state.allPosts);
   
+  
   useEffect(() => {
     dispatch(getAllPosts());
   }, [dispatch]);
 
   return (
     <div>
-      {allPosts.map((post) => (
+    {allPosts
+      .filter((post) => post.typePost === "tech")
+      .map((post) => (
         <Card key={post.id} post={post} />
       ))}
-    </div>
+  </div>
   );
 };
 

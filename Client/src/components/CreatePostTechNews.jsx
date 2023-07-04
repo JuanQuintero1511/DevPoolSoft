@@ -13,7 +13,8 @@ const CreatePostTechNews = ({ closeModal }) => {
         id_user_data: user.user_datum.id_user_data,
         title: "",
         body: "",
-        image: ""
+        image: "",
+        typePost: "tech"
       });
     
     
@@ -35,7 +36,7 @@ const CreatePostTechNews = ({ closeModal }) => {
     
       const handleSubmit = (event) => {
         event.preventDefault();
-    
+
         if (validation()) {
           dispatch(createPostUser(postData));
           closeModal();
@@ -43,6 +44,19 @@ const CreatePostTechNews = ({ closeModal }) => {
         } else {
           alert("Please fill in the required fields");
         }
+
+
+        // if (validation()) {
+        //   if (user?.user_datum?.rol === "tech") {
+        //     dispatch(createPostUser(postData));
+        //     closeModal();
+        //     window.location.reload();
+        //   } else {
+        //     alert("Only users with tech role can create posts.");
+        //   }
+        // } else {
+        //   alert("Please fill in the required fields");
+        // }
       };
     
       //*validaciones*//

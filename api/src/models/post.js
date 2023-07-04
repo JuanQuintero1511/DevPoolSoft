@@ -42,7 +42,7 @@ module.exports = (sequelize) => {
           allowNull: true
         },
         typePost: {
-          type: DataTypes.ENUM (["Job", "Community"]),
+          type: DataTypes.ENUM (["Job", "Community", "tech"]),
           allowNull: true,
         },
         resume: {

@@ -61,9 +61,11 @@ const Community = () => {
           {showModal && <CreatePostCommunity closeModal={closeModal} />}
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 ml-[20vw]">
-          {posts.map((post) => (
-            <PostCommunity key={post.id_post} post={post} />
-          ))}
+          {posts
+            .filter((post) => post.typePost === "Community")
+            .map((post) => (
+              <PostCommunity key={post.id_post} post={post} />
+            ))}
         </div>
       </div>
     </div>

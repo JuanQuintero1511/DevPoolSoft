@@ -15,7 +15,8 @@ const CreatePostCommunity = ({ closeModal }) => {
     id_user_data: user.user_datum.id_user_data,
     title: "",
     body: "",
-    image: ""
+    image: "",
+    typePost: "Community",
   });
 
 
