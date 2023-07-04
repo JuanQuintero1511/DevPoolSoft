@@ -5,7 +5,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 import { SearchBar } from "./SearchBar";
 import { SearchSuggestionsList } from "./SearchSuggestionsList";
 import { logoutUser } from "../redux/actions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import MercadoPagoModal from "./MercadoPago/MercadoPagoModal"
 import { getAuth, signOut } from "firebase/auth";
 import { initializeApp } from "firebase/app";
@@ -85,6 +85,8 @@ const Nav = () => {
     navigate('/login');
   }
 
+  const user = useSelector((state) => state.userLogin);
+  console.log(user);
 
   return (
     <>
@@ -190,10 +192,12 @@ const Nav = () => {
               <i className="bi bi-person-circle"></i>
             </button>
           </NavLink>
-
+          
+          {user.user_datum?.rol === "admin" &&
           <IconButton color="primary" onClick={() => navigate ('dashboard')} aria-label="Dashboard"  >
             <DashboardCustomize />
           </IconButton>
+          }
 
           <button type="button" onClick={handlerLogout} className="btn btn-danger text-white">
             <i className="bi bi-box-arrow-right"></i>

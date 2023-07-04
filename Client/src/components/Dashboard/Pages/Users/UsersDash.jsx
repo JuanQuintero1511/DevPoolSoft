@@ -13,16 +13,16 @@ import Button from "@mui/material/Button";
 import TablePagination from '@mui/material/TablePagination';
 import EditIcon from '@mui/icons-material/Edit';
 import ListAltIcon from '@mui/icons-material/ListAlt';
-
 // import TypeUsersDash from './TypeUsersDash';
 // import HabilitarAlert from "./Habilitar";
 // import Detalle_usuario from './DetalleUsuario';
 // import SearchBar from './SearchBar';
 // import * as actions from "../../../actions";
 // import { AppDispatch, RootState } from '../../../store/index';
-
 import Title from './Title';
-import { getAllUsers } from '../../../../redux/actions';
+import { getAllUsers, modifyRol } from '../../../../redux/actions';
+import Swal from 'sweetalert2';
+
 
 const UsersDash = ({ setSelectedLink, link }) => {
   useEffect(() => {
@@ -31,7 +31,11 @@ const UsersDash = ({ setSelectedLink, link }) => {
 
   const dispatch = useDispatch();
   const UsuariosDashAll = useSelector((state) => state.allUsers);
-  const UsuariosDash = UsuariosDashAll.filter(user => user.user_datum !== null && user.user_datum.rol === "developer");
+let UsuariosDash = [];
+
+if (Array.isArray(UsuariosDashAll)) {
+  UsuariosDash = UsuariosDashAll.filter(user => user.user_datum !== null && user.user_datum.rol === "developer");
+}
   console.log(UsuariosDash);
 
 
@@ -60,13 +64,36 @@ const UsersDash = ({ setSelectedLink, link }) => {
     setNombre_usuario(nombre);
     setEstado(estado);
   };
-
-  const handleClick = (e, id, tipo, username) => {
+  
+  //*ROL
+  // const handleRol = (e, id, tipo, userName) => {
+  //   e.preventDefault();
+  //   setOpen(true);
+  //   setUsuario(id);
+  //   setTipo(tipo);
+  //   setNombre_usuario(username);
+  // };
+  const handleRol = (e, id,) => {
     e.preventDefault();
-    setOpen(true);
-    setUsuario(id);
-    setTipo(tipo);
-    setNombre_usuario(username);
+  
+    Swal.fire({
+      title: 'Confirmar cambio de rol',
+      text: '¿Estás seguro/a de cambiar el rol a administrador?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Llamar a la acción modifyRol solo si se confirma el cambio de rol
+        dispatch(modifyRol({ id: id, rol: 'admin' }));
+  
+        Swal.fire('Cambio de rol confirmado', '', 'success')
+        .then(() => {
+          window.location.reload();
+        })
+      }
+    });
   };
 
   const handleDetalle = (e, id, nombre) => {
@@ -116,11 +143,15 @@ const UsersDash = ({ setSelectedLink, link }) => {
                       </Button>
                     </TableCell>
                     <TableCell>{u.email}</TableCell>
-                    <TableCell onClick={(e) => handleClick(e, u.user_datum.id_user_data, u.user_datum.rol, u.userName)}>
+
+                  {/* //*ROL */}
+                    <TableCell onClick={(e) => handleRol(e, u.user_datum.id_user_data, u.user_datum.rol, u.userName)}>
                       <Button variant='text' color="inherit" >
                         <EditIcon fontSize="small" sx={{ color: "#ACA8A6", pb: 0.5 }} />
                         {u.user_datum.rol}
                       </Button>
+
+                  {/* //*HABILITADO */}
                     </TableCell>
                     <TableCell>{u.user_datum.isActive === true ? "Habilitado" : "Deshabilitado"}</TableCell>
                     <TableCell align="right">
