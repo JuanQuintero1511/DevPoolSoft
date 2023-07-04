@@ -8,10 +8,10 @@ import TableRow from '@mui/material/TableRow';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Button from "@mui/material/Button";
-// import Title from './Title';
+import Title from './Title';
 import { useDispatch, useSelector } from "react-redux";
 import TablePagination from '@mui/material/TablePagination';
-// import Tipo_usuarios from './Tipo_Usuarios';
+// import TypeUsersDash from './TypeUsersDash';
 // import HabilitarAlert from "./Habilitar";
 // import Detalle_usuario from './DetalleUsuario';
 // import SearchBar from './SearchBar';
@@ -30,7 +30,7 @@ export default function UserDash() {
   console.log(UsuariosDash);
 
 
-  const user = useSelector((state) => state.userLogin);
+//   const user = useSelector((state) => state.userLogin);
 
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -84,12 +84,12 @@ export default function UserDash() {
     <React.Fragment>
       <Grid item xs={12}>
         <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-          {/* <Grid container sx={{ display: "flex", flexDirection: "row", justifyContent: "space-between", mb: 5, alignItems: "center" }}> */}
-            {/* <Grid item sx={{ ml: 3 }}><Title>Usuarios</Title></Grid> */}
+          <Grid container sx={{ display: "flex", flexDirection: "row", justifyContent: "space-between", mb: 5, alignItems: "center" }}>
+            <Grid item sx={{ ml: 3 }}><Title>Usuarios</Title></Grid>
             {/* <Grid item sx={{ mr: 3 }}>
                 <SearchBar type="Usuario" setPage={setPage}></SearchBar>
             </Grid> */}
-          {/* </Grid> */}
+          </Grid>
           <Table size="small">
             <TableHead>
               <TableRow>
@@ -129,8 +129,8 @@ export default function UserDash() {
                       }
                     </TableCell>
                   </TableRow>
-                  {/* <Tipo_usuarios open={open} setopen={setOpen} id={usuario} username={nombre_usuario} tipo={tipo} />
-                  <Detalle_usuario open={openDet} setopen={setOpenDet} id={usuario} nombre={nombre_usuario} />
+                  {/* <TypeUsersDash open={open} setopen={setOpen} id={usuario} username={nombre_usuario} tipo={tipo} /> */}
+                  {/* <Detalle_usuario open={openDet} setopen={setOpenDet} id={usuario} nombre={nombre_usuario} />
                   <HabilitarAlert open={openHab} setopen={setOpenHab} nombre={nombre_usuario} id={usuario} estado={estado} tipo="usuario" /> */}
                 </React.Fragment>
               ))}
