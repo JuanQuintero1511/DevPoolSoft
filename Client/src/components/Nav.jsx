@@ -4,8 +4,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import { SearchBar } from "./SearchBar";
 import { SearchSuggestionsList } from "./SearchSuggestionsList";
-import { logoutUser } from "../redux/actions";
-import { useDispatch } from "react-redux";
+import {
+  filtrarCargo,
+  filtrarTipoEmpleo,
+  logoutUser,
+  resetPosts,
+} from "../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
 import MercadoPagoModal from "./MercadoPago/MercadoPagoModal";
 import { getAuth, signOut } from "firebase/auth";
 import { initializeApp } from "firebase/app";
@@ -15,11 +20,11 @@ const Nav = () => {
   const searchRef = useRef(null);
   const suggestionsRef = useRef(null);
   const location = useLocation();
-
-  const [selectedTipoEmpleo, setSelectedTipoEmpleo] = useState("");
-  const [selectedCargo, setSelectedCargo] = useState("");
-
   const [showModal, setShowModal] = useState(false);
+  const allPosts = useSelector((state) => state.allPosts);
+  console.log(allPosts);
+  const originalPosts = useSelector((state) => state.originalPosts);
+  console.log(originalPosts);
 
   const closeModal = () => {
     setShowModal(false);
@@ -84,31 +89,21 @@ const Nav = () => {
     navigate("/login");
   };
 
-  const handleTipoEmpleoChange = (tipoEmpleo) => {
-    if (selectedCargo.includes(tipoEmpleo)) {
-      // El tipo de empleo ya está seleccionado, lo removemos del estado
-      setSelectedTipoEmpleo((prevState) =>
-        prevState.filter((item) => item !== tipoEmpleo)
-      );
-    } else {
-      // El tipo de empleo no está seleccionado, lo agregamos al estado
-      setSelectedTipoEmpleo((prevState) => [...prevState, tipoEmpleo]);
-    }
+  const handleEmpleoFilter = (e) => {
+    e.preventDefault();
+    dispatch(filtrarTipoEmpleo(e.target.value));
   };
-  console.log(selectedCargo);
 
-  const handleCargo = (cargo) => {
-    if (selectedTipoEmpleo.includes(cargo)) {
-      // El tipo de empleo ya está seleccionado, lo removemos del estado
-      setSelectedCargo((prevState) =>
-        prevState.filter((item) => item !== cargo)
-      );
-    } else {
-      // El tipo de empleo no está seleccionado, lo agregamos al estado
-      setSelectedCargo((prevState) => [...prevState, cargo]);
-    }
+  const handleCargoFilter = (e) => {
+    e.preventDefault();
+    dispatch(filtrarCargo(e.target.value));
   };
-  console.log(selectedTipoEmpleo);
+
+  const handleReset = (e) => {
+    e.preventDefault();
+    dispatch(resetPosts());
+  };
+
   //   const [suggestions, setSuggestions] = useState([]);
   //   const searchRef = useRef(null);
   //   const suggestionsRef = useRef(null);
@@ -161,7 +156,7 @@ const Nav = () => {
 
   return (
     <>
-       <nav
+      <nav
         className="navbar bg-dark border-bottom border-bottom-dark fixed-top"
         data-bs-theme="dark"
       >
@@ -173,82 +168,43 @@ const Nav = () => {
           </NavLink>
           {location.pathname === "/JobsOffers" && (
             <div className="dropdown">
-              <button
-                className="btn btn-secondary dropdown-toggle bg-gradient-to-r from-indigo-500 via-emerald-500 to-indigo-500"
-                type="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
+              <select
+                className="form-select text-white py-2 px-4 rounded-md bg-clip-padding"
+                onChange={handleEmpleoFilter}
               >
-                Tipo De Empleo
-              </button>
-              <ul className="dropdown-menu dropdown-menu-dark">
-                <li>
-                  <a className="dropdown-item active" onClick={() => setSelectedTipoEmpleo("On-Site")}>
-                    On-Site
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" onClick={() => setSelectedTipoEmpleo("Remote")}>
-                    Remote
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" onClick={() => setSelectedTipoEmpleo("Part-Time")}>
-                    Part-Time
-                  </a>
-                </li>
-              </ul>
+                <option disabled value="">Tipo de Empleo</option>
+                <option value="On-Site">On-Site</option>
+                <option value="Remote">Remote</option>
+                <option value="Part-Time">Part-Time</option>
+              </select>
             </div>
           )}
 
           {location.pathname === "/JobsOffers" && (
             <div className="dropdown">
-              <button
-                className="btn btn-secondary dropdown-toggle bg-gradient-to-r from-indigo-500 via-emerald-500 to-indigo-500"
-                type="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
+              <select
+                className="form-select text-white py-2 px-4 rounded-md bg-clip-padding"
+                onChange={handleCargoFilter}
               >
-                Cargo
-              </button>
-              <ul className="dropdown-menu dropdown-menu-dark">
-                <li>
-                  <a className="dropdown-item active" onClick={() => setSelectedCargo("Full-Stack")}>
-                    Full-Stack
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item"  onClick={() => setSelectedCargo("Front-End")}>
-                    Front-End
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item"  onClick={() => setSelectedCargo("Back-End")}>
-                    Back-End
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item"  onClick={() => setSelectedCargo("Mobile App")}>
-                    Mobile App
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item"  onClick={() => setSelectedCargo("Software Engineer")}>
-                    Software Engineer
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item"  onClick={() => setSelectedCargo("Data Scientist")}>
-                    Data Scientist
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item"  onClick={() => setSelectedCargo("DevOps Engineer")}>
-                    DevOps Engineer
-                  </a>
-                </li>
-              </ul>
+                <option disabled value="">Cargo</option>
+                <option value="Full-Stack">Full-Stack</option>
+                <option value="Front-End">Front-End</option>
+                <option value="Back-End">Back-End</option>
+                <option value="Mobile App">Mobile App</option>
+                <option value="Software Engineer">Software Engineer</option>
+                <option value="Data Scientist">Data Scientist</option>
+                <option value="DevOps Engineer">DevOps Engineer</option>
+              </select>
             </div>
+          )}
+          {location.pathname === "/JobsOffers" && (
+            <button
+              onClick={handleReset}
+              type="button"
+              className="btn btn-danger text-white"
+            >
+              Reset
+            </button>
           )}
           <div className="d-flex flex-grow-2 w-50" ref={searchRef}>
             <SearchBar setSuggestions={handleSetSuggestions} />
