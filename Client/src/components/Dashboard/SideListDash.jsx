@@ -115,7 +115,7 @@ const SideListDash = ({ open, setOpen }) => {
         component: <MyData {...{ setSelectedLink, link: '' }} />,
       },
       {
-        title: 'Users',
+        title: 'Usuarios',
         icon: <VerifiedUserRounded />,
         link: 'users',
         component: <UsersDash {...{ setSelectedLink, link: 'users' }} />,
