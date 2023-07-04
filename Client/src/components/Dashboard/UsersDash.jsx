@@ -25,7 +25,11 @@ import { getAllUsers } from '../../redux/actions';
 export default function UserDash() {
 
   const dispatch = useDispatch();
-  const UsuariosDash = useSelector((state) => state.allUsers);
+  const UsuariosDashAll = useSelector((state) => state.allUsers);
+  const UsuariosDash = UsuariosDashAll.filter(user => user.user_datum !== null);
+  console.log(UsuariosDash);
+
+
   const user = useSelector((state) => state.userLogin);
 
   const [page, setPage] = useState(0);
