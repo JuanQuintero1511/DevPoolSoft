@@ -37,7 +37,7 @@ import MuiDrawer from '@mui/material/Drawer';
 import { useMemo, useState } from 'react';
 
 import UsersDash from './Pages/Users/UsersDash';
-import Companies from './Pages/Companies/Companies';
+import CompaniesDash from './Pages/Companies/CompaniesDash';
 import Jobs from './Pages/Jobs/Jobs';
 import Main from './Pages/Main/Main';
 import TechNews from './Pages/TechNews/TechNews';
@@ -119,7 +119,7 @@ const SideListDash = ({ open, setOpen }) => {
         title: 'Empresas',
         icon: <BusinessCenter />,
         link: 'companies',
-        component: <Companies {...{ setSelectedLink, link: 'companies' }} />,
+        component: <CompaniesDash {...{ setSelectedLink, link: 'companies' }} />,
       },
       {
         title: 'Postulaciones',

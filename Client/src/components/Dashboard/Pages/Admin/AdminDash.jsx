@@ -14,24 +14,24 @@ import TablePagination from '@mui/material/TablePagination';
 import EditIcon from '@mui/icons-material/Edit';
 import ListAltIcon from '@mui/icons-material/ListAlt';
 
-// import TypeUsersDash from './TypeUsersDash';
+// import TypeCompaniesDash from './TypeCompaniesDash';
 // import HabilitarAlert from "./Habilitar";
 // import Detalle_usuario from './DetalleUsuario';
 // import SearchBar from './SearchBar';
 // import * as actions from "../../../actions";
 // import { AppDispatch, RootState } from '../../../store/index';
 
-import Title from './Title';
+import Title from '../Users/Title';
 import { getAllUsers } from '../../../../redux/actions';
 
-const UsersDash = ({ setSelectedLink, link }) => {
+const CompaniesDash = ({ setSelectedLink, link }) => {
   useEffect(() => {
     setSelectedLink(link);
   }, []);
 
   const dispatch = useDispatch();
   const UsuariosDashAll = useSelector((state) => state.allUsers);
-  const UsuariosDash = UsuariosDashAll.filter(user => user.user_datum !== null && user.user_datum.rol === "developer");
+  const UsuariosDash = UsuariosDashAll.filter(user => user.user_datum !== null && user.user_datum.rol === "admin");
   console.log(UsuariosDash);
 
 
@@ -90,7 +90,7 @@ const UsersDash = ({ setSelectedLink, link }) => {
       <Grid item xs={12}>
         <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
           <Grid container sx={{ display: "flex", flexDirection: "row", justifyContent: "space-between", mb: 5, alignItems: "center" }}>
-            <Grid item sx={{ ml: 3 }}><Title>Developers</Title></Grid>
+            <Grid item sx={{ ml: 3 }}><Title>Administrators</Title></Grid>
             {/* <Grid item sx={{ mr: 3 }}>
                 <SearchBar type="Usuario" setPage={setPage}></SearchBar>
             </Grid> */}
@@ -134,7 +134,7 @@ const UsersDash = ({ setSelectedLink, link }) => {
                       }
                     </TableCell>
                   </TableRow>
-                  {/* <TypeUsersDash open={open} setopen={setOpen} id={usuario} username={nombre_usuario} tipo={tipo} /> */}
+                  {/* <TypeCompaniesDash open={open} setopen={setOpen} id={usuario} username={nombre_usuario} tipo={tipo} /> */}
                   {/* <Detalle_usuario open={openDet} setopen={setOpenDet} id={usuario} nombre={nombre_usuario} />
                   <HabilitarAlert open={openHab} setopen={setOpenHab} nombre={nombre_usuario} id={usuario} estado={estado} tipo="usuario" /> */}
                 </React.Fragment>
@@ -156,4 +156,4 @@ const UsersDash = ({ setSelectedLink, link }) => {
   );
 }
 
-export default UsersDash;
+export default CompaniesDash;
