@@ -42,16 +42,16 @@ module.exports = (sequelize) => {
           allowNull: true
         },
         typePost: {
-          type: DataTypes.ENUM (["Job", "Community"]),
+          type: DataTypes.ENUM (["Job", "Community", "Tech"]),
           allowNull: true
         },
         full_name: {
           type: DataTypes.STRING,
-          allowNull: false
+          allowNull: true
         },
         email: {
           type: DataTypes.STRING,
-          allowNull: false          
+          allowNull: true          
         },
         interviewerImage: {
           type: DataTypes.JSONB,

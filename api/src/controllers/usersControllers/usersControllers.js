@@ -1,4 +1,4 @@
-const { Users, User_data, Posts } = require("../../db");
+const { Users, User_data, Posts, Devdata } = require("../../db");
 const { Op } = require("sequelize")
 
 const createUser = async (userName, email, password) => {
@@ -12,6 +12,9 @@ const getAllUsers = async () => {
         attributes: ['id_users', 'userName', 'email', 'password'],
         include: {
             model: User_data,
+            include: {
+              model: Devdata
+            }
         }
     });
 }

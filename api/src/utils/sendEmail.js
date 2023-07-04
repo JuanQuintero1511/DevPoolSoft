@@ -3,7 +3,7 @@ const { google } = require('googleapis');
 const {GMAIL_USER,  GMAIL_CLIENT_ID, GMAIL_CLIENT_SECRET, GMAIL_REFRESH_TOKEN, GMAIL_REDIRECT_URI} = process.env
 const {generateConfirmationToken} = require("./functionsConfirmEmail");
 
-const sendNotification = async (email, full_name, rol) => {
+const sendNotification = async (email, full_name, rol_type) => {
   let result;
 
   const token = generateConfirmationToken(email);
@@ -93,13 +93,13 @@ const sendNotification = async (email, full_name, rol) => {
       `
     };
     
-    if(!rol) {const result = await transporter.sendMail(mailOptionsNewPost)
+    if(!rol_type) {const result = await transporter.sendMail(mailOptionsNewPost)
       console.log('Notification email sent: ' + result.response);
     }
-    if (rol === "company") {const result = await transporter.sendMail(mailOptionsWelcomeCompany)
+    if (rol_type === "company") {const result = await transporter.sendMail(mailOptionsWelcomeCompany)
       console.log('Notification email sent: ' + result.response);
     }
-    if (rol === "developer") {const result = await transporter.sendMail(mailOptionsWelcomeDeveloper)
+    if (rol_type === "developer") {const result = await transporter.sendMail(mailOptionsWelcomeDeveloper)
       console.log('Notification email sent: ' + result.response);
     }
 

@@ -36,9 +36,10 @@ export const Login = () => {
     event.preventDefault();
 
     const user = users.find((user) => user.email === userData.email);
-
+    
     if (user && user.password === userData.password && user.userName === userData.username) {
-      dispatch(userLogin(user));
+      console.log(user)
+      dispatch(userLogin(user));      
       navigate("/home");
     } else {
       Swal.fire({
@@ -80,13 +81,13 @@ export const Login = () => {
 
   const validatePassword = () => {
     if (
-      !/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,10}$/.test(userData.password) ||
+      !/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,12}$/.test(userData.password) ||
       userData.password === ""
     ) {
       setErrors({
         ...errors,
         password:
-          "Password must be alphanumeric and have a length between 6 and 10 characters",
+          "Password must be alphanumeric and have a length between 6 and 12 characters",
       });
     } else {
       setErrors({
@@ -202,7 +203,7 @@ export const Login = () => {
                   placeholder="Enter password"
                   className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none"
                   minLength="6"
-                  maxLength="10"
+                  maxLength="12"
                   autoComplete="current-password"
                   required
                 />

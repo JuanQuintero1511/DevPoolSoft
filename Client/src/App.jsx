@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import { useLocation } from 'react-router-dom';
-import { Landing} from './components/Landing';
+import { Landing } from './components/Landing';
 import Home from './components/Home';
 import { Register } from './components/Register'
 import { Login } from './components/Login';
@@ -12,13 +12,12 @@ import Detail from "./components/DetailCommunity";
 import JobsOffers from "./components/JobsOffers";
 import InProgress from "./components/InProgress";
 import MyPostCommunity from "./components/MyPostsCommunity";
-import {useEffect} from "react";
+import { useEffect } from "react";
 import { userLogin_App } from "./redux/actions";
-import { useDispatch} from 'react-redux';
+import { useDispatch } from 'react-redux';
 import Test1 from "./components/test1";
 import CommentsCommunity from "./components/CommentsCommunity";
 import MercadoPagoButton from "./components/MercadoPago/MercadoPagoButton";
-
 import  Dashboard  from "./components/Dashboard/Dashboard";
 
 
@@ -29,14 +28,14 @@ import  Dashboard  from "./components/Dashboard/Dashboard";
 
 
 function App() {
- 
-const location = useLocation();
-const dispatch = useDispatch();
 
-useEffect(() => {
-  const userName = localStorage.getItem('userName');
-  if (userName) dispatch(userLogin_App(userName));
-}, [])
+  const location = useLocation();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const userName = localStorage.getItem('userName');
+    if (userName) dispatch(userLogin_App(userName));
+  }, [])
 
 
   return (
@@ -47,11 +46,11 @@ useEffect(() => {
       </div>
 
       <Routes>
-        
-        <Route path='/' element={ <Landing />}/>
-        <Route path='/login' element={ <Login /> }/>
-        <Route path='/home' element={ <Home />}/>
-        <Route path='/JobsOffers' element={<JobsOffers />}/>
+
+        <Route path='/' element={<Landing />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/home' element={<Home />} />
+        <Route path='/JobsOffers' element={<JobsOffers />} />
         <Route path='/register' element={<Register />} />
         <Route path='/profile' element={ <Profile />}/>
         <Route path='/community' element={ <Community />}/>
