@@ -20,7 +20,6 @@ const reducer = (state = initialState, action) => {
     let tipoEmpleoFilters;
     let cargoFilters;
 
-
     switch (action.type) {
         case GET_ALL_POSTS:
             return {

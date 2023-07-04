@@ -21,6 +21,7 @@ const Nav = () => {
   const originalPosts = useSelector((state) => state.originalPosts);
   console.log(originalPosts);
 
+
   const closeModal = () => {
     setShowModal(false);
   };
@@ -99,9 +100,10 @@ const Nav = () => {
     dispatch(resetPosts());
   };
 
+
   return (
     <>
-      <nav
+       <nav
         className="navbar bg-dark border-bottom border-bottom-dark fixed-top"
         data-bs-theme="dark"
       >
@@ -117,6 +119,7 @@ const Nav = () => {
                 className="form-select text-white py-2 px-4 rounded-md bg-clip-padding"
                 onChange={handleEmpleoFilter}
               >
+
                 <option disabled value="">
                   Tipo de Empleo
                 </option>
