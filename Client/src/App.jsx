@@ -21,6 +21,7 @@ import MercadoPagoButton from "./components/MercadoPago/MercadoPagoButton";
 
 import  Dashboard  from "./components/Dashboard/Dashboard";
 import  HomeDash  from "./components/Dashboard/HomeDash";
+import UserDash from "./components/Dashboard/UsersDash";
 
 
 
@@ -44,6 +45,10 @@ useEffect(() => {
      {location.pathname !== "/" && location.pathname !=="/login" && location.pathname !== "/register"  && <Nav/> }
      {location.pathname !== "/" && location.pathname !=="/login" && location.pathname !== "/register" && <SideBar/>}
       </div> */}
+      <div>
+     {location.pathname !== "/" && location.pathname !=="/login" && location.pathname !== "/register" && location.pathname !== "/dashboard"  && <Nav/> }
+     {location.pathname !== "/" && location.pathname !=="/login" && location.pathname !== "/register" && location.pathname !== "/dashboard" && <SideBar/>}
+      </div>
 
       <Routes>
         
@@ -64,6 +69,10 @@ useEffect(() => {
         //Dashboard routes
         <Route path="/dashboard/*" element={<Dashboard />} />
         <Route path="/*" element={<HomeDash />} />
+
+        <Route path="/userdash" element={<UserDash/>} />
+
+        
         
 
       </Routes>
