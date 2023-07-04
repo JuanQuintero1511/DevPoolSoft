@@ -14,7 +14,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import SideListDash from './SideListDash';
 import { useState } from "react";
 import { useMemo } from 'react';
-import { Brightness4, Brightness7 } from '@mui/icons-material';
+import { Brightness4, Brightness7, DashboardCustomize, House } from '@mui/icons-material';
 import { Menu, Tooltip, createTheme } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
@@ -89,6 +89,9 @@ export default function Dashboard() {
             >
               Dashboard
             </Typography>
+            <IconButton color="inherit" onClick={() => navigate('/home')} aria-label="Dashboard"  >
+              <House />
+            </IconButton>
             <IconButton onClick={() => setDark(!dark)}>
               {dark ? <Brightness7 /> : <Brightness4 />}
             </IconButton>

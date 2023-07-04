@@ -1,8 +1,11 @@
 
 import {
 
+  AccountCircle,
   BusinessCenter,
   ChevronLeft,
+
+  Computer,
 
   Dashboard,
   House,
@@ -39,9 +42,11 @@ import { useMemo, useState } from 'react';
 import UsersDash from './Pages/Users/UsersDash';
 import CompaniesDash from './Pages/Companies/CompaniesDash';
 import Jobs from './Pages/Jobs/Jobs';
-import Main from './Pages/Main/Main';
+
 import TechNews from './Pages/TechNews/TechNews';
 import { Route, Routes, useNavigate } from 'react-router-dom';
+import MyData from './Pages/MyData/MyData';
+import AdminDash from './Pages/Admin/AdminDash';
 
 
 
@@ -104,13 +109,13 @@ const SideListDash = ({ open, setOpen }) => {
   const list = useMemo(
     () => [
       {
-        title: 'Inicio',
-        icon: <House />,
+        title: 'Mis datos',
+        icon: <AccountCircle />,
         link: '',
-        component: <Main {...{ setSelectedLink, link: '' }} />,
+        component: <MyData {...{ setSelectedLink, link: '' }} />,
       },
       {
-        title: 'Users',
+        title: 'Usuarios',
         icon: <VerifiedUserRounded />,
         link: 'users',
         component: <UsersDash {...{ setSelectedLink, link: 'users' }} />,
@@ -132,6 +137,12 @@ const SideListDash = ({ open, setOpen }) => {
         icon: <NewspaperRounded />,
         link: 'technews',
         component: <TechNews {...{ setSelectedLink, link: 'technews' }} />,
+      },
+      {
+        title: 'Administradores',
+        icon: <Computer />,
+        link: 'admin',
+        component: <AdminDash {...{ setSelectedLink, link: 'admin' }} />,
       },
     ],
     []
