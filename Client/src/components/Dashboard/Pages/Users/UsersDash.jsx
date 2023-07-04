@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-
 import Link from '@mui/material/Link';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -13,7 +12,6 @@ import Button from "@mui/material/Button";
 import TablePagination from '@mui/material/TablePagination';
 import EditIcon from '@mui/icons-material/Edit';
 import ListAltIcon from '@mui/icons-material/ListAlt';
-// import TypeUsersDash from './TypeUsersDash';
 // import HabilitarAlert from "./Habilitar";
 // import Detalle_usuario from './DetalleUsuario';
 // import SearchBar from './SearchBar';
@@ -66,35 +64,28 @@ if (Array.isArray(UsuariosDashAll)) {
   };
   
   //*ROL
-  // const handleRol = (e, id, tipo, userName) => {
-  //   e.preventDefault();
-  //   setOpen(true);
-  //   setUsuario(id);
-  //   setTipo(tipo);
-  //   setNombre_usuario(username);
-  // };
-  const handleRol = (e, id,) => {
+  const handleRol = (e, id) => {
     e.preventDefault();
   
     Swal.fire({
-      title: 'Confirmar cambio de rol',
-      text: '¿Estás seguro/a de cambiar el rol a administrador?',
+      title: 'Confirm Role Change',
+      text: 'Are you sure you want to change the role to administrator?',
       icon: 'question',
       showCancelButton: true,
-      confirmButtonText: 'Confirmar',
-      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Confirm',
+      cancelButtonText: 'Cancel',
     }).then((result) => {
       if (result.isConfirmed) {
-        // Llamar a la acción modifyRol solo si se confirma el cambio de rol
         dispatch(modifyRol({ id: id, rol: 'admin' }));
   
-        Swal.fire('Cambio de rol confirmado', '', 'success')
-        .then(() => {
-          window.location.reload();
-        })
+        Swal.fire('Role Change Confirmed', '', 'success')
+          .then(() => {
+            window.location.reload();
+          });
       }
     });
   };
+  
 
   const handleDetalle = (e, id, nombre) => {
     e.preventDefault();
@@ -165,7 +156,6 @@ if (Array.isArray(UsuariosDashAll)) {
                       }
                     </TableCell>
                   </TableRow>
-                  {/* <TypeUsersDash open={open} setopen={setOpen} id={usuario} username={nombre_usuario} tipo={tipo} /> */}
                   {/* <Detalle_usuario open={openDet} setopen={setOpenDet} id={usuario} nombre={nombre_usuario} />
                   <HabilitarAlert open={openHab} setopen={setOpenHab} nombre={nombre_usuario} id={usuario} estado={estado} tipo="usuario" /> */}
                 </React.Fragment>

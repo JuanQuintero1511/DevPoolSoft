@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-
 import Link from '@mui/material/Link';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -13,16 +12,14 @@ import Button from "@mui/material/Button";
 import TablePagination from '@mui/material/TablePagination';
 import EditIcon from '@mui/icons-material/Edit';
 import ListAltIcon from '@mui/icons-material/ListAlt';
-
-// import TypeCompaniesDash from './TypeCompaniesDash';
 // import HabilitarAlert from "./Habilitar";
 // import Detalle_usuario from './DetalleUsuario';
 // import SearchBar from './SearchBar';
 // import * as actions from "../../../actions";
 // import { AppDispatch, RootState } from '../../../store/index';
-
 import Title from '../Users/Title';
-import { getAllUsers } from '../../../../redux/actions';
+import { getAllUsers, modifyRol } from '../../../../redux/actions';
+import Swal from 'sweetalert2';
 
 const CompaniesDash = ({ setSelectedLink, link }) => {
   useEffect(() => {
@@ -31,7 +28,11 @@ const CompaniesDash = ({ setSelectedLink, link }) => {
 
   const dispatch = useDispatch();
   const UsuariosDashAll = useSelector((state) => state.allUsers);
-  const UsuariosDash = UsuariosDashAll.filter(user => user.user_datum !== null && user.user_datum.rol === "admin");
+let UsuariosDash = [];
+
+if (Array.isArray(UsuariosDashAll)) {
+  UsuariosDash = UsuariosDashAll.filter(user => user.user_datum !== null && user.user_datum.rol === "admin");
+}
   console.log(UsuariosDash);
 
 
@@ -61,13 +62,29 @@ const CompaniesDash = ({ setSelectedLink, link }) => {
     setEstado(estado);
   };
 
-  const handleClick = (e, id, tipo, username) => {
-    e.preventDefault();
-    setOpen(true);
-    setUsuario(id);
-    setTipo(tipo);
-    setNombre_usuario(username);
-  };
+//*ROL
+const handleRol = (e, id) => {
+  e.preventDefault();
+
+  Swal.fire({
+    title: 'Confirm Role Change',
+    text: 'Are you sure you want to change the role to developer?',
+    icon: 'question',
+    showCancelButton: true,
+    confirmButtonText: 'Confirm',
+    cancelButtonText: 'Cancel',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      dispatch(modifyRol({ id: id, rol: 'developer' }));
+
+      Swal.fire('Role Change Confirmed', '', 'success')
+        .then(() => {
+          window.location.reload();
+        });
+    }
+  });
+};
+
 
   const handleDetalle = (e, id, nombre) => {
     e.preventDefault();
@@ -116,11 +133,15 @@ const CompaniesDash = ({ setSelectedLink, link }) => {
                       </Button>
                     </TableCell>
                     <TableCell>{u.email}</TableCell>
-                    <TableCell onClick={(e) => handleClick(e, u.user_datum.id_user_data, u.user_datum.rol, u.userName)}>
+
+                    {/* //*ROL  */}
+                    <TableCell onClick={(e) => handleRol(e, u.user_datum.id_user_data, u.user_datum.rol, u.userName)}>
                       <Button variant='text' color="inherit" >
                         <EditIcon fontSize="small" sx={{ color: "#ACA8A6", pb: 0.5 }} />
                         {u.user_datum.rol}
                       </Button>
+
+                    {/* //*HABILITADO */}
                     </TableCell>
                     <TableCell>{u.user_datum.isActive === true ? "Habilitado" : "Deshabilitado"}</TableCell>
                     <TableCell align="right">
@@ -134,7 +155,6 @@ const CompaniesDash = ({ setSelectedLink, link }) => {
                       }
                     </TableCell>
                   </TableRow>
-                  {/* <TypeCompaniesDash open={open} setopen={setOpen} id={usuario} username={nombre_usuario} tipo={tipo} /> */}
                   {/* <Detalle_usuario open={openDet} setopen={setOpenDet} id={usuario} nombre={nombre_usuario} />
                   <HabilitarAlert open={openHab} setopen={setOpenHab} nombre={nombre_usuario} id={usuario} estado={estado} tipo="usuario" /> */}
                 </React.Fragment>
