@@ -1,4 +1,3 @@
-
 import { GET_ALL_POSTS, GET_ID_POST, DELETE_POST_USER, GET_ALL_POSTS_ID_USER, GET_ALL_USERS, USER_LOGIN, CREATE_USER_DATA, CREATE_USER, LOGOUT_USER, GET_USERS_COMPANIES, GET_USER_BY_ID, FILTRAR_CARGO, FILTRAR_TIPO_EMPLEO, RESET_POSTS, DEV_DATA, MODIFY_POST_USER, DELETE_COMMENT} from "./action-types";
 
 const initialState = {
@@ -19,7 +18,6 @@ const reducer = (state = initialState, action) => {
     let cargoFiltrado;
     let tipoEmpleoFilters;
     let cargoFilters;
-
 
     switch (action.type) {
         case GET_ALL_POSTS:

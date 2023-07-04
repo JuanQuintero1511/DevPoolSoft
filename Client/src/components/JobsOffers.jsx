@@ -3,7 +3,7 @@ import { getAllPosts } from "../redux/actions";
 import { useState, useEffect } from "react";
 import OffersCards from "./OffersCards";
 import CreatePostModal from "./CreatePostModal";
-import Swal from "sweetalert2";
+import Swal from 'sweetalert2';
 
 const JobsOffers = () => {
   const user = useSelector((state) => state.userLogin);
@@ -16,6 +16,7 @@ const JobsOffers = () => {
 
   // const [filteredPosts, setFilteredPosts] = useState([]);
 
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -25,6 +26,7 @@ const JobsOffers = () => {
   const closeModal = () => {
     setShowModal(false);
   };
+
 
   // const filterPosts = () => {
   //   let filtered = posts.filter((post) => {
@@ -72,6 +74,7 @@ const JobsOffers = () => {
   //     setSelectedCargo((prevState) => [...prevState, cargo]);
   //   }
   // };
+
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-200 bg-cover">
