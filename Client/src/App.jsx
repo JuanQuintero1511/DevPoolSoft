@@ -6,7 +6,7 @@ import { Register } from './components/Register'
 import { Login } from './components/Login';
 import Nav from "./components/Nav";
 import SideBar from "./components/sidebar";
-import { Profile } from "./components/Profile";
+import Profile from "./components/Profile";
 import Community from "./components/Community";
 import Detail from "./components/DetailCommunity";
 import JobsOffers from "./components/JobsOffers";
