@@ -11,6 +11,7 @@ import {
   Mail,
   MarkChatUnread,
   MenuBook,
+  NewspaperRounded,
   NotificationsActive,
 
   VerifiedUserRounded,
@@ -38,6 +39,7 @@ import UsersDash from './Pages/Users/UsersDash';
 import Companies from './Pages/Companies/Companies';
 import Jobs from './Pages/Jobs/Jobs';
 import Main from './Pages/Main/Main';
+import TechNews from './Pages/TechNews/TechNews';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 
 
@@ -94,7 +96,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 
 
-const SideListDash = (open, setOpen) => {
+const SideListDash = ({ open, setOpen }) => {
 
   const [selectedLink, setSelectedLink] = useState('');
 
@@ -102,7 +104,7 @@ const SideListDash = (open, setOpen) => {
     () => [
       {
         title: 'Inicio',
-        icon: <Dashboard />,
+        icon: <House />,
         link: '',
         component: <Main {...{ setSelectedLink, link: '' }} />,
       },
@@ -123,6 +125,12 @@ const SideListDash = (open, setOpen) => {
         icon: <MenuBook />,
         link: 'jobs',
         component: <Jobs {...{ setSelectedLink, link: 'jobs' }} />,
+      },
+      {
+        title: 'Noticias Tech',
+        icon: <NewspaperRounded />,
+        link: 'technews',
+        component: <TechNews {...{ setSelectedLink, link: 'technews' }} />,
       },
     ],
     []

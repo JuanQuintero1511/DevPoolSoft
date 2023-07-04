@@ -11,10 +11,10 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useEffect } from "react";
-import { getUsuarios_dash, tipo_usuario } from "../../../actions";
+import { getUsuarios_dash, tipo_usuario } from "../../../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { userTypes } from '../../../auxiliar';
-import { getAllUsers } from '../../redux/actions';
+import { getAllUsers } from '../../../../redux/actions';
 
 export default function TypeUsersDash(props) {
   const [tipo, setTipo] = useState(props.tipo);

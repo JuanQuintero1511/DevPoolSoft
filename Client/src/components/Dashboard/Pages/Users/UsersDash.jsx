@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+
 import Link from '@mui/material/Link';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -8,21 +10,24 @@ import TableRow from '@mui/material/TableRow';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Button from "@mui/material/Button";
-import Title from './Title';
-import { useDispatch, useSelector } from "react-redux";
 import TablePagination from '@mui/material/TablePagination';
+import EditIcon from '@mui/icons-material/Edit';
+import ListAltIcon from '@mui/icons-material/ListAlt';
+
 // import TypeUsersDash from './TypeUsersDash';
 // import HabilitarAlert from "./Habilitar";
 // import Detalle_usuario from './DetalleUsuario';
 // import SearchBar from './SearchBar';
-import EditIcon from '@mui/icons-material/Edit';
-import ListAltIcon from '@mui/icons-material/ListAlt';
 // import * as actions from "../../../actions";
 // import { AppDispatch, RootState } from '../../../store/index';
 
+import Title from './Title';
 import { getAllUsers } from '../../../../redux/actions';
 
-export default function UserDash() {
+const UsersDash = ({ setSelectedLink, link }) => {
+  useEffect(() => {
+    setSelectedLink(link);
+  }, []);
 
   const dispatch = useDispatch();
   const UsuariosDashAll = useSelector((state) => state.allUsers);
@@ -150,3 +155,5 @@ export default function UserDash() {
     </React.Fragment>
   );
 }
+
+export default UsersDash;

@@ -1,18 +1,19 @@
 import { useEffect } from "react";
 
-const CompaniesDash =  ({ setSelectedLink, link }) => {
+const TechNews =  ({ setSelectedLink, link }) => {
  useEffect(() => {
    setSelectedLink(link);
  }, []);
 
+
  return(
   <>
  
-  <div>Empresas</div>
+   <div>Noticias Tech</div>
   
   </>
  )
  
  }
  
- export default CompaniesDash;
+ export default TechNews;
