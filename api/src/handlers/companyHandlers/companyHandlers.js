@@ -2,6 +2,8 @@ const {
     createCompany,
     setCompanyRol,
     setCompanyPremium,
+    setCompanyActive,
+    setCompanyDesactive,
     getAllCompanies,
     searchCompanyByName,
     getCompanyById,
@@ -28,11 +30,6 @@ const createCompanyHandler = async (req, res) => {
             rol_type,
             image
         } = req.body;
-
-        console.log(userName),
-        console.log(email),
-        console.log(full_name),        
-        console.log(image)
 
         await createCompany(
             full_name,
@@ -107,6 +104,28 @@ const updateCompanyPremiumHandler = async (req, res) => {
     }
 }
 
+const updateCompanyActiveHandler = async (req, res) => {
+    const { full_name } = req.params
+    console.log(req.params.full_name)
+    try {
+        await setCompanyActive(full_name)
+        res.status(200).json({ message: "Cuenta desactivada" })
+    } catch (error) {
+        res.status(404).json({ error: error.message })
+    }
+}
+
+const updateCompanyDesactiveHandler = async (req, res) => {
+    const { full_name } = req.params
+    console.log(req.params.full_name)
+    try {
+        await setCompanyActive(full_name)
+        res.status(200).json({ message: "Cuenta desactivada" })
+    } catch (error) {
+        res.status(404).json({ error: error.message })
+    }
+}
+
 const deleteCompanyHandler = async (req, res) => {
 
 }
@@ -117,5 +136,7 @@ module.exports = {
     getCompanyHandlerId,
     createCompanyHandler,
     updateCompanyPremiumHandler,
+    updateCompanyActiveHandler,
+    updateCompanyDesactiveHandler,
     deleteCompanyHandler,
 }
