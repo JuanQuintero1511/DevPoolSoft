@@ -51,14 +51,13 @@ const MercadoPagoModal = ({ closemodal }) => {
               </div>
             </div>
           </div>
-          <div className="flex items-center justify-center">
-            <button className="bg-blue-500 text-white py-2 px-4 rounded-lg mb-2 md:mb-0 md:mr-4 ">
-              <a href="https://www.mercadopago.com.co/checkout/v1/redirect?pref_id=1390863745-6ffa3ca2-9da1-4132-853a-1127a5eaf8b0" className="text-white tracking-normal">
+          <div className="flex flex-col md:flex-row justify-center p-4">
+            <button className="bg-blue-500 text-white py-2 px-4 rounded-lg mb-2 md:mb-0 md:mr-4">
+              <a href="https://www.mercadopago.com.co/checkout/v1/redirect?pref_id=1390863745-6ffa3ca2-9da1-4132-853a-1127a5eaf8b0" className="text-white">
                 BUY FIRST OFFER
               </a>
             </button>
-            <button className="bg-yellow-500 text-white py-2 px-2 rounded-lg mb-2 md:mb-0 md:mr-4">
-
+            <button className="bg-yellow-500 text-white py-2 px-4 rounded-lg mb-2 md:mb-0 md:mr-4">
               <a href="https://www.mercadopago.com.co/checkout/v1/redirect?pref_id=1390863745-55b8e754-a21e-4260-8fd1-3fe6e378d93f" className="text-white">
                 BUY SECOND OFFER
               </a>

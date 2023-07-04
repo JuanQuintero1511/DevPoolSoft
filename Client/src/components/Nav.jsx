@@ -4,12 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import { SearchBar } from "./SearchBar";
 import { SearchSuggestionsList } from "./SearchSuggestionsList";
-import {
-  filtrarCargo,
-  filtrarTipoEmpleo,
-  logoutUser,
-  resetPosts,
-} from "../redux/actions";
+import { filtrarCargo, filtrarTipoEmpleo, logoutUser, resetPosts} from "../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import MercadoPagoModal from "./MercadoPago/MercadoPagoModal";
 import { getAuth, signOut } from "firebase/auth";
@@ -104,56 +99,6 @@ const Nav = () => {
     dispatch(resetPosts());
   };
 
-  //   const [suggestions, setSuggestions] = useState([]);
-  //   const searchRef = useRef(null);
-  //   const suggestionsRef = useRef(null);
-  //   const location = useLocation();
-
-  //   const [showModal, setShowModal] = useState(false);
-
-  //    const closeModal = () => {
-  //      setShowModal(false);
-  //    };
-  //   const closeSuggestions = () => {
-  //     setSuggestions([]);
-  //   };
-
-  //   useEffect(() => {
-  //     const handleClickOutside = (event) => {
-  //       if (
-  //         searchRef.current &&
-  //         !searchRef.current.contains(event.target) &&
-  //         suggestionsRef.current &&
-  //         !suggestionsRef.current.contains(event.target)
-  //       ) {
-  //         setSuggestions([]);
-  //       }
-  //     };
-
-  //     document.addEventListener("click", handleClickOutside);
-
-  //     return () => {
-  //       document.removeEventListener("click", handleClickOutside);
-  //     };
-  //   }, []);
-
-  //   const handleSetSuggestions = (filteredSuggestions) => {
-  //     setSuggestions(filteredSuggestions);
-  //   };
-
-  // //BOTON LOGOUT//
-
-  //   const dispatch = useDispatch();
-  //   const navigate = useNavigate();
-
-  //   const handlerLogout = () => {
-  //     localStorage.removeItem('userName')
-
-  //     dispatch(logoutUser());
-
-  //     navigate('/login');
-  //   }
-
   return (
     <>
       <nav
@@ -172,7 +117,9 @@ const Nav = () => {
                 className="form-select text-white py-2 px-4 rounded-md bg-clip-padding"
                 onChange={handleEmpleoFilter}
               >
-                <option disabled value="">Tipo de Empleo</option>
+                <option disabled value="">
+                  Tipo de Empleo
+                </option>
                 <option value="On-Site">On-Site</option>
                 <option value="Remote">Remote</option>
                 <option value="Part-Time">Part-Time</option>
@@ -186,7 +133,9 @@ const Nav = () => {
                 className="form-select text-white py-2 px-4 rounded-md bg-clip-padding"
                 onChange={handleCargoFilter}
               >
-                <option disabled value="">Cargo</option>
+                <option disabled value="">
+                  Cargo
+                </option>
                 <option value="Full-Stack">Full-Stack</option>
                 <option value="Front-End">Front-End</option>
                 <option value="Back-End">Back-End</option>

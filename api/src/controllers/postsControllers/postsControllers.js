@@ -1,7 +1,7 @@
 const { Posts, User_data, Comments } = require ("../../db");
 const cloudinary= require ("../../utils/cloudinary")
 
-const createNewPost = async (title, body, state, id_user_data, image, typePost) => {
+const createNewPost = async (title, body, state, id_user_data, full_name, email,image, typePost) => {
   let imageUploadResult;
 
   if (image) {
@@ -25,6 +25,8 @@ const createNewPost = async (title, body, state, id_user_data, image, typePost) 
     id_user_data,
     image: imageUploadResult ? { url: imageUploadResult.url } : null,
     typePost: typePost ? typePost : null,
+    full_name, 
+    email
   });
 
   return newPost;
@@ -80,16 +82,21 @@ const createNewJobPost = async (title, body, state, id_user_data, image, typePos
 
 
 const getAllPosts = async () => {
-  const AllPosts = await Posts.findAll({ 
-   include: [
+  const AllPosts = await Posts.findAll(
     { 
+      include: [
+      { 
         model: User_data, 
         attributes: ['full_name'] 
       },
     {
       model: Comments,
-      attributes: ['description', 'id_comments', 'likes']
-    }]});
+      attributes: ['description', 'id_comments', 'likes'],
+      include: {
+        model: User_data,
+        attributes: ['full_name']
+    }}
+    ]});
   return AllPosts;
 };
 
@@ -103,7 +110,11 @@ const getPostById = async (id) => {
       },
     {
       model: Comments,
-      attributes: ['description', 'id_comments', 'likes']}
+      attributes: ['description', 'id_comments', 'likes'],
+      include: {
+        model: User_data,
+        attributes: ['full_name']
+    }}
     ]});
     return PostById;
 };
@@ -122,8 +133,27 @@ const deletePost = async (post) => {
     return postDelete;
 };
 
+const searchPostByType = async (typePost) => {
+
+  const posts = await Posts.findAll({
+    where: {
+      typePost: `${typePost}`
+    },
+    include: [{
+      model: Comments,
+      attributes: ['description', 'id_comments', 'likes'],
+      include: [{
+        model: User_data,
+        attributes: ['full_name']   
+      }]
+    }]
+  });  
+
+  return posts;
+};
 
 
 
 
-module.exports = {createNewPost, createNewJobPost, getAllPosts, getPostById, updatePost, deletePost}
+
+module.exports = {createNewPost, createNewJobPost, getAllPosts, getPostById, updatePost, deletePost, searchPostByType}
