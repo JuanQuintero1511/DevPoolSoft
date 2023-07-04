@@ -5,6 +5,7 @@ import {
   ChevronLeft,
 
   Dashboard,
+  House,
   Inbox,
 
   Logout,
