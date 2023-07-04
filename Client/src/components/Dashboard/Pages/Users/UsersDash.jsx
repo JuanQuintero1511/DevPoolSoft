@@ -20,7 +20,7 @@ import ListAltIcon from '@mui/icons-material/ListAlt';
 // import * as actions from "../../../actions";
 // import { AppDispatch, RootState } from '../../../store/index';
 
-import { getAllUsers } from '../../redux/actions';
+import { getAllUsers } from '../../../../redux/actions';
 
 export default function UserDash() {
 

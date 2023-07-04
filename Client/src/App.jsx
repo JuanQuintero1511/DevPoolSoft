@@ -21,7 +21,7 @@ import MercadoPagoButton from "./components/MercadoPago/MercadoPagoButton";
 
 import  Dashboard  from "./components/Dashboard/Dashboard";
 import  HomeDash  from "./components/Dashboard/HomeDash";
-import UserDash from "./components/Dashboard/UsersDash";
+
 
 
 
@@ -66,7 +66,7 @@ useEffect(() => {
         <Route path="/dashboard/*" element={<Dashboard />} />
         <Route path="/*" element={<HomeDash />} />
 
-        <Route path="/userdash" element={<UserDash/>} />
+
 
         
         

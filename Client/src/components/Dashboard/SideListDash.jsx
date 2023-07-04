@@ -1,16 +1,19 @@
 
 import {
 
+  BusinessCenter,
   ChevronLeft,
-  ChevronLeftRounded,
+
   Dashboard,
   Inbox,
-  KingBed,
+
   Logout,
   Mail,
   MarkChatUnread,
+  MenuBook,
   NotificationsActive,
-  PeopleAlt,
+
+  VerifiedUserRounded,
 
 } from '@mui/icons-material';
 import {
@@ -23,11 +26,19 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
+
   styled,
   Tooltip,
   Typography,
 } from '@mui/material';
 import MuiDrawer from '@mui/material/Drawer';
+import { useMemo, useState } from 'react';
+
+import UsersDash from './Pages/Users/UsersDash';
+import Companies from './Pages/Companies/Companies';
+import Jobs from './Pages/Jobs/Jobs';
+import Main from './Pages/Main/Main';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 
 
 
@@ -82,27 +93,66 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 
+
 const SideListDash = (open, setOpen) => {
+
+  const [selectedLink, setSelectedLink] = useState('');
+
+  const list = useMemo(
+    () => [
+      {
+        title: 'Inicio',
+        icon: <Dashboard />,
+        link: '',
+        component: <Main {...{ setSelectedLink, link: '' }} />,
+      },
+      {
+        title: 'Users',
+        icon: <VerifiedUserRounded />,
+        link: 'users',
+        component: <UsersDash {...{ setSelectedLink, link: 'users' }} />,
+      },
+      {
+        title: 'Empresas',
+        icon: <BusinessCenter />,
+        link: 'companies',
+        component: <Companies {...{ setSelectedLink, link: 'companies' }} />,
+      },
+      {
+        title: 'Postulaciones',
+        icon: <MenuBook />,
+        link: 'jobs',
+        component: <Jobs {...{ setSelectedLink, link: 'jobs' }} />,
+      },
+    ],
+    []
+  );
+
+  const navigate = useNavigate();
+
+
   return (
     <>
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
           <IconButton onClick={() => { setOpen(false) }}>
 
-            <ChevronLeft/>
+            <ChevronLeft />
 
           </IconButton>
         </DrawerHeader>
         <Divider />
         <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem key={text} disablePadding sx={{ display: 'block' }}>
+          {list.map((item) => (
+            <ListItem key={item.title} disablePadding sx={{ display: 'block' }}>
               <ListItemButton
                 sx={{
                   minHeight: 48,
                   justifyContent: open ? 'initial' : 'center',
                   px: 2.5,
                 }}
+                onClick={() => navigate(item.link)}
+                selected={selectedLink === item.link}
               >
                 <ListItemIcon
                   sx={{
@@ -111,9 +161,12 @@ const SideListDash = (open, setOpen) => {
                     justifyContent: 'center',
                   }}
                 >
-                  {index % 2 === 0 ? <Inbox /> : <Mail />}
+                  {item.icon}
                 </ListItemIcon>
-                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+                <ListItemText
+                  primary={item.title}
+                  sx={{ opacity: open ? 1 : 0 }}
+                />
               </ListItemButton>
             </ListItem>
           ))}
@@ -122,6 +175,11 @@ const SideListDash = (open, setOpen) => {
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
+        <Routes>
+          {list.map((item) => (
+            <Route key={item.title} path={item.link} element={item.component} />
+          ))}
+        </Routes>
 
       </Box>
     </>

@@ -80,7 +80,7 @@ export default function Dashboard() {
                 ...(open && { display: 'none' }),
               }}
             >
-              <Menu />
+              <MenuIcon />
             </IconButton>
             <Tooltip title="Go back to home page">
               <IconButton sx={{ mr: 1 }} onClick={() => navigate('/')}>
