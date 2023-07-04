@@ -40,10 +40,10 @@ useEffect(() => {
 
   return (
     <>
-    {/* <div>
-     {location.pathname !== "/" && location.pathname !=="/login" && location.pathname !== "/register"  && <Nav/> }
-     {location.pathname !== "/" && location.pathname !=="/login" && location.pathname !== "/register" && <SideBar/>}
-      </div> */}
+    <div>
+     {location.pathname !== "/" && location.pathname !=="/login" && location.pathname !== "/register" && location.pathname !== "/dashboard"  && <Nav/> }
+     {location.pathname !== "/" && location.pathname !=="/login" && location.pathname !== "/register" && location.pathname !== "/dashboard" && <SideBar/>}
+      </div>
 
       <Routes>
         
