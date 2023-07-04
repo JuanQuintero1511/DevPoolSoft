@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-const MainDash = ({ setSelectedLink, link }) => {
+const  MyData= ({ setSelectedLink, link }) => {
   useEffect(() => {
     setSelectedLink(link);
   }, []);
@@ -8,11 +8,11 @@ const MainDash = ({ setSelectedLink, link }) => {
   return (
     <>
 
-      <div>Inicio</div>
+      <h2>Mis datos</h2>
 
     </>
   )
 
 }
 
-export default MainDash;
+export default MyData;
