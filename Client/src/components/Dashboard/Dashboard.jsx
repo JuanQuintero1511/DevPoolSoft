@@ -12,7 +12,6 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 
 import SideListDash from './SideListDash';
-import HomeDash from './HomeDash';
 import { useState } from "react";
 import { useMemo } from 'react';
 import { Brightness4, Brightness7 } from '@mui/icons-material';
@@ -82,11 +81,6 @@ export default function Dashboard() {
             >
               <MenuIcon />
             </IconButton>
-            <Tooltip title="Go back to home page">
-              <IconButton sx={{ mr: 1 }} onClick={() => navigate('/')}>
-                <HomeDash />
-              </IconButton>
-            </Tooltip>
             <Typography
               variant="h6"
               noWrap
