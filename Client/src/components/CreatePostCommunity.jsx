@@ -16,14 +16,10 @@ const CreatePostCommunity = ({ closeModal }) => {
     title: "",
     body: "",
     image: "",
-<<<<<<< HEAD
     state: "In Progress",
     typePost: "Community",
     full_name: user.user_datum.full_name,
     email: user.email
-=======
-    typePost: "Community",
->>>>>>> 234fa9591b634be5d2a7dd97abc91bcc3ddf29ef
   });
 
 

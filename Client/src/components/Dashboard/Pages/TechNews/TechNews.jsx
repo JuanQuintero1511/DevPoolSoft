@@ -8,18 +8,18 @@
 
 //  return(
 //   <>
- 
+
 //    <div>Noticias Tech</div>
-  
+
 //   </>
 //  )
- 
-//  }
- 
-//  export default TechNews;
- 
 
- import React, { useEffect, useState } from 'react';
+//  }
+
+//  export default TechNews;
+
+
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 
 import Link from '@mui/material/Link';
@@ -34,29 +34,43 @@ import Button from "@mui/material/Button";
 import TablePagination from '@mui/material/TablePagination';
 import EditIcon from '@mui/icons-material/Edit';
 import ListAltIcon from '@mui/icons-material/ListAlt';
-
-// import TypeCompaniesDash from './TypeCompaniesDash';
+// import TypeUsersDash from './TypeUsersDash';
 // import HabilitarAlert from "./Habilitar";
 // import Detalle_usuario from './DetalleUsuario';
 // import SearchBar from './SearchBar';
 // import * as actions from "../../../actions";
 // import { AppDispatch, RootState } from '../../../store/index';
-
 import Title from '../Users/Title';
-import { getAllUsers } from '../../../../redux/actions';
+import { getAllPosts } from '../../../../redux/actions';
+import Swal from 'sweetalert2';
+
 
 const TechNews = ({ setSelectedLink, link }) => {
+  
   useEffect(() => {
     setSelectedLink(link);
   }, []);
-
+  
   const dispatch = useDispatch();
-  const UsuariosDashAll = useSelector((state) => state.allUsers);
-  const UsuariosDash = UsuariosDashAll.filter(user => user.user_datum !== null && user.user_datum.rol === "admin");
-  console.log(UsuariosDash);
+
+  const posts = useSelector((state) => state.allPosts);
 
 
-//   const user = useSelector((state) => state.userLogin);
+
+  // if (Array.isArray(UsuariosDashAll)) {
+  //   UsuariosDash = UsuariosDashAll.filter(user => user.user_datum !== null && user.user_datum.rol === "developer");
+  // }
+  // console.log(UsuariosDash);
+
+
+
+  const postTech = posts.filter((post) => post.typePost === "tech")
+  // .map((post) => (
+  //   <Card key={post.id} post={post} />
+  // ))
+
+
+  //   const user = useSelector((state) => state.userLogin);
 
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -68,34 +82,61 @@ const TechNews = ({ setSelectedLink, link }) => {
   const [tipo, setTipo] = useState("");
   const [openDet, setOpenDet] = useState(false);
 
-  let usuariosSliced = UsuariosDash.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
-
   useEffect(() => {
-    dispatch(getAllUsers());
+    dispatch(getAllPosts());
   }, [dispatch, rowsPerPage, openHab, open]);
 
-  const HandleHabilitar = (e, id, nombre, estado) => {
-    e.preventDefault();
-    setOpenHab(true);
-    setUsuario(id);
-    setNombre_usuario(nombre);
-    setEstado(estado);
-  };
+  let postsTech = postTech.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
-  const handleClick = (e, id, tipo, username) => {
-    e.preventDefault();
-    setOpen(true);
-    setUsuario(id);
-    setTipo(tipo);
-    setNombre_usuario(username);
-  };
 
-  const handleDetalle = (e, id, nombre) => {
-    e.preventDefault();
-    setOpenDet(true);
-    setUsuario(id);
-    setNombre_usuario(nombre);
-  };
+
+
+
+  // const HandleHabilitar = (e, id, nombre, estado) => {
+  //   e.preventDefault();
+  //   setOpenHab(true);
+  //   setUsuario(id);
+  //   setNombre_usuario(nombre);
+  //   setEstado(estado);
+  // };
+
+  //*ROL
+  // const handleRol = (e, id, tipo, userName) => {
+  //   e.preventDefault();
+  //   setOpen(true);
+  //   setUsuario(id);
+  //   setTipo(tipo);
+  //   setNombre_usuario(username);
+  // };
+  // const handleRol = (e, id,) => {
+  //   e.preventDefault();
+
+  //   Swal.fire({
+  //     title: 'Confirmar cambio de rol',
+  //     text: '¿Estás seguro/a de cambiar el rol a administrador?',
+  //     icon: 'question',
+  //     showCancelButton: true,
+  //     confirmButtonText: 'Confirmar',
+  //     cancelButtonText: 'Cancelar',
+  //   }).then((result) => {
+  //     if (result.isConfirmed) {
+  //       // Llamar a la acción modifyRol solo si se confirma el cambio de rol
+  //       dispatch(modifyRol({ id: id, rol: 'admin' }));
+
+  //       Swal.fire('Cambio de rol confirmado', '', 'success')
+  //         .then(() => {
+  //           window.location.reload();
+  //         })
+  //     }
+  //   });
+  // };
+
+  // const handleDetalle = (e, id, nombre) => {
+  //   e.preventDefault();
+  //   setOpenDet(true);
+  //   setUsuario(id);
+  //   setNombre_usuario(nombre);
+  // };
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -119,29 +160,32 @@ const TechNews = ({ setSelectedLink, link }) => {
           <Table size="small">
             <TableHead>
               <TableRow>
-                <TableCell>Titulo</TableCell>
-                <TableCell>E-mail</TableCell>
-                <TableCell>Type</TableCell>
-                <TableCell>State</TableCell>
+                <TableCell>Title</TableCell>
+                <TableCell>Name</TableCell>
+                <TableCell>Fecha</TableCell>
+                {/* <TableCell>Type</TableCell>
+                <TableCell>State</TableCell> */}
                 <TableCell align="right"></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {usuariosSliced.map((u) => (
-                <React.Fragment key={u.user_datum.id_user_data}>
+              {postsTech.map((u) => (
+                <React.Fragment key={u.id_post}>
                   <TableRow>
-                    <TableCell onClick={(e) => handleDetalle(e, u.user_datum.id_user_data, u.userName)}>
-                      <Button variant='text' color="inherit">
-                        <ListAltIcon fontSize="small" sx={{ color: "#ACA8A6", pb: 0.5 }} />
-                        {u.userName}
-                      </Button>
-                    </TableCell>
-                    <TableCell>{u.email}</TableCell>
-                    <TableCell onClick={(e) => handleClick(e, u.user_datum.id_user_data, u.user_datum.rol, u.userName)}>
+                    <TableCell>{u.title}</TableCell>
+                    <TableCell>{u.full_name}</TableCell>
+                    <TableCell>{u.date_register.indexOf('T')}</TableCell>
+                    {/* {posts.date_register?.substring(0, post.date_register.indexOf('T'))} */}
+
+
+                    {/* //*ROL */}
+                    {/* <TableCell onClick={(e) => handleRol(e, u.user_datum.id_user_data, u.user_datum.rol, u.userName)}>
                       <Button variant='text' color="inherit" >
                         <EditIcon fontSize="small" sx={{ color: "#ACA8A6", pb: 0.5 }} />
                         {u.user_datum.rol}
-                      </Button>
+                      </Button> */}
+
+                    {/* //*HABILITADO
                     </TableCell>
                     <TableCell>{u.user_datum.isActive === true ? "Habilitado" : "Deshabilitado"}</TableCell>
                     <TableCell align="right">
@@ -153,9 +197,9 @@ const TechNews = ({ setSelectedLink, link }) => {
                           Habilitar
                         </Button>
                       }
-                    </TableCell>
+                    </TableCell> */}
                   </TableRow>
-                  {/* <TypeCompaniesDash open={open} setopen={setOpen} id={usuario} username={nombre_usuario} tipo={tipo} /> */}
+                  {/* <TypeUsersDash open={open} setopen={setOpen} id={usuario} username={nombre_usuario} tipo={tipo} /> */}
                   {/* <Detalle_usuario open={openDet} setopen={setOpenDet} id={usuario} nombre={nombre_usuario} />
                   <HabilitarAlert open={openHab} setopen={setOpenHab} nombre={nombre_usuario} id={usuario} estado={estado} tipo="usuario" /> */}
                 </React.Fragment>
@@ -165,7 +209,7 @@ const TechNews = ({ setSelectedLink, link }) => {
           <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
             component="div"
-            count={UsuariosDash.length}
+            count={postTech.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}

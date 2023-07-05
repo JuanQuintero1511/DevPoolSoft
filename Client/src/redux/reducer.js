@@ -11,7 +11,8 @@ import {
    GET_USERS_COMPANIES, 
    MODIFY_POST_USER, 
    DELETE_COMMENT,
-   MODIFY_ROL} from "./action-types";
+   MODIFY_ROL,
+   CREATE_PUBLICATION} from "./action-types";
 
 const initialState = {
 

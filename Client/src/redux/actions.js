@@ -152,14 +152,12 @@ export const newGoogleUser = (data) => {
     }
 }
 
-<<<<<<< HEAD
 export const modifyRol = (postData) => {
     return async function (dispatch) {
         const { data } = await axios.patch(`http://localhost:3001/admin/`, postData);
         dispatch({ type: MODIFY_ROL, payload: data });
     }
 }
-=======
 export const createPublication = (publicationData) => {
     return async function (dispatch) {
       try {
@@ -170,4 +168,3 @@ export const createPublication = (publicationData) => {
       }
     };
   };
->>>>>>> 234fa9591b634be5d2a7dd97abc91bcc3ddf29ef
