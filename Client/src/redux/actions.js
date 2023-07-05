@@ -1,4 +1,4 @@
-import { GET_ALL_POSTS, GET_ID_POST, CREATE_POST_USER, GET_ALL_POSTS_ID_USER, CREATE_USER, DELETE_POST_USER, GET_ALL_USERS, USER_LOGIN, CREATE_USER_DATA, LOGOUT_USER, GET_USERS_COMPANIES, CREATE_GOOGLE_USER, CREATE_PUBLICATION } from "./action-types";
+import { GET_ALL_POSTS, GET_ID_POST, CREATE_POST_USER, GET_ALL_POSTS_ID_USER, CREATE_USER, DELETE_POST_USER, GET_ALL_USERS, USER_LOGIN, CREATE_USER_DATA, LOGOUT_USER, GET_USERS_COMPANIES, CREATE_GOOGLE_USER, CREATE_PUBLICATION,UPDATE_POST_USER } from "./action-types";
 import axios from "axios";
 
 export const getAllPosts = () => {
@@ -43,8 +43,22 @@ export const deletePostUser = (id_post) => {
     return async function (dispatch) {
         const { data } = await axios.delete(`http://localhost:3001/posts/${id_post}`);
         dispatch({ type: DELETE_POST_USER, payload: data });
+        window.location.reload();
     }
 }
+export const updatePostUser = (id_post, updatedPost) => {
+    return async function (dispatch) {
+      try {
+        // Eliminar las propiedades que generan referencias circulares
+        const cleanedPost = JSON.parse(JSON.stringify(updatedPost));
+  
+        const { data } = await axios.put(`http://localhost:3001/posts/${id_post}`, cleanedPost);
+        dispatch({ type: UPDATE_POST_USER, payload: data });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  };
 export const userLogin = (user) => {
     return { type: USER_LOGIN, payload: user}
 }
@@ -122,3 +136,5 @@ export const createPublication = (publicationData) => {
       }
     };
   };
+
+

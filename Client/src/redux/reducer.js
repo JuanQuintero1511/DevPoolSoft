@@ -1,4 +1,4 @@
-import { GET_ALL_POSTS, GET_ID_POST, DELETE_POST_USER, GET_ALL_POSTS_ID_USER, GET_ALL_USERS, USER_LOGIN, CREATE_USER_DATA, CREATE_USER, LOGOUT_USER, GET_USERS_COMPANIES, CREATE_PUBLICATION } from "./action-types";
+import { GET_ALL_POSTS, GET_ID_POST, DELETE_POST_USER, GET_ALL_POSTS_ID_USER, GET_ALL_USERS, USER_LOGIN, CREATE_USER_DATA, CREATE_USER, LOGOUT_USER, GET_USERS_COMPANIES, CREATE_PUBLICATION,UPDATE_POST_USER } from "./action-types";
 
 const initialState = {
 
@@ -12,7 +12,7 @@ const initialState = {
 }
 
 const reducer = (state = initialState, action) => {
-
+ const updatedPosts = state.allPosts.filter(post => post.id !== action.payload);
   switch (action.type) {
     case GET_ALL_POSTS:
       return { ...state, allPosts: action.payload };
@@ -57,6 +57,17 @@ const reducer = (state = initialState, action) => {
             case CREATE_PUBLICATION:
               return { ...state, allPosts: [...state.allPosts, { ...action.payload }] };
             
+              case DELETE_POST_USER:
+              return { ...state, allPosts: updatedPosts };
+
+              case UPDATE_POST_USER:
+                const updatedAllPosts = state.allPosts.map(post => {
+                  if (post.id === action.payload.id) {
+                    return { ...post, ...action.payload };
+                  }
+                  return post;
+                });
+                return { ...state, allPosts: updatedAllPosts };  
 
             // case CREATE_GOOGLE_USER:
             //   localStorage.setItem("userName", action.payload.userName);
