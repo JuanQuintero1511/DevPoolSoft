@@ -33,13 +33,14 @@ const Home = () => {
       </div>
 
       <Modal show={showModal} onHide={closeModal}>
-        <Modal.Header closeButton>
+        {/* <Modal.Header closeButton>
           <Modal.Title>Agregar Publicación</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
+        </Modal.Header> */}
           <CreatePostTechNews closeModal={closeModal} />
-        </Modal.Body>
+        {/* <Modal.Body>
+        </Modal.Body> */}
       </Modal>
+      <CardsContainer />
     </div>
   );
 };

@@ -101,7 +101,7 @@ const CreatePostTechNews = ({ closeModal }) => {
     
       return (
         <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 z-50">
-          <div className="bg-white rounded-lg p-6">
+          <div className="bg-white w-50 rounded-lg p-6">
             <button
               className="absolute top-2 right-2 text-gray-600 hover:text-gray-800"
               onClick={() => closeModal()}
