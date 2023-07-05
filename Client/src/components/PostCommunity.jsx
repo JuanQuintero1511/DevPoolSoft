@@ -1,10 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const PostCommunity = ({ posts }) => {
+const PostCommunity = ({ post }) => {
   return (
     <div className="bg-gray-100 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 ml-[20vw]">
-      {posts.map((post) => (
         <div key={post.id_post} className="bg-white rounded-lg shadow-md p-4 transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg">
           <div className="mb-4">
             <Link to={`/community/${post.id_post}`}>
@@ -38,7 +37,7 @@ const PostCommunity = ({ posts }) => {
             </div>
           </div>
         </div>
-      ))}
+      
     </div>
   );
 };

@@ -17,8 +17,6 @@ const CommentsCommunity = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(user);
-    console.log(post.comments);
     dispatch(getPostById(id));
   }, [dispatch, id]);
 

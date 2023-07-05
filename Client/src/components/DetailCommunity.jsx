@@ -12,8 +12,7 @@ const Detail = () => {
   const user = useSelector((state) => state.userLogin);
   const navigate = useNavigate();
 
-  console.log(post);
-  console.log(user);
+
 
   useEffect(() => {
     dispatch(getPostById(id));

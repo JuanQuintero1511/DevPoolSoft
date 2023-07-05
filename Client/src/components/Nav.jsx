@@ -14,14 +14,13 @@ import Dashboard from "./Dashboard/Dashboard";
 import { DashboardCustomize } from "@mui/icons-material";
 
 const Nav = () => {
+  const user = useSelector((state) => state.userLogin);
   const [suggestions, setSuggestions] = useState([]);
   const searchRef = useRef(null);
   const suggestionsRef = useRef(null);
   const location = useLocation();
   const allPosts = useSelector((state) => state.allPosts);
-  console.log(allPosts);
   const originalPosts = useSelector((state) => state.originalPosts);
-  console.log(originalPosts);
 
 
   const [showModal, setShowModal] = useState(false);
@@ -80,8 +79,7 @@ const Nav = () => {
     dispatch(logoutUser());
     const auth = getAuth();
 
-  const user = useSelector((state) => state.userLogin);
-  console.log(user);
+  
 
     signOut(auth)
       .then(() => {
@@ -186,7 +184,7 @@ const Nav = () => {
             </button>
           </NavLink>
           
-          {user.user_datum?.rol === "admin" &&
+          {user?.user_datum?.rol === "admin" &&
           <IconButton color="primary" onClick={() => navigate ('dashboard')} aria-label="Dashboard"  >
             <DashboardCustomize />
           </IconButton>
