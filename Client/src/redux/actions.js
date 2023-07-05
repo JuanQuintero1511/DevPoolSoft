@@ -1,5 +1,6 @@
 
-import { GET_ALL_POSTS, GET_ID_POST, CREATE_POST_USER, GET_ALL_POSTS_ID_USER, CREATE_USER, DELETE_POST_USER, GET_ALL_USERS, USER_LOGIN, CREATE_USER_DATA, LOGOUT_USER, GET_USERS_COMPANIES, GET_USER_BY_ID, CREATE_GOOGLE_USER,  DEV_DATA, MODIFY_POST_USER, CREATE_COMMENT_POST, DELETE_COMMENT  } from "./action-types";
+
+import { GET_ALL_POSTS, GET_ID_POST, CREATE_POST_USER, GET_ALL_POSTS_ID_USER, CREATE_USER, DELETE_POST_USER, GET_ALL_USERS, USER_LOGIN, CREATE_USER_DATA, LOGOUT_USER, GET_USERS_COMPANIES, GET_USER_BY_ID, CREATE_GOOGLE_USER, FILTRAR_CARGO, FILTRAR_TIPO_EMPLEO, RESET_POSTS,  DEV_DATA, MODIFY_POST_USER, CREATE_COMMENT_POST, DELETE_COMMENT  } from "./action-types";
 import axios from "axios";
 
 export const getAllPosts = () => {
@@ -147,6 +148,22 @@ export const newGoogleUser = (data) => {
     }
 }
 
+export const filtrarTipoEmpleo = (tipoEmpleo) => ({
+    type: FILTRAR_TIPO_EMPLEO,
+    payload: tipoEmpleo
+});
+
+export const filtrarCargo = (cargo) => ({
+    type: FILTRAR_CARGO,
+    payload: cargo
+});
+
+
+export const resetPosts = () => {
+    return {
+        type: RESET_POSTS
+    };
+};
 
 
 export const devData = (data) => {

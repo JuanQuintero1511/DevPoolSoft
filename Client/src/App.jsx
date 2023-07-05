@@ -22,10 +22,8 @@ import { useDispatch} from 'react-redux';
 import Test1 from "./components/test1";
 import CommentsCommunity from "./components/CommentsCommunity";
 import MercadoPagoButton from "./components/MercadoPago/MercadoPagoButton";
-import Dashboard from "./components/Dashboard";
 
 import { IdProfile } from "./components/IdProfile";
-
 import DevData from "./components/DevData";
 
 function App() {
@@ -47,22 +45,21 @@ useEffect(() => {
       </div>
 
       <Routes>
-        
-        <Route path='/' element={ <Landing />}/>
-        <Route path='/login' element={ <Login /> }/>
-        <Route path='/home' element={ <Home />}/>
-        <Route path='/JobsOffers' element={<JobsOffers />}/>
-        <Route path='/register' element={<Register />} />
-        <Route path='/profile' element={ <Profile />}/>
-        <Route path='/community' element={ <Community />}/>
-        <Route path="/community/:id" element={ <Detail />} />
-        <Route path="/community/myposts/:id" element={ <MyPostCommunity />} />
-        <Route path="/inprogress" element={ <InProgress /> }/>
-        <Route path= "/test1" element={<Test1/>} / >
-        <Route path= "/comments/:id" element={<CommentsCommunity/>} / >
-        <Route path="/test2" element={<MercadoPagoButton/>} />
-        
-
+        <Route path="/" element={<Landing />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/JobsOffers" element={<JobsOffers />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/profile/:id" element={<IdProfile />} />
+        <Route path="/community" element={<Community />} />
+        <Route path="/community/:id" element={<Detail />} />
+        <Route path="/community/myposts/:id" element={<MyPostCommunity />} />
+        <Route path="/inprogress" element={<InProgress />} />
+        <Route path="/test1" element={<Test1 />} />
+        <Route path="/devdata" element={<DevData />} />
+        <Route path="/comments/:id" element={<CommentsCommunity />} />
+        <Route path="/test2" element={<MercadoPagoButton />} />
       </Routes>
     </>
   );
