@@ -19,7 +19,7 @@ import { Link } from "react-router-dom";
   const jobPosts = posts.filter((post) => post.typePost === "Job");
   const [showModal, setShowModal] = useState(false);
   const [filteredPosts, setFilteredPosts] = useState([]);
-  ]);
+  
   const dispatch = useDispatch();
 
  
