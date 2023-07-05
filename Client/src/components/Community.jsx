@@ -21,7 +21,7 @@ const Community = () => {
   const user = useSelector((state) => state.userLogin);
 
 
-
+console.log(posts);
 
   const closeModal = () => {
     setShowModal(!showModal);
