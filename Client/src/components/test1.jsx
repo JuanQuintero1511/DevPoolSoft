@@ -9,7 +9,6 @@ const Test1 = () => {
 
   const dispatch = useDispatch();
   const userLoged = useSelector((state) => state.userLogin);
-  console.log(userLoged)
 
 
 
@@ -19,12 +18,6 @@ const Test1 = () => {
     user: false,
   });
   const [error, setError] = useState({});
-
-  const [thisUser, setThisUser] = useState({
-    userName: "",
-    password: "",
-    email: "",
-  });
 
 
 
@@ -46,23 +39,7 @@ const Test1 = () => {
 
   })
 
-  //si es dev
-console.log(form)
-
-  const [formData, setFormData] = useState({
-    experience: {
-      puesto: "",
-      duracion: "",
-      empresa: ""
-    },
-    education: {
-      titulo: "",
-      institucion: "",
-      año: ""
-    },
-    skills: [],
-    ratings: ""
-  });
+ console.log(form);
 
 
   const handleImageUpload = (url) => {
@@ -94,28 +71,30 @@ console.log(form)
       ...prevUser,
       [name]: parsedValue
     }));
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [name]: value
-    }));
+   
   };
 
-  const handleSkillsChange = (event) => {
-    const selectedSkills = Array.from(event.target.selectedOptions, (option) => option.value);
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      skills: selectedSkills
-    }));
-  };
+ 
   const onValidation = (values) => {
     const noSymbols = /[ `!@#$%^&*()+\-=\[\]{};':"\\|,.<>\/?~]/;
     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
 
     let errors = {}
-    if (!values.full_name && !values.backup_email && !values.description && !values.date_birthday && !values.address && !values.phone_number && !values.profile_image && !values.authentication && !values.image.url) {
-      errors.userName = "All camps are required"
+    if (
+      !values.full_name.trim() ||
+      !values.backup_email.trim() ||
+      !values.description.trim() ||
+      !values.date_birthday.trim() ||
+      !values.address.trim() ||
+      !values.phone_number ||
+      !values.profile_image.trim() ||
+      !values.authentication.trim() ||
+      !values.image.url.trim()
+    ) {
+      errors.userName = "All fields are required";
     }
+    
     if (values.full_name.lenght > 30 && noSymbols.test(values.full_name)) {
       errors.full_name = "\nFull name must be less than or equal to 30 characters and can not contain symbols";
     }
@@ -125,6 +104,8 @@ console.log(form)
     return errors
 
   }
+
+  
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -154,8 +135,10 @@ console.log(form)
         image: {
           url: ""
         }
+      
 
       })
+     
       setTimeout(() => {
         window.location.reload();
       }, 2000);
@@ -314,7 +297,10 @@ console.log(form)
                   </div> :
 
                   <div className="-my-[430px]">
+
                     <CloudinaryUploadWidget onImageUpload={handleImageUpload}/>
+
+
                   </div>}
               </div>
             </div>
@@ -325,116 +311,6 @@ console.log(form)
                 ))}
               </div>
             )}
-
-            {/* {form.rol_type === "userDev" && (<div>
-
-            <div className="relative mb-2">
-              <label
-                className="flex flex-col font-mono tracking-widest">
-                <textarea name="description" value={form.description}
-                  onChange={handleInputChange}
-                  placeholder="Description about you..."
-                  className="bg-black-300 py-3 px-6 placeholder:text-secondary text-black rounded-lg font-medium" />
-              </label>
-            </div>
-            <div className="mb-4">
-          <label className="block mb-1" htmlFor="puesto">Puesto</label>
-          <input
-            type="text"
-            id="puesto"
-            name="experience.puesto"
-            value={formData.experience.puesto}
-            onChange={handleInputChange}
-            className="w-full px-2 py-1 border rounded"
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block mb-1" htmlFor="duracion">Duración</label>
-          <input
-            type="text"
-            id="duracion"
-            name="experience.duracion"
-            value={formData.experience.duracion}
-            onChange={handleInputChange}
-            className="w-full px-2 py-1 border rounded"
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block mb-1" htmlFor="empresa">Empresa</label>
-          <input
-            type="text"
-            id="empresa"
-            name="experience.empresa"
-            value={formData.experience.empresa}
-            onChange={handleInputChange}
-            className="w-full px-2 py-1 border rounded"
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block mb-1" htmlFor="titulo">Título</label>
-          <input
-            type="text"
-            id="titulo"
-            name="education.titulo"
-            value={formData.education.titulo}
-            onChange={handleInputChange}
-            className="w-full px-2 py-1 border rounded"
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block mb-1" htmlFor="institucion">Institución</label>
-          <input
-            type="text"
-            id="institucion"
-            name="education.institucion"
-            value={formData.education.institucion}
-            onChange={handleInputChange}
-            className="w-full px-2 py-1 border rounded"
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block mb-1" htmlFor="año">Año</label>
-          <input
-            type="number"
-            id="año"
-            name="education.año"
-            value={formData.education.año}
-            onChange={handleInputChange}
-            className="w-full px-2 py-1 border rounded"
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block mb-1" htmlFor="skills">Habilidades</label>
-          <select
-            id="skills"
-            name="skills"
-            multiple
-            value={formData.skills}
-            onChange={handleSkillsChange}
-            className="w-full px-2 py-1 border rounded"
-          >
-            <option value="JavaScript">JavaScript</option>
-            <option value="HTML">HTML</option>
-            <option value="CSS">CSS</option>
-            <option value="Node.js">Node.js</option>
-            <option value="React">React</option>
-          </select>
-        </div>
-        <div className="mb-4">
-          <label className="block mb-1" htmlFor="ratings">Ratings</label>
-          <input
-            type="number"
-            id="ratings"
-            name="ratings"
-            value={formData.ratings}
-            onChange={handleInputChange}
-            className="w-full px-2 py-1 border rounded"
-          />
-        </div>
-        </div>)} */}
-
-
-
             <div className="flex items-center justify-center my-2 h-4">
               <a onClick={handleSubmit}
                 className="relative inline-flex items-center justify-center px-9 py-3 overflow-hidden font-mono font-medium tracking-widest text-white bg-gray-800 rounded-lg group mx-4 mt-14">
