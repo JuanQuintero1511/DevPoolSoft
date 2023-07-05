@@ -26,19 +26,7 @@ const MercadoPagoModal = ({ closemodal }) => {
           <div className="p-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="bg-gray-200 p-4 rounded-lg">
-                <h4 className="text-lg font-bold text-center">FIRST OFFER</h4>
-                <p className="text-sm max-h-[calc(100vh-10rem)]"> 
-                  Power up your business with DevPool! Take advantage of our exclusive offer for advertising space on our website.
-                  We bring together the best of professional and social platforms to provide maximum visibility and attract more clients.
-                </p>
-                <p className="text-sm">
-                  What do you get with our offer? Access to a strategic space on our website, where thousands of professionals and businesses
-                  connect daily in search of opportunities. By promoting your business on DevPool, you can reach your target audience
-                  and make a greater impact in your industry.
-                </p>
-              </div>
-              <div className="bg-gray-200 p-4 rounded-lg">
-                <h4 className="text-lg font-bold text-center">SECOND OFFER</h4>
+                <h4 className="text-lg font-bold text-center">BECOME PREMIUM!</h4>
                 <p className="text-sm">
                   In addition to our main page, we are excited to offer users the opportunity to become Premium Members. By becoming a Premium
                   Member, you'll enjoy enhanced visibility for your posts, priority placement in search results, and a prestigious blue checkmark
@@ -52,14 +40,9 @@ const MercadoPagoModal = ({ closemodal }) => {
             </div>
           </div>
           <div className="flex flex-col md:flex-row justify-center p-4">
-            <button className="bg-blue-500 text-white py-2 px-4 rounded-lg mb-2 md:mb-0 md:mr-4">
-              <a href="https://www.mercadopago.com.co/checkout/v1/redirect?pref_id=1390863745-6ffa3ca2-9da1-4132-853a-1127a5eaf8b0" className="text-white">
-                BUY FIRST OFFER
-              </a>
-            </button>
             <button className="bg-yellow-500 text-white py-2 px-4 rounded-lg mb-2 md:mb-0 md:mr-4">
-              <a href="https://www.mercadopago.com.co/checkout/v1/redirect?pref_id=1390863745-55b8e754-a21e-4260-8fd1-3fe6e378d93f" className="text-white">
-                BUY SECOND OFFER
+              <a href="https://www.mercadopago.com.co/checkout/v1/redirect?pref_id=1390863745-b1dc3c41-e408-4ed4-9415-f8124626dbe8" className="text-white">
+                BUY PREMIUM
               </a>
             </button>
           </div>
