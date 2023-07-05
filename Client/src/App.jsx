@@ -15,19 +15,26 @@ import Detail from "./components/DetailCommunity";
 import JobsOffers from "./components/JobsOffers";
 import InProgress from "./components/InProgress";
 import MyPostCommunity from "./components/MyPostsCommunity";
+import { userLogin_App } from "./redux/actions";
 import Test1 from "./components/test1";
 import CommentsCommunity from "./components/CommentsCommunity";
 import MercadoPagoButton from "./components/MercadoPago/MercadoPagoButton";
 import  Dashboard  from "./components/Dashboard/Dashboard";
-// import  HomeDash  from "./components/Dashboard/HomeDash";
-
 import { IdProfile } from "./components/IdProfile";
 import DevData from "./components/DevData";
 
 function App() {
+
   const location = useLocation();
-  const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    const userName = localStorage.getItem('userName');
+    if (userName) dispatch(userLogin_App(userName));
+  }, [])
+
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     const userName = localStorage.getItem("userName");
@@ -54,14 +61,11 @@ function App() {
 
   return (
     <>
-      <div>
-        {location.pathname !== "/" &&
-          location.pathname !== "/login" &&
-          location.pathname !== "/register" && <Nav />}
-        {location.pathname !== "/" &&
-          location.pathname !== "/login" &&
-          location.pathname !== "/register" && <SideBar />}
-      </div>
+
+    <div>
+     {location.pathname !== "/" && location.pathname !=="/login" && location.pathname !== "/register" && location.pathname !== "/dashboard"  && <Nav/> }
+     {location.pathname !== "/" && location.pathname !=="/login" && location.pathname !== "/register" && location.pathname !== "/dashboard" && <SideBar/>}
+    </div>
 
       <Routes>
 

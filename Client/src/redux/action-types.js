@@ -17,9 +17,9 @@ export const RESET_POSTS = "RESET_POSTS";
 export const MODIFY_POST_USER = "MODIFY_POST_USER";
 export const CREATE_COMMENT_POST = "CREATE_COMMENT_POST";
 export const DELETE_COMMENT = "DELETE_COMMENT";
+export const MODIFY_ROL = "MODIFY_ROL";
+export const ACTIVE_USER = "ACTIVE_USER";
+export const DESACTIVE_USER = "DESACTIVE_USER";
+export const CREATE_PUBLICATION = "CREATE_PUBLICATION"
 export const DEV_DATA = "DEV_DATA";
-
-
-
-
 

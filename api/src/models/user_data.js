@@ -19,10 +19,6 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    // google_id: {
-    //   type: DataTypes.STRING,
-    //   allowNull: false,
-    // },
     description: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -44,11 +40,8 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     phone_number: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
-      validate: {
-        len: [0, 15] 
-      }
     },
     profile_image: {
       type: DataTypes.STRING,
