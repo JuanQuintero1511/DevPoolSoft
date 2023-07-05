@@ -9,3 +9,5 @@ adminRouter.get("/:id", getAdminByIdHandler);
 adminRouter.post("/", createAdminHandler);
 adminRouter.put("/:id", updateAdminHandler);
 adminRouter.patch("/", setAdminHandler);
+
+module.exports = adminRouter;

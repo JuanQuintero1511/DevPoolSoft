@@ -9,18 +9,22 @@ import { useDispatch, useSelector } from "react-redux";
 import MercadoPagoModal from "./MercadoPago/MercadoPagoModal";
 import { getAuth, signOut } from "firebase/auth";
 import { initializeApp } from "firebase/app";
+import { IconButton } from "@mui/material";
+import Dashboard from "./Dashboard/Dashboard";
+import { DashboardCustomize } from "@mui/icons-material";
 
 const Nav = () => {
   const [suggestions, setSuggestions] = useState([]);
   const searchRef = useRef(null);
   const suggestionsRef = useRef(null);
   const location = useLocation();
-  const [showModal, setShowModal] = useState(false);
   const allPosts = useSelector((state) => state.allPosts);
   console.log(allPosts);
   const originalPosts = useSelector((state) => state.originalPosts);
   console.log(originalPosts);
 
+
+  const [showModal, setShowModal] = useState(false);
 
   const closeModal = () => {
     setShowModal(false);
@@ -55,6 +59,7 @@ const Nav = () => {
 
   //BOTON LOGOUT//
 
+
   const firebaseConfig = {
     apiKey: "AIzaSyCwCe7BBMtInaRu422Myrvg5d-qO-LAtHc",
     authDomain: "devpoolsoft.firebaseapp.com",
@@ -62,11 +67,11 @@ const Nav = () => {
     storageBucket: "devpoolsoft.appspot.com",
     messagingSenderId: "759683741972",
     appId: "1:759683741972:web:bc2b1d5c9746d5c728aa01",
-    measurementId: "G-2549PBCD08",
+    measurementId: "G-2549PBCD08"
   };
 
   const app = initializeApp(firebaseConfig);
-
+  
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -74,6 +79,10 @@ const Nav = () => {
     localStorage.removeItem("userName");
     dispatch(logoutUser());
     const auth = getAuth();
+
+  const user = useSelector((state) => state.userLogin);
+  console.log(user);
+
     signOut(auth)
       .then(() => {
         navigate("/login");
@@ -99,6 +108,7 @@ const Nav = () => {
     e.preventDefault();
     dispatch(resetPosts());
   };
+
 
 
   return (
@@ -175,6 +185,12 @@ const Nav = () => {
               <i className="bi bi-person-circle"></i>
             </button>
           </NavLink>
+          
+          {user.user_datum?.rol === "admin" &&
+          <IconButton color="primary" onClick={() => navigate ('dashboard')} aria-label="Dashboard"  >
+            <DashboardCustomize />
+          </IconButton>
+          }
 
           <button
             type="button"
