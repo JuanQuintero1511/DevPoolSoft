@@ -110,38 +110,38 @@ const SideListDash = ({ open, setOpen }) => {
   const list = useMemo(
     () => [
       {
-        title: 'Mis datos',
+        title: 'My information',
         icon: <AccountCircle />,
         link: 'mydata',
         component: <MyData {...{ setSelectedLink, 
         link: 'mydata' }} />,
       },
       {
-        title: 'Usuarios',
+        title: 'Users',
         icon: <VerifiedUserRounded />,
         link: 'users',
         component: <UsersDash {...{ setSelectedLink, link: 'users' }} />,
       },
       {
-        title: 'Empresas',
+        title: 'Companies',
         icon: <BusinessCenter />,
         link: 'companies',
         component: <CompaniesDash {...{ setSelectedLink, link: 'companies' }} />,
       },
       {
-        title: 'Postulaciones',
+        title: 'Jobs Offers',
         icon: <MenuBook />,
         link: 'jobs',
         component: <Jobs {...{ setSelectedLink, link: 'jobs' }} />,
       },
       {
-        title: 'Noticias Tech',
+        title: 'Tech News',
         icon: <NewspaperRounded />,
         link: 'technews',
         component: <TechNews {...{ setSelectedLink, link: 'technews' }} />,
       },
       {
-        title: 'Administradores',
+        title: 'Administrators',
         icon: <Computer />,
         link: 'admin',
         component: <AdminDash {...{ setSelectedLink, link: 'admin' }} />,
