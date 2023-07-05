@@ -39,11 +39,8 @@ export const Login = () => {
     
     if (user && user.password === userData.password && user.userName === userData.username) {
       console.log(user)
-      dispatch(userLogin(user));
-      if (user.user_datum && user.user_datum.rol === "admin") {
-        navigate ("/dashboard")
-      } else {
-      navigate("/home");}
+      dispatch(userLogin(user));      
+      navigate("/home");
     } else {
       Swal.fire({
         icon: 'error',

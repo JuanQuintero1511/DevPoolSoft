@@ -10,7 +10,7 @@ const devDataRouter = require('../routes/devDataRouter/devDataRouter')
 const mercadoPagoRouter = require('../routes/mercadoPagoRouter/mercadoPagoRouter');
 const confirmEmailRouter = require('../routes/confirmEmailRouter/confirmEmailRouter')
 const resetPasswordRouter = require('../routes/resetPasswordRouter/resetPasswordRouter')
-const adminRouter = require('./adminRouter/adminRouter')
+const adminRouter = require('../routes/adminRouter/adminRouter')
 
 const router = Router();
 

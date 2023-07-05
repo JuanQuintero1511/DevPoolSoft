@@ -1,22 +1,11 @@
 const { Router } = require("express");
 
+const { getAdminsHandler, getAdminByIdHandler, createAdminHandler, updateAdminHandler, setAdminHandler }  = require("../../handlers/adminHandler/adminHandler")
 
-// const { getRolesHandler, postRoleHandler, putRolesHandler, postNewUserAdmHandler } = require("../../handlers/rolHandlers/rolHandlers");
+const adminRouter = Router();
 
-const { getAdminHandler, createAdminHandler, updateAdminHandler, getAdminByIdHandler, setAdminHandler} = require('../../handlers/adminHandlers/adminHandlers')
-// const validatePostRoles = require("../../middlewares/validatePostRoles/validatePostRoles");
-// const validateJwt = require("../../middlewares/validateJwt/validateJwt");
-// const validateRoleAdm = require("../../middlewares/validateRoleAdm/validateRolAdm")
-
-const adminRoter = Router();
-
-adminRoter.get("/",  getAdminHandler); 
-adminRoter.get("/:id",  getAdminByIdHandler); 
-adminRoter.post("/", createAdminHandler);
-// adminRoter.put("/:id", updateAdminHandler);
-adminRoter.put("/:id", setAdminHandler);
-
-
-
-
-module.exports = adminRoter;
+adminRouter.get("/", getAdminsHandler); 
+adminRouter.get("/:id", getAdminByIdHandler); 
+adminRouter.post("/", createAdminHandler);
+adminRouter.put("/:id", updateAdminHandler);
+adminRouter.patch("/", setAdminHandler);

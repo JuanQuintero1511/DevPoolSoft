@@ -54,7 +54,6 @@ const setCompanyUsers = async (userName, full_name) => {
       userName: `${userName}`,
     }
   })  
-  console.log(companyUser)
   const usersToSet = companyUser.dataValues.id_users
   await User_data.update({ id_users: `${usersToSet}`}, {
     where: {
@@ -81,10 +80,27 @@ const setCompanyRol = async (rol_type, full_name) => {
 const setCompanyPremium = async (full_name) => {
   await User_data.update({ isPremium: true }, {
     where: {
-      full_name: { [Op.iLike]: `%${full_name}%` }
+      full_name: `${full_name}`
     }
   })
 }
+
+const setCompanyDesactive = async (full_name) => {
+  await User_data.update({ isActive: false }, {
+    where: {
+      full_name: `${full_name}`
+    }
+  })
+}
+
+const setCompanyActive = async (full_name) => {
+  await User_data.update({ isActive: true }, {
+    where: {
+      full_name: `${full_name}`
+    }
+  })
+}
+
 
 
 // //?Trae las empresas de la DB
@@ -137,6 +153,8 @@ module.exports = {
   createCompanyUser,
   setCompanyUsers,
   setCompanyPremium,
+  setCompanyActive,
+  setCompanyDesactive,
   getAllCompanies,
   getCompanyById,
   searchCompanyByName,
