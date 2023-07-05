@@ -36,6 +36,7 @@ export const Login = () => {
     event.preventDefault();
   
     const user = users.find((user) => user.email === userData.email);
+
   
     if (user && user.password === userData.password && user.userName === userData.username && user.user_datum && user.user_datum.isActive === false) {
       Swal.fire({
@@ -46,8 +47,12 @@ export const Login = () => {
       });
     } else if (user && user.password === userData.password && user.userName === userData.username) {
       console.log(user);
+
       dispatch(userLogin(user));
-      navigate("/home");
+      if (user.user_datum && user.user_datum.rol === "admin") {
+        navigate ("/dashboard")
+      } else {
+      navigate("/home");}
     } else {
       Swal.fire({
         icon: 'error',

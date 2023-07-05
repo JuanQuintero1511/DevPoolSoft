@@ -12,27 +12,28 @@ module.exports = (sequelize) => {
             },
             aboutMe: {
                 type: DataTypes.STRING,                
-                validate: {
-                    len: [0, 500]
-                }
+                allowNull: true
             },
             experience: {
                 type: DataTypes.JSONB,
+                allowNull: true
             },
             education: {
-                type: DataTypes.JSONB,                
+                type: DataTypes.JSONB,  
+                allowNull: true              
             },
             skills: {
-                type: DataTypes.JSON,                
+                type: DataTypes.JSON,    
+                allowNull: true            
             },
             ratings: {
-                type: DataTypes.FLOAT, 
-                validate: {
-                    len: [0, 5]
-                }               
+                type: DataTypes.STRING, 
+                allowNull: true
+                          
             },
             curriculumVitae: {
-                type: DataTypes.JSONB,                
+                type: DataTypes.JSONB,     
+                allowNull: true           
               },
         },
         {

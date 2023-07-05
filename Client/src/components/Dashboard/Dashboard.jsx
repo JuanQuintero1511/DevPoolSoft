@@ -1,4 +1,3 @@
-
 import { ThemeProvider, styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 
@@ -55,12 +54,9 @@ export default function Dashboard() {
       }),
     [dark]
   );
-
   const handleDrawerOpen = () => {
     setOpen(true);
   };
-
-
   const navigate = useNavigate();
   return (
     <ThemeProvider theme={darkTheme}>
