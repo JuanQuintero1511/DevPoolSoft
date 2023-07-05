@@ -18,9 +18,9 @@ const newOrder = async () => {
         ],
 
         back_urls: {
-            failure: '/failure',
-            pending: '/pending',
-            success: '/success'
+            failure: 'http://localhost:5173/home',
+            pending: 'http://localhost:5173/home',
+            success: 'http://localhost:5173/home'
         }
     }
     

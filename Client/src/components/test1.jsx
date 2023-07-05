@@ -144,7 +144,7 @@ const Test1 = () => {
         {rolSelected.company || rolSelected.user ? null : <div className="flex justify-center space-x-4 h-12 mb-2">
           <a onClick={() => {
             setRolSelected({ user: true, company: false });
-            setForm({ ...form, rol_type: "developer", isPremium: true, authentication: "CUIT" });
+            setForm({ ...form, rol_type: "developer", authentication: "CUIT" });
           }} className="relative inline-flex items-center justify-center px-9 py-3 overflow-hidden font-mono font-medium tracking-normal text-white bg-gray-800 rounded-lg group">
             <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-green-500 rounded-full group-hover:w-56 group-hover:h-56"></span>
             <span className="absolute inset-0 w-full h-full -mt-1 rounded-lg opacity-30 bg-gradient-to-b from-transparent via-transparent to-teal-200"></span>
@@ -153,7 +153,7 @@ const Test1 = () => {
           <a
             onClick={() => {
               setRolSelected({ company: true, user: false });
-              setForm({ ...form, rol_type: "company" });
+              setForm({ ...form, rol_type: "company", authentication: "CUIT" });
 
             }}
             className="relative inline-flex items-center justify-center px-10 py-4 overflow-hidden font-mono font-medium tracking-widest text-white bg-gray-800 rounded-lg group focus:bg-teal-200 focus:outline-none"
@@ -218,22 +218,10 @@ const Test1 = () => {
               </label>
             </div>
 
-            {rolSelected.company && (
-              <div className="relative mb-2">
-                <input type="text" id="floating_outlined" className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-black font-mono dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " name="authentication"
-                  onChange={handleInputChange}
-                  value={form.authentication}
-                  required />
-                <label for="floating_outlined" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1 font-mono tracking-widest"
-
-                >
-                  Authentication archive:
-                </label>
-              </div>)}
-
+          
 
             <div className="relative mb-2">
-              <input id="floating_outlined" className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-black font-mono dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " type="text"
+              <input id="floating_outlined" className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-black font-mono dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " type="date"
                 name='date_birthday'
                 value={form.date_birthday}
                 onChange={handleInputChange}

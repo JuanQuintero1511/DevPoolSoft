@@ -22,4 +22,5 @@ export const ACTIVE_USER = "ACTIVE_USER";
 export const DESACTIVE_USER = "DESACTIVE_USER";
 export const CREATE_PUBLICATION = "CREATE_PUBLICATION"
 export const DEV_DATA = "DEV_DATA";
+export const UPDATE_POST_USER = "UPDATE_POST_USER"
 
