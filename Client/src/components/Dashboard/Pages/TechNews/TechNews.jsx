@@ -55,6 +55,9 @@ const TechNews = ({ setSelectedLink, link }) => {
 
   const posts = useSelector((state) => state.allPosts);
 
+  console.log(posts);
+  
+
 
 
   // if (Array.isArray(UsuariosDashAll)) {
@@ -69,6 +72,7 @@ const TechNews = ({ setSelectedLink, link }) => {
   //   <Card key={post.id} post={post} />
   // ))
 
+console.log(postTech);
 
   //   const user = useSelector((state) => state.userLogin);
 

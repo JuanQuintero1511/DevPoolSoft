@@ -21,6 +21,7 @@ import { GET_ALL_POSTS,
         MODIFY_POST_USER,
         CREATE_COMMENT_POST,
         DELETE_COMMENT,
+        UPDATE_POST_USER,
        } from "./action-types";
 
 import axios from "axios";
@@ -63,6 +64,22 @@ export const createUser = (userData) => {
         dispatch({ type: CREATE_USER });
     }
 }
+
+export const updatePostUser = (id_post, updatedPost) => {
+    return async function (dispatch) {
+      try {
+        // Eliminar las propiedades que generan referencias circulares
+        const cleanedPost = JSON.parse(JSON.stringify(updatedPost));
+  
+        const { data } = await axios.put(`http://localhost:3001/posts/${id_post}`, cleanedPost);
+        dispatch({ type: UPDATE_POST_USER, payload: data });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  };
+
+
 export const deletePostUser = (id_post) => {
     return async function (dispatch) {
         const { data } = await axios.delete(`http://localhost:3001/posts/${id_post}`);
@@ -95,13 +112,13 @@ export const userLogin = (user) => {
     return { type: USER_LOGIN, payload: user }
 }
 
-// export const userLogin_App = (userName) => {
-//     return async function (dispatch) {
-//         const { data } = await axios.get(`http://localhost:3001/users/?userName=${userName}`);
-//         dispatch({ type: USER_LOGIN, payload: data });
+export const userLogin_App = (userName) => {
+     return async function (dispatch) {
+        const { data } = await axios.get(`http://localhost:3001/users/?userName=${userName}`);
+         dispatch({ type: USER_LOGIN, payload: data });
 
-//     }
-// }
+     }
+ }
 
 export function logoutUser() {
     return { type: LOGOUT_USER };
@@ -126,7 +143,7 @@ export const getUsersAndCompanies = () => {
     return async (dispatch) => {
         const usersResponse = await axios.get("http://localhost:3001/users");
         // const companiesResponse = await axios.get("http://localhost:3001/company");
-        console.log(usersResponse);
+        
         const users = usersResponse.data;
         // const companies = companiesResponse.data;
 
@@ -156,9 +173,9 @@ export const getUserById = (id) => {
 export const newGoogleUser = (data) => {
     return async function (dispatch) {
         // try {
-        console.log(data);
+       
         const response = await axios.post(`http://localhost:3001/auth/google`, data)
-        console.log(response.data);
+        
         return dispatch({
             type: CREATE_GOOGLE_USER,
             payload: response.data

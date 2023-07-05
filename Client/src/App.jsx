@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 //* import que rompe
-// import { userLogin_App } from "./redux/actions";
+import { userLogin_App } from "./redux/actions";
 
 
 import Nav from "./components/Nav";
@@ -52,29 +52,29 @@ function App() {
 
   const navigate = useNavigate();
 
-  //* este codigo rompe relacionado al de la linea 32
-  // useEffect(() => {
-  //   const userName = localStorage.getItem("userName");
-  //   if (userName) {
-  //     dispatch(userLogin_App(userName))
-  //       .then(() => {
-  //         // Autenticación exitosa, permitir acceso a rutas protegidas
-  //       })
-  //       .catch(() => {
-  //         // Autenticación fallida, redirigir al login
-  //         navigate("/");
-  //       });
-  //   } else {
-  //     // Si el usuario no está autenticado y no está en la página de login o registro, redirige al login
-  //     if (
-  //       location.pathname !== "/login" &&
-  //       location.pathname !== "/register" &&
-  //       location.pathname !== "/"
-  //     ) {
-  //       navigate("/");
-  //     }
-  //   }
-  // }, [dispatch, navigate, location]);
+  
+  useEffect(() => {
+    const userName = localStorage.getItem("userName");
+    if (userName) {
+      dispatch(userLogin_App(userName))
+        .then(() => {
+          // Autenticación exitosa, permitir acceso a rutas protegidas
+        })
+        .catch(() => {
+          // Autenticación fallida, redirigir al login
+          navigate("/");
+        });
+    } else {
+      // Si el usuario no está autenticado y no está en la página de login o registro, redirige al login
+      if (
+        location.pathname !== "/login" &&
+        location.pathname !== "/register" &&
+        location.pathname !== "/"
+      ) {
+        navigate("/");
+      }
+    }
+  }, [dispatch, navigate, location]);
 
   return (
     <>

@@ -28,8 +28,6 @@ export default function EmailModal({handleCloseEmailModal, post}) {
 
  
 
-  // console.log(companyUser[0].email)
-  console.log(user.email)
 
 
 

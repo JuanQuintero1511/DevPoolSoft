@@ -36,10 +36,19 @@ export const Login = () => {
     event.preventDefault();
   
     const user = users.find((user) => user.email === userData.email);
-    
-    if (user && user.password === userData.password && user.userName === userData.username) {
-      console.log(user)
-      dispatch(userLogin(user));      
+
+  
+    if (user && user.password === userData.password && user.userName === userData.username && user.user_datum && user.user_datum.isActive === false) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Login incomplete!',
+        text: 'Your account is disabled',
+        confirmButtonColor: '#ff7f7f',
+      });
+    } else if (user && user.password === userData.password && user.userName === userData.username) {
+
+      dispatch(userLogin(user));
+      
       navigate("/home");
     } else {
       Swal.fire({

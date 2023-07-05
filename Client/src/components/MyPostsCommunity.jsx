@@ -65,8 +65,10 @@ const MyPostCommunity = () => {
           {showModal && <CreatePostCommunity closeModal={closeModal} />}
         </div>
         {posts?.length > 0 ? 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 ml-[20vw]">
-          {posts?.map((post) => (
+        <div className= "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 ml-[20vw]">
+          {posts && posts
+            .filter((post) => post.typePost === "Community")
+            .map((post) => (
             <CardMyPostCommunity key={post.id_post} post={post} user={user} />
           ))}
         </div>

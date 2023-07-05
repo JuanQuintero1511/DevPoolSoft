@@ -19,10 +19,10 @@ const Home = () => {
               <div className="col-12">
                 <div className="mb-4">
                   <button
-                    className="btn btn-primary fixed top-4 right-0 mt-5 ml-4 bg-blue-500 text-white px-4 py-2 rounded-md"
+                    className="btn btn-primary fixed top-4 right-0 mt-5 ml-4 bg-blue-500 text-white px-4 py-2 rounded-md mr-4"
                     onClick={() => setShowModal(true)}
                   >
-                    Crear Publicación
+                    CREATE POST
                   </button>
                 </div>
                 <CardsContainer />
@@ -42,12 +42,9 @@ const Home = () => {
       </Modal> */}
 
       <Modal show={showModal} onHide={closeModal}>
-        <Modal.Header closeButton>
-          <Modal.Title>Agregar Publicación</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
+       
           <CreatePostTechNews closeModal={closeModal} />
-        </Modal.Body>
+        
       </Modal>
     </div>
   );

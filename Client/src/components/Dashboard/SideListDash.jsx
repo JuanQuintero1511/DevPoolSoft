@@ -41,9 +41,9 @@ import { useMemo, useState } from 'react';
 
 import UsersDash from './Pages/Users/UsersDash';
 import CompaniesDash from './Pages/Companies/CompaniesDash';
-import Jobs from './Pages/Jobs/Jobs';
+// import Jobs from './Pages/Jobs/Jobs';
 
-import TechNews from './Pages/TechNews/TechNews';
+// import TechNews from './Pages/TechNews/TechNews';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 // import Profile from '../Profile';
 import AdminDash from './Pages/Admin/AdminDash';
@@ -127,18 +127,6 @@ const SideListDash = ({ open, setOpen }) => {
         icon: <BusinessCenter />,
         link: 'companies',
         component: <CompaniesDash {...{ setSelectedLink, link: 'companies' }} />,
-      },
-      {
-        title: 'Jobs Offers',
-        icon: <MenuBook />,
-        link: 'jobs',
-        component: <Jobs {...{ setSelectedLink, link: 'jobs' }} />,
-      },
-      {
-        title: 'Tech News',
-        icon: <NewspaperRounded />,
-        link: 'technews',
-        component: <TechNews {...{ setSelectedLink, link: 'technews' }} />,
       },
       {
         title: 'Administrators',

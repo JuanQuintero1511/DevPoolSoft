@@ -39,7 +39,6 @@ const Test1 = () => {
 
   })
 
- console.log(form);
 
 
   const handleImageUpload = (url) => {
@@ -136,7 +135,6 @@ const Test1 = () => {
     }
 
   }
-console.log(form)
 
   return (
     <div className=" flex items-center justify-center min-h-screen" >

@@ -12,8 +12,7 @@ const Detail = () => {
   const user = useSelector((state) => state.userLogin);
   const navigate = useNavigate();
 
-  console.log(post);
-  console.log(user);
+
 
   useEffect(() => {
     dispatch(getPostById(id));
@@ -161,7 +160,7 @@ const Detail = () => {
             <div className="flex items-center">
               <span>🧑🏻‍💻 </span>
               <span className="font-bold">{com.user_datum?.full_name}</span>
-              {com.user_datum?.full_name === user.user_datum?.full_name && (
+              {(com.user_datum?.full_name === user.user_datum?.full_name || user.user_datum?.rol === "admin"  )&& (
                 <button onClick={() => handleCommentDelete(com.id_comments)} title="Delete" className="ml-auto">
                   ❌
                 </button>
