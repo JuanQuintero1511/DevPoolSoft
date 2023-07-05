@@ -4,29 +4,50 @@ import { useState, useEffect } from "react";
 import OffersCards from "./OffersCards";
 import CreatePostModal from "./CreatePostModal";
 import Swal from 'sweetalert2';
+
 import Paginated from "./Paginated";
 import { Link } from "react-router-dom";
 
-const JobsOffers = () => {
 
-const user = useSelector((state) => state.userLogin);
-const posts = useSelector((state) => state.allPosts);
-const [showModal, setShowModal] = useState(false);
-const jobPosts = posts.filter((post) => post.typePost === "Job");
 
-const closeModal = () => {
-  setShowModal(!showModal);
-}
- 
+ const JobsOffers = () => {
+
+  const user = useSelector((state) => state.userLogin);
+  const posts = useSelector((state) => state.allPosts);
+  const selectedTipoEmpleo = useSelector((state) => state.selectedTipoEmpleo);
+  const selectedCargo = useSelector((state) => state.selectedCargo);
+  const jobPosts = posts.filter((post) => post.typePost === "Job");
+  const [showModal, setShowModal] = useState(false);
+  const [filteredPosts, setFilteredPosts] = useState([]);
+  ]);
   const dispatch = useDispatch();
 
+ 
   useEffect(() => {
-     dispatch(getAllPosts());
-   }, [dispatch]);
-  
-  
+    const filtered = filterPosts();
+    setFilteredPosts(filtered);
+    dispatch(getAllPosts());
+  }, [selectedTipoEmpleo, selectedCargo]);
+   
 
-  const [currentPage, setCurrentPage] = useState(1);
+  const filterPosts = () => {
+    let filtered = posts.filter((post) => {
+      if (selectedTipoEmpleo && post.tipoEmpleo.toLowerCase() !== selectedTipoEmpleo.toLowerCase()) {
+        return false;
+      }
+      if (selectedCargo && post.cargo.toLowerCase() !== selectedCargo.toLowerCase()) {
+        return false;
+      }
+      return true;
+    });
+    return filtered;
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
+  //paginado
+   const [currentPage, setCurrentPage] = useState(1);
    const postsPerPage = 6;
 
    const handlePageChange = (pageNumber) => {
@@ -37,12 +58,22 @@ const closeModal = () => {
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = jobPosts.slice(indexOfFirstPost, indexOfLastPost);
 
-  // console.log(currentPosts[0])
-  
+  const handleTipoEmpleoChange = (tipoEmpleo) => {
+    if (selectedTipoEmpleo.includes(tipoEmpleo)) {
+      setSelectedTipoEmpleo(prevState => prevState.filter(item => item !== tipoEmpleo));
+    } else {
+      setSelectedTipoEmpleo(prevState => [...prevState, tipoEmpleo]);
+    }
+  };
 
-
- 
-
+  const handleCargoChange = (cargo) => {
+    if (selectedCargo.includes(cargo)) {
+      setSelectedCargo(prevState => prevState.filter(item => item !== cargo));
+    } else {
+      setSelectedCargo(prevState => [...prevState, cargo]);
+    }
+  };
+   
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-200 bg-cover">
       <div className="absolute top-16 right-8">
@@ -99,5 +130,4 @@ const closeModal = () => {
     </div>
   );
 };
-
 export default JobsOffers;

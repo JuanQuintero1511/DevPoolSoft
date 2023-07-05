@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { getAllUsers } from "../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
@@ -34,11 +34,20 @@ export const Login = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
+  
     const user = users.find((user) => user.email === userData.email);
-    
-    if (user && user.password === userData.password && user.userName === userData.username) {
-      console.log(user)
+
+  
+    if (user && user.password === userData.password && user.userName === userData.username && user.user_datum && user.user_datum.isActive === false) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Login incomplete!',
+        text: 'Your account is disabled',
+        confirmButtonColor: '#ff7f7f',
+      });
+    } else if (user && user.password === userData.password && user.userName === userData.username) {
+      console.log(user);
+
       dispatch(userLogin(user));
       if (user.user_datum && user.user_datum.rol === "admin") {
         navigate ("/dashboard")
@@ -47,13 +56,14 @@ export const Login = () => {
     } else {
       Swal.fire({
         icon: 'error',
-        title: 'Login incompleted !',
-        text: 'Invalid username, email or password..',
+        title: 'Login incomplete!',
+        text: 'Invalid username, email, or password..',
         confirmButtonColor: '#ff7f7f',
       });
-      
     }
-  }
+  };
+  
+  
 
 
   //*validaciones*//

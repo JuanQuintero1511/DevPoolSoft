@@ -53,8 +53,6 @@ const Test1 = () => {
   };
 
 
-
-
   const handleInputChange = event => {
     const { name, value } = event.target;
     const parsedValue = name === "phone_number" ? parseInt(value) : value;
@@ -289,7 +287,10 @@ console.log(form)
                   </div> :
 
                   <div className="-my-[430px]">
-                    <CloudinaryUploadWidget onImageUpload={handleImageUpload}  />
+
+                    <CloudinaryUploadWidget onImageUpload={handleImageUpload}/>
+
+
                   </div>}
               </div>
             </div>

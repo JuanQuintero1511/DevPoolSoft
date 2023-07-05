@@ -74,10 +74,12 @@ const Community = () => {
           </div>
           {showModal && <CreatePostCommunity closeModal={closeModal} />}
         </div>
-        
-        {/* //*paginado       */}
-        <div >    
-            <PostCommunity  posts={currentPosts}/>          
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 ml-[20vw]">
+          {posts
+            .filter((post) => post.typePost === "Community")
+            .map((post) => (
+              <PostCommunity key={post.id_post} post={post} />
+            ))}
         </div>
 
         <Paginated

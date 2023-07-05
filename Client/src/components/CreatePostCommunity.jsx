@@ -5,6 +5,7 @@ import { createPostUser } from "../redux/actions";
 import CloudinaryUploadWidget from "./Cloudinary/UploadWidget"
 import Swal from 'sweetalert2';
 
+// {if(user?.user_datum?.rol === "company") {
 
 const CreatePostCommunity = ({ closeModal }) => {
 

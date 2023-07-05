@@ -14,10 +14,8 @@ const Profile = () => {
   const allUsers = useSelector((state) => state.allUsers)
   const user = useSelector((state) => state.userLogin);
 
+
   const filteredUser = allUsers.filter((u) => u.userName === user.userName);
- 
-
-
 
   return (
     <div>
