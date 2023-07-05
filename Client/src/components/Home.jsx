@@ -32,15 +32,23 @@ const Home = () => {
         </div>
       </div>
 
-      <Modal show={showModal} onHide={closeModal}>
-        {/* <Modal.Header closeButton>
+      {/* <Modal show={showModal} onHide={closeModal}>
+        <Modal.Header closeButton>
           <Modal.Title>Agregar Publicación</Modal.Title>
-        </Modal.Header> */}
+        </Modal.Header>
           <CreatePostTechNews closeModal={closeModal} />
-        {/* <Modal.Body>
-        </Modal.Body> */}
+        <Modal.Body>
+        </Modal.Body>
+      </Modal> */}
+
+      <Modal show={showModal} onHide={closeModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Agregar Publicación</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <CreatePostTechNews closeModal={closeModal} />
+        </Modal.Body>
       </Modal>
-      <CardsContainer />
     </div>
   );
 };
