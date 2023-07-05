@@ -14,7 +14,9 @@ import {
     MODIFY_POST_USER,
     CREATE_COMMENT_POST,
     DELETE_COMMENT,
-    MODIFY_ROL
+    MODIFY_ROL,
+    ACTIVE_USER,
+    DESACTIVE_USER
 } from "./action-types";
 
 import axios from "axios";
@@ -158,3 +160,19 @@ export const modifyRol = (postData) => {
         dispatch({ type: MODIFY_ROL, payload: data });
     }
 }
+
+export const activeUser = (full_name) => {
+    return async function (dispatch) {
+        const { data } = await axios.patch(`http://localhost:3001/company/active/${full_name}`);
+        dispatch({ type: ACTIVE_USER, payload: data });
+    }
+}
+
+export const desactiveUser = (full_name) => {
+    return async function (dispatch) {
+        const { data } = await axios.patch(`http://localhost:3001/company/desactive/${full_name}`);
+        dispatch({ type: ACTIVE_USER, payload: data });
+    }
+}
+
+

@@ -11,7 +11,9 @@ import {
    GET_USERS_COMPANIES, 
    MODIFY_POST_USER, 
    DELETE_COMMENT,
-   MODIFY_ROL} from "./action-types";
+   MODIFY_ROL,
+  ACTIVE_USER,
+  DESACTIVE_USER} from "./action-types";
 
 const initialState = {
 
@@ -37,6 +39,12 @@ const reducer = (state = initialState, action) => {
       return { ...state, idPost: action.payload };
 
     case MODIFY_ROL:
+      return { ...state, allUsers: action.payload };
+
+    case ACTIVE_USER:
+    return { ...state, allUsers: action.payload };
+
+    case DESACTIVE_USER:
       return { ...state, allUsers: action.payload };
 
     case GET_ALL_POSTS_ID_USER:
