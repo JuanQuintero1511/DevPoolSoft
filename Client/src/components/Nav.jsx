@@ -14,6 +14,7 @@ import Dashboard from "./Dashboard/Dashboard";
 import { DashboardCustomize } from "@mui/icons-material";
 
 const Nav = () => {
+  const user = useSelector((state) => state.userLogin);
   const [suggestions, setSuggestions] = useState([]);
   const searchRef = useRef(null);
   const suggestionsRef = useRef(null);
