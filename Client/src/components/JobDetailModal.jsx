@@ -48,12 +48,12 @@ const JobDetailsModal = ({ post, handleCloseModal }) => {
             <p>{post.body}</p>
             <div className="flex items-center mt-4">
               <img
-                src={post.interviewer.interviewerImage?.url}
+                src={post.interviewer?.interviewerImage?.url}
                 alt="Foto del entrevistador"
                 className="w-8 h-8 rounded-full mr-2"
               />
               <p>Interviewer name:</p>
-              <p className="text-sm ml-2"> {post.interviewer.interviewerName}</p>
+              <p className="text-sm ml-2"> {post.interviewer?.interviewerName}</p>
             </div>
           </div>
 
@@ -75,7 +75,7 @@ const JobDetailsModal = ({ post, handleCloseModal }) => {
       </div>
 
       {isModalOpen && (
-        <EmailModal handleCloseEmailModal={handleCloseEmailModal} />
+        <EmailModal post={post} handleCloseEmailModal={handleCloseEmailModal} />
       )}
     </>
   );

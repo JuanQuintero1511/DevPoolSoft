@@ -29,7 +29,6 @@ const  { sendNotification }  = require('../../utils/sendEmail')
             const rol = req.body.rol_type;
             const rol_type = req.body.rol_type;
             const userName = req.body.userName;
-            const password = req.body.password;
             const email = req.body.email;
             const full_nameAux = req.body.full_name;      
                        
@@ -45,7 +44,7 @@ const  { sendNotification }  = require('../../utils/sendEmail')
                 rol,
                 image                
               );
-              await setCompanyUsers(userName, email, password, full_nameAux);
+              await setCompanyUsers(userName, full_nameAux);
               await setCompanyRol(rol_type, full_nameAux);
                   
             const newUsers = await searchUsersByUserName(userName);
@@ -109,14 +108,6 @@ const deleteCompanyHandler = async (req, res) => {
 
 }
 
-
-module.exports = {
-    getCompanyHandler,
-    getCompanyHandlerId,
-    createCompanyHandler,
-    updateCompanyPremiumHandler,
-    deleteCompanyHandler,
-}
 
 module.exports = {
     getCompanyHandler,

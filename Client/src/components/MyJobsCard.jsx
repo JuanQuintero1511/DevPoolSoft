@@ -1,10 +1,12 @@
 import Swal from 'sweetalert2';
 import JobDetailsModal from './JobDetailModal';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { deletePostUser } from '../redux/actions';
 
-const OffersCards = ({ post }) => {
+const MyJobsCard = ({ post, user }) => {
+  const dispatch  = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   const handleOpenModal = () => {
     setIsModalOpen(true);
   };
@@ -12,6 +14,25 @@ const OffersCards = ({ post }) => {
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
+
+  const handleSubmit = (event) => {
+    Swal.fire({
+      icon: 'question',
+      title: 'Are you sure?',
+      text: 'This action cannot be undone.',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Delete',
+      cancelButtonText: 'Cancel'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(deletePostUser(post.id_post));
+        window.location.reload();
+      }
+    });
+  };
+
 
  
 
@@ -31,7 +52,6 @@ const OffersCards = ({ post }) => {
         <p className="block font-sans text-base font-light leading-relaxed text-inherit antialiased">
           {post.resume}
         </p>
-       
       </div>
       <div className="p-6 pt-0">
         <button
@@ -42,6 +62,14 @@ const OffersCards = ({ post }) => {
         >
           Read More
         </button>
+        <div>
+            <button onClick={handleSubmit} title="Delete" className="mr-2 mt-2">
+              ❌
+            </button>
+            {/* <button onClick={() => setShowModal(true)} title="Modify">
+              📝
+            </button> */}
+          </div>
       </div>
       {isModalOpen && (
         <div className="fixed top-0 left-0 flex items-center justify-center w-screen h-screen bg-gray-900 bg-opacity-50 z-50">
@@ -52,4 +80,4 @@ const OffersCards = ({ post }) => {
   );
 };
 
-export default OffersCards;
+export default MyJobsCard;

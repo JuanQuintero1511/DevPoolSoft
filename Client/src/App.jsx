@@ -19,14 +19,14 @@ import Test1 from "./components/test1";
 import CommentsCommunity from "./components/CommentsCommunity";
 import MercadoPagoButton from "./components/MercadoPago/MercadoPagoButton";
 
-import  Dashboard  from "./components/Dashboard/Dashboard";
 // import  HomeDash  from "./components/Dashboard/HomeDash";
 
 
 
-
-
 import DevData from "./components/DevData";
+import MyJobsPosts from "./components/MyJobsPosts";
+
+
 
 function App() {
   const location = useLocation();
@@ -64,10 +64,11 @@ function App() {
       </div>
 
       <Routes>
-        <Route path='/' element={<Landing />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/home' element={<Home />} />
-        <Route path='/JobsOffers' element={<JobsOffers />} />
+        
+        <Route path='/' element={ <Landing />}/>
+        <Route path='/login' element={ <Login /> }/>
+        <Route path='/home' element={ <Home />}/>
+        <Route path='/JobsOffers' element={<JobsOffers />}/>
         <Route path='/register' element={<Register />} />
         <Route path='/profile' element={ <Profile />}/>
         <Route path='/community' element={ <Community />}/>
@@ -78,10 +79,10 @@ function App() {
         <Route path= "/devdata" element={<DevData/>} / >
         <Route path= "/comments/:id" element={<CommentsCommunity/>} / >
         <Route path="/test2" element={<MercadoPagoButton/>} />
-        
+        <Route path="/JobsOffers/myposts/:id" element={ <MyJobsPosts />} />
         //Dashboard routes
-        <Route path="/dashboard/*" element={<Dashboard />} />
-        {/* <Route path="/*" element={<HomeDash />} /> */}
+        {/* <Route path="/dashboard/*" element={<Dashboard />} />
+        <Route path="/*" element={<HomeDash />} /> */}
         
 
       </Routes>

@@ -44,7 +44,7 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     phone_number: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
       validate: {
         len: [0, 15] 

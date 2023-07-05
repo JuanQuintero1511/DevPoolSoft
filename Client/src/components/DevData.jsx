@@ -9,6 +9,7 @@ const DevData = () => {
   const dispatch = useDispatch();
 
   const [formData, setFormData] = useState({
+    aboutMe: "",
     id_user_data: "",
     experience: {
       puesto: "",
@@ -33,7 +34,8 @@ console.log(formData)
     if (userLoged.user_datum) {
       setFormData((prevState) => ({
         ...prevState,
-        id_user_data: userLoged.user_datum.id_user_data
+        id_user_data: userLoged.user_datum.id_user_data,
+        aboutMe: userLoged.user_datum.description
       }));
     }
   }, [userLoged.user_datum]);
