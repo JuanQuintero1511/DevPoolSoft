@@ -6,20 +6,20 @@ import CreatePostModal from "./CreatePostModal";
 import Swal from 'sweetalert2';
 
 const JobsOffers = () => {
-  
+
   const user = useSelector((state) => state.userLogin);
   const posts = useSelector((state) => state.allPosts);
-  
+
   const selectedTipoEmpleo = useSelector((state) => state.selectedTipoEmpleo);
   const selectedCargo = useSelector((state) => state.selectedCargo);
-  
+
   const [showModal, setShowModal] = useState(false);
-  
+
   const [filteredPosts, setFilteredPosts] = useState([]);
-  
-  
+
+
   const [similpostArray, setSimilpostArray] = useState([
-    
+
     // {
     //   id: 1,
     //   title: "Fron-end Developer (Remote)",
@@ -104,55 +104,43 @@ const JobsOffers = () => {
   ]);
 
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
-     dispatch(getAllPosts());
-   }, [dispatch]);
+    dispatch(getAllPosts());
+  }, [dispatch]);
 
 
 
-const closeModal = () => {
-  setShowModal(false);
-}
+  const filterPosts = () => {
+    let filtered = posts.filter((post) => {
+      if (selectedTipoEmpleo && post.tipoEmpleo.toLowerCase() !== selectedTipoEmpleo.toLowerCase()) {
+        return false;
+      }
+      if (selectedCargo && post.cargo.toLowerCase() !== selectedCargo.toLowerCase()) {
+        return false;
+      }
+      return true;
+    });
+    console.log('filteredPosts:', filtered);
 
- 
-const filterPosts = () => {
-  let filtered = posts.filter((post) => {
-    if (selectedTipoEmpleo && post.tipoEmpleo.toLowerCase() !== selectedTipoEmpleo.toLowerCase()) {
-      return false;
-    }
-    if (selectedCargo && post.cargo.toLowerCase() !== selectedCargo.toLowerCase()) {
-      return false;
-    }
-    return true;
-  });
-  console.log('filteredPosts:', filtered); 
+    return filtered;
+  };
 
-  return filtered;
-};
-
-useEffect(() => {
-  const filtered = filterPosts();
-  setFilteredPosts(filtered);
-  console.log('filteredPosts state:', filtered); 
-}, [selectedTipoEmpleo, selectedCargo]);
-
- 
+  useEffect(() => {
+    const filtered = filterPosts();
+    setFilteredPosts(filtered);
+    console.log('filteredPosts state:', filtered);
+  }, [selectedTipoEmpleo, selectedCargo]);
 
 
-=======
-  const user = useSelector((state) => state.userLogin);
-  const posts = useSelector((state) => state.allPosts);
 
   // const selectedTipoEmpleo = useSelector((state) => state.selectedTipoEmpleo);
   // const selectedCargo = useSelector((state) => state.selectedCargo);
 
-  const [showModal, setShowModal] = useState(false);
 
   // const [filteredPosts, setFilteredPosts] = useState([]);
 
 
-  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getAllPosts());
@@ -192,7 +180,7 @@ useEffect(() => {
       setSelectedTipoEmpleo(prevState => [...prevState, tipoEmpleo]);
     }
   };
-  
+
   const handleCargoChange = (cargo) => {
     if (selectedCargo.includes(cargo)) {
       setSelectedCargo(prevState => prevState.filter(item => item !== cargo));
@@ -200,8 +188,8 @@ useEffect(() => {
       setSelectedCargo(prevState => [...prevState, cargo]);
     }
   };
-  
-  
+
+
 
 
   // useEffect(() => {
@@ -255,18 +243,18 @@ useEffect(() => {
         </button>
       </div>
 
-//       {showModal && <CreatePostModal  closeModal={closeModal} />}
-//       <div className="grid grid-cols-3 gap-5 mt-16 py-4 mx-2">
-//       {similpostArray.map((post) => {
-//     console.log("post:", post);
-//     return <OffersCards key={post.id} post={post} />;
-//   })}
-//       </div>
-      {/* <div>
-      {filteredPosts.map((filteredPost) => (
-  <OffersCards key={filteredPost.id} post={filteredPost} />
-))}
-    </div> */}
+      {/* {showModal && <CreatePostModal closeModal={closeModal} />}
+      <div className="grid grid-cols-3 gap-5 mt-16 py-4 mx-2">
+        {similpostArray.map((post) => {
+          console.log("post:", post);
+          return <OffersCards key={post.id} post={post} />;
+        })}
+      </div>
+      {<div>
+        {filteredPosts.map((filteredPost) => (
+          <OffersCards key={filteredPost.id} post={filteredPost} />
+        ))}
+      </div>} */}
 
 
       {showModal && <CreatePostModal closeModal={closeModal} />}

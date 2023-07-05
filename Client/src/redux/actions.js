@@ -11,7 +11,7 @@ import { GET_ALL_POSTS,
         GET_USERS_COMPANIES, 
         MODIFY_ROL,
         ACTIVE_USER,
-        DESACTIVE_USER
+        DESACTIVE_USER,
         GET_USER_BY_ID,
         CREATE_GOOGLE_USER,
         FILTRAR_CARGO,
@@ -20,7 +20,7 @@ import { GET_ALL_POSTS,
         DEV_DATA,
         MODIFY_POST_USER,
         CREATE_COMMENT_POST,
-        DELETE_COMMENT
+        DELETE_COMMENT,
        } from "./action-types";
 
 import axios from "axios";
@@ -95,13 +95,13 @@ export const userLogin = (user) => {
     return { type: USER_LOGIN, payload: user }
 }
 
-export const userLogin_App = (userName) => {
-    return async function (dispatch) {
-        const { data } = await axios.get(`http://localhost:3001/users/?userName=${userName}`);
-        dispatch({ type: USER_LOGIN, payload: data });
+// export const userLogin_App = (userName) => {
+//     return async function (dispatch) {
+//         const { data } = await axios.get(`http://localhost:3001/users/?userName=${userName}`);
+//         dispatch({ type: USER_LOGIN, payload: data });
 
-    }
-}
+//     }
+// }
 
 export function logoutUser() {
     return { type: LOGOUT_USER };

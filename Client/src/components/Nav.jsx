@@ -4,7 +4,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import { SearchBar } from "./SearchBar";
 import { SearchSuggestionsList } from "./SearchSuggestionsList";
-import { logoutUser } from "../redux/actions";
 import { filtrarCargo, filtrarTipoEmpleo, logoutUser, resetPosts} from "../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import MercadoPagoModal from "./MercadoPago/MercadoPagoModal";
@@ -19,7 +18,6 @@ const Nav = () => {
   const searchRef = useRef(null);
   const suggestionsRef = useRef(null);
   const location = useLocation();
-  const [showModal, setShowModal] = useState(false);
   const allPosts = useSelector((state) => state.allPosts);
   console.log(allPosts);
   const originalPosts = useSelector((state) => state.originalPosts);
@@ -73,17 +71,7 @@ const Nav = () => {
   };
 
   const app = initializeApp(firebaseConfig);
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyCwCe7BBMtInaRu422Myrvg5d-qO-LAtHc",
-    authDomain: "devpoolsoft.firebaseapp.com",
-    projectId: "devpoolsoft",
-    storageBucket: "devpoolsoft.appspot.com",
-    messagingSenderId: "759683741972",
-    appId: "1:759683741972:web:bc2b1d5c9746d5c728aa01",
-    measurementId: "G-2549PBCD08",
-  };
-
+  
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

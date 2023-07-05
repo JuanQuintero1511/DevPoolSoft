@@ -2,7 +2,11 @@ import { Routes, Route } from "react-router-dom";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { userLogin_App } from "./redux/actions";
+
+//* import que rompe
+// import { userLogin_App } from "./redux/actions";
+
+
 import Nav from "./components/Nav";
 import SideBar from "./components/sidebar";
 import { Landing } from "./components/Landing";
@@ -15,7 +19,6 @@ import Detail from "./components/DetailCommunity";
 import JobsOffers from "./components/JobsOffers";
 import InProgress from "./components/InProgress";
 import MyPostCommunity from "./components/MyPostsCommunity";
-import { userLogin_App } from "./redux/actions";
 import Test1 from "./components/test1";
 import CommentsCommunity from "./components/CommentsCommunity";
 import MercadoPagoButton from "./components/MercadoPago/MercadoPagoButton";
@@ -28,36 +31,39 @@ function App() {
   const location = useLocation();
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    const userName = localStorage.getItem('userName');
-    if (userName) dispatch(userLogin_App(userName));
-  }, [])
+
+  //chequear que sucede aca con el import userLogin_APP
+  //que va relacionado a la action userLogin_
+  // useEffect(() => {
+  //   const userName = localStorage.getItem('userName');
+  //   if (userName) dispatch(userLogin_App(userName));
+  // }, [])
 
   const navigate = useNavigate();
 
-
-  useEffect(() => {
-    const userName = localStorage.getItem("userName");
-    if (userName) {
-      dispatch(userLogin_App(userName))
-        .then(() => {
-          // Autenticación exitosa, permitir acceso a rutas protegidas
-        })
-        .catch(() => {
-          // Autenticación fallida, redirigir al login
-          navigate("/");
-        });
-    } else {
-      // Si el usuario no está autenticado y no está en la página de login o registro, redirige al login
-      if (
-        location.pathname !== "/login" &&
-        location.pathname !== "/register" &&
-        location.pathname !== "/"
-      ) {
-        navigate("/");
-      }
-    }
-  }, [dispatch, navigate, location]);
+  //* este codigo rompe relacionado al de la linea 32
+  // useEffect(() => {
+  //   const userName = localStorage.getItem("userName");
+  //   if (userName) {
+  //     dispatch(userLogin_App(userName))
+  //       .then(() => {
+  //         // Autenticación exitosa, permitir acceso a rutas protegidas
+  //       })
+  //       .catch(() => {
+  //         // Autenticación fallida, redirigir al login
+  //         navigate("/");
+  //       });
+  //   } else {
+  //     // Si el usuario no está autenticado y no está en la página de login o registro, redirige al login
+  //     if (
+  //       location.pathname !== "/login" &&
+  //       location.pathname !== "/register" &&
+  //       location.pathname !== "/"
+  //     ) {
+  //       navigate("/");
+  //     }
+  //   }
+  // }, [dispatch, navigate, location]);
 
   return (
     <>
@@ -87,7 +93,6 @@ function App() {
           
         //Dashboard routes
         <Route path="/dashboard/*" element={<Dashboard />} />
-        {/* <Route path="/*" element={<HomeDash />} /> */}
 
       </Routes>
     </>
