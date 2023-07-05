@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { getAllUsers } from "../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
