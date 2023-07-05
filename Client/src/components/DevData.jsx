@@ -28,7 +28,6 @@ const DevData = () => {
     }
   });
 
-console.log(formData)
 
   useEffect(() => {
     if (userLoged.user_datum) {

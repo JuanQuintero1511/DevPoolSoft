@@ -46,7 +46,6 @@ export const Login = () => {
         confirmButtonColor: '#ff7f7f',
       });
     } else if (user && user.password === userData.password && user.userName === userData.username) {
-      console.log(user);
 
       dispatch(userLogin(user));
       if (user.user_datum && user.user_datum.rol === "admin") {
