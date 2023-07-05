@@ -80,7 +80,7 @@ export default function EmailModal({handleCloseEmailModal, post}) {
             
             <br />
 
-            <label htmlFor="subject">Affair:</label>
+            <label htmlFor="subject">Subject:</label>
             <input
               type="text"
               id="subject"
