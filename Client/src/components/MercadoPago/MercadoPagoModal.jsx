@@ -41,7 +41,7 @@ const MercadoPagoModal = ({ closemodal }) => {
           </div>
           <div className="flex flex-col md:flex-row justify-center p-4">
             <button className="bg-yellow-500 text-white py-2 px-4 rounded-lg mb-2 md:mb-0 md:mr-4">
-              <a href="https://www.mercadopago.com.co/checkout/v1/redirect?pref_id=1390863745-564b5a60-faf1-438d-88ca-a4a1d2884219" className="text-white">
+              <a href="https://www.mercadopago.com.co/checkout/v1/redirect?pref_id=1390863745-4e6e0fc5-4589-4721-873e-fc841abd5362" className="text-white">
                 BUY PREMIUM
               </a>
             </button>

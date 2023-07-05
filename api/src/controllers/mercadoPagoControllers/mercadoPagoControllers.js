@@ -18,9 +18,9 @@ const newOrder = async () => {
         ],
 
         back_urls: {
-            failure: 'http://localhost:5173/home',
-            pending: 'http://localhost:5173/home',
-            success: 'http://localhost:5173/home'
+            failure: 'https://front-end-beige-two.vercel.app/home',
+            pending: 'https://front-end-beige-two.vercel.app/home',
+            success: 'https://front-end-beige-two.vercel.app/home'
         }
     }
     
