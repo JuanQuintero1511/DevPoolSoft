@@ -52,16 +52,6 @@ const Test1 = () => {
     }));
   };
 
-  const handleImageId = (public_id) => {
-    setForm((prevUser) => ({
-      ...prevUser,
-      image: {
-        ...prevUser.image,
-        public_id: public_id
-      },
-    }));
-  };
-
 
   const handleInputChange = event => {
     const { name, value } = event.target;
@@ -297,7 +287,10 @@ console.log(form)
                   </div> :
 
                   <div className="-my-[430px]">
-                    <CloudinaryUploadWidget onImageUpload={handleImageUpload}  />
+
+                    <CloudinaryUploadWidget onImageUpload={handleImageUpload}/>
+
+
                   </div>}
               </div>
             </div>
