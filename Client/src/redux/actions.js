@@ -171,8 +171,18 @@ export const activeUser = (full_name) => {
 export const desactiveUser = (full_name) => {
     return async function (dispatch) {
         const { data } = await axios.patch(`http://localhost:3001/company/desactive/${full_name}`);
-        dispatch({ type: ACTIVE_USER, payload: data });
+        dispatch({ type: DESACTIVE_USER, payload: data });
     }
 }
 
 
+export const createPublication = (publicationData) => {
+    return async function (dispatch) {
+      try {
+        const { data } = await axios.post("http://localhost:3001/posts", publicationData);
+        dispatch({ type: CREATE_PUBLICATION, payload: data });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  };

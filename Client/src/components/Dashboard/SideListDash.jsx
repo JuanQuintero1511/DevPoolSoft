@@ -45,8 +45,9 @@ import Jobs from './Pages/Jobs/Jobs';
 
 import TechNews from './Pages/TechNews/TechNews';
 import { Route, Routes, useNavigate } from 'react-router-dom';
-import MyData from './Pages/MyData/MyData';
+// import Profile from '../Profile';
 import AdminDash from './Pages/Admin/AdminDash';
+import MyData from './Pages/MyData/MyData';
 
 
 
@@ -111,8 +112,9 @@ const SideListDash = ({ open, setOpen }) => {
       {
         title: 'Mis datos',
         icon: <AccountCircle />,
-        link: '',
-        component: <MyData {...{ setSelectedLink, link: '' }} />,
+        link: 'mydata',
+        component: <MyData {...{ setSelectedLink, 
+        link: 'mydata' }} />,
       },
       {
         title: 'Usuarios',

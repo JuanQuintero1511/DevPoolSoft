@@ -1,100 +1,102 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createPostUser } from "../redux/actions";
 
-import CloudinaryUploadWidget from "./Cloudinary/UploadWidget"
+import CloudinaryUploadWidget from "./Cloudinary/UploadWidget";
 
 const CreatePostTechNews = ({ closeModal }) => {
+  const user = useSelector((state) => state.userLogin);
 
-      const user = useSelector((state) => state.userLogin);
-      
-    
-      const [postData, setPostData] = useState({
+
+  // const [postData, setPostData] = useState({
+  //   id_user_data: user.user_datum.id_user_data,
+  //   title: "",
+  //   body: "",
+  //   image: "",
+  //   typePost: "tech"
+  // });
+
+
+  const [postData, setPostData] = useState({
+    id_user_data: "",
+    title: "",
+    body: "",
+    image: "",
+    typePost: "tech",
+  });
+
+  useEffect(() => {
+    if (user?.user_datum?.id_user_data) {
+      setPostData((prevPostData) => ({
+        ...prevPostData,
         id_user_data: user.user_datum.id_user_data,
-        title: "",
-        body: "",
-        image: "",
-        typePost: "tech"
-      });
-    
-    
-      const handleImageUpload = (url) => {
-        setPostData((prevPostData) => ({
-          ...prevPostData,
-          image: {
-            ...prevPostData.image,
-            url: url,
-          },
-        }));
-      };
-    
-      const handleChange = (event) => {
-        setPostData({ ...postData, [event.target.name]: event.target.value });
-      };
-    
-      const dispatch = useDispatch();
-    
-      const handleSubmit = (event) => {
-        event.preventDefault();
+      }));
+    }
+  }, [user]);
 
-        if (validation()) {
-          dispatch(createPostUser(postData));
-          closeModal();
-          window.location.reload();
-        } else {
-          alert("Please fill in the required fields");
-        }
+  const handleImageUpload = (url) => {
+    setPostData((prevPostData) => ({
+      ...prevPostData,
+      image: {
+        ...prevPostData.image,
+        url: url,
+      },
+    }));
+  };
 
+  const handleChange = (event) => {
+    setPostData({ ...postData, [event.target.name]: event.target.value });
+  };
 
-        // if (validation()) {
-        //   if (user?.user_datum?.rol === "tech") {
-        //     dispatch(createPostUser(postData));
-        //     closeModal();
-        //     window.location.reload();
-        //   } else {
-        //     alert("Only users with tech role can create posts.");
-        //   }
-        // } else {
-        //   alert("Please fill in the required fields");
-        // }
-      };
-    
-      //*validaciones*//
-    
-      const [errors, setErrors] = useState({
-        title: "",
-        body: "",
-      });
-    
-      const validateTitle = () => {
-        const { title } = postData;
-        if (title.length < 3) {
-          setErrors({ ...errors, title: "Requires a minimum of 3 characters." });
-        } else if (title.length > 50) {
-          setErrors({ ...errors, title: "Maximum 50 characters." });
-        } else {
-          setErrors({ ...errors, title: "" });
-        }
-      };
-    
-      const validateBody = () => {
-        const { body } = postData;
-        if (body.length < 10) {
-          setErrors({ ...errors, body: "Requires a minimum of 10 characters." });
-        } else if (body.length > 500) {
-          setErrors({ ...errors, body: "Maximum 500 characters." });
-        } else {
-          setErrors({ ...errors, body: "" });
-        }
-      };
-    
-      let validation = () => {
-        if (errors.title === "" && errors.body === "") {
-          return true
-        }
-        return false
-      }
-    
+  const dispatch = useDispatch();
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    if (validation()) {
+      dispatch(createPostUser(postData));
+      closeModal();
+      window.location.reload();
+    } else {
+      alert("Please fill in the required fields");
+    }
+  };
+
+  //*validaciones*//
+
+  const [errors, setErrors] = useState({
+    title: "",
+    body: "",
+  });
+
+  const validateTitle = () => {
+    const { title } = postData;
+    if (title.length < 3) {
+      setErrors({ ...errors, title: "Requires a minimum of 3 characters." });
+    } else if (title.length > 50) {
+      setErrors({ ...errors, title: "Maximum 50 characters." });
+    } else {
+      setErrors({ ...errors, title: "" });
+    }
+  };
+
+  const validateBody = () => {
+    const { body } = postData;
+    if (body.length < 10) {
+      setErrors({ ...errors, body: "Requires a minimum of 10 characters." });
+    } else if (body.length > 500) {
+      setErrors({ ...errors, body: "Maximum 500 characters." });
+    } else {
+      setErrors({ ...errors, body: "" });
+    }
+  };
+
+  let validation = () => {
+    if (errors.title === "" && errors.body === "") {
+      return true;
+    }
+    return false;
+  };
     
     
       return (

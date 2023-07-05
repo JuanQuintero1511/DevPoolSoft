@@ -13,7 +13,9 @@ import {
    DELETE_COMMENT,
    MODIFY_ROL,
   ACTIVE_USER,
-  DESACTIVE_USER} from "./action-types";
+  DESACTIVE_USER,
+   CREATE_PUBLICATION
+  } from "./action-types";
 
 const initialState = {
 
@@ -77,9 +79,13 @@ const reducer = (state = initialState, action) => {
             
         case DELETE_POST_USER:
             return { ...state, allPosts: action.payload};
-        
+
         case GET_USERS_COMPANIES:
             return { ...state, usersYcompanies: action.payload };
+            
+            case CREATE_PUBLICATION:
+              return { ...state, allPosts: [...state.allPosts, { ...action.payload }] };
+            
 
         // case DELETE_COMMENT:
         //   return { ...state, comments: action.payload};
