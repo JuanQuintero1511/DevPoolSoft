@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { getAllUsers } from "../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
@@ -34,7 +34,7 @@ export const Login = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
+  
     const user = users.find((user) => user.email === userData.email);
     
     if (user && user.password === userData.password && user.userName === userData.username) {
@@ -44,13 +44,14 @@ export const Login = () => {
     } else {
       Swal.fire({
         icon: 'error',
-        title: 'Login incompleted !',
-        text: 'Invalid username, email or password..',
+        title: 'Login incomplete!',
+        text: 'Invalid username, email, or password..',
         confirmButtonColor: '#ff7f7f',
       });
-      
     }
-  }
+  };
+  
+  
 
 
   //*validaciones*//

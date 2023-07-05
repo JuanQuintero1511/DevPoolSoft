@@ -12,6 +12,9 @@ const Detail = () => {
   const user = useSelector((state) => state.userLogin);
   const navigate = useNavigate();
 
+  console.log(post);
+  console.log(user);
+
   useEffect(() => {
     dispatch(getPostById(id));
   }, [dispatch, id]);
@@ -62,6 +65,17 @@ const Detail = () => {
   };
 
   const validateComment = () => {
+    if (!user?.user_datum) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Invalid Comment',
+        text: 'You need to register to be able to comment.',
+        confirmButtonColor: '#7FCEFF',
+      });
+      return false;
+    }
+    
+
     if (comment.trim().length < 10) {
       Swal.fire({
         icon: 'error',
