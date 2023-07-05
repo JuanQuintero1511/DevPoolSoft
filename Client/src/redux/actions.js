@@ -126,7 +126,7 @@ export const getUsersAndCompanies = () => {
     return async (dispatch) => {
         const usersResponse = await axios.get("http://localhost:3001/users");
         // const companiesResponse = await axios.get("http://localhost:3001/company");
-        console.log(usersResponse);
+        
         const users = usersResponse.data;
         // const companies = companiesResponse.data;
 
@@ -156,9 +156,9 @@ export const getUserById = (id) => {
 export const newGoogleUser = (data) => {
     return async function (dispatch) {
         // try {
-        console.log(data);
+       
         const response = await axios.post(`http://localhost:3001/auth/google`, data)
-        console.log(response.data);
+        
         return dispatch({
             type: CREATE_GOOGLE_USER,
             payload: response.data
