@@ -24,7 +24,6 @@ const Test1 = () => {
   const [form, setForm] = useState({
     userName: userLoged.userName,
     email: userLoged.email,
-    password: userLoged.password,
     full_name: "",
     backup_email: "",
     description: "",
@@ -40,7 +39,6 @@ const Test1 = () => {
 
   })
 
- console.log(form);
 
 
   const handleImageUpload = (url) => {
@@ -49,16 +47,6 @@ const Test1 = () => {
       image: {
         ...prevUser.image,
         url: url,
-      },
-    }));
-  };
-
-  const handleImageId = (public_id) => {
-    setForm((prevUser) => ({
-      ...prevUser,
-      image: {
-        ...prevUser.image,
-        public_id: public_id
       },
     }));
   };
@@ -147,7 +135,6 @@ const Test1 = () => {
     }
 
   }
-console.log(form)
 
   return (
     <div className=" flex items-center justify-center min-h-screen" >
@@ -298,7 +285,10 @@ console.log(form)
                   </div> :
 
                   <div className="-my-[430px]">
-                    <CloudinaryUploadWidget onImageUpload={handleImageUpload}  />
+
+                    <CloudinaryUploadWidget onImageUpload={handleImageUpload}/>
+
+
                   </div>}
               </div>
             </div>

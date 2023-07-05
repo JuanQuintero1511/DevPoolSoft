@@ -1,33 +1,48 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import sgMail from '@sendgrid/mail';
-import axios from "axios"
-// Configura las credenciales de SendGrid
-sgMail.setApiKey(import.meta.env.VITE_SENDGRID);
+import axios, { all } from "axios"
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllUsers, userLogin } from '../../redux/actions';
+import Swal from 'sweetalert2';
 
-export default function EmailModal({handleCloseEmailModal}) {
+
+
+
+
+export default function EmailModal({handleCloseEmailModal, post}) {
   const [senderEmail, setSenderEmail] = useState('');
   const [recipientEmail, setRecipientEmail] = useState('');
   const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
 
 
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAllUsers());
+  }, [dispatch])
+
+  const allUsers = useSelector((state) => state.allUsers);
+  const user = useSelector((state) => state.userLogin);
+ 
+  const companyUser = allUsers.filter( (e) => e.user_datum.id_user_data === post.id_user_data);
+
+ 
+
+
+
+
   const sendEmail = async (event) => {
+   
     event.preventDefault();
+    handleCloseEmailModal();
+    Swal.fire({
+      icon: 'success',
+      title: 'Submission Successful',
+      text: 'Your email and CV have been successfully submitted.',
+    });
+     
 
-    const emailData = {
-      to: recipientEmail,
-      from: senderEmail,
-      subject: subject,
-      text: message,
-    };
-
-    try {
-      await axios.post('/v3/mail/send', emailData);
-      console.log('Email sent successfully!');
-      closeModal();
-    } catch (error) {
-      console.error('Error sending email:', error);
-    }
+    
   };
 
   return (
@@ -56,29 +71,16 @@ export default function EmailModal({handleCloseEmailModal}) {
                 />
               </svg>
             </button>
-          <h2 className="text-xl mb-4">Enviar correo electrónico</h2>
+          <h2 className="text-xl mb-4">Apply for this job!</h2>
           <form onSubmit={sendEmail}>
-            <label htmlFor="senderEmail">Remitente:</label>
-            <input
-              type="email"
-              id="senderEmail"
-              value={senderEmail}
-              onChange={(e) => setSenderEmail(e.target.value)}
-              required
-              className="mb-2 w-full"
-            />
+            <label htmlFor="senderEmail">Sender: {user.user_datum.full_name}</label>
+            <br />
+            
+            <label htmlFor="recipientEmail" className='mt-4 mb-4'>Recipient: {companyUser[0]?.email}</label>
+            
+            <br />
 
-            <label htmlFor="recipientEmail">Destinatario:</label>
-            <input
-              type="email"
-              id="recipientEmail"
-              value={recipientEmail}
-              onChange={(e) => setRecipientEmail(e.target.value)}
-              required
-              className="mb-2 w-full"
-            />
-
-            <label htmlFor="subject">Asunto:</label>
+            <label htmlFor="subject">Affair:</label>
             <input
               type="text"
               id="subject"
@@ -88,7 +90,7 @@ export default function EmailModal({handleCloseEmailModal}) {
               className="mb-2 w-full"
             />
 
-            <label htmlFor="message">Mensaje:</label>
+            <label htmlFor="message">Message:</label>
             <textarea
               id="message"
               rows="4"
@@ -97,10 +99,11 @@ export default function EmailModal({handleCloseEmailModal}) {
               required
               className="mb-4 w-full"
             />
+           <p>Your CV will be sent automatically.</p>
 
             <div className="flex justify-end">
               <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-md">
-                Enviar
+               SEND
               </button>
             
             </div>

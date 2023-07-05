@@ -3,11 +3,13 @@ import { useDispatch, useSelector } from "react-redux"
 import { createPostUser } from "../redux/actions";
 import CloudinaryUploadWidget from "./Cloudinary/UploadWidget";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const CreatePostModal = ({ addPost, closeModal }) => {
 
   const user = useSelector((state) => state.userLogin);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [postData, setPostData] = useState({
     id_user_data: user.user_datum.id_user_data,
@@ -43,7 +45,10 @@ const CreatePostModal = ({ addPost, closeModal }) => {
     if (validation()) {
       dispatch(createPostUser(postData));
       closeModal();
-      window.location.reload();
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 1500);
     } else {
       Swal.fire({
         icon: 'error',

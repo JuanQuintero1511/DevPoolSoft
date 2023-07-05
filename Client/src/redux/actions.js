@@ -1,6 +1,29 @@
+import { GET_ALL_POSTS, 
+        GET_ID_POST, 
+        CREATE_POST_USER, 
+        GET_ALL_POSTS_ID_USER, 
+        CREATE_USER, 
+        DELETE_POST_USER, 
+        GET_ALL_USERS, 
+        USER_LOGIN, 
+        CREATE_USER_DATA, 
+        LOGOUT_USER, 
+        GET_USERS_COMPANIES, 
+        MODIFY_ROL,
+        ACTIVE_USER,
+        DESACTIVE_USER,
+        GET_USER_BY_ID,
+        CREATE_GOOGLE_USER,
+        FILTRAR_CARGO,
+        FILTRAR_TIPO_EMPLEO,
+        RESET_POSTS,
+        DEV_DATA,
+        MODIFY_POST_USER,
+        CREATE_COMMENT_POST,
+        DELETE_COMMENT,
+        UPDATE_POST_USER,
+       } from "./action-types";
 
-
-import { GET_ALL_POSTS, GET_ID_POST, CREATE_POST_USER, GET_ALL_POSTS_ID_USER, CREATE_USER, DELETE_POST_USER, GET_ALL_USERS, USER_LOGIN, CREATE_USER_DATA, LOGOUT_USER, GET_USERS_COMPANIES, GET_USER_BY_ID, CREATE_GOOGLE_USER, FILTRAR_CARGO, FILTRAR_TIPO_EMPLEO, RESET_POSTS,  DEV_DATA, MODIFY_POST_USER, CREATE_COMMENT_POST, DELETE_COMMENT  } from "./action-types";
 import axios from "axios";
 
 export const getAllPosts = () => {
@@ -41,6 +64,22 @@ export const createUser = (userData) => {
         dispatch({ type: CREATE_USER });
     }
 }
+
+export const updatePostUser = (id_post, updatedPost) => {
+    return async function (dispatch) {
+      try {
+        // Eliminar las propiedades que generan referencias circulares
+        const cleanedPost = JSON.parse(JSON.stringify(updatedPost));
+  
+        const { data } = await axios.put(`http://localhost:3001/posts/${id_post}`, cleanedPost);
+        dispatch({ type: UPDATE_POST_USER, payload: data });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  };
+
+
 export const deletePostUser = (id_post) => {
     return async function (dispatch) {
         const { data } = await axios.delete(`http://localhost:3001/posts/${id_post}`);
@@ -74,12 +113,12 @@ export const userLogin = (user) => {
 }
 
 export const userLogin_App = (userName) => {
-    return async function (dispatch) {
+     return async function (dispatch) {
         const { data } = await axios.get(`http://localhost:3001/users/?userName=${userName}`);
-        dispatch({ type: USER_LOGIN, payload: data });
+         dispatch({ type: USER_LOGIN, payload: data });
 
-    }
-}
+     }
+ }
 
 export function logoutUser() {
     return { type: LOGOUT_USER };
@@ -104,7 +143,7 @@ export const getUsersAndCompanies = () => {
     return async (dispatch) => {
         const usersResponse = await axios.get("http://localhost:3001/users");
         // const companiesResponse = await axios.get("http://localhost:3001/company");
-        console.log(usersResponse);
+        
         const users = usersResponse.data;
         // const companies = companiesResponse.data;
 
@@ -134,19 +173,53 @@ export const getUserById = (id) => {
 export const newGoogleUser = (data) => {
     return async function (dispatch) {
         // try {
-            console.log(data);
-            const response = await axios.post(`http://localhost:3001/auth/google`, data)
-            console.log(response.data);
-            return dispatch({
-                type: CREATE_GOOGLE_USER,
-                payload: response.data
-            })
+       
+        const response = await axios.post(`http://localhost:3001/auth/google`, data)
+        
+        return dispatch({
+            type: CREATE_GOOGLE_USER,
+            payload: response.data
+        })
         // }
         // catch (error) {
         //     alert(error)
         // }
     }
 }
+
+
+export const modifyRol = (postData) => {
+    return async function (dispatch) {
+        const { data } = await axios.patch(`http://localhost:3001/admin/`, postData);
+        dispatch({ type: MODIFY_ROL, payload: data });
+    }
+}
+
+export const activeUser = (full_name) => {
+    return async function (dispatch) {
+        const { data } = await axios.patch(`http://localhost:3001/company/active/${full_name}`);
+        dispatch({ type: ACTIVE_USER, payload: data });
+    }
+}
+
+export const desactiveUser = (full_name) => {
+    return async function (dispatch) {
+        const { data } = await axios.patch(`http://localhost:3001/company/desactive/${full_name}`);
+        dispatch({ type: DESACTIVE_USER, payload: data });
+    }
+}
+
+
+export const createPublication = (publicationData) => {
+    return async function (dispatch) {
+      try {
+        const { data } = await axios.post("http://localhost:3001/posts", publicationData);
+        dispatch({ type: CREATE_PUBLICATION, payload: data });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  };
 
 export const filtrarTipoEmpleo = (tipoEmpleo) => ({
     type: FILTRAR_TIPO_EMPLEO,
@@ -172,3 +245,4 @@ export const devData = (data) => {
         dispatch({ type: DEV_DATA });
     }
 }
+

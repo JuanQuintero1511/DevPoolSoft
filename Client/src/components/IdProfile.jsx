@@ -8,9 +8,8 @@ export const IdProfile = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const usersYcompanies = useSelector((state) => state.usersYcompanies);
-  console.log(usersYcompanies);
   const user = usersYcompanies.find((user) => user.id_users === id);
-  console.log(user);
+  
 
   useEffect(() => {
     dispatch(getUserById(id));

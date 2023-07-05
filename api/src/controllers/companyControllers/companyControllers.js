@@ -11,7 +11,7 @@ const createCompany = async (
   phone_number,
   profile_image,
   authentication,
-  rol,
+  rol_type,
   image
 ) => {
   let imageUploadResult;
@@ -37,10 +37,8 @@ const createCompany = async (
     phone_number,
     profile_image,
     authentication,
-    rol,
-    image: {     
-      url: imageUploadResult.url,
-    },
+    rol: rol_type,
+    image: imageUploadResult ? { url: imageUploadResult.url } : null,
   });
 };
 
@@ -50,19 +48,16 @@ const createCompanyUser = async (userName, email, password) => {
   })
 }
 
-const setCompanyUsers = async (userName, email, password, full_name) => {
-  const [companyUser, created] = await Users.findOrCreate({
+const setCompanyUsers = async (userName, full_name) => {
+  const companyUser = await Users.findOne({
     where: {
       userName: `${userName}`,
-      email: `${email}`,
-      password: `${password}`,
     }
   })  
-  console.log(companyUser.dataValues)
   const usersToSet = companyUser.dataValues.id_users
   await User_data.update({ id_users: `${usersToSet}`}, {
     where: {
-      full_name: { [Op.iLike]: `%${full_name}%`}
+      full_name: `${full_name}`
     }
   })
 }
@@ -77,7 +72,7 @@ const setCompanyRol = async (rol_type, full_name) => {
   const atributoToSet = companyRol.dataValues.id_roles
   await User_data.update({ id_roles: `${atributoToSet}` }, {
     where: {
-      full_name: { [Op.iLike]: `%${full_name}%` }
+      full_name: `${full_name}`
     }
   })
 }
@@ -85,10 +80,27 @@ const setCompanyRol = async (rol_type, full_name) => {
 const setCompanyPremium = async (full_name) => {
   await User_data.update({ isPremium: true }, {
     where: {
-      full_name: { [Op.iLike]: `%${full_name}%` }
+      full_name: `${full_name}`
     }
   })
 }
+
+const setCompanyDesactive = async (full_name) => {
+  await User_data.update({ isActive: false }, {
+    where: {
+      full_name: `${full_name}`
+    }
+  })
+}
+
+const setCompanyActive = async (full_name) => {
+  await User_data.update({ isActive: true }, {
+    where: {
+      full_name: `${full_name}`
+    }
+  })
+}
+
 
 
 // //?Trae las empresas de la DB
@@ -141,6 +153,8 @@ module.exports = {
   createCompanyUser,
   setCompanyUsers,
   setCompanyPremium,
+  setCompanyActive,
+  setCompanyDesactive,
   getAllCompanies,
   getCompanyById,
   searchCompanyByName,

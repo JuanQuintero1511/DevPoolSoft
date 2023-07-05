@@ -36,6 +36,14 @@ export const Register = () => {
       ...prevUsers,
       [name]: value,
     }));
+
+    setConfirmPassword(prevPass => ({
+      ...prevPass,
+      [name]: value
+    }))
+
+
+
   };
 
   const onValidate = (values) => {
@@ -70,6 +78,10 @@ export const Register = () => {
         "Password must be at least 8 characters and contain at least one uppercase letter, one lowercase letter, and one number";
     }
 
+    if(values.password !== confirmPassword.password2){
+      errors.password = "Passwords must be equals"
+    }
+  
     return errors;
   };
 
@@ -140,8 +152,10 @@ export const Register = () => {
               <div className="relative mb-2">
                 <input
                   type="password"
-                  id="floating_outlined1"
-                  className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-black font-mono dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+
+                  id="floating_outlined2"
+                  className="block px-2.5 pb-2.5 pt-4 w-full sm:w-[215%] text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-black font-mono dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+
                   placeholder=" "
                   name="password"
                   onChange={handleInputChange}
@@ -229,16 +243,6 @@ export const Register = () => {
               <span className="absolute inset-0 w-full h-full -mt-1 rounded-lg opacity-30 bg-gradient-to-b from-transparent via-transparent to-teal-300"></span>
               <span className="relative">BACK</span>
             </a>
-
-            {/* {successfully && (
-            <div>
-              <a href="/login" className="relative inline-flex items-center justify-center px-9 py-3 overflow-hidden font-mono font-medium tracking-widest text-white bg-gray-800 rounded-lg group mx-4 mt-14">
-                <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-green-500 rounded-full group-hover:w-56 group-hover:h-56"></span>
-                <span className="absolute inset-0 w-full h-full -mt-1 rounded-lg opacity-30 bg-gradient-to-b from-transparent via-transparent to-teal-300"></span>
-                <span className="relative">LOGIN</span>
-              </a>
-            </div>
-          )} */}
           </div>
         </form>
       </div>

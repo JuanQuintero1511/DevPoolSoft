@@ -1,4 +1,28 @@
-import { GET_ALL_POSTS, GET_ID_POST, DELETE_POST_USER, GET_ALL_POSTS_ID_USER, GET_ALL_USERS, USER_LOGIN, CREATE_USER_DATA, CREATE_USER, LOGOUT_USER, GET_USERS_COMPANIES, GET_USER_BY_ID, FILTRAR_CARGO, FILTRAR_TIPO_EMPLEO, RESET_POSTS, DEV_DATA, MODIFY_POST_USER, DELETE_COMMENT} from "./action-types";
+
+import {
+    GET_ALL_POSTS,
+    GET_ID_POST,
+    DELETE_POST_USER,
+    GET_ALL_POSTS_ID_USER,
+    GET_ALL_USERS,
+    USER_LOGIN,
+    CREATE_USER_DATA,
+    CREATE_USER,
+    LOGOUT_USER,
+    GET_USERS_COMPANIES,
+    GET_USER_BY_ID,
+    FILTRAR_CARGO,
+    FILTRAR_TIPO_EMPLEO,
+    RESET_POSTS,
+    DEV_DATA,
+    MODIFY_POST_USER,
+    DELETE_COMMENT,
+    MODIFY_ROL,
+    ACTIVE_USER,
+    DESACTIVE_USER,
+    CREATE_PUBLICATION,
+    UPDATE_POST_USER,
+} from "./action-types";
 
 const initialState = {
 
@@ -35,6 +59,16 @@ const reducer = (state = initialState, action) => {
         case MODIFY_POST_USER:
             return { ...state, idPost: action.payload };
 
+        case MODIFY_ROL:
+            return { ...state, allUsers: action.payload };
+
+        case ACTIVE_USER:
+            return { ...state, allUsers: action.payload };
+
+        case DESACTIVE_USER:
+            return { ...state, allUsers: action.payload };
+
+
         case GET_ALL_POSTS_ID_USER:
             return { ...state, allPostsIdUser: action.payload }
 
@@ -60,11 +94,27 @@ const reducer = (state = initialState, action) => {
                 ...state,
             }
 
+        case UPDATE_POST_USER:
+            const updatedAllPosts = state.allPosts.map(post => {
+                if (post.id === action.payload.id) {
+                    return { ...post, ...action.payload };
+                }
+                return post;
+            });
+            return { ...state, allPosts: updatedAllPosts };
+
         case DELETE_POST_USER:
-            return { ...state, allPosts: action.payload };
+            return {
+                ...state, allPosts: action.payload
+            };
+
 
         case GET_USERS_COMPANIES:
             return { ...state, usersYcompanies: action.payload };
+
+        case CREATE_PUBLICATION:
+            return { ...state, allPosts: [...state.allPosts, { ...action.payload }] };
+
 
         // case CREATE_GOOGLE_USER:
         //   localStorage.setItem("userName", action.payload.userName);

@@ -2,7 +2,11 @@ import { Routes, Route } from "react-router-dom";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
+
+//* import que rompe
 import { userLogin_App } from "./redux/actions";
+
+
 import Nav from "./components/Nav";
 import SideBar from "./components/sidebar";
 import { Landing } from "./components/Landing";
@@ -18,17 +22,37 @@ import MyPostCommunity from "./components/MyPostsCommunity";
 import Test1 from "./components/test1";
 import CommentsCommunity from "./components/CommentsCommunity";
 import MercadoPagoButton from "./components/MercadoPago/MercadoPagoButton";
-import  Dashboard  from "./components/Dashboard/Dashboard";
+
+
 // import  HomeDash  from "./components/Dashboard/HomeDash";
 
+
+
+
+import  Dashboard  from "./components/Dashboard/Dashboard";
 import { IdProfile } from "./components/IdProfile";
+
 import DevData from "./components/DevData";
+import MyJobsPosts from "./components/MyJobsPosts";
+
+
 
 function App() {
+
   const location = useLocation();
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
+
+  //chequear que sucede aca con el import userLogin_APP
+  //que va relacionado a la action userLogin_
+  // useEffect(() => {
+  //   const userName = localStorage.getItem('userName');
+  //   if (userName) dispatch(userLogin_App(userName));
+  // }, [])
+
+  const navigate = useNavigate();
+
+  
   useEffect(() => {
     const userName = localStorage.getItem("userName");
     if (userName) {
@@ -54,17 +78,15 @@ function App() {
 
   return (
     <>
-      <div>
-        {location.pathname !== "/" &&
-          location.pathname !== "/login" &&
-          location.pathname !== "/register" && <Nav />}
-        {location.pathname !== "/" &&
-          location.pathname !== "/login" &&
-          location.pathname !== "/register" && <SideBar />}
-      </div>
+
+    <div>
+     {location.pathname !== "/" && location.pathname !=="/login" && location.pathname !== "/register" && location.pathname !== "/dashboard"  && <Nav/> }
+     {location.pathname !== "/" && location.pathname !=="/login" && location.pathname !== "/register" && location.pathname !== "/dashboard" && <SideBar/>}
+    </div>
 
       <Routes>
 
+         
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
         <Route path="/home" element={<Home />} />
@@ -80,10 +102,10 @@ function App() {
         <Route path="/devdata" element={<DevData />} />
         <Route path="/comments/:id" element={<CommentsCommunity />} />
         <Route path="/test2" element={<MercadoPagoButton />} />
+        <Route path="/JobsOffers/myposts/:id" element={ <MyJobsPosts />} />
           
         //Dashboard routes
         <Route path="/dashboard/*" element={<Dashboard />} />
-        {/* <Route path="/*" element={<HomeDash />} /> */}
 
       </Routes>
     </>
