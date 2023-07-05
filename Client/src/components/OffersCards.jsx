@@ -1,9 +1,14 @@
 import Swal from 'sweetalert2';
 import JobDetailsModal from './JobDetailModal';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { deletePostUser } from '../redux/actions';
 
 const OffersCards = ({ post }) => {
+  const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const user = useSelector((state) => state.userLogin);
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -13,11 +18,27 @@ const OffersCards = ({ post }) => {
     setIsModalOpen(false);
   };
 
- 
+  const handleSubmit = (event) => {
+    Swal.fire({
+      icon: 'question',
+      title: 'Are you sure?',
+      text: 'This action cannot be undone.',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Delete',
+      cancelButtonText: 'Cancel'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(deletePostUser(post.id_post));
+        window.location.reload();
+      }
+    });
+  };
 
   return (
     <div className="relative flex w-86 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
-      
+      {user.user_datum?.rol === "admin" ? <div><button className='bg-red-400 py-2 px-2 text-sm rounded-md mx-4 my-4' onClick={handleSubmit}>DELETE</button></div> : null}
       <div className="relative mx-4 -mt-6 h-56 overflow-hidden rounded-xl bg-blue-gray-500 bg-clip-border text-white shadow-lg shadow-blue-gray-500/40">
         <img
           src={post.image?.url}
