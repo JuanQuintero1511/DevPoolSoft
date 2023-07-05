@@ -1,9 +1,37 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Swal from 'sweetalert2';
+import { useSelector, useDispatch } from "react-redux";
+import { deletePostUser } from "../redux/actions";
+
 
 const PostCommunity = ({ post }) => {
+
+  const userLogin = useSelector((state) => state.userLogin);
+  console.log(userLogin);
+
+   const dispatch = useDispatch();
+
+  const handleSubmit = (event) => {
+    Swal.fire({
+      icon: 'question',
+      title: 'Are you sure?',
+      text: 'This action cannot be undone.',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Delete',
+      cancelButtonText: 'Cancel'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(deletePostUser(post.id_post));
+        window.location.reload();
+      }
+    });
+  };
+
   return (
-    <div className="bg-gray-100 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 ml-[20vw]">
+    <div className="bg-gray-100">
         <div key={post.id_post} className="bg-white rounded-lg shadow-md p-4 transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg">
           <div className="mb-4">
             <Link to={`/community/${post.id_post}`}>
@@ -25,17 +53,25 @@ const PostCommunity = ({ post }) => {
               </button>
             </Link>
           </div>
-
-          <div className="flex justify-end">
-            <div className="mr-4">
-              <span className="text-gray-600">❤️ </span>
-              <span className="font-bold"> {post.likes}</span>
-            </div>
-            <div className="ml-2">
-              <span>✉️ </span>
-              <span className="font-bold"> {post.comments.length} </span>
-            </div>
+          <div className="flex justify-between items-center mt-4">
+          {userLogin.user_datum?.rol === "admin" &&
+          <div>
+            <button onClick={handleSubmit} title="Delete" className="mr-2">
+              ❌
+            </button>          
           </div>
+          }
+            <div className="flex justify-end">
+              <div className="mr-4">
+                <span className="text-gray-600">❤️ </span>
+                <span className="font-bold"> {post.likes}</span>
+              </div>
+              <div className="ml-2">
+                <span>✉️ </span>
+                <span className="font-bold"> {post.comments.length} </span>
+              </div>
+            </div>
+            </div>
         </div>
       
     </div>

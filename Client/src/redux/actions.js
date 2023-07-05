@@ -21,6 +21,7 @@ import { GET_ALL_POSTS,
         MODIFY_POST_USER,
         CREATE_COMMENT_POST,
         DELETE_COMMENT,
+        UPDATE_POST_USER,
        } from "./action-types";
 
 import axios from "axios";
@@ -63,6 +64,22 @@ export const createUser = (userData) => {
         dispatch({ type: CREATE_USER });
     }
 }
+
+export const updatePostUser = (id_post, updatedPost) => {
+    return async function (dispatch) {
+      try {
+        // Eliminar las propiedades que generan referencias circulares
+        const cleanedPost = JSON.parse(JSON.stringify(updatedPost));
+  
+        const { data } = await axios.put(`http://localhost:3001/posts/${id_post}`, cleanedPost);
+        dispatch({ type: UPDATE_POST_USER, payload: data });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  };
+
+
 export const deletePostUser = (id_post) => {
     return async function (dispatch) {
         const { data } = await axios.delete(`http://localhost:3001/posts/${id_post}`);
