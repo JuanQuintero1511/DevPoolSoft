@@ -1,80 +1,111 @@
-const { INTEGER } = require("sequelize");
-const {createNewPost, getAllPosts, getPostById} = require("../../controllers/postsControllers/postsControllers")
+const {createNewPost, getAllPosts, getPostById, updatePost, deletePost, createNewJobPost, searchPostByType} = require('../../controllers/postsControllers/postsControllers')
+const  { sendNotification }  = require('../../utils/sendEmail')
 
 const createPostHandler = async (req, res) => {
-    try {
-      const {description} = req.body;      
-      if (!description ) throw new Error("Missing required data");
-      const newPost = await createNewPost (description);           
-      return res.status(201).json(newPost);
 
+  let newPost
+
+    try {
+      const { title, body, state, id_user_data, full_name, email,image, typePost, resume, interviewerImage, interviewerName } = req.body;           
+
+      if (!title && !body && !id_user_data) throw new Error("Missing required data");
+      
+      if (typePost === "Job") {
+        newPost = await createNewJobPost(title, body, state, id_user_data, image, typePost, resume, interviewerImage, interviewerName);
+
+      } else { const newPost = await createNewPost(
+        title, 
+        body, 
+        state, 
+        id_user_data,
+        full_name,
+        email,
+        image,
+        typePost);       
+       
+        sendNotification(email, full_name);
+        return res.status(201).json({ newPost });
+      }    
     } catch (error) {
-      return res.status(400).json({ error: error.message });      
+      return res.status(400).json({ error: error.message });
     }
   };
   
   const getAllPostsHandler = async (req, res) => {
-    try {      
-      const allPosts = await getAllPosts();      
-      return res.status(201).json(allPosts);
-      
+    try {
+      const { typePost } = req.query;
+      const allPosts = typePost ? await searchPostByType(typePost) : await getAllPosts();
+      if (allPosts.length === 0) {
+        throw new Error("The posts do not exist.");
+      }
+  
+      return res.status(200).json(allPosts);
     } catch (error) {
-      return res.status(400).json({ error: error.message });
+      console.error("Error occurred while fetching all posts:", error);
+      return res.status(400).json({ details: error.message });
     }
   };
-  
+
 
   const getPostByIdHandler = async (req, res) => {
-    
-    const {id} = req.body;
-    
-   
-    console.log((id) + "-" + "hola");
+    const {id} = req.params;
+    try{
+      if(isNaN(id)) {
+        let postById = await getPostById(id)
 
-    try {      
-      const PostById = await getPostById (id);      
-       
-      return PostById;
-
-    } catch (error) {
-      return res.status(400).json({ error: error.message });
-    }
-  };
-  
-  const updatePostHandler = async (id_post, newData) => {
-    try {
-      
-      const post = await Posts.findByPk(id_post);
-      if (!post) {
-        throw new Error('El post no existe');
+        if (!postById) throw Error("The user's post was not found.");
+        return res.status(200).json(postById);
       }
-
-      
-      await post.update(newData);
-
-      return post;
-
-    } catch (error) {
-      return res.status(400).json({ error: error.message });
+    } catch(error) {
+      return res.status(400).json({ details: error.message });
     }
-  };
+};  
+
+
+  const updatePostHandler = async (req, res) => {
+    const {
+      id, 
+      title, 
+      body, 
+      state, 
+      id_user_data,
+      image } = req.body;
+
+      if (!id && !title && !body && !state && !id_user_data ) throw new Error("Missing required data");
   
-  const deletePostHandler = async (id_post) => {
     try {
-     
-      const post = await Posts.findByPk(id_post);
-      
-      if (!post) {
-        throw new Error('El post no existe');
-      }
+      if(isNaN(id)) {
+        let postById = await getPostById(id)
 
-      await post.destroy();
+        if (!postById) throw Error("The user's post was not found.");
       
-      return 'Post eliminado exitosamente';
-     } catch (error) {
-      return res.status(400).json({ error: error.message });
+      }
+      const postChanges = await updatePost(id, title, body, state, id_user_data, image);
+  
+      return res.status(200).json({ message: "The post was updated successfully.", postChanges });
+  
+    } catch (error) {
+      return res.status(500).json({ error: "An error occurred while updating the post.", details: error.message });
     }
   };
+
+  const deletePostHandler = async (req, res) => {
+    const { id } = req.params;
+  
+    try {
+      const post = await getPostById(id);
+      if (!post) {
+        return res.status(404).json({ error: "The post does not exist." });
+      }  
+      const postdelete = await deletePost(post);
+  
+      return res.status(200).json({ message: "The post was deleted successfully.", postdelete });
+  
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
+  };
+
 
 module.exports = {
     createPostHandler,
@@ -83,56 +114,3 @@ module.exports = {
     updatePostHandler,
     deletePostHandler
 };
-
-
-
-// // const { Activity, Country } = require("../db");
-// const { Op } = require("sequelize");
-
-// const postActivity = async ({ name, difficulty, duration, season, country, }) => {
-//   const newActivity = await Activity.create({
-//     name,
-//     difficulty,
-//     duration,
-//     season,
-//     country,
-//   });
-//   for (const countryId of country) {
-//     let countryObj = await Country.findByPk(countryId);
-//     if (countryObj) {
-//       newActivity.addCountry(countryObj);
-//     }
-//   }
-//   return newActivity;
-// };
-
-// const getActivities = async () => {
-//   const activity = await Activity.findAll({
-//     include: [{ model: Country, attributes: ["name"] }],
-//   });
-//   return activity;
-// };
-
-// const getActivityByName = async (name) => {
-//   return await Activity.findOne({
-//     where: { name: { [Op.iLike]: `%${name}%` } },
-//   });
-// };
-
-
-// //?Controller para borrar actividades
-// const activityDeleteAll = () => {
-//   Activity.destroy({ where: {} });
-// };
-
-// const activityDeleteById = (id) => {
-//   Activity.destroy({ where: { id } });
-// };
-
-// module.exports = {
-//   getActivities,
-//   postActivity,
-//   getActivityByName,
-//   activityDeleteAll,
-//   activityDeleteById,
-// };

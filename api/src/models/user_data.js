@@ -13,6 +13,7 @@ module.exports = (sequelize) => {
     full_name: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
     },    
     backup_email: {
       type: DataTypes.STRING,
@@ -22,7 +23,7 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        len: [0, 255] 
+        len: [0, 500] 
       }
     },
     date_birthday: {
@@ -39,11 +40,8 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     phone_number: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
-      validate: {
-        len: [0, 15] 
-      }
     },
     profile_image: {
       type: DataTypes.STRING,
@@ -51,16 +49,24 @@ module.exports = (sequelize) => {
     },
     isActive: {
       type: DataTypes.BOOLEAN,
-      defaultValue: false,      
+      defaultValue: true,      
     },
     isPremium: {
       type: DataTypes.BOOLEAN,      
       defaultValue: false,
     },
     authentication: {
-      type: DataTypes.ENUM (["CUIT", "CUIL", "PASSPORT"]),
+      type: DataTypes.ENUM (["CUIT", "CUIL", "PASSPORT, DNI"]),
       allowNull: false,
-    }
+    },
+    image: {
+      type: DataTypes.JSONB,
+      allowNull: false
+    },
+    rol: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
   },
   {
     timestamps:false

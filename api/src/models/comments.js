@@ -4,17 +4,17 @@ module.exports = (sequelize) => {
     sequelize.define(
         'comments',
         {
-            id_coments: {
+            id_comments: {
                 type: DataTypes.UUID,
-                defaultValue: DataTypes.UUIDV4W,
+                defaultValue: DataTypes.UUIDV4,
                 primaryKey: true,
-                unique: true
+                allowNull: false
             },
             description: {
                 type: DataTypes.STRING,
                 allowNull: false,
                 validate: {
-                    len: [0, 255] 
+                    len: [0, 500] 
                   }
             },
             likes: {

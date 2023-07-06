@@ -10,26 +10,61 @@ module.exports = (sequelize) => {
           primaryKey: true,
           allowNull: false
         },
-        description: {
+        title: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+              len: [3, 250] // Establece que la longitud máxima es de 250 caracteres
+            }
+          },
+        body: {
           type: DataTypes.STRING,
           allowNull: false,
           validate: {
-            len: [0, 255] // Establece que la longitud máxima es de 255 caracteres
+            len: [10, 500] // Establece que la longitud máxima es de 500 caracteres
           }
         },
         likes: {
           type: DataTypes.INTEGER,
           defaultValue: 0
         },
-        // date_register: {
-        //   type: DataTypes.DATE,
-        //   defaultValue: DataTypes.NOW,
-        //   allowNull: false,
-        // },
-        // state: {
-        //   type: DataTypes.ENUM (["In Progress", "Finished"]),
-        //   allowNull: false,
-        // }
+        date_register: {
+          type: DataTypes.DATE,
+          defaultValue: DataTypes.NOW,
+          allowNull: false,
+        },
+        state: {
+          type: DataTypes.ENUM (["In Progress", "Finished"]),
+          allowNull: true,
+        },
+        image: {
+          type: DataTypes.JSONB,
+          allowNull: true
+        },
+        typePost: {
+          type: DataTypes.ENUM (["Job", "Community", "tech"]),
+          allowNull: true,
+        },
+        full_name: {
+          type: DataTypes.STRING,
+          allowNull: true
+        },
+        email: {
+          type: DataTypes.STRING,
+          allowNull: true          
+        },
+        interviewerImage: {
+          type: DataTypes.JSONB,
+          allowNull: true
+          },
+        resume: {
+          type: DataTypes.STRING,
+          allowNull: true
+        },
+        interviewerName: {
+          type: DataTypes.JSONB,
+          allowNull: true
+        }
       },
       {
         paranoid: true, // Habilita soft deletes
@@ -41,28 +76,6 @@ module.exports = (sequelize) => {
   };
 
 
-   // id: {
-        //   type: DataTypes.INTEGER,
-        //   primaryKey: true,
-        //   autoIncremet: true,
-        // },
-        // title: {
-        //   type: DataTypes.STRING,
-        //   allowNull: false,
-        //   validate: {
-        //     len: [0, 50] // Establece que la longitud máxima es de 255 caracteres
-        //   }
-        // },
-        // body: {
-        //   type: DataTypes.STRING,
-        //   allowNull: false,
-        //   validate: {
-        //     len: [0, 255] // Establece que la longitud máxima es de 255 caracteres
-        //   }
-        // },
-  
-  
-  
   
   
   
