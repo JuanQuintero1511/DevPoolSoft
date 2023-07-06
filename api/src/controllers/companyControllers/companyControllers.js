@@ -158,5 +158,6 @@ module.exports = {
   getAllCompanies,
   getCompanyById,
   searchCompanyByName,
- 
+ 
 }
+

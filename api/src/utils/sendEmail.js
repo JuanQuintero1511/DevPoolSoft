@@ -96,10 +96,10 @@ const sendNotification = async (email, full_name, rol_type) => {
     if(!rol_type) {const result = await transporter.sendMail(mailOptionsNewPost)
       console.log('Notification email sent: ' + result.response);
     }
-    if (rol === "company") {const result = await transporter.sendMail(mailOptionsWelcomeCompany)
+    if (rol_type === "company") {const result = await transporter.sendMail(mailOptionsWelcomeCompany)
       console.log('Notification email sent: ' + result.response);
     }
-    if (rol === "developer") {const result = await transporter.sendMail(mailOptionsWelcomeDeveloper)
+    if (rol_type === "developer") {const result = await transporter.sendMail(mailOptionsWelcomeDeveloper)
       console.log('Notification email sent: ' + result.response);
     }
     return result
